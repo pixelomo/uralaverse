@@ -23,15 +23,14 @@ const params = {
 let enterObjects = []
 const fontLoader = new FontLoader()
 fontLoader.load('/fonts/optimer.json', (font) =>{
-    fontMaker('WELCOME \n TO THE \n URALAVERSE!', font, {x: 0, y: 1, z: 0},  0x03ead9, 'welcome')
-    fontMaker('ENTER >', font, {x: 0, y: -1, z: 0},  0xff0030, 'enter')
+    fontMaker('WELCOME \n TO THE \n URALAVERSE!', font, {x: 0, y: 1, z: 0},  0x03ead9, 'welcome', true)
+    fontMaker('ENTER >', font, {x: 0, y: -1, z: 0},  0xff0030, 'enter', true)
     enterObjects = scene.children.filter(obj => obj.name === 'enter')
 })
 
-const fontMaker = (text, font, position, color, name) => {
+const fontMaker = (text, font, position, color, name, wireframe) => {
     const textGeometry = new TextGeometry(
-        text,
-        {
+        text, {
             font: font,
             size: 0.5,
             height: .2,
@@ -44,24 +43,33 @@ const fontMaker = (text, font, position, color, name) => {
         }
     )
     textGeometry.center()
-    const textMesh = new THREE.Mesh(textGeometry, new THREE.MeshPhongMaterial({
-        polygonOffset: true,
-        polygonOffsetFactor: 1, // positive value pushes polygon further away
-        polygonOffsetUnits: 1,
-    }))
+
+    let material
+    if(wireframe){
+        material = new THREE.MeshPhongMaterial({
+            polygonOffset: true,
+            polygonOffsetFactor: 1, // positive value pushes polygon further away
+            polygonOffsetUnits: 1,
+        })
+
+        let wireframe = new THREE.WireframeGeometry( textGeometry );
+        let line = new THREE.LineSegments( wireframe );
+        line.material.color.setHex(color);
+        line.position.x = position.x
+        line.position.y = position.y
+        line.position.z = position.z
+        line.name = name
+        scene.add(line);
+    } else {
+        material = new THREE.MeshStandardMaterial()
+    }
+
+    const textMesh = new THREE.Mesh(textGeometry, material)
     textMesh.position.x = position.x
     textMesh.position.y = position.y
     textMesh.position.z = position.z
     textMesh.name = name
     scene.add(textMesh)
-    let wireframe = new THREE.WireframeGeometry( textGeometry );
-    let line = new THREE.LineSegments( wireframe );
-    line.material.color.setHex(color);
-    line.position.x = position.x
-    line.position.y = position.y
-    line.position.z = position.z
-    line.name = name
-    scene.add(line);
 }
 
 /**
@@ -92,6 +100,12 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+
+// Lights
+// const ambientLight = new THREE.AmbientLight()
+// ambientLight.color = new THREE.Color(0xffffff)
+// ambientLight.intensity = 0.05
+// scene.add(ambientLight)
 
 /**
  * Textures
@@ -447,6 +461,8 @@ const tick = () => {
     }
 
     // renderer.toneMappingExposure += 0.1
+    scene.rotation.y = Math.cos(elapsedTime / 6)
+    scene.rotation.x = Math.sin(elapsedTime / 6)
 
     // Render
     composer.render();
