@@ -396,7 +396,7 @@ const tick = () => {
         for(const obj in enterObjects){
             objectsToTest.push(enterObjects[obj])
         }
-        // console.log(objectsToTest[0])
+        // console.log(objectsToTest[0]) // enter
     }
     // const objectsToTest = [object1, object2, object3]
     const intersects = raycaster.intersectObjects(objectsToTest)
