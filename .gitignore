@@ -67,3 +67,4 @@ node_modules/
 # Nuxt build
 .nuxt
 dist
+.vercel
