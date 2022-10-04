@@ -4,27 +4,28 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
-import { Group } from 'three'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import gsap from 'gsap'
 
 const params = {
     exposure: 1,
     bloomThreshold: 0.33,
-    bloomStrength: 1.27,
+    bloomStrength: 0,
     bloomRadius: 1,
-    donutsAmount: 120,
-    spheresAmount: 80,
-    diamondAmount: 100,
+    donutsAmount: 100,
+    spheresAmount: 70,
+    diamondAmount: 200,
 };
 
 // FONT
 let enterObjects = []
 const fontLoader = new FontLoader()
-fontLoader.load('/fonts/optimer.json', (font) =>{
+fontLoader.load('/fonts/galaxy.json', (font) =>{
     fontMaker('WELCOME \n TO THE \n URALAVERSE!', font, {x: 0, y: 1, z: 0},  0x03ead9, 'welcome', true)
-    fontMaker('ENTER >', font, {x: 0, y: -1, z: 0},  0xff0030, 'enter', true)
+    fontMaker('ENTER', font, {x: 0, y: -1.5, z: 0},  0xff0030, 'enter', false)
     enterObjects = scene.children.filter(obj => obj.name === 'enter')
 })
 
@@ -32,26 +33,26 @@ const fontMaker = (text, font, position, color, name, wireframe) => {
     const textGeometry = new TextGeometry(
         text, {
             font: font,
-            size: 0.5,
-            height: .2,
-            curveSegments: 4,
-            bevelEnabled: true,
-            bevelSize: 0.03,
-            bevelThickness: 0.03,
-            bevelOffset: 0,
-            bevelSegments: 4
+            size: 0.6,
+            height: 0.2,
+            // curveSegments: 1,
+            // bevelEnabled: true,
+            // bevelSize: 0.01,
+            // bevelThickness: 0.03,
+            // bevelOffset: 0,
+            // bevelSegments: 1
         }
     )
     textGeometry.center()
 
-    let material
+    const textMesh = new THREE.Mesh()
     if(wireframe){
-        material = new THREE.MeshPhongMaterial({
+        textMesh.geometry = textGeometry
+        textMesh.material = new THREE.MeshPhongMaterial({
             polygonOffset: true,
             polygonOffsetFactor: 1, // positive value pushes polygon further away
             polygonOffsetUnits: 1,
         })
-
         let wireframe = new THREE.WireframeGeometry( textGeometry );
         let line = new THREE.LineSegments( wireframe );
         line.material.color.setHex(color);
@@ -60,11 +61,16 @@ const fontMaker = (text, font, position, color, name, wireframe) => {
         line.position.z = position.z
         line.name = name
         scene.add(line);
+        gsap.to(line.scale, 7, {
+            z: 5
+        })
     } else {
-        material = new THREE.MeshStandardMaterial()
+        textMesh.geometry = textGeometry
+        textMesh.material = material
+        gsap.to(textMesh.rotation, 1, {
+            x: - Math.PI * 2
+        })
     }
-
-    const textMesh = new THREE.Mesh(textGeometry, material)
     textMesh.position.x = position.x
     textMesh.position.y = position.y
     textMesh.position.z = position.z
@@ -101,18 +107,67 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-// Lights
+/**
+ * Lights
+ */
+// Ambient light - low cost
 // const ambientLight = new THREE.AmbientLight()
-// ambientLight.color = new THREE.Color(0xffffff)
-// ambientLight.intensity = 0.05
+// ambientLight.color = new THREE.Color(0xff8867)
+// ambientLight.intensity = 0.01
 // scene.add(ambientLight)
+
+// Directional light - moderate cost
+// const directionalLight = new THREE.DirectionalLight(0x00fffc, 0.3)
+// directionalLight.position.set(1, 0.25, 0)
+// scene.add(directionalLight)
+
+// Hemisphere light - low cost
+const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.3)
+scene.add(hemisphereLight)
+
+// Point light - moderate cost
+const pointLight = new THREE.PointLight(0xff9000, 0.2, 10, 2)
+pointLight.position.set(1, - 0.5, 1)
+scene.add(pointLight)
+
+// // Rect area light - high cost
+// const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 2, 1, 1)
+// rectAreaLight.position.set(- 1.5, 0, 1.5)
+// rectAreaLight.lookAt(new THREE.Vector3())
+// scene.add(rectAreaLight)
+
+// Spot light - high cost
+// const spotLight = new THREE.SpotLight(0x78ff00, 0.5, 10, Math.PI * 0.1, 0.25, 1)
+// spotLight.position.set(0, 2, 3)
+// scene.add(spotLight)
+
+// spotLight.target.position.x = - 0.75
+// scene.add(spotLight.target)
+
+/**
+ * Models
+ */
+
+ const gltfLoader = new GLTFLoader()
+
+ let coin = {}
+ gltfLoader.load('/models/btc.glb', (m) => {
+        const coinModel = m.scene.children[0]
+        coinModel.scale.set(0.75, 0.75, 0.75)
+        coinModel.position.x = 2
+        coinModel.position.y = 1
+        scene.add(coinModel)
+        coin = coinModel
+        // console.log(scene.children)
+    }
+)
 
 /**
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const matcapTexture = textureLoader.load('/textures/matcaps/0.png')
-const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
+const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
+const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture, color: '#0b5400' })
 const matcapTexture2 = textureLoader.load('/textures/matcaps/3.png')
 const material2 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture2 })
 
@@ -235,22 +290,39 @@ const getRandomInt = (min, max) => {
 }
 
 let lastNumber
+let enterColor
 
 window.addEventListener('click', () => {
     if(intersects.length) {
         if(!currentIntersect) {
-            console.log('click enter')
+            // console.log('click enter')
         }
         currentIntersect = intersects[0]
     } else {
         if(currentIntersect) {
-            console.log('click')
+            // console.log('click')
             clicked = true
-            currentIntersect.object.material.color.set('green')
+            enterColor = new THREE.Color('#490561')
+            gsap.to(currentIntersect.object.material.color, 1, {
+                r: enterColor.r,
+                g: enterColor.g,
+                b: enterColor.b
+            })
+            gsap.to(currentIntersect.object.scale, 1, {
+                x: 1.5,
+                y: 1.5,
+                z: 1.5
+            })
+            gsap.to(currentIntersect.object.rotation, 1, {
+                x: Math.PI * 2
+            })
+            // currentIntersect.object.material.color.set('#490561')
             setTimeout(() => {
                 while(scene.children.length > 0){
                     scene.remove(scene.children[0]);
                 }
+                renderer.toneMappingExposure = 0.4
+                firstScene = false
                 scene.add(camera)
                 let number = getRandomInt(1, 3)
                 if(number === lastNumber){
@@ -277,6 +349,9 @@ window.addEventListener('click', () => {
                         octGroup.add(oct)
                     }
                     scene.add(octGroup)
+                    scene.add(coin)
+                    scene.add(pointLight)
+                    scene.add(hemisphereLight)
                     lastNumber = 1
                 }
                 if (number === 2){
@@ -301,6 +376,9 @@ window.addEventListener('click', () => {
                         sphereGroup.add(sphere)
                     }
                     scene.add(sphereGroup)
+                    scene.add(coin)
+                    scene.add(pointLight)
+                    scene.add(hemisphereLight)
                     lastNumber = 2
                 }
                 if (number === 3){
@@ -310,9 +388,7 @@ window.addEventListener('click', () => {
                     for(let i = 0; i < 400; i++){
                         const donut = new THREE.Mesh(
                             donutGeometry,
-                            new THREE.MeshNormalMaterial({
-                                wireframe: true
-                            })
+                            new THREE.MeshNormalMaterial({wireframe: true})
                         )
                         donut.position.x = (Math.random() - 0.5) * 10
                         donut.position.y = (Math.random() - 0.5) * 10
@@ -324,9 +400,12 @@ window.addEventListener('click', () => {
                         donutGroup.add(donut)
                     }
                     scene.add(donutGroup)
+                    scene.add(coin)
+                    scene.add(pointLight)
+                    scene.add(hemisphereLight)
                     lastNumber = 3
                 }
-            }, 1000)
+            }, 1200)
         }
     }
 
@@ -359,15 +438,20 @@ window.addEventListener('click', () => {
  * Camera
  */
 // Base camera
+const cameraGroup = new THREE.Group()
+scene.add(cameraGroup)
+
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 1
-camera.position.y = -2
-camera.position.z = 3.5
-scene.add(camera)
+camera.position.x = -2
+camera.position.y = 1
+camera.position.z = 6
+cameraGroup.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+
+let firstScene = true
 
 /**
  * Renderer
@@ -387,18 +471,40 @@ bloomPass.threshold = params.bloomThreshold;
 bloomPass.strength = params.bloomStrength;
 bloomPass.radius = params.bloomRadius;
 
-let composer = new EffectComposer( renderer );
-composer.addPass( renderScene );
-composer.addPass( bloomPass );
+let composer = new EffectComposer( renderer )
+composer.addPass( renderScene )
+composer.addPass( bloomPass )
 
+
+let up = true;
+let limit = 1;
+
+const checkBloomStrength = () => {
+    if (up == true && bloomPass.strength <= limit) {
+        bloomPass.strength += 0.005
+        if (bloomPass.strength == limit) {
+          up = false;
+        }
+    } else {
+        up = false
+        bloomPass.strength -= 0.008
+        if (bloomPass.strength == 0.2 || bloomPass.strength < 0.2) {
+            up = true;
+        }
+    }
+}
+
+let changeBloomStrength = setInterval(checkBloomStrength, 16);
 /**
  * Animate
  */
 const clock = new THREE.Clock()
+let previousTime = 0
 
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
-
+    const deltaTime = elapsedTime - previousTime
+    previousTime = elapsedTime
     // Update controls
     controls.update()
 
@@ -410,6 +516,7 @@ const tick = () => {
         for(const obj in enterObjects){
             objectsToTest.push(enterObjects[obj])
         }
+        // camera.lookAt(scene.children[7].position)
         // console.log(objectsToTest[0]) // enter
     }
     // const objectsToTest = [object1, object2, object3]
@@ -418,16 +525,33 @@ const tick = () => {
     if(!clicked) {
         if(intersects.length) {
             if(!currentIntersect) {
-                console.log('mouse enter')
+                // console.log('mouse enter')
             }
             currentIntersect = intersects[0]
             // console.log(currentIntersect.object)
-            currentIntersect.object.material.color.set('#0000ff')
+            // currentIntersect.object.material.color.set('#002034')
+            enterColor = new THREE.Color('#002034')
+            gsap.to(currentIntersect.object.material.color, 1, {
+                r: enterColor.r,
+                g: enterColor.g,
+                b: enterColor.b
+            })
+            // gsap.to(currentIntersect.object.scale, 1, {
+            //     x: 1.3,
+            //     y: 1.3,
+            //     z: 1.3
+            // })
         }
         else {
             if(currentIntersect) {
-                console.log('mouse leave')
-                currentIntersect.object.material.color.set('#ff0030')
+                // console.log('mouse leave')
+                // currentIntersect.object.material.color.set('#083b00')
+                enterColor = new THREE.Color('#083b00')
+                gsap.to(currentIntersect.object.material.color, 1, {
+                    r: enterColor.r,
+                    g: enterColor.g,
+                    b: enterColor.b
+                })
             }
             currentIntersect = null
         }
@@ -460,10 +584,23 @@ const tick = () => {
         }
     }
 
-    // renderer.toneMappingExposure += 0.1
-    scene.rotation.y = Math.cos(elapsedTime / 6)
-    scene.rotation.x = Math.sin(elapsedTime / 6)
-
+    if(!firstScene){
+        scene.rotation.y = - elapsedTime * Math.PI / 16
+        scene.rotation.z = - elapsedTime * Math.PI / 16
+        renderer.toneMappingExposure += 0.02
+        clearInterval(changeBloomStrength)
+    }
+    // const parallaxX = mouse.x * 1.5
+    // const parallaxY = - mouse.y * 1.5
+    // cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 5 * deltaTime
+    // cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 5 * deltaTime
+    // if(scene.children.length > 6){
+    //     camera.lookAt(scene.children[7])
+    // }
+    if(typeof coin.children != 'undefined'){
+        coin.rotation.z = - elapsedTime * Math.PI * 0.2
+        // coin.position.z = - elapsedTime / 6
+    }
     // Render
     composer.render();
     // renderer.render(scene, camera)
