@@ -9,32 +9,41 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import gsap from 'gsap'
+// const tl = gsap.timeline();
 
 const params = {
     exposure: 1,
     bloomThreshold: 0.33,
     bloomStrength: 0,
     bloomRadius: 1,
-    donutsAmount: 100,
-    spheresAmount: 70,
-    diamondAmount: 200,
+    donutsAmount: 70,
+    spheresAmount: 100,
+    diamondAmount: 170,
+    particleCount: 3000
 };
 
 // FONT
-let enterObjects = []
+let mainFont = {}
+// let uralaverseObject = {}
+
 const fontLoader = new FontLoader()
 fontLoader.load('/fonts/galaxy.json', (font) =>{
-    fontMaker('WELCOME \n TO THE \n URALAVERSE!', font, {x: 0, y: 1, z: 0},  0x03ead9, 'welcome', true)
-    fontMaker('ENTER', font, {x: 0, y: -1.5, z: 0},  0xff0030, 'enter', false)
-    enterObjects = scene.children.filter(obj => obj.name === 'enter')
+    mainFont = font
+    fontMaker('WELCOME', mainFont, 0.9, {x: 1, y: 2.4, z: -2.5},  0x03ead9, 'welcome', true)
+    fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.3, z: -2.8},  0x03ead9, 'welcome', true)
+    fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', true, true)
+    // fontMaker('ENTER', mainFont, 0.6, {x: 1, y: -1.5, z: 0},  0xff0030, 'enter', false)
+    // enterObjects = scene.children.filter(obj => obj.name === 'enter')
+    // uralaverseObject = scene.children.filter(obj => obj.name === 'uralaverse')
 })
 
-const fontMaker = (text, font, position, color, name, wireframe) => {
+
+const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, stretch) => {
     const textGeometry = new TextGeometry(
         text, {
             font: font,
-            size: 0.6,
-            height: 0.2,
+            size: size,
+            height: 0.5,
             // curveSegments: 1,
             // bevelEnabled: true,
             // bevelSize: 0.01,
@@ -48,22 +57,34 @@ const fontMaker = (text, font, position, color, name, wireframe) => {
     const textMesh = new THREE.Mesh()
     if(wireframe){
         textMesh.geometry = textGeometry
-        textMesh.material = new THREE.MeshPhongMaterial({
-            polygonOffset: true,
-            polygonOffsetFactor: 1, // positive value pushes polygon further away
-            polygonOffsetUnits: 1,
-        })
+        // textMesh.material = new THREE.MeshPhongMaterial({
+        //     polygonOffset: true,
+        //     polygonOffsetFactor: 1, // positive value pushes polygon further away
+        //     polygonOffsetUnits: 1,
+        // })
+        textMesh.material = new THREE.MeshStandardMaterial({ color: color })
         let wireframe = new THREE.WireframeGeometry( textGeometry );
         let line = new THREE.LineSegments( wireframe );
         line.material.color.setHex(color);
         line.position.x = position.x
         line.position.y = position.y
         line.position.z = position.z
-        line.name = name
+        // if(stretch){
+        //     textMesh.scale.y = 1.4
+        //     textMesh.scale.x = 1.1
+        //     line.scale.y = 1.4
+        //     line.scale.x = 1.1
+        // }
         scene.add(line);
-        gsap.to(line.scale, 7, {
-            z: 5
-        })
+        if(firstScene){
+            gsap.to(line.scale, 10, {
+                z: 2,
+                yoyo: true,
+                repeat: -1,
+                repeatDelay: 5,
+                ease: "power1.inOut()",
+            })
+        }
     } else {
         textMesh.geometry = textGeometry
         textMesh.material = material
@@ -75,6 +96,8 @@ const fontMaker = (text, font, position, color, name, wireframe) => {
     textMesh.position.y = position.y
     textMesh.position.z = position.z
     textMesh.name = name
+    window[name + 'text'] = textMesh;
+    objectsToTest.push(window[name + 'text'])
     scene.add(textMesh)
 }
 
@@ -154,9 +177,10 @@ scene.add(pointLight)
  gltfLoader.load('/models/btc.glb', (m) => {
         const coinModel = m.scene.children[0]
         coinModel.scale.set(0.75, 0.75, 0.75)
-        coinModel.position.x = 2
-        coinModel.position.y = 1
-        scene.add(coinModel)
+        // coinModel.position.x = 3
+        // coinModel.position.y = 1
+        coinModel.position.x = 1
+        coinModel.position.y = 2
         coin = coinModel
         // console.log(scene.children)
     }
@@ -168,10 +192,45 @@ scene.add(pointLight)
 const textureLoader = new THREE.TextureLoader()
 const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
 const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture, color: '#0b5400' })
-const matcapTexture2 = textureLoader.load('/textures/matcaps/3.png')
+const matcapTexture2 = textureLoader.load('/textures/matcaps/4.png')
 const material2 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture2 })
-
 let genHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+
+/**
+// Particles
+ */
+//
+const particleTexture = textureLoader.load('/textures/particles/1.png')
+const particlesGeometry = new THREE.BufferGeometry()
+const count = params.particleCount
+
+const positions = new Float32Array(count * 3)
+const colors = new Float32Array(count * 3)
+
+for(let i = 0; i < count * 3; i++){
+    positions[i] = (Math.random() - 0.5) * 20
+    colors[i] = Math.random()
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.1,
+    sizeAttenuation: true,
+    // color: '#f7f1aa',
+    map: particleTexture,
+    transparent: true,
+    alphaMap: particleTexture,
+    // alphaTest: 0.5
+    // depthTest: false
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexColors: true
+})
+
+const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+scene.add(particles)
 
 // Donuts
 const donutGroup = new THREE.Group()
@@ -221,8 +280,7 @@ const octGeometry = new THREE.OctahedronGeometry(.2)
 for(let i = 0; i < params.diamondAmount; i++){
     const oct = new THREE.Mesh(
         octGeometry,
-        new THREE.MeshMatcapMaterial({
-            matcap: matcapTexture2,
+        new THREE.MeshStandardMaterial({
             color: new THREE.Color("#"+genHex(6)),
         })
     )
@@ -231,12 +289,229 @@ for(let i = 0; i < params.diamondAmount; i++){
     oct.position.z = (Math.random() - 0.5) * 10
     oct.rotation.x = Math.random() * Math.PI
     oct.rotation.y = Math.random() * Math.PI
-    const scale = Math.random()
+    const scale = Math.random() * 1.25
     oct.scale.set(scale, scale, scale)
     octGroup.add(oct)
 }
 
 scene.add(donutGroup, sphereGroup, octGroup)
+
+const homeScene = () => {
+    // Donuts
+    const donutGroup = new THREE.Group()
+    const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+    for(let i = 0; i < params.donutsAmount; i++){
+        const donut = new THREE.Mesh(
+            donutGeometry,
+            new THREE.MeshNormalMaterial({
+                wireframe: true
+            })
+        )
+        donut.position.x = (Math.random() - 0.5) * 10
+        donut.position.y = (Math.random() - 0.5) * 10
+        donut.position.z = (Math.random() - 0.5) * 10
+        donut.rotation.x = Math.random() * Math.PI
+        donut.rotation.y = Math.random() * Math.PI
+        const scale = Math.random()
+        donut.scale.set(scale, scale, scale)
+        donutGroup.add(donut)
+    }
+
+    // Sphere
+    const sphereGroup = new THREE.Group()
+    const sphereGeometry = new THREE.SphereGeometry(.2, 20, 20)
+    for(let i = 0; i < params.spheresAmount; i++){
+        const sphere = new THREE.Mesh(
+            sphereGeometry,
+            new THREE.MeshMatcapMaterial({
+                matcap: matcapTexture2,
+                color: new THREE.Color("#"+genHex(6))
+            })
+        )
+        // sphere.material.color = new THREE.Color("rgb(159, 1, 134)")
+        sphere.position.x = (Math.random() - 0.5) * 10
+        sphere.position.y = (Math.random() - 0.5) * 10
+        sphere.position.z = (Math.random() - 0.5) * 10
+        sphere.rotation.x = Math.random() * Math.PI
+        sphere.rotation.y = Math.random() * Math.PI
+        const scale = Math.random()
+        sphere.scale.set(scale, scale, scale)
+        sphereGroup.add(sphere)
+    }
+
+    // Octahedro
+    const octGroup = new THREE.Group()
+    const octGeometry = new THREE.OctahedronGeometry(.2)
+    for(let i = 0; i < params.diamondAmount; i++){
+        const oct = new THREE.Mesh(
+            octGeometry,
+            new THREE.MeshStandardMaterial({
+                color: new THREE.Color("#"+genHex(6)),
+            })
+        )
+        oct.position.x = (Math.random() - 0.5) * 10
+        oct.position.y = (Math.random() - 0.5) * 10
+        oct.position.z = (Math.random() - 0.5) * 10
+        oct.rotation.x = Math.random() * Math.PI
+        oct.rotation.y = Math.random() * Math.PI
+        const scale = Math.random()
+        oct.scale.set(scale, scale, scale)
+        octGroup.add(oct)
+    }
+
+    scene.add(donutGroup, sphereGroup, octGroup)
+    fontMaker('WELCOME \n TO THE \n URALAVERSE!', mainFont, 0.6, {x: 1, y: 1.5, z: 0},  0x03ead9, 'welcome', true)
+    fontMaker('ENTER', mainFont, 0.6, {x: 1, y: -1.5, z: 0},  0xff0030, 'enter', false)
+    scene.add(hemisphereLight)
+    scene.add(pointLight)
+    let spherePositions = sphereGroup.children.map(i => i.position)
+    gsap.to(spherePositions, {
+        x: Math.cos(100),
+        y: Math.sin(100),
+        z: Math.sin(100),
+        duration: 25,
+        yoyo: true,
+        repeat: -1,
+        stagger: 0.01,
+        ease: "back.inOut(1.7)",
+        repeatDelay: 8
+    })
+
+    let donutPositions = donutGroup.children.map(i => i.position)
+    gsap.to(donutPositions, {
+        x: Math.cos(100),
+        y: Math.sin(100),
+        z: Math.sin(100),
+        duration: 25,
+        yoyo: true,
+        repeat: -1,
+        stagger: 0.01,
+        ease: "back.inOut(1.7)",
+        repeatDelay: 8
+    })
+    let donutScales = donutGroup.children.map(i => i.scale)
+    gsap.to(donutScales, {
+        x: 0.5,
+        y: 0.5,
+        z: 0.5,
+        duration: 25,
+        yoyo: true,
+        repeat: -1,
+        stagger: 0.01,
+        ease: "back.inOut(1.7)",
+        repeatDelay: 8
+    })
+    let donutRotations = donutGroup.children.map(i => i.rotation)
+    gsap.to(donutRotations, {
+        x: Math.PI * 4,
+        duration: 20,
+        yoyo: true,
+        repeat: -1,
+        ease: "power1.inOut()",
+    })
+
+    let diamondPositions = octGroup.children.map(i => i.position)
+    gsap.to(diamondPositions, {
+        x: Math.cos(100),
+        y: Math.sin(100),
+        z: Math.sin(100),
+        duration: 25,
+        yoyo: true,
+        repeat: -1,
+        stagger: 0.01,
+        ease: "back.inOut(1.7)",
+        repeatDelay: 8
+    })
+    let diamondRotations = octGroup.children.map(i => i.rotation)
+    gsap.to(diamondRotations, {
+        x: Math.PI * 8,
+        duration: 20,
+        yoyo: true,
+        repeat: -1,
+        ease: "power1.inOut()",
+    })
+
+    changeBloomStrength
+}
+
+const menuScene = () => {
+    fontMaker('HOME', mainFont, 0.6, {x: -2, y: 2.5, z: 1},  0x22f930, 'home', true)
+    fontMaker('ABOUT', mainFont, 0.6, {x: 2.5, y: 2, z: 0},  0x22f930, 'about', true)
+    fontMaker('PORTFOLIO', mainFont, 0.6, {x: -2, y: 1, z: -1},  0xda005a, 'portfolio', true)
+    fontMaker('CLIENTS', mainFont, 0.6, {x: 3, y: 0, z: 1},  0xfaff30, 'clients', true)
+    fontMaker('SERVICES', mainFont, 0.6, {x: -2, y: -1, z: 0},  0x00df90, 'services', true)
+    fontMaker('TEAM', mainFont, 0.6, {x: 4, y: -2, z: -1},  0x00f0a0, 'team', true)
+    fontMaker('CONTACT', mainFont, 0.6, {x: 0, y: -3, z: 0},  0x7890f0, 'contact', true)
+    scene.add(pointLight)
+    scene.add(hemisphereLight)
+    const octGroup = new THREE.Group()
+    const octGeometry = new THREE.OctahedronGeometry(.2)
+    for(let i = 0; i < 100; i++){
+        const oct = new THREE.Mesh(
+            octGeometry,
+            new THREE.MeshStandardMaterial({
+                color: new THREE.Color("#"+genHex(6)),
+            })
+        )
+        oct.position.x = (Math.random() - 0.5) * 10
+        oct.position.y = (Math.random() - 0.5) * 10
+        oct.position.z = (Math.random() - 0.5) * 10
+        oct.rotation.x = Math.random() * Math.PI
+        oct.rotation.y = Math.random() * Math.PI
+        const scale = Math.random()
+        oct.scale.set(scale, scale, scale)
+        octGroup.add(oct)
+    }
+    scene.add(octGroup)
+    renderer.toneMappingExposure = 4
+}
+
+let aboutText = document.querySelector('.aboutText')
+
+const aboutScene = () => {
+    fontMaker('HOME', mainFont, 0.6, {x: 3.5, y: 3.3, z: 1},  0x22f930, 'home', true)
+    fontMaker('ABOUT', mainFont, 0.6, {x: -2.5, y: 3, z: 0},  0x22f930, 'about', true)
+    aboutText.classList.add('show')
+    scene.add(pointLight)
+    scene.add(hemisphereLight)
+    scene.add(coin)
+    gsap.to(coin.rotation, {
+        z: Math.PI * 2,
+        duration: 8,
+        // yoyo: true,
+        repeat: -1,
+        ease: "linear",
+    })
+    // coin.rotation.z = - elapsedTime * Math.PI * 0.2
+    const donutGroup = new THREE.Group()
+    const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+    for(let i = 0; i < 120; i++){
+        const donut = new THREE.Mesh(
+            donutGeometry,
+            new THREE.MeshNormalMaterial({
+                wireframe: true
+            })
+        )
+        donut.position.x = (Math.random() - 0.5) * 10
+        donut.position.y = (Math.random() - 0.5) * 10
+        donut.position.z = (Math.random() - 0.5) * 10
+        donut.rotation.x = Math.random() * Math.PI
+        donut.rotation.y = Math.random() * Math.PI
+        const scale = Math.random()
+        donut.scale.set(scale, scale, scale)
+        donutGroup.add(donut)
+    }
+    scene.add(donutGroup)
+    let donutRotations = donutGroup.children.map(i => i.rotation)
+    gsap.to(donutRotations, {
+        x: Math.PI * 4,
+        duration: 20,
+        yoyo: true,
+        repeat: -1,
+        ease: "power0.inOut()",
+    })
+    renderer.toneMappingExposure = 4
+}
 
 /**
  * Raycaster
@@ -301,113 +576,143 @@ window.addEventListener('click', () => {
     } else {
         if(currentIntersect) {
             // console.log('click')
-            clicked = true
-            enterColor = new THREE.Color('#490561')
-            gsap.to(currentIntersect.object.material.color, 1, {
-                r: enterColor.r,
-                g: enterColor.g,
-                b: enterColor.b
-            })
-            gsap.to(currentIntersect.object.scale, 1, {
-                x: 1.5,
-                y: 1.5,
-                z: 1.5
-            })
-            gsap.to(currentIntersect.object.rotation, 1, {
-                x: Math.PI * 2
-            })
-            // currentIntersect.object.material.color.set('#490561')
-            setTimeout(() => {
-                while(scene.children.length > 0){
-                    scene.remove(scene.children[0]);
-                }
-                renderer.toneMappingExposure = 0.4
-                firstScene = false
-                scene.add(camera)
-                let number = getRandomInt(1, 3)
-                if(number === lastNumber){
-                    number = getRandomInt(1, 3)
-                }
-                if (number === 1){
-                    const octGroup = new THREE.Group()
-                    const octGeometry = new THREE.OctahedronGeometry(.2)
-                    for(let i = 0; i < 1000; i++){
-                        const oct = new THREE.Mesh(
-                            octGeometry,
-                            new THREE.MeshMatcapMaterial({
-                                matcap: matcapTexture2,
-                                color: new THREE.Color("#"+genHex(6)),
-                            })
-                        )
-                        oct.position.x = (Math.random() - 0.5) * 10
-                        oct.position.y = (Math.random() - 0.5) * 10
-                        oct.position.z = (Math.random() - 0.5) * 10
-                        oct.rotation.x = Math.random() * Math.PI
-                        oct.rotation.y = Math.random() * Math.PI
-                        const scale = Math.random()
-                        oct.scale.set(scale, scale, scale)
-                        octGroup.add(oct)
-                    }
-                    scene.add(octGroup)
-                    scene.add(coin)
-                    scene.add(pointLight)
-                    scene.add(hemisphereLight)
-                    lastNumber = 1
-                }
-                if (number === 2){
-                    const sphereGroup = new THREE.Group()
-                    const sphereGeometry = new THREE.SphereGeometry(.2, 20, 20)
-                    for(let i = 0; i < 600; i++){
-                        const sphere = new THREE.Mesh(
-                            sphereGeometry,
-                            new THREE.MeshMatcapMaterial({
-                                matcap: matcapTexture2,
-                                color: new THREE.Color("#"+genHex(6))
-                            })
-                        )
-                        // sphere.material.color = new THREE.Color("rgb(159, 1, 134)")
-                        sphere.position.x = (Math.random() - 0.5) * 10
-                        sphere.position.y = (Math.random() - 0.5) * 10
-                        sphere.position.z = (Math.random() - 0.5) * 10
-                        sphere.rotation.x = Math.random() * Math.PI
-                        sphere.rotation.y = Math.random() * Math.PI
-                        const scale = Math.random()
-                        sphere.scale.set(scale, scale, scale)
-                        sphereGroup.add(sphere)
-                    }
-                    scene.add(sphereGroup)
-                    scene.add(coin)
-                    scene.add(pointLight)
-                    scene.add(hemisphereLight)
-                    lastNumber = 2
-                }
-                if (number === 3){
-                    // Donuts
-                    const donutGroup = new THREE.Group()
-                    const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
-                    for(let i = 0; i < 400; i++){
-                        const donut = new THREE.Mesh(
-                            donutGeometry,
-                            new THREE.MeshNormalMaterial({wireframe: true})
-                        )
-                        donut.position.x = (Math.random() - 0.5) * 10
-                        donut.position.y = (Math.random() - 0.5) * 10
-                        donut.position.z = (Math.random() - 0.5) * 10
-                        donut.rotation.x = Math.random() * Math.PI
-                        donut.rotation.y = Math.random() * Math.PI
-                        const scale = Math.random()
-                        donut.scale.set(scale, scale, scale)
-                        donutGroup.add(donut)
-                    }
-                    scene.add(donutGroup)
-                    scene.add(coin)
-                    scene.add(pointLight)
-                    scene.add(hemisphereLight)
-                    lastNumber = 3
-                }
-            }, 1200)
+            // clicked = true
+            // enterColor = new THREE.Color('#490561')
+            // gsap.to(currentIntersect.object.material.color, 1, {
+            //     r: enterColor.r,
+            //     g: enterColor.g,
+            //     b: enterColor.b
+            // })
+            // gsap.to(currentIntersect.object.scale, 1, {
+            //     x: 1.2,
+            //     y: 1.2,
+            //     z: 1.2
+            // })
+            // gsap.to(currentIntersect.object.rotation, 1, {
+            //     x: Math.PI * 2
+            // })
+            // // currentIntersect.object.material.color.set('#490561')
+
+            // if(firstScene){
+            //     setTimeout(() => {
+            //         while(scene.children.length > 0){
+            //             scene.remove(scene.children[0]);
+            //         }
+            //         renderer.toneMappingExposure = 0.4
+            //         firstScene = false
+            //         scene.add(camera)
+            //         menuScene()
+            //     }, 1200)
+            // }
+            // if(currentIntersect.object.name === 'home'){
+            //     setTimeout(() => {
+            //         while(scene.children.length > 0){
+            //             scene.remove(scene.children[0]);
+            //         }
+            //         renderer.toneMappingExposure = 4
+            //         firstScene = true
+            //         scene.add(camera)
+            //         homeScene()
+            //         aboutText.classList.remove('show')
+            //     }, 1200)
+            // }
+            // if(currentIntersect.object.name === 'about'){
+            //     setTimeout(() => {
+            //         while(scene.children.length > 0){
+            //             scene.remove(scene.children[0]);
+            //         }
+            //         renderer.toneMappingExposure = 4
+            //         scene.add(camera)
+            //         aboutScene()
+            //     }, 1200)
+            // }
+
         }
-    }
+            // let number = getRandomInt(1, 4)
+            // if(number === lastNumber){
+            //     number = getRandomInt(1, 4)
+            // }
+            // if (number === 1){
+                // lastNumber = 1
+            // }
+            // if (number === 2){
+            //     const octGroup = new THREE.Group()
+            //     const octGeometry = new THREE.OctahedronGeometry(.2)
+            //     for(let i = 0; i < 1000; i++){
+            //         const oct = new THREE.Mesh(
+            //             octGeometry,
+            //             new THREE.MeshMatcapMaterial({
+            //                 matcap: matcapTexture2,
+            //                 color: new THREE.Color("#"+genHex(6)),
+            //             })
+            //         )
+            //         oct.position.x = (Math.random() - 0.5) * 10
+            //         oct.position.y = (Math.random() - 0.5) * 10
+            //         oct.position.z = (Math.random() - 0.5) * 10
+            //         oct.rotation.x = Math.random() * Math.PI
+            //         oct.rotation.y = Math.random() * Math.PI
+            //         const scale = Math.random()
+            //         oct.scale.set(scale, scale, scale)
+            //         octGroup.add(oct)
+            //     }
+            //     scene.add(octGroup)
+            //     scene.add(coin)
+            //     scene.add(pointLight)
+            //     scene.add(hemisphereLight)
+            //     lastNumber = 2
+            // }
+            // if (number === 3){
+            //     const sphereGroup = new THREE.Group()
+            //     const sphereGeometry = new THREE.SphereGeometry(.2, 20, 20)
+            //     for(let i = 0; i < 600; i++){
+            //         const sphere = new THREE.Mesh(
+            //             sphereGeometry,
+            //             new THREE.MeshMatcapMaterial({
+            //                 matcap: matcapTexture2,
+            //                 color: new THREE.Color("#"+genHex(6))
+            //             })
+            //         )
+            //         // sphere.material.color = new THREE.Color("rgb(159, 1, 134)")
+            //         sphere.position.x = (Math.random() - 0.5) * 10
+            //         sphere.position.y = (Math.random() - 0.5) * 10
+            //         sphere.position.z = (Math.random() - 0.5) * 10
+            //         sphere.rotation.x = Math.random() * Math.PI
+            //         sphere.rotation.y = Math.random() * Math.PI
+            //         const scale = Math.random()
+            //         sphere.scale.set(scale, scale, scale)
+            //         sphereGroup.add(sphere)
+            //     }
+            //     scene.add(sphereGroup)
+            //     scene.add(coin)
+            //     scene.add(pointLight)
+            //     scene.add(hemisphereLight)
+            //     lastNumber = 3
+            // }
+            // if (number === 4){
+            //     // Donuts
+            //     const donutGroup = new THREE.Group()
+            //     const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+            //     for(let i = 0; i < 400; i++){
+            //         const donut = new THREE.Mesh(
+            //             donutGeometry,
+            //             new THREE.MeshNormalMaterial({wireframe: true})
+            //         )
+            //         donut.position.x = (Math.random() - 0.5) * 10
+            //         donut.position.y = (Math.random() - 0.5) * 10
+            //         donut.position.z = (Math.random() - 0.5) * 10
+            //         donut.rotation.x = Math.random() * Math.PI
+            //         donut.rotation.y = Math.random() * Math.PI
+            //         const scale = Math.random()
+            //         donut.scale.set(scale, scale, scale)
+            //         donutGroup.add(donut)
+            //     }
+            //     scene.add(donutGroup)
+            //     scene.add(coin)
+            //     scene.add(pointLight)
+            //     scene.add(hemisphereLight)
+            //     lastNumber = 4
+            // }
+        }
 
         // switch(currentIntersect.object) {
         //     case objectsToTest[0]:
@@ -441,9 +746,9 @@ window.addEventListener('click', () => {
 const cameraGroup = new THREE.Group()
 scene.add(cameraGroup)
 
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = -2
-camera.position.y = 1
+const camera = new THREE.PerspectiveCamera(65, sizes.width / sizes.height, 0.1, 100)
+camera.position.x = -2.5
+camera.position.y = -3
 camera.position.z = 6
 cameraGroup.add(camera)
 
@@ -501,6 +806,73 @@ let changeBloomStrength = setInterval(checkBloomStrength, 16);
 const clock = new THREE.Clock()
 let previousTime = 0
 
+let spherePositions = sphereGroup.children.map(i => i.position)
+gsap.to(spherePositions, {
+    x: Math.cos(100),
+    y: Math.sin(100),
+    z: Math.sin(100),
+    duration: 25,
+    yoyo: true,
+    repeat: -1,
+    stagger: 0.01,
+    ease: "back.inOut(1.7)",
+    repeatDelay: 8
+})
+
+let donutPositions = donutGroup.children.map(i => i.position)
+gsap.to(donutPositions, {
+    x: Math.cos(100),
+    y: Math.sin(100),
+    z: Math.sin(100),
+    duration: 25,
+    yoyo: true,
+    repeat: -1,
+    stagger: 0.01,
+    ease: "back.inOut(1.7)",
+    repeatDelay: 8
+})
+let donutScales = donutGroup.children.map(i => i.scale)
+gsap.to(donutScales, {
+    x: 0.5,
+    y: 0.5,
+    z: 0.5,
+    duration: 25,
+    yoyo: true,
+    repeat: -1,
+    stagger: 0.01,
+    ease: "back.inOut(1.7)",
+    repeatDelay: 8
+})
+let donutRotations = donutGroup.children.map(i => i.rotation)
+gsap.to(donutRotations, {
+    x: Math.PI * 4,
+    duration: 20,
+    yoyo: true,
+    repeat: -1,
+    ease: "power1.inOut()",
+})
+
+let diamondPositions = octGroup.children.map(i => i.position)
+gsap.to(diamondPositions, {
+    x: Math.cos(100),
+    y: Math.sin(100),
+    z: Math.sin(100),
+    duration: 25,
+    yoyo: true,
+    repeat: -1,
+    stagger: 0.01,
+    ease: "back.inOut(1.7)",
+    repeatDelay: 8
+})
+let diamondRotations = octGroup.children.map(i => i.rotation)
+gsap.to(diamondRotations, {
+    x: Math.PI * 8,
+    duration: 20,
+    yoyo: true,
+    repeat: -1,
+    ease: "power1.inOut()",
+})
+
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - previousTime
@@ -511,83 +883,85 @@ const tick = () => {
     // Cast a ray from the mouse and handle events
     raycaster.setFromCamera(mouse, camera)
 
-    const objectsToTest = []
-    if(enterObjects.length > 0){
-        for(const obj in enterObjects){
-            objectsToTest.push(enterObjects[obj])
-        }
-        // camera.lookAt(scene.children[7].position)
-        // console.log(objectsToTest[0]) // enter
-    }
+    // if(enterObjects.length > 0){
+    //     for(const obj in enterObjects){
+    //         objectsToTest.push(enterObjects[obj])
+    //     }
+    // }
     // const objectsToTest = [object1, object2, object3]
     const intersects = raycaster.intersectObjects(objectsToTest)
 
-    if(!clicked) {
+    // if(!clicked) {
         if(intersects.length) {
             if(!currentIntersect) {
                 // console.log('mouse enter')
             }
             currentIntersect = intersects[0]
             // console.log(currentIntersect.object)
-            // currentIntersect.object.material.color.set('#002034')
-            enterColor = new THREE.Color('#002034')
-            gsap.to(currentIntersect.object.material.color, 1, {
-                r: enterColor.r,
-                g: enterColor.g,
-                b: enterColor.b
-            })
-            // gsap.to(currentIntersect.object.scale, 1, {
-            //     x: 1.3,
-            //     y: 1.3,
-            //     z: 1.3
-            // })
-        }
-        else {
-            if(currentIntersect) {
-                // console.log('mouse leave')
-                // currentIntersect.object.material.color.set('#083b00')
-                enterColor = new THREE.Color('#083b00')
+            if(currentIntersect.object == window.entertext){
+                enterColor = new THREE.Color('#002034')
+                gsap.to(currentIntersect.object.material.color, 1, {
+                    r: enterColor.r,
+                    g: enterColor.g,
+                    b: enterColor.b
+                })
+            } else {
+                enterColor = new THREE.Color('#ffee00')
                 gsap.to(currentIntersect.object.material.color, 1, {
                     r: enterColor.r,
                     g: enterColor.g,
                     b: enterColor.b
                 })
             }
+        }
+        else {
+            if(currentIntersect) {
+                // console.log('mouse leave')
+                if(currentIntersect.object == window.entertext){
+                    enterColor = new THREE.Color('#083b00')
+                    gsap.to(currentIntersect.object.material.color, 1, {
+                        r: enterColor.r,
+                        g: enterColor.g,
+                        b: enterColor.b
+                    })
+                } else {
+                    enterColor = new THREE.Color('#00c4eb')
+                    gsap.to(currentIntersect.object.material.color, 1, {
+                        r: enterColor.r,
+                        g: enterColor.g,
+                        b: enterColor.b
+                    })
+                }
+            }
             currentIntersect = null
         }
-    }
+    // }
 
-    for(let i = 0; i < donutGroup.children.length; i++){
-        if(i % 2 === 0){
-            donutGroup.children[i].rotation.x = - elapsedTime * Math.PI * 0.25
-        } else {
-            donutGroup.children[i].rotation.y = elapsedTime * Math.PI * 0.25
-        }
-    }
-
-    for(let i = 0; i < sphereGroup.children.length; i++){
-        if(i % 2 === 0){
-            sphereGroup.children[i].position.x = sphereGroup.children[i].position.x + Math.cos(elapsedTime) / (i * 2)
-            sphereGroup.children[i].position.y = sphereGroup.children[i].position.y + Math.sin(elapsedTime) / (i * 2)
-        } else {
-            sphereGroup.children[i].position.x = sphereGroup.children[i].position.x + Math.sin(elapsedTime) / (i * 2)
-            sphereGroup.children[i].position.z = sphereGroup.children[i].position.z + Math.cos(elapsedTime) / (i * 2)
-        }
-    }
-    for(let i = 0; i < octGroup.children.length; i++){
-        if(i % 2 === 0){
-            octGroup.children[i].rotation.x = elapsedTime * Math.PI * 0.5
-            // octGroup.children[i].position.y = octGroup.children[i].position.y + Math.sin(elapsedTime) / (i * 3)
-        } else {
-            octGroup.children[i].rotation.x = - elapsedTime * Math.PI * 0.5
-            // octGroup.children[i].position.z = octGroup.children[i].position.y + Math.sin(elapsedTime) / (i * 2)
-        }
-    }
+    // for(let i = 0; i < sphereGroup.children.length; i++){
+    //     if(i % 2 === 0){
+    //         gsap.to(sphereGroup.children[i].position, {
+    //             x: sphereGroup.children[i].position.x + Math.cos(elapsedTime),
+    //             y: sphereGroup.children[i].position.y + Math.sin(elapsedTime),
+    //             duration: 4,
+    //             yoyo: true,
+    //         })
+    //     } else {
+    //         gsap.to(sphereGroup.children[i].position, {
+    //             x: sphereGroup.children[i].position.x + Math.sin(elapsedTime),
+    //             z: sphereGroup.children[i].position.z + Math.cos(elapsedTime),
+    //             duration: 8,
+    //             yoyo: true,
+    //         })
+    //     }
+    // }
 
     if(!firstScene){
-        scene.rotation.y = - elapsedTime * Math.PI / 16
-        scene.rotation.z = - elapsedTime * Math.PI / 16
-        renderer.toneMappingExposure += 0.02
+        // gsap.to(scene.rotation, {
+        //     y: scene.rotation.y = - elapsedTime * Math.PI / 16,
+        //     z: scene.rotation.z = - elapsedTime * Math.PI / 16
+        // })
+
+        // renderer.toneMappingExposure += 0.02
         clearInterval(changeBloomStrength)
     }
     // const parallaxX = mouse.x * 1.5
@@ -597,10 +971,10 @@ const tick = () => {
     // if(scene.children.length > 6){
     //     camera.lookAt(scene.children[7])
     // }
-    if(typeof coin.children != 'undefined'){
-        coin.rotation.z = - elapsedTime * Math.PI * 0.2
-        // coin.position.z = - elapsedTime / 6
-    }
+    // if(typeof coin.children != 'undefined'){
+    //     coin.rotation.z = - elapsedTime * Math.PI * 0.2
+    //     // coin.position.z = - elapsedTime / 6
+    // }
     // Render
     composer.render();
     // renderer.render(scene, camera)

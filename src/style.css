@@ -1,19 +1,54 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
 html,
-body
-{
+body {
     overflow: hidden;
 }
 
-.webgl
-{
+.webgl {
     position: fixed;
     top: 0;
     left: 0;
     outline: none;
+}
+
+.text-panel {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 80%;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    font-size: 24px;
+    font-family: sans-serif;
+    padding: 20px 25px 25px;
+    border-radius: 16px;
+    display: none;
+    pointer-events: none;
+    border: 2px solid #fff;
+}
+
+.show{
+    display: block;
+}
+p {
+    margin: 16px 0;
+}
+h1, h2, h3, h4 {
+    margin-bottom: 10px;
+}
+
+svg {
+    width: 35px;
+    margin-bottom: -11px;
+    margin-top: 16px;
+    margin-right: 10px;
+}
+svg path{
+    fill: #fff
 }
