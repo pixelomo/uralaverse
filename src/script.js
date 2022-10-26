@@ -25,6 +25,7 @@ const params = {
 // FONT
 let mainFont = {}
 // let uralaverseObject = {}
+let homeButton = {}
 
 const fontLoader = new FontLoader()
 fontLoader.load('/fonts/galaxy.json', (font) =>{
@@ -32,6 +33,10 @@ fontLoader.load('/fonts/galaxy.json', (font) =>{
     fontMaker('WELCOME', mainFont, 0.9, {x: 1, y: 2.4, z: -2.5},  0x03ead9, 'welcome', true)
     fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.3, z: -2.8},  0x03ead9, 'welcome', true)
     fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', true, true)
+    fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x7890f0, 'contact', true)
+    fontMaker('HOME', mainFont, 0.5, {x: 1, y: -1, z: 2},  0x22f930, 'home', false)
+    homeButton = scene.children.filter(obj => obj.name === 'home')
+    homeButton[0].visible = false
     // fontMaker('ENTER', mainFont, 0.6, {x: 1, y: -1.5, z: 0},  0xff0030, 'enter', false)
     // enterObjects = scene.children.filter(obj => obj.name === 'enter')
     // uralaverseObject = scene.children.filter(obj => obj.name === 'uralaverse')
@@ -100,28 +105,6 @@ const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, str
     objectsToTest.push(window[name + 'text'])
     scene.add(textMesh)
 }
-
-/**
- * Base
- */
-// Debug
-// const gui = new dat.GUI()
-
-// gui.add( params, 'exposure', 0.1, 2 ).onChange( function ( value ) {
-//     renderer.toneMappingExposure = Math.pow( value, 4.0 );
-// } );
-
-// gui.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
-//     bloomPass.threshold = Number( value );
-// } );
-
-// gui.add( params, 'bloomStrength', 0.0, 3.0 ).onChange( function ( value ) {
-//     bloomPass.strength = Number( value );
-// } );
-
-// gui.add( params, 'bloomRadius', 0.0, 1.0 ).step( 0.01 ).onChange( function ( value ) {
-//     bloomPass.radius = Number( value );
-// } );
 
 
 // Canvas
@@ -467,6 +450,7 @@ const menuScene = () => {
 }
 
 let aboutText = document.querySelector('.aboutText')
+let contactForm = document.querySelector('.contactForm')
 
 const aboutScene = () => {
     fontMaker('HOME', mainFont, 0.6, {x: 3.5, y: 3.3, z: 1},  0x22f930, 'home', true)
@@ -576,13 +560,13 @@ window.addEventListener('click', () => {
     } else {
         if(currentIntersect) {
             // console.log('click')
-            // clicked = true
-            // enterColor = new THREE.Color('#490561')
-            // gsap.to(currentIntersect.object.material.color, 1, {
-            //     r: enterColor.r,
-            //     g: enterColor.g,
-            //     b: enterColor.b
-            // })
+            clicked = true
+            enterColor = new THREE.Color('#490561')
+            gsap.to(currentIntersect.object.material.color, 1, {
+                r: enterColor.r,
+                g: enterColor.g,
+                b: enterColor.b
+            })
             // gsap.to(currentIntersect.object.scale, 1, {
             //     x: 1.2,
             //     y: 1.2,
@@ -591,7 +575,7 @@ window.addEventListener('click', () => {
             // gsap.to(currentIntersect.object.rotation, 1, {
             //     x: Math.PI * 2
             // })
-            // // currentIntersect.object.material.color.set('#490561')
+            // currentIntersect.object.material.color.set('#490561')
 
             // if(firstScene){
             //     setTimeout(() => {
@@ -604,18 +588,39 @@ window.addEventListener('click', () => {
             //         menuScene()
             //     }, 1200)
             // }
-            // if(currentIntersect.object.name === 'home'){
-            //     setTimeout(() => {
-            //         while(scene.children.length > 0){
-            //             scene.remove(scene.children[0]);
-            //         }
-            //         renderer.toneMappingExposure = 4
-            //         firstScene = true
-            //         scene.add(camera)
-            //         homeScene()
-            //         aboutText.classList.remove('show')
-            //     }, 1200)
-            // }
+            if(currentIntersect.object.name === 'home'){
+                gsap.to(camera.position, {
+                    x: -2.5,
+                    y: -3,
+                    z: 6,
+                    duration: 2,
+                    ease: "back.inOut(1.7)",
+                })
+                setTimeout(() => {
+                    // while(scene.children.length > 0){
+                    //     scene.remove(scene.children[0]);
+                    // }
+                    // renderer.toneMappingExposure = 4
+                    // aboutText.classList.remove('show')
+                    homeButton[0].visible = false
+                    contactForm.classList.remove('show')
+                }, 700)
+            }
+            if(currentIntersect.object.name === 'contact'){
+                gsap.to(camera.position, {
+                    x: -0.82,
+                    y: -0.33,
+                    z: -1.8,
+                    duration: 2,
+                    ease: "back.inOut(1.7)",
+                })
+                setTimeout(() => {
+                    // renderer.toneMappingExposure = 4
+                    contactForm.classList.add('show')
+                    homeButton[0].visible = true
+                    homeButton[0].rotation.y = 500
+                }, 1200)
+            }
             // if(currentIntersect.object.name === 'about'){
             //     setTimeout(() => {
             //         while(scene.children.length > 0){
@@ -780,6 +785,36 @@ let composer = new EffectComposer( renderer )
 composer.addPass( renderScene )
 composer.addPass( bloomPass )
 
+
+/**
+ * Base
+ */
+// Debug
+// const gui = new dat.GUI()
+
+// gui.add(camera.position, 'x', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos X')
+// gui.add(camera.position, 'y', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos Y')
+// gui.add(camera.position, 'z', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos Z')
+
+// gui.add(camera.rotation, 'x', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation X')
+// gui.add(camera.rotation, 'y', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation Y')
+// gui.add(camera.rotation, 'z', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation Z')
+
+// gui.add( params, 'exposure', 0.1, 2 ).onChange( function ( value ) {
+//     renderer.toneMappingExposure = Math.pow( value, 4.0 );
+// } );
+
+// gui.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
+//     bloomPass.threshold = Number( value );
+// } );
+
+// gui.add( params, 'bloomStrength', 0.0, 3.0 ).onChange( function ( value ) {
+//     bloomPass.strength = Number( value );
+// } );
+
+// gui.add( params, 'bloomRadius', 0.0, 1.0 ).step( 0.01 ).onChange( function ( value ) {
+//     bloomPass.radius = Number( value );
+// } );
 
 let up = true;
 let limit = 1;
