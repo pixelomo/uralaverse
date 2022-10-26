@@ -34,7 +34,7 @@ fontLoader.load('/fonts/galaxy.json', (font) =>{
     fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.3, z: -2.8},  0x03ead9, 'welcome', true)
     fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', true, true)
     fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x7890f0, 'contact', true)
-    fontMaker('HOME', mainFont, 0.5, {x: 1, y: -1, z: 2},  0x22f930, 'home', false)
+    fontMaker('HOME', mainFont, 0.5, {x: 1, y: -1.5, z: 2},  0x22f930, 'home', false)
     homeButton = scene.children.filter(obj => obj.name === 'home')
     homeButton[0].visible = false
     // fontMaker('ENTER', mainFont, 0.6, {x: 1, y: -1.5, z: 0},  0xff0030, 'enter', false)
