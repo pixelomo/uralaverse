@@ -16,10 +16,14 @@ const params = {
     bloomThreshold: 0.33,
     bloomStrength: 0,
     bloomRadius: 1,
-    donutsAmount: 70,
-    spheresAmount: 100,
-    diamondAmount: 170,
-    particleCount: 3000
+    // donutsAmount: 70,
+    // spheresAmount: 100,
+    // diamondAmount: 170,
+    // particleCount: 3000
+    donutsAmount: 50,
+    spheresAmount: 50,
+    diamondAmount: 120,
+    particleCount: 2200
 };
 
 // FONT
