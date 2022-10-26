@@ -150,7 +150,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   /* border: 1px solid white; */
   -webkit-text-fill-color: white;
-  -webkit-box-shadow: 0 0 0px 1000px black inset;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
   outline: none;
 }
 
