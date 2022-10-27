@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
+import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -20,10 +21,10 @@ const params = {
     // spheresAmount: 100,
     // diamondAmount: 170,
     // particleCount: 3000
-    donutsAmount: 50,
-    spheresAmount: 50,
-    diamondAmount: 120,
-    particleCount: 2200
+    donutsAmount: 25,
+    spheresAmount: 25,
+    diamondAmount: 50,
+    particleCount: 1500
 };
 
 // FONT
@@ -45,7 +46,6 @@ fontLoader.load('/fonts/galaxy.json', (font) =>{
     // enterObjects = scene.children.filter(obj => obj.name === 'enter')
     // uralaverseObject = scene.children.filter(obj => obj.name === 'uralaverse')
 })
-
 
 const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, stretch) => {
     const textGeometry = new TextGeometry(
@@ -110,6 +110,79 @@ const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, str
     scene.add(textMesh)
 }
 
+// SVG SVG SVG //
+// SVG SVG SVG //
+// SVG SVG SVG //
+const loadSVG = (path, name, url, position, scale) => {
+
+    const loader = new SVGLoader()
+    loader.load( path, ( data ) => {
+
+        const paths = data.paths
+        const group = new THREE.Group()
+        group.scale.multiplyScalar( 0.25 )
+        group.position.x = - 70
+        group.position.y = 70
+        group.scale.set(scale, scale, scale)
+        group.scale.y *= - 1
+
+        for ( let i = 0; i < paths.length; i++ ) {
+            const path = paths[ i ]
+            const fillColor = path.userData.style.fill
+
+            if ( fillColor !== undefined && fillColor !== 'none' ) {
+                const material = new THREE.MeshBasicMaterial( {
+                    color: new THREE.Color().setStyle( fillColor ).convertSRGBToLinear(),
+                    opacity: path.userData.style.fillOpacity,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    depthWrite: false,
+                    // wireframe: guiData.fillShapesWireframe
+                });
+
+                const shapes = SVGLoader.createShapes( path )
+
+                for ( let j = 0; j < shapes.length; j ++ ) {
+                    const shape = shapes[ j ]
+                    const geometry = new THREE.ShapeGeometry( shape )
+                    const mesh = new THREE.Mesh( geometry, material )
+                    group.add(mesh)
+                }
+            }
+
+            const strokeColor = path.userData.style.stroke
+
+            if ( strokeColor !== undefined && strokeColor !== 'none' ) {
+                const material = new THREE.MeshBasicMaterial( {
+                    color: new THREE.Color().setStyle( strokeColor ).convertSRGBToLinear(),
+                    opacity: path.userData.style.strokeOpacity,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    depthWrite: false,
+                    // wireframe: guiData.strokesWireframe
+                });
+
+                for ( let j = 0, jl = path.subPaths.length; j < jl; j ++ ) {
+                    const subPath = path.subPaths[ j ]
+                    const geometry = SVGLoader.pointsToStroke( subPath.getPoints(), path.userData.style )
+
+                    if ( geometry ) {
+                        const mesh = new THREE.Mesh( geometry, material )
+                        group.add( mesh )
+                    }
+                }
+            }
+        }
+        group.name = name
+        group.userData.url = url
+        objectsToTest.push(group)
+        group.position.set(position.x, position.y, position.z)
+        scene.add(group)
+    })
+}
+loadSVG('/images/urala-white.svg', 'urala', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.01)
+loadSVG('/images/decapital.svg', 'decapital', 'https://de.capital/', {x: 1.5, y: -1.5, z: .5}, 0.001)
+loadSVG('/images/ctjp.svg', 'cointelegraph', 'https://jp.cointelegraph.com/', {x: -4, y: 2.5, z: 0}, 0.01)
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -261,7 +334,7 @@ for(let i = 0; i < params.spheresAmount; i++){
     sphereGroup.add(sphere)
 }
 
-// Octahedro
+// Octahedron
 const octGroup = new THREE.Group()
 const octGeometry = new THREE.OctahedronGeometry(.2)
 for(let i = 0; i < params.diamondAmount; i++){
@@ -563,7 +636,7 @@ window.addEventListener('click', () => {
         currentIntersect = intersects[0]
     } else {
         if(currentIntersect) {
-            // console.log('click')
+            // console.log(currentIntersect)
             clicked = true
             enterColor = new THREE.Color('#490561')
             gsap.to(currentIntersect.object.material.color, 1, {
@@ -624,6 +697,9 @@ window.addEventListener('click', () => {
                     homeButton[0].visible = true
                     homeButton[0].rotation.y = 500
                 }, 1200)
+            }
+            if(currentIntersect.object.parent.userData.url){
+                window.open(currentIntersect.object.parent.userData.url, '_blank').focus();
             }
             // if(currentIntersect.object.name === 'about'){
             //     setTimeout(() => {
