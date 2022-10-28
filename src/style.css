@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
 
 * {
     margin: 0;
@@ -8,7 +11,7 @@
 html,
 body {
     overflow: hidden;
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Nabla', cursive;
 }
 
 .webgl {
@@ -33,7 +36,7 @@ body {
     font-family: sans-serif;
     padding: 20px 25px 25px;
     border-radius: 16px;
-    box-shadow: -1px -1px 55px 25px rgb(255 255 255 / 12%);
+    box-shadow: -1px -1px 55px 25px rgb(59 30 102 / 50%);
     display: none;
     /* pointer-events: none; */
     /* border: 2px solid #fff; */
@@ -60,12 +63,10 @@ svg path{
 }
 
 section#contact {
-    background-color: rgba(0,0,0,0.8);
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    background-size: 250px;
+    /* background-color: rgba(0,0,0,0.8); */
+    background: linear-gradient(152deg, #3b1e65 20%, transparent 70%);
     color: #fff;
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Nabla', cursive;
 }
 section#contact h3{
     font-size: 62px;
@@ -88,14 +89,14 @@ button{
     width: 100%;
     font-weight: 700;
     border-radius: 8px;
-    background: #6d3bb2;
-    color: #fff;
+    background: linear-gradient(168deg, #3b1e65 10%, transparent 70%);
+    /* color: #fff; */
     text-align: left;
     border: none;
     padding: 8px;
     position: relative;
     text-align: center;
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Nabla', cursive;
     font-size: 28px;
     cursor: pointer;
 }
@@ -120,11 +121,12 @@ input, textarea{
     margin-bottom: 1rem;
     color: #fff !important;
     -webkit-background-clip: text !important;
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Nabla', cursive;
+    /* font-family: sans-serif; */
     font-size: 22px;
 }
 textarea {
-    height: 90px;
+    height: 180px;
 }
 ::placeholder {
     color: #fff;
@@ -149,12 +151,95 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   /* border: 1px solid white; */
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: #fff !important;
   -webkit-box-shadow: 0 0 0px 1000px transparent inset;
   outline: none;
 }
 
-@media(max-width: 991px){
+#about {
+    /* clip-path: polygon(0 0, 37% 0, 89% 100%, 0% 100%); */
+    border-radius: 0;;
+    bottom: 0;
+    left: 0;
+    right: initial;
+    width: 100%;
+    max-width: none;
+    top: initial;
+    height: 57vh;
+    /* font-family: 'Racing Sans One', cursive; */
+    font-family: 'Rubik Mono One', sans-serif;
+    font-size: 74px;
+    text-transform: uppercase;
+    /* text-shadow: 1px 2px 10px #00fff6; */
+    color: #000;
+    /* background: rgb(0 0 0 / 80%); */
+    background: transparent;
+    box-shadow: none;
+}
+.marquee span {
+    background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
+    background-size: contain;
+    background-size: 100%;
+    color: transparent;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    animation: bg 17s infinite forwards;
+}
+@keyframes bg{
+    0%, 35% {
+        background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
+    }
+    50% {
+        background-image: url(https://media0.giphy.com/media/xT1XGMbENXj5IMKtnG/giphy.gif?cid=ecf05e47tbbfwk3t4x6i8781zq7m9qeqfnm6gceezwkgja99&rid=giphy.gif&ct=g);
+    }
+    70% {
+        background-image: url(https://media2.giphy.com/media/l3vRbTrGdpZrjjco8/giphy.gif?cid=790b761107897db13569da8f14938a34a6218a71940c1f09&rid=giphy.gif&ct=g);
+    }
+}
+/* #about p{
+    white-space: nowrap;
+}
+.hero-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee {
+    font-size: 0;
+}
+
+.clipped-text {
+    display: inline-block;
+    font-size: 155px;
+    margin-right: 100px;
+} */
+/* .marquee {
+  height: 25px;
+  width: 420px;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee div {
+  display: block;
+  width: 200%;
+  height: 30px;
+  position: absolute;
+  overflow: hidden;
+  animation: marquee 5s linear infinite;
+}
+
+.marquee span {
+  float: left;
+  width: 50%;
+}
+
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: -100%; }
+} */
+
+/* @media(max-width: 991px){
     section#contact{
         min-height: 820px;
         padding-top: 5rem !important;
@@ -166,4 +251,4 @@ select:-webkit-autofill:focus {
         padding: 2rem;
         button{margin-top: 1rem;}
     }
-}
+} */

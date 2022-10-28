@@ -22,9 +22,9 @@ const params = {
     // diamondAmount: 170,
     // particleCount: 3000
     donutsAmount: 25,
-    spheresAmount: 25,
+    spheresAmount: 30,
     diamondAmount: 50,
-    particleCount: 1500
+    particleCount: 1800
 };
 
 // FONT
@@ -38,8 +38,9 @@ fontLoader.load('/fonts/galaxy.json', (font) =>{
     fontMaker('WELCOME', mainFont, 0.9, {x: 1, y: 2.4, z: -2.5},  0x03ead9, 'welcome', true)
     fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.3, z: -2.8},  0x03ead9, 'welcome', true)
     fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', true, true)
-    fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x7890f0, 'contact', true)
-    fontMaker('HOME', mainFont, 0.5, {x: 1, y: -1.5, z: 2},  0x22f930, 'home', false)
+    fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x00df00, 'contact', true)
+    fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  0xF8a020, 'about', true)
+    fontMaker('HOME', mainFont, 0.4, {x: 1, y: -1.5, z: 2},  0x22ff33, 'home', false)
     homeButton = scene.children.filter(obj => obj.name === 'home')
     homeButton[0].visible = false
     // fontMaker('ENTER', mainFont, 0.6, {x: 1, y: -1.5, z: 0},  0xff0030, 'enter', false)
@@ -177,11 +178,12 @@ const loadSVG = (path, name, url, position, scale) => {
         group.userData.url = url
         objectsToTest.push(group)
         group.position.set(position.x, position.y, position.z)
+        group.lookAt(camera.position)
         scene.add(group)
     })
 }
 loadSVG('/images/urala-white.svg', 'urala', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.01)
-loadSVG('/images/decapital.svg', 'decapital', 'https://de.capital/', {x: 1.5, y: -1.5, z: .5}, 0.001)
+loadSVG('/images/decapital.svg', 'decapital', 'https://de.capital/', {x: 1.5, y: -1.5, z: .5}, 0.0005)
 loadSVG('/images/ctjp.svg', 'cointelegraph', 'https://jp.cointelegraph.com/', {x: -4, y: 2.5, z: 0}, 0.01)
 
 // Canvas
@@ -251,7 +253,8 @@ scene.add(pointLight)
  */
 const textureLoader = new THREE.TextureLoader()
 const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
-const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture, color: '#0b5400' })
+// const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture, color: '#0b5400' })
+const material = new THREE.MeshNormalMaterial()
 const matcapTexture2 = textureLoader.load('/textures/matcaps/4.png')
 const material2 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture2 })
 let genHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
@@ -528,6 +531,7 @@ const menuScene = () => {
 
 let aboutText = document.querySelector('.aboutText')
 let contactForm = document.querySelector('.contactForm')
+let aboutSection = document.querySelector('#about')
 
 const aboutScene = () => {
     fontMaker('HOME', mainFont, 0.6, {x: 3.5, y: 3.3, z: 1},  0x22f930, 'home', true)
@@ -677,10 +681,11 @@ window.addEventListener('click', () => {
                     // while(scene.children.length > 0){
                     //     scene.remove(scene.children[0]);
                     // }
-                    // renderer.toneMappingExposure = 4
+                    renderer.toneMappingExposure = 4
                     // aboutText.classList.remove('show')
                     homeButton[0].visible = false
                     contactForm.classList.remove('show')
+                    aboutSection.classList.remove('show')
                 }, 700)
             }
             if(currentIntersect.object.name === 'contact'){
@@ -692,10 +697,35 @@ window.addEventListener('click', () => {
                     ease: "back.inOut(1.7)",
                 })
                 setTimeout(() => {
-                    // renderer.toneMappingExposure = 4
+                    renderer.toneMappingExposure = 0.5
                     contactForm.classList.add('show')
+                    aboutSection.classList.remove('show')
+                    homeButton[0].position.set(1, -1.5, 2)
                     homeButton[0].visible = true
-                    homeButton[0].rotation.y = 500
+                    homeButton[0].lookAt(camera.position)
+                    // pointLight.lookAt(homeButton[0].position)
+                }, 1200)
+            }
+            if(currentIntersect.object.name === 'about'){
+                gsap.to(camera.position, {
+                    x: 5,
+                    y: 14,
+                    z: 5,
+                    duration: 2,
+                    ease: "back.inOut(1.7)",
+                })
+                gsap.to(decapObject[0].position, {
+                    y: 6,
+                    z: -1,
+                    duration: 2,
+                    ease: "back.inOut(1.7)",
+                })
+                setTimeout(() => {
+                    aboutSection.classList.add('show')
+                    homeButton[0].visible = true
+                    homeButton[0].position.set(-4,3,3)
+                    homeButton[0].lookAt(camera.position)
+                    // homeButton[0].rotation.y = 500
                 }, 1200)
             }
             if(currentIntersect.object.parent.userData.url){
@@ -990,6 +1020,10 @@ gsap.to(diamondRotations, {
     ease: "power1.inOut()",
 })
 
+let uralaObject = {}
+let ctObject = {}
+let decapObject = {}
+
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - previousTime
@@ -1081,6 +1115,14 @@ const tick = () => {
         // renderer.toneMappingExposure += 0.02
         clearInterval(changeBloomStrength)
     }
+    uralaObject = scene.children.filter(obj => obj.name === 'urala')
+    ctObject = scene.children.filter(obj => obj.name === 'cointelegraph')
+    decapObject = scene.children.filter(obj => obj.name === 'decapital')
+    if(uralaObject.length > 0 && elapsedTime > 2){
+        uralaObject[0].lookAt(camera.position)
+        ctObject[0].lookAt(camera.position)
+        decapObject[0].lookAt(camera.position)
+    }
     // const parallaxX = mouse.x * 1.5
     // const parallaxY = - mouse.y * 1.5
     // cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 5 * deltaTime
@@ -1101,3 +1143,33 @@ const tick = () => {
 }
 
 tick()
+
+// MARQUEE not threejs
+// let marquee = document.querySelectorAll('.clipped-text');
+
+// // added event listener because it doesn't get the right width
+// addEventListener("load", function () {
+//  marquee.forEach(el => {
+//   // set a default rate, the higher the value, the faster it is
+//   let rate = 100;
+//   // get the width of the element
+//   let distance = el.clientWidth;
+//   console.log(distance)
+//   // get the margin-right of the element
+//   let style = window.getComputedStyle(el);
+//   let marginRight = parseInt(style.marginRight) || 0;
+//   // get the total width of the element
+//   let totalDistance = distance + marginRight;
+//   // get the duration of the animation
+//   // for a better explanation, see the quoted codepen in the first comment
+//   let time = totalDistance / rate;
+//   // get the parent of the element
+//   let container = el.parentElement;
+
+//   gsap.to(container, time, {
+//    repeat: -1,
+//    x: '-'+totalDistance,
+//    ease: 'none',
+//   });
+//  });
+// });
