@@ -35,11 +35,16 @@ let homeButton = {}
 const fontLoader = new FontLoader()
 fontLoader.load('/fonts/galaxy.json', (font) =>{
     mainFont = font
-    fontMaker('WELCOME', mainFont, 0.9, {x: 1, y: 2.4, z: -2.5},  0x03ead9, 'welcome', true)
-    fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.3, z: -2.8},  0x03ead9, 'welcome', true)
-    fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', true, true)
-    fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x00df00, 'contact', true)
-    fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  0xF8a020, 'about', true)
+    // fontMaker('WELCOME', mainFont, 0.9, {x: 1, y: 2.4, z: -2.5},  0x03ead9, 'welcome', true)
+    // fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.3, z: -2.8},  0x03ead9, 'welcome', true)
+    // fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', true, true)
+    // fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x00df00, 'contact', true)
+    // fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  0xF8a020, 'about', true)
+    fontMaker('WELCOME', mainFont, 0.9, {x: 1, y: 2.4, z: -2.5},  0x03ead9, 'welcome', false)
+    fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.3, z: -2.8},  0x03ead9, 'welcome', false)
+    fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', false, true)
+    fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x00df00, 'contact', false)
+    fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  0xF8a020, 'about', false)
     fontMaker('HOME', mainFont, 0.4, {x: 1, y: -1.5, z: 2},  0x22ff33, 'home', false)
     homeButton = scene.children.filter(obj => obj.name === 'home')
     homeButton[0].visible = false
@@ -53,7 +58,7 @@ const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, str
         text, {
             font: font,
             size: size,
-            height: 0.5,
+            height: 0.3,
             // curveSegments: 1,
             // bevelEnabled: true,
             // bevelSize: 0.01,
@@ -88,7 +93,7 @@ const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, str
         scene.add(line);
         if(firstScene){
             gsap.to(line.scale, 10, {
-                z: 2,
+                z: 1.4,
                 yoyo: true,
                 repeat: -1,
                 repeatDelay: 5,
@@ -182,7 +187,7 @@ const loadSVG = (path, name, url, position, scale) => {
         scene.add(group)
     })
 }
-loadSVG('/images/urala-white.svg', 'urala', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.01)
+loadSVG('/images/urala-w.svg', 'urala', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.007)
 loadSVG('/images/decapital.svg', 'decapital', 'https://de.capital/', {x: 1.5, y: -1.5, z: .5}, 0.0005)
 loadSVG('/images/ctjp.svg', 'cointelegraph', 'https://jp.cointelegraph.com/', {x: -4, y: 2.5, z: 0}, 0.01)
 
@@ -685,6 +690,7 @@ window.addEventListener('click', () => {
                     // aboutText.classList.remove('show')
                     homeButton[0].visible = false
                     contactForm.classList.remove('show')
+                    canvas.classList.remove('disable')
                     aboutSection.classList.remove('show')
                 }, 700)
             }
@@ -698,7 +704,24 @@ window.addEventListener('click', () => {
                 })
                 setTimeout(() => {
                     renderer.toneMappingExposure = 0.5
+                    // renderer.toneMappingExposure = 1
+                    // contact plane
+                    // const plane = new THREE.Mesh(
+                    //     new THREE.PlaneGeometry(6, 4),
+                    //     new THREE.MeshBasicMaterial({
+                    //         color: '#000',
+                    //         transparent: true
+                    //     })
+                    // )
+                    // plane.rotation.x = Math.PI / 1.2
+                    // plane.position.z = 2
+                    // plane.position.x = 1.5
+                    // plane.position.y = 1
+                    // objectsToTest.push(plane)
+                    // scene.add(plane)
                     contactForm.classList.add('show')
+                    canvas.classList.add('disable')
+                    document.getElementById("name").focus();
                     aboutSection.classList.remove('show')
                     homeButton[0].position.set(1, -1.5, 2)
                     homeButton[0].visible = true
@@ -929,24 +952,43 @@ composer.addPass( bloomPass )
 // } );
 
 let up = true;
-let limit = 1;
+// let limit = .5;
+
+// const checkBloomStrength = () => {
+//     if (up == true && bloomPass.strength <= limit) {
+//         bloomPass.strength += 0.004
+//         if (bloomPass.strength == limit) {
+//           up = false;
+//         }
+//     } else {
+//         up = false
+//         bloomPass.strength -= 0.002
+//         if (bloomPass.strength == 0.2 || bloomPass.strength < 0.2) {
+//             up = true;
+//         }
+//     }
+// }
+
+// let changeBloomStrength = setInterval(checkBloomStrength, 16);
+let limit = .65;
 
 const checkBloomStrength = () => {
     if (up == true && bloomPass.strength <= limit) {
-        bloomPass.strength += 0.005
+        bloomPass.strength += 0.0035
         if (bloomPass.strength == limit) {
           up = false;
         }
     } else {
         up = false
-        bloomPass.strength -= 0.008
-        if (bloomPass.strength == 0.2 || bloomPass.strength < 0.2) {
+        bloomPass.strength -= 0.006
+        if (bloomPass.strength == 0.01 || bloomPass.strength < 0.01) {
             up = true;
         }
     }
 }
 
-let changeBloomStrength = setInterval(checkBloomStrength, 16);
+let changeBloomStrength = setInterval(checkBloomStrength, 24);
+
 /**
  * Animate
  */

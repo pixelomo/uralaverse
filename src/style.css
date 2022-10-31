@@ -16,10 +16,12 @@ body {
 
 .webgl {
     position: fixed;
+    z-index: 1;
     top: 0;
     left: 0;
     outline: none;
 }
+.webgl.disable{pointer-events: none;}
 
 .text-panel {
     position: absolute;
@@ -67,6 +69,7 @@ section#contact {
     background: linear-gradient(152deg, #3b1e65 20%, transparent 70%);
     color: #fff;
     font-family: 'Nabla', cursive;
+    z-index: 999;
 }
 section#contact h3{
     font-size: 62px;
@@ -168,7 +171,7 @@ select:-webkit-autofill:focus {
     height: 57vh;
     /* font-family: 'Racing Sans One', cursive; */
     font-family: 'Rubik Mono One', sans-serif;
-    font-size: 74px;
+    font-size: 4vw;
     text-transform: uppercase;
     /* text-shadow: 1px 2px 10px #00fff6; */
     color: #000;
@@ -176,7 +179,7 @@ select:-webkit-autofill:focus {
     background: transparent;
     box-shadow: none;
 }
-.marquee span {
+#about span {
     background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
     background-size: contain;
     background-size: 100%;
@@ -239,16 +242,42 @@ select:-webkit-autofill:focus {
   100% { left: -100%; }
 } */
 
-/* @media(max-width: 991px){
+@media(max-width: 991px){
     section#contact{
-        min-height: 820px;
-        padding-top: 5rem !important;
+        top: 1rem;
     }
-    h3.section-subheading{
+    section#contact h3{
+        font-size: 42px;
+    }
+    textarea{
+        height: 90px;
+    }
+    input, textarea{
+        font-size: 16px;
+    }
+    button {
+        font-size: 20px;
+    }
+    section#about{
+        top: 1rem;
+        bottom: initial;
+        background: rgb(0 0 0 / 70%);
+        width: 90%;
+        margin: 1rem auto;
+        left: 0;
+        right: 0;
+        font-size: 25px;
+        border-radius: 12px;
+        padding: 1rem;
+        box-sizing: border-box;
+        height: auto;
+    }
+    /* section#about br {display: none;} */
+    /* h3.section-subheading{
         font-size: 12px;
     }
     form{
         padding: 2rem;
         button{margin-top: 1rem;}
-    }
-} */
+    } */
+}
