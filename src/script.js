@@ -27,11 +27,21 @@ const params = {
     particleCount: 1800
 };
 
+/**
+ * Textures
+ */
+const textureLoader = new THREE.TextureLoader()
+//  const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
+ // const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture, color: '#0b5400' })
+const material = new THREE.MeshStandardMaterial()
+const matcapTexture2 = textureLoader.load('/textures/matcaps/4.png')
+const material2 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture2 })
+let genHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+
 // FONT
 let mainFont = {}
 // let uralaverseObject = {}
 let homeButton = {}
-
 const fontLoader = new FontLoader()
 fontLoader.load('/fonts/galaxy.json', (font) =>{
     mainFont = font
@@ -40,12 +50,12 @@ fontLoader.load('/fonts/galaxy.json', (font) =>{
     // fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', true, true)
     // fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x00df00, 'contact', true)
     // fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  0xF8a020, 'about', true)
-    fontMaker('WELCOME', mainFont, 0.9, {x: 1, y: 2.4, z: -2.5},  0x03ead9, 'welcome', false)
-    fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.3, z: -2.8},  0x03ead9, 'welcome', false)
-    fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  0xf3ead9, 'uralaverse', false, true)
-    fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  0x00df00, 'contact', false)
-    fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  0xF8a020, 'about', false)
-    fontMaker('HOME', mainFont, 0.4, {x: 1, y: -1.5, z: 2},  0x22ff33, 'home', false)
+    fontMaker('WELCOME', mainFont, 0.9, {x: 1, y: 2.4, z: -2.5},  '#002056', 'welcome', false)
+    fontMaker('TO THE', mainFont, 0.6, {x: 1, y: 1.4, z: -2.8},  '#bd4500', 'to', false)
+    fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  '#7d09a7', 'uralaverse', false)
+    fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  '#bd4500', 'contact', false)
+    fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  '#00f208', 'about', false)
+    fontMaker('HOME', mainFont, 0.4, {x: 1, y: -1.5, z: 2},  '#22ff33', 'home', false)
     homeButton = scene.children.filter(obj => obj.name === 'home')
     homeButton[0].visible = false
     // fontMaker('ENTER', mainFont, 0.6, {x: 1, y: -1.5, z: 0},  0xff0030, 'enter', false)
@@ -53,7 +63,7 @@ fontLoader.load('/fonts/galaxy.json', (font) =>{
     // uralaverseObject = scene.children.filter(obj => obj.name === 'uralaverse')
 })
 
-const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, stretch) => {
+const fontMaker = (text, font, size = 0.6, position, color, name, wireframe) => {
     const textGeometry = new TextGeometry(
         text, {
             font: font,
@@ -84,12 +94,6 @@ const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, str
         line.position.x = position.x
         line.position.y = position.y
         line.position.z = position.z
-        // if(stretch){
-        //     textMesh.scale.y = 1.4
-        //     textMesh.scale.x = 1.1
-        //     line.scale.y = 1.4
-        //     line.scale.x = 1.1
-        // }
         scene.add(line);
         if(firstScene){
             gsap.to(line.scale, 10, {
@@ -102,7 +106,9 @@ const fontMaker = (text, font, size = 0.6, position, color, name, wireframe, str
         }
     } else {
         textMesh.geometry = textGeometry
-        textMesh.material = material
+        textMesh.material = new THREE.MeshStandardMaterial({
+            color: color
+        })
         gsap.to(textMesh.rotation, 1, {
             x: - Math.PI * 2
         })
@@ -187,9 +193,9 @@ const loadSVG = (path, name, url, position, scale) => {
         scene.add(group)
     })
 }
-loadSVG('/images/urala-w.svg', 'urala', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.007)
-loadSVG('/images/decapital.svg', 'decapital', 'https://de.capital/', {x: 1.5, y: -1.5, z: .5}, 0.0005)
-loadSVG('/images/ctjp.svg', 'cointelegraph', 'https://jp.cointelegraph.com/', {x: -4, y: 2.5, z: 0}, 0.01)
+loadSVG('/images/urala-b.svg', 'urala', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.015)
+// loadSVG('/images/decapital.svg', 'decapital', 'https://de.capital/', {x: 1.5, y: -1.5, z: .5}, 0.0005)
+loadSVG('/images/ctb.svg', 'cointelegraph', 'https://jp.cointelegraph.com/', {x: -5.5, y: 4, z: -.5}, 0.015)
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -207,17 +213,17 @@ const scene = new THREE.Scene()
 // scene.add(ambientLight)
 
 // Directional light - moderate cost
-// const directionalLight = new THREE.DirectionalLight(0x00fffc, 0.3)
-// directionalLight.position.set(1, 0.25, 0)
+// const directionalLight = new THREE.DirectionalLight(0xffffff, .7)
+// directionalLight.position.set(1, -.5, 1)
 // scene.add(directionalLight)
 
 // Hemisphere light - low cost
-const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.3)
+const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, .8)
 scene.add(hemisphereLight)
 
 // Point light - moderate cost
-const pointLight = new THREE.PointLight(0xff9000, 0.2, 10, 2)
-pointLight.position.set(1, - 0.5, 1)
+const pointLight = new THREE.PointLight(0xffffff, 0.7, 30, 2)
+pointLight.position.set(1, 3, 1)
 scene.add(pointLight)
 
 // // Rect area light - high cost
@@ -252,17 +258,6 @@ scene.add(pointLight)
         // console.log(scene.children)
     }
 )
-
-/**
- * Textures
- */
-const textureLoader = new THREE.TextureLoader()
-const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
-// const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture, color: '#0b5400' })
-const material = new THREE.MeshNormalMaterial()
-const matcapTexture2 = textureLoader.load('/textures/matcaps/4.png')
-const material2 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture2 })
-let genHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 
 /**
 // Particles
@@ -703,7 +698,7 @@ window.addEventListener('click', () => {
                     ease: "back.inOut(1.7)",
                 })
                 setTimeout(() => {
-                    renderer.toneMappingExposure = 0.5
+                    renderer.toneMappingExposure = 2.2
                     // renderer.toneMappingExposure = 1
                     // contact plane
                     // const plane = new THREE.Mesh(
@@ -737,16 +732,16 @@ window.addEventListener('click', () => {
                     duration: 2,
                     ease: "back.inOut(1.7)",
                 })
-                gsap.to(decapObject[0].position, {
-                    y: 6,
-                    z: -1,
-                    duration: 2,
-                    ease: "back.inOut(1.7)",
-                })
+                // gsap.to(decapObject[0].position, {
+                //     y: 6,
+                //     z: -1,
+                //     duration: 2,
+                //     ease: "back.inOut(1.7)",
+                // })
                 setTimeout(() => {
                     aboutSection.classList.add('show')
                     homeButton[0].visible = true
-                    homeButton[0].position.set(-4,3,3)
+                    homeButton[0].position.set(-4,3,2)
                     homeButton[0].lookAt(camera.position)
                     // homeButton[0].rotation.y = 500
                 }, 1200)
@@ -1093,38 +1088,52 @@ const tick = () => {
             // console.log(currentIntersect.object)
             if(currentIntersect.object == window.entertext){
                 enterColor = new THREE.Color('#002034')
-                gsap.to(currentIntersect.object.material.color, 1, {
-                    r: enterColor.r,
-                    g: enterColor.g,
-                    b: enterColor.b
-                })
+                // gsap.to(currentIntersect.object.material.color, 1, {
+                //     r: enterColor.r,
+                //     g: enterColor.g,
+                //     b: enterColor.b
+                // })
             } else {
-                enterColor = new THREE.Color('#ffee00')
-                gsap.to(currentIntersect.object.material.color, 1, {
+                enterColor = new THREE.Color('#00c4eb')
+                gsap.to(currentIntersect.object.material.color, 4, {
                     r: enterColor.r,
                     g: enterColor.g,
                     b: enterColor.b
                 })
             }
+            // if(currentIntersect.object.parent.userData.url){
+            //     gsap.to(currentIntersect.object.parent.scale, {
+            //         x: currentIntersect.object.parent.scale.x * 1.05,
+            //         y: currentIntersect.object.parent.scale.y * 1.05,
+            //         z: currentIntersect.object.parent.scale.z * 1.05
+            //     })
+            // }
         }
         else {
             if(currentIntersect) {
                 // console.log('mouse leave')
                 if(currentIntersect.object == window.entertext){
                     enterColor = new THREE.Color('#083b00')
-                    gsap.to(currentIntersect.object.material.color, 1, {
-                        r: enterColor.r,
-                        g: enterColor.g,
-                        b: enterColor.b
-                    })
+                    // gsap.to(currentIntersect.object.material.color, 1, {
+                    //     r: enterColor.r,
+                    //     g: enterColor.g,
+                    //     b: enterColor.b
+                    // })
                 } else {
                     enterColor = new THREE.Color('#00c4eb')
-                    gsap.to(currentIntersect.object.material.color, 1, {
-                        r: enterColor.r,
-                        g: enterColor.g,
-                        b: enterColor.b
-                    })
+                    // gsap.to(currentIntersect.object.material.color, 1, {
+                    //     r: enterColor.r,
+                    //     g: enterColor.g,
+                    //     b: enterColor.b
+                    // })
                 }
+                // if(currentIntersect.object.parent.userData.url){
+                //     gsap.to(currentIntersect.object.parent.scale, {
+                //         x: currentIntersect.object.parent.scale.x / 1.05,
+                //         y: currentIntersect.object.parent.scale.y / 1.05,
+                //         z: currentIntersect.object.parent.scale.z / 1.05
+                //     })
+                // }
             }
             currentIntersect = null
         }
@@ -1159,11 +1168,11 @@ const tick = () => {
     }
     uralaObject = scene.children.filter(obj => obj.name === 'urala')
     ctObject = scene.children.filter(obj => obj.name === 'cointelegraph')
-    decapObject = scene.children.filter(obj => obj.name === 'decapital')
+    // decapObject = scene.children.filter(obj => obj.name === 'decapital')
     if(uralaObject.length > 0 && elapsedTime > 2){
         uralaObject[0].lookAt(camera.position)
         ctObject[0].lookAt(camera.position)
-        decapObject[0].lookAt(camera.position)
+        // decapObject[0].lookAt(camera.position)
     }
     // const parallaxX = mouse.x * 1.5
     // const parallaxY = - mouse.y * 1.5
@@ -1186,32 +1195,3 @@ const tick = () => {
 
 tick()
 
-// MARQUEE not threejs
-// let marquee = document.querySelectorAll('.clipped-text');
-
-// // added event listener because it doesn't get the right width
-// addEventListener("load", function () {
-//  marquee.forEach(el => {
-//   // set a default rate, the higher the value, the faster it is
-//   let rate = 100;
-//   // get the width of the element
-//   let distance = el.clientWidth;
-//   console.log(distance)
-//   // get the margin-right of the element
-//   let style = window.getComputedStyle(el);
-//   let marginRight = parseInt(style.marginRight) || 0;
-//   // get the total width of the element
-//   let totalDistance = distance + marginRight;
-//   // get the duration of the animation
-//   // for a better explanation, see the quoted codepen in the first comment
-//   let time = totalDistance / rate;
-//   // get the parent of the element
-//   let container = el.parentElement;
-
-//   gsap.to(container, time, {
-//    repeat: -1,
-//    x: '-'+totalDistance,
-//    ease: 'none',
-//   });
-//  });
-// });

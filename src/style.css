@@ -1,7 +1,7 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
-/* @import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap'); */
-@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@500;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
 
 * {
     margin: 0;
@@ -11,7 +11,6 @@
 html,
 body {
     overflow: hidden;
-    font-family: 'Nabla', cursive;
 }
 
 .webgl {
@@ -68,15 +67,18 @@ section#contact {
     /* background-color: rgba(0,0,0,0.8); */
     background: linear-gradient(152deg, #3b1e65 20%, transparent 70%);
     color: #fff;
-    font-family: 'Nabla', cursive;
+    /* font-family: 'Nabla', cursive; */
     z-index: 999;
 }
 section#contact h3{
     font-size: 62px;
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #cafeff;
-    color: #6d3bb2;
+    /* color: #cafeff; */
+    /* font-family: 'Catamaran', sans-serif; */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    /* color: #6d3bb2; */
 }
 
 form {
@@ -93,13 +95,14 @@ button{
     font-weight: 700;
     border-radius: 8px;
     background: linear-gradient(168deg, #3b1e65 10%, transparent 70%);
-    /* color: #fff; */
+    color: #fff;
     text-align: left;
     border: none;
     padding: 8px;
     position: relative;
     text-align: center;
-    font-family: 'Nabla', cursive;
+    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Nabla', cursive; */
     font-size: 28px;
     cursor: pointer;
 }
@@ -123,9 +126,7 @@ input, textarea{
     resize: none;
     margin-bottom: 1rem;
     color: #fff !important;
-    -webkit-background-clip: text !important;
-    font-family: 'Nabla', cursive;
-    /* font-family: sans-serif; */
+    font-family: 'Roboto', sans-serif;
     font-size: 22px;
 }
 textarea {
@@ -165,13 +166,13 @@ select:-webkit-autofill:focus {
     bottom: 0;
     left: 0;
     right: initial;
-    width: 100%;
-    max-width: none;
+    /* width: 100%; */
+    max-width: 50vw;
     top: initial;
     height: 57vh;
-    /* font-family: 'Racing Sans One', cursive; */
-    font-family: 'Rubik Mono One', sans-serif;
-    font-size: 4vw;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 5vw;
     text-transform: uppercase;
     /* text-shadow: 1px 2px 10px #00fff6; */
     color: #000;
@@ -262,7 +263,7 @@ select:-webkit-autofill:focus {
         top: 1rem;
         bottom: initial;
         background: rgb(0 0 0 / 70%);
-        width: 90%;
+        max-width: 90%;
         margin: 1rem auto;
         left: 0;
         right: 0;
