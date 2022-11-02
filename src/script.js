@@ -41,7 +41,7 @@ let genHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).t
 // FONT
 let mainFont = {}
 // let uralaverseObject = {}
-let homeButton = {}
+// let homeButton = {}
 const fontLoader = new FontLoader()
 fontLoader.load('/fonts/galaxy.json', (font) =>{
     mainFont = font
@@ -55,9 +55,9 @@ fontLoader.load('/fonts/galaxy.json', (font) =>{
     fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  '#7d09a7', 'uralaverse', false)
     fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  '#bd4500', 'contact', false)
     fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  '#00f208', 'about', false)
-    fontMaker('HOME', mainFont, 0.4, {x: 1, y: -1.5, z: 2},  '#22ff33', 'home', false)
-    homeButton = scene.children.filter(obj => obj.name === 'home')
-    homeButton[0].visible = false
+    // fontMaker('HOME', mainFont, 0.4, {x: 1, y: -1.5, z: 2},  '#22ff33', 'home', false)
+    // homeButton = scene.children.filter(obj => obj.name === 'home')
+    // homeButton[0].visible = false
     // fontMaker('ENTER', mainFont, 0.6, {x: 1, y: -1.5, z: 0},  0xff0030, 'enter', false)
     // enterObjects = scene.children.filter(obj => obj.name === 'enter')
     // uralaverseObject = scene.children.filter(obj => obj.name === 'uralaverse')
@@ -125,6 +125,7 @@ const fontMaker = (text, font, size = 0.6, position, color, name, wireframe) => 
 // SVG SVG SVG //
 // SVG SVG SVG //
 // SVG SVG SVG //
+let uralaLogo = {}
 const loadSVG = (path, name, url, position, scale) => {
 
     const loader = new SVGLoader()
@@ -677,13 +678,15 @@ window.addEventListener('click', () => {
                     duration: 2,
                     ease: "back.inOut(1.7)",
                 })
+                uralaLogo = scene.children.filter(obj => obj.name === 'urala')
                 setTimeout(() => {
                     // while(scene.children.length > 0){
                     //     scene.remove(scene.children[0]);
                     // }
                     renderer.toneMappingExposure = 4
                     // aboutText.classList.remove('show')
-                    homeButton[0].visible = false
+                    // homeButton[0].visible = false
+                    uralaLogo[0].position.y = 3
                     contactForm.classList.remove('show')
                     canvas.classList.remove('disable')
                     aboutSection.classList.remove('show')
@@ -697,6 +700,7 @@ window.addEventListener('click', () => {
                     duration: 2,
                     ease: "back.inOut(1.7)",
                 })
+                uralaLogo = scene.children.filter(obj => obj.name === 'urala')
                 setTimeout(() => {
                     renderer.toneMappingExposure = 2.2
                     // renderer.toneMappingExposure = 1
@@ -714,13 +718,14 @@ window.addEventListener('click', () => {
                     // plane.position.y = 1
                     // objectsToTest.push(plane)
                     // scene.add(plane)
+                    uralaLogo[0].position.y = 6
                     contactForm.classList.add('show')
                     canvas.classList.add('disable')
                     document.getElementById("name").focus();
                     aboutSection.classList.remove('show')
-                    homeButton[0].position.set(1, -1.5, 2)
-                    homeButton[0].visible = true
-                    homeButton[0].lookAt(camera.position)
+                    // homeButton[0].position.set(1, -1.5, 2)
+                    // homeButton[0].visible = true
+                    // homeButton[0].lookAt(camera.position)
                     // pointLight.lookAt(homeButton[0].position)
                 }, 1200)
             }
@@ -740,9 +745,9 @@ window.addEventListener('click', () => {
                 // })
                 setTimeout(() => {
                     aboutSection.classList.add('show')
-                    homeButton[0].visible = true
-                    homeButton[0].position.set(-4,3,2)
-                    homeButton[0].lookAt(camera.position)
+                    // homeButton[0].visible = true
+                    // homeButton[0].position.set(-4,3,2)
+                    // homeButton[0].lookAt(camera.position)
                     // homeButton[0].rotation.y = 500
                 }, 1200)
             }
@@ -870,6 +875,30 @@ window.addEventListener('click', () => {
             //      break
         //  }
     //  }
+ })
+
+ const goHome = () => {
+    gsap.to(camera.position, {
+        x: -2.5,
+        y: -3,
+        z: 6,
+        duration: 2,
+        ease: "back.inOut(1.7)",
+    })
+    uralaLogo = scene.children.filter(obj => obj.name === 'urala')
+    setTimeout(() => {
+        renderer.toneMappingExposure = 4
+        uralaLogo[0].position.y = 3
+        contactForm.classList.remove('show')
+        canvas.classList.remove('disable')
+        aboutSection.classList.remove('show')
+    }, 700)
+ }
+
+ const close = document.querySelector('.close-button')
+
+ close.addEventListener('click', () => {
+    goHome()
  })
 
 /**
