@@ -209,7 +209,7 @@ input:-webkit-autofill:active {
     box-shadow: 0px 0px 8px 5px rgb(45 149 252 / 40%);
 }
 
-#about {
+#about, #locations {
     border-radius: 0;;
     bottom: 5rem;
     left: 0;
@@ -225,7 +225,7 @@ input:-webkit-autofill:active {
     background: transparent;
     box-shadow: none;
 }
-#about span {
+#about span, #locations span {
     background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
     background-size: contain;
     background-size: 100%;
@@ -234,6 +234,39 @@ input:-webkit-autofill:active {
     -webkit-background-clip: text;
     animation: bg 17s infinite forwards;
 }
+
+#about span.close-button, #locations span.close-button{
+    width: auto;
+    border-radius: 9px;
+    border-width: 2px;
+    bottom: 2rem;
+    top: initial;
+    right: 1rem;
+    font-size: 22px;
+    padding: 11px;
+}
+#locations {
+    right: 7rem;
+    left: initial;
+    bottom: 7rem;
+    width: 370px;
+    background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
+    box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
+    padding: 2rem 2rem 4rem;
+    height: auto;
+    border-radius: 16px;
+}
+#locations span.title {
+    border-bottom: 5px solid #4970fc;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+#locations p {
+    font-size: 16px;
+    color: #fff;
+    margin: 0 auto 10px;
+}
+
 @keyframes bg{
     0%, 35% {
         background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
@@ -288,7 +321,7 @@ input:-webkit-autofill:active {
   100% { left: -100%; }
 } */
 
-@media(max-width: 991px){
+@media(max-width: 1024px){
     section#contact{
         top: 1rem;
     }
@@ -304,19 +337,33 @@ input:-webkit-autofill:active {
     button {
         font-size: 20px;
     }
-    section#about{
+    section#about, section#locations{
         top: 1rem;
         bottom: initial;
-        background: rgb(0 0 0 / 70%);
+        /* background: rgb(0 0 0 / 70%); */
+        background: linear-gradient(132deg, #3b1e65 55%, transparent 100%);
+        box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
         max-width: 90%;
         margin: 1rem auto;
         left: 0;
         right: 0;
-        font-size: 31px;
+        font-size: 29px;
         border-radius: 12px;
-        padding: 1rem;
+        padding: 1rem 1rem 4rem;
         box-sizing: border-box;
         height: auto;
+    }
+    section#locations {
+        right: 0;
+        left: 0;
+        bottom: 2rem;
+        max-width: 80%;
+    }
+    /* section#locations {
+        width: 260px;
+    } */
+    #about span.close-button, #locations span.close-button {
+        bottom: 1rem;
     }
     /* section#about br {display: none;} */
     /* h3.section-subheading{

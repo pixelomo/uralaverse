@@ -21,10 +21,10 @@ const params = {
     // spheresAmount: 100,
     // diamondAmount: 170,
     // particleCount: 3000
-    donutsAmount: 25,
-    spheresAmount: 30,
-    diamondAmount: 50,
-    particleCount: 1800
+    donutsAmount: 20,
+    spheresAmount: 20,
+    diamondAmount: 40,
+    particleCount: 800
 };
 
 /**
@@ -55,6 +55,7 @@ fontLoader.load('/fonts/galaxy.json', (font) =>{
     fontMaker('URALAVERSE!', mainFont, 1, {x: 1, y: 0.2, z: -2.5},  '#7d09a7', 'uralaverse', false)
     fontMaker('CONTACT', mainFont, 0.5, {x: 0, y: -3, z: -2.5},  '#bd4500', 'contact', false)
     fontMaker('ABOUT', mainFont, 0.4, {x: -3, y: -2, z: -2},  '#00f208', 'about', false)
+    fontMaker('LOCATIONS', mainFont, 0.4, {x: 3.2, y: -2.2, z: -2},  '#002056', 'locations', false)
     // fontMaker('HOME', mainFont, 0.4, {x: 1, y: -1.5, z: 2},  '#22ff33', 'home', false)
     // homeButton = scene.children.filter(obj => obj.name === 'home')
     // homeButton[0].visible = false
@@ -533,6 +534,7 @@ const menuScene = () => {
 let aboutText = document.querySelector('.aboutText')
 let contactForm = document.querySelector('.contactForm')
 let aboutSection = document.querySelector('#about')
+let locationSection = document.querySelector('#locations')
 
 const aboutScene = () => {
     fontMaker('HOME', mainFont, 0.6, {x: 3.5, y: 3.3, z: 1},  0x22f930, 'home', true)
@@ -700,6 +702,8 @@ window.addEventListener('click', () => {
                     duration: 2,
                     ease: "back.inOut(1.7)",
                 })
+                aboutSection.classList.remove('show')
+                locationSection.classList.remove('show')
                 uralaLogo = scene.children.filter(obj => obj.name === 'urala')
                 setTimeout(() => {
                     renderer.toneMappingExposure = 2.2
@@ -722,7 +726,6 @@ window.addEventListener('click', () => {
                     contactForm.classList.add('show')
                     canvas.classList.add('disable')
                     document.getElementById("name").focus();
-                    aboutSection.classList.remove('show')
                     // homeButton[0].position.set(1, -1.5, 2)
                     // homeButton[0].visible = true
                     // homeButton[0].lookAt(camera.position)
@@ -737,12 +740,7 @@ window.addEventListener('click', () => {
                     duration: 2,
                     ease: "back.inOut(1.7)",
                 })
-                // gsap.to(decapObject[0].position, {
-                //     y: 6,
-                //     z: -1,
-                //     duration: 2,
-                //     ease: "back.inOut(1.7)",
-                // })
+                locationSection.classList.remove('show')
                 setTimeout(() => {
                     aboutSection.classList.add('show')
                     // homeButton[0].visible = true
@@ -753,6 +751,19 @@ window.addEventListener('click', () => {
             }
             if(currentIntersect.object.parent.userData.url){
                 window.open(currentIntersect.object.parent.userData.url, '_blank').focus();
+            }
+            if(currentIntersect.object.name === 'locations'){
+                gsap.to(camera.position, {
+                    x: -3.4,
+                    y: 16.25,
+                    z: -0.6,
+                    duration: 2,
+                    ease: "back.inOut(1.7)",
+                })
+                aboutSection.classList.remove('show')
+                setTimeout(() => {
+                    locationSection.classList.add('show')
+                }, 1200)
             }
             // if(currentIntersect.object.name === 'about'){
             //     setTimeout(() => {
@@ -892,15 +903,16 @@ window.addEventListener('click', () => {
         contactForm.classList.remove('show')
         canvas.classList.remove('disable')
         aboutSection.classList.remove('show')
+        locationSection.classList.remove('show')
     }, 700)
  }
 
- const close = document.querySelector('.close-button')
+ const close = document.querySelectorAll('.close-button')
 
- close.addEventListener('click', () => {
+ close.forEach(btn => btn.addEventListener('click', () => {
     goHome()
  })
-
+)
 /**
  * Camera
  */
