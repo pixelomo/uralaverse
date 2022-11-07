@@ -11,6 +11,7 @@
 html,
 body {
     overflow: hidden;
+    color: #b6d8fa;
 }
 
 .webgl {
@@ -32,7 +33,7 @@ body {
     width: 80%;
     max-width: 400px;
     background-color: rgba(0,0,0,0.5);
-    color: #fff;
+    /* color: #fff; */
     font-size: 24px;
     font-family: sans-serif;
     padding: 20px 25px 25px;
@@ -209,7 +210,7 @@ input:-webkit-autofill:active {
     box-shadow: 0px 0px 8px 5px rgb(45 149 252 / 40%);
 }
 
-#about, #locations {
+/* #about, #locations {
     border-radius: 0;;
     bottom: 5rem;
     left: 0;
@@ -224,6 +225,24 @@ input:-webkit-autofill:active {
     color: #000;
     background: transparent;
     box-shadow: none;
+} */
+#about, #locations {
+    bottom: initial;
+    left: 3rem;
+    right: 3rem;
+    max-width: 100%;
+    top: 3rem;
+    margin: 0 auto;
+    overflow: scroll;
+    height: 80vh;
+    font-family: 'Roboto', sans-serif;
+    /* background: linear-gradient(50deg, #3b1e65 40%, transparent 100%); */
+    /* background: linear-gradient(153deg, #3b1e65 50%, transparent 100%); */
+    background: rgb(59 30 101 / 90%);
+    font-size: 22px;
+}
+#about h1 span{
+    font-size: 30px;
 }
 #about span, #locations span {
     background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
@@ -233,14 +252,21 @@ input:-webkit-autofill:active {
     -moz-background-clip: text;
     -webkit-background-clip: text;
     animation: bg 17s infinite forwards;
+    font-weight: 900;
+    font-size: 55px;
+}
+ul{padding-left: 2rem;}
+#about strong{
+    display: block;
+    margin-bottom: 0.75rem;
 }
 
 #about span.close-button, #locations span.close-button{
     width: auto;
     border-radius: 9px;
     border-width: 2px;
-    bottom: 2rem;
-    top: initial;
+    /* bottom: 2rem; */
+    top: 1rem;
     right: 1rem;
     font-size: 22px;
     padding: 11px;
@@ -260,6 +286,10 @@ input:-webkit-autofill:active {
     border-bottom: 5px solid #4970fc;
     margin-bottom: 20px;
     display: inline-block;
+    font-size: 30px;
+}
+#locations span{
+    font-size: 42px;
 }
 #locations p {
     font-size: 16px;
@@ -340,8 +370,8 @@ input:-webkit-autofill:active {
     section#about, section#locations{
         top: 1rem;
         bottom: initial;
-        /* background: rgb(0 0 0 / 70%); */
-        background: linear-gradient(132deg, #3b1e65 55%, transparent 100%);
+        /* background: linear-gradient(132deg, #3b1e65 55%, transparent 100%); */
+        background: rgb(59 30 101 / 90%);
         box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
         max-width: 90%;
         margin: 1rem auto;
@@ -349,9 +379,19 @@ input:-webkit-autofill:active {
         right: 0;
         font-size: 29px;
         border-radius: 12px;
-        padding: 1rem 1rem 4rem;
+        padding: 1rem 1rem 2.5rem;
         box-sizing: border-box;
         height: auto;
+    }
+    section#about{
+        font-size: 16px;
+        height: 89vh;
+    }
+    section#about h1 span{
+        font-size: 18px;
+    }
+    #about span{
+        font-size: 30px;
     }
     section#locations {
         right: 0;
@@ -359,11 +399,20 @@ input:-webkit-autofill:active {
         bottom: 2rem;
         max-width: 80%;
     }
+    section#locations span {
+        font-size: 34px;
+    }
+    #locations span.title{
+        font-size: 28px;
+    }
     /* section#locations {
         width: 260px;
     } */
     #about span.close-button, #locations span.close-button {
         bottom: 1rem;
+        position: relative;
+        left: 0;
+        right: 0;
     }
     /* section#about br {display: none;} */
     /* h3.section-subheading{
