@@ -961,50 +961,50 @@ composer.addPass( bloomPass )
 /**
  * Base
  */
- import { Line2 } from 'three/examples/jsm/lines/Line2.js';
- import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
- import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
- import * as GeometryUtils from 'three/examples/jsm/utils/GeometryUtils.js';
+//  import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+//  import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+//  import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
+//  import * as GeometryUtils from 'three/examples/jsm/utils/GeometryUtils.js';
 
- let line;
- let matLine, matLineBasic, matLineDashed;
- const Lpositions = [];
- const Lcolors = [];
+//  let line;
+//  let matLine, matLineBasic, matLineDashed;
+//  const Lpositions = [];
+//  const Lcolors = [];
 
- const points = GeometryUtils.hilbert3D( new THREE.Vector3( 0, 0, 0 ), 20.0, 1, 0, 1, 2, 3, 4, 5, 6, 7 );
+//  const points = GeometryUtils.hilbert3D( new THREE.Vector3( 0, 0, 0 ), 20.0, 1, 0, 1, 2, 3, 4, 5, 6, 7 );
 
- const spline = new THREE.CatmullRomCurve3( points );
- const divisions = Math.round( 12 * points.length );
- const point = new THREE.Vector3();
- const color = new THREE.Color();
+//  const spline = new THREE.CatmullRomCurve3( points );
+//  const divisions = Math.round( 12 * points.length );
+//  const point = new THREE.Vector3();
+//  const color = new THREE.Color();
 
- for ( let i = 0, l = divisions; i < l; i ++ ) {
-     const t = i / l;
-     spline.getPoint( t, point );
-     Lpositions.push( point.x, point.y, point.z );
-     color.setHSL( t, 1.0, 0.5 );
-     Lcolors.push( color.r, color.g, color.b );
- }
+//  for ( let i = 0, l = divisions; i < l; i ++ ) {
+//      const t = i / l;
+//      spline.getPoint( t, point );
+//      Lpositions.push( point.x, point.y, point.z );
+//      color.setHSL( t, 1.0, 0.5 );
+//      Lcolors.push( color.r, color.g, color.b );
+//  }
 
- // Line2 ( LineGeometry, LineMaterial )
- const geometry = new LineGeometry();
- geometry.setPositions( Lpositions );
- geometry.setColors( Lcolors );
+//  // Line2 ( LineGeometry, LineMaterial )
+//  const geometry = new LineGeometry();
+//  geometry.setPositions( Lpositions );
+//  geometry.setColors( Lcolors );
 
- matLine = new LineMaterial( {
-     color: 0xffffff,
-     linewidth: 10, // in world units with size attenuation, pixels otherwise
-     vertexColors: true,
-     //resolution:  // to be set by renderer, eventually
-     dashed: false,
-     alphaToCoverage: true,
- } );
+//  matLine = new LineMaterial( {
+//      color: 0xffffff,
+//      linewidth: 10, // in world units with size attenuation, pixels otherwise
+//      vertexColors: true,
+//      //resolution:  // to be set by renderer, eventually
+//      dashed: false,
+//      alphaToCoverage: true,
+//  } );
 
- line = new Line2( geometry, matLine );
- line.computeLineDistances();
- line.scale.set( .1, .1, .1 );
- line.position.set(0,-2,-5)
- scene.add( line );
+//  line = new Line2( geometry, matLine );
+//  line.computeLineDistances();
+//  line.scale.set( .1, .1, .1 );
+//  line.position.set(0,-2,-5)
+//  scene.add( line );
 
 // Debug
 // const gui = new dat.GUI()
@@ -1274,7 +1274,7 @@ const tick = () => {
     //     coin.rotation.z = - elapsedTime * Math.PI * 0.2
     //     // coin.position.z = - elapsedTime / 6
     // }
-    matLine.resolution.set( window.innerWidth, window.innerHeight ); // resolution of the viewport
+    // matLine.resolution.set( window.innerWidth, window.innerHeight ); // resolution of the viewport
     // Render
     composer.render();
     // renderer.render(scene, camera)
