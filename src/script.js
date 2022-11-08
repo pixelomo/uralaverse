@@ -17,6 +17,8 @@ const params = {
     bloomThreshold: 0.33,
     bloomStrength: 0,
     bloomRadius: 1,
+    // bloomLimit: 0.65,
+    bloomLimit: 1.5,
     // donutsAmount: 70,
     // spheresAmount: 100,
     // diamondAmount: 170,
@@ -921,9 +923,7 @@ const cameraGroup = new THREE.Group()
 scene.add(cameraGroup)
 
 const camera = new THREE.PerspectiveCamera(65, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = -2.5
-camera.position.y = -3
-camera.position.z = 6
+camera.position.set( - 2.5, -3, 6 );
 cameraGroup.add(camera)
 
 // Controls
@@ -942,6 +942,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.setClearColor( 0x000000, 0.0 );
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.toneMappingExposure += 5
 
@@ -960,8 +961,55 @@ composer.addPass( bloomPass )
 /**
  * Base
  */
+ import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+ import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
+ import * as GeometryUtils from 'three/examples/jsm/utils/GeometryUtils.js';
+
+ let line;
+ let matLine, matLineBasic, matLineDashed;
+ const Lpositions = [];
+ const Lcolors = [];
+
+ const points = GeometryUtils.hilbert3D( new THREE.Vector3( 0, 0, 0 ), 20.0, 1, 0, 1, 2, 3, 4, 5, 6, 7 );
+
+ const spline = new THREE.CatmullRomCurve3( points );
+ const divisions = Math.round( 12 * points.length );
+ const point = new THREE.Vector3();
+ const color = new THREE.Color();
+
+ for ( let i = 0, l = divisions; i < l; i ++ ) {
+     const t = i / l;
+     spline.getPoint( t, point );
+     Lpositions.push( point.x, point.y, point.z );
+     color.setHSL( t, 1.0, 0.5 );
+     Lcolors.push( color.r, color.g, color.b );
+ }
+
+ // Line2 ( LineGeometry, LineMaterial )
+ const geometry = new LineGeometry();
+ geometry.setPositions( Lpositions );
+ geometry.setColors( Lcolors );
+
+ matLine = new LineMaterial( {
+     color: 0xffffff,
+     linewidth: 10, // in world units with size attenuation, pixels otherwise
+     vertexColors: true,
+     //resolution:  // to be set by renderer, eventually
+     dashed: false,
+     alphaToCoverage: true,
+ } );
+
+ line = new Line2( geometry, matLine );
+ line.computeLineDistances();
+ line.scale.set( .1, .1, .1 );
+ line.position.set(0,-2,-5)
+ scene.add( line );
+
 // Debug
 // const gui = new dat.GUI()
+
+// gui.add(matLine, 'linewidth', 0.1, 2 ).min(2).max(10).step(0.01).name('Line Width')
 
 // gui.add(camera.position, 'x', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos X')
 // gui.add(camera.position, 'y', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos Y')
@@ -1006,7 +1054,7 @@ let up = true;
 // }
 
 // let changeBloomStrength = setInterval(checkBloomStrength, 16);
-let limit = .65;
+let limit = params.bloomLimit;
 
 const checkBloomStrength = () => {
     if (up == true && bloomPass.strength <= limit) {
@@ -1226,6 +1274,7 @@ const tick = () => {
     //     coin.rotation.z = - elapsedTime * Math.PI * 0.2
     //     // coin.position.z = - elapsedTime / 6
     // }
+    matLine.resolution.set( window.innerWidth, window.innerHeight ); // resolution of the viewport
     // Render
     composer.render();
     // renderer.render(scene, camera)
