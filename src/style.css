@@ -261,15 +261,17 @@ ul{padding-left: 2rem;}
     margin-bottom: 0.75rem;
 }
 
-#about span.close-button, #locations span.close-button{
+#about button.close-button, #locations button.close-button{
     width: auto;
+    min-width: 110px;
     border-radius: 9px;
     border-width: 2px;
-    /* bottom: 2rem; */
+    height: auto;
     top: 1rem;
     right: 1rem;
     font-size: 22px;
-    padding: 11px;
+    color: #b6d8fa;
+    background-size: 100%;
 }
 #locations {
     right: 7rem;
@@ -308,48 +310,6 @@ ul{padding-left: 2rem;}
         background-image: url(https://media2.giphy.com/media/l3vRbTrGdpZrjjco8/giphy.gif?cid=790b761107897db13569da8f14938a34a6218a71940c1f09&rid=giphy.gif&ct=g);
     }
 }
-/* #about p{
-    white-space: nowrap;
-}
-.hero-marquee {
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.marquee {
-    font-size: 0;
-}
-
-.clipped-text {
-    display: inline-block;
-    font-size: 155px;
-    margin-right: 100px;
-} */
-/* .marquee {
-  height: 25px;
-  width: 420px;
-  overflow: hidden;
-  position: relative;
-}
-
-.marquee div {
-  display: block;
-  width: 200%;
-  height: 30px;
-  position: absolute;
-  overflow: hidden;
-  animation: marquee 5s linear infinite;
-}
-
-.marquee span {
-  float: left;
-  width: 50%;
-}
-
-@keyframes marquee {
-  0% { left: 0; }
-  100% { left: -100%; }
-} */
 
 @media(max-width: 1024px){
     section#contact{
@@ -408,11 +368,13 @@ ul{padding-left: 2rem;}
     /* section#locations {
         width: 260px;
     } */
-    #about span.close-button, #locations span.close-button {
+    #about button.close-button, #locations button.close-button {
         bottom: 1rem;
         position: relative;
         left: 0;
         right: 0;
+        width: 100%;
+        font-size: 20px;
     }
     /* section#about br {display: none;} */
     /* h3.section-subheading{
