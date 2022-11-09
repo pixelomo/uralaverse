@@ -345,13 +345,18 @@ ul{padding-left: 2rem;}
     }
     section#about{
         font-size: 16px;
-        height: 89vh;
+        /* height: 89vh; */
+        height: 600px;
     }
     section#about h1 span{
         font-size: 18px;
     }
     #about span{
         font-size: 30px;
+    }
+    #about span, #locations span{
+        color: inherit;
+        background-image: none;
     }
     section#locations {
         right: 0;
