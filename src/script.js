@@ -2,31 +2,29 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
-import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
-import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
+import { FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import gsap from 'gsap'
 // const tl = gsap.timeline();
+
+let sceneReady = false
 
 const params = {
     exposure: 1,
     bloomThreshold: 0.33,
     bloomStrength: 0,
     bloomRadius: 1,
-    bloomLimit: 0.65,
-    // bloomLimit: 1.5,
-    // donutsAmount: 70,
-    // spheresAmount: 100,
-    // diamondAmount: 170,
-    // particleCount: 3000
-    donutsAmount: 20,
-    spheresAmount: 20,
-    diamondAmount: 40,
-    particleCount: 800
+    bloomLimit: 0.65, // 1.5
+    donutsAmount: 20, // 70
+    spheresAmount: 20, // 100
+    diamondAmount: 40, // 170
+    particleCount: 800 // 3000
 };
 
 /**
@@ -85,11 +83,6 @@ const fontMaker = (text, font, size = 0.6, position, color, name, wireframe) => 
     const textMesh = new THREE.Mesh()
     if(wireframe){
         textMesh.geometry = textGeometry
-        // textMesh.material = new THREE.MeshPhongMaterial({
-        //     polygonOffset: true,
-        //     polygonOffsetFactor: 1, // positive value pushes polygon further away
-        //     polygonOffsetUnits: 1,
-        // })
         textMesh.material = new THREE.MeshStandardMaterial({ color: color })
         let wireframe = new THREE.WireframeGeometry( textGeometry );
         let line = new THREE.LineSegments( wireframe );
@@ -227,7 +220,7 @@ scene.add(hemisphereLight)
 
 // Point light - moderate cost
 const pointLight = new THREE.PointLight(0xffffff, 0.7, 30, 2)
-pointLight.position.set(1, 3, 1)
+pointLight.position.set(1, 3, 10)
 scene.add(pointLight)
 
 // // Rect area light - high cost
@@ -243,25 +236,6 @@ scene.add(pointLight)
 
 // spotLight.target.position.x = - 0.75
 // scene.add(spotLight.target)
-
-/**
- * Models
- */
-
- const gltfLoader = new GLTFLoader()
-
- let coin = {}
- gltfLoader.load('/models/btc.glb', (m) => {
-        const coinModel = m.scene.children[0]
-        coinModel.scale.set(0.75, 0.75, 0.75)
-        // coinModel.position.x = 3
-        // coinModel.position.y = 1
-        coinModel.position.x = 1
-        coinModel.position.y = 2
-        coin = coinModel
-        // console.log(scene.children)
-    }
-)
 
 /**
 // Particles
@@ -674,6 +648,8 @@ window.addEventListener('click', () => {
             //         menuScene()
             //     }, 1200)
             // }
+
+            ////////////////////// HOME //////////////////////////
             if(currentIntersect.object.name === 'home'){
                 gsap.to(camera.position, {
                     x: -2.5,
@@ -694,8 +670,11 @@ window.addEventListener('click', () => {
                     contactForm.classList.remove('show')
                     canvas.classList.remove('disable')
                     aboutSection.classList.remove('show')
+                    controls.enabled = true;
                 }, 700)
             }
+
+            /////////////////////////// CONTACT ///////////////////////////////
             if(currentIntersect.object.name === 'contact'){
                 gsap.to(camera.position, {
                     x: -0.82,
@@ -734,6 +713,8 @@ window.addEventListener('click', () => {
                     // pointLight.lookAt(homeButton[0].position)
                 }, 1200)
             }
+
+            /////////////////////////// ABOUT ///////////////////////////////
             if(currentIntersect.object.name === 'about'){
                 gsap.to(camera.position, {
                     x: 5,
@@ -754,6 +735,7 @@ window.addEventListener('click', () => {
             if(currentIntersect.object.parent.userData.url){
                 window.open(currentIntersect.object.parent.userData.url, '_blank').focus();
             }
+            /////////////////////////// LOCATIONS ///////////////////////////////
             if(currentIntersect.object.name === 'locations'){
                 gsap.to(camera.position, {
                     x: -3.4,
@@ -762,6 +744,46 @@ window.addEventListener('click', () => {
                     duration: 2,
                     ease: "back.inOut(1.7)",
                 })
+                // scene.traverse((child) =>{
+                //     if(child.name === 'globe'){
+                //         // console.log(child.parent)
+                //         let g = child.parent.position
+                //         // cameraGroup.position.set(g.x, g.y, g.z)
+                //         // pointLight.lookAt(g)
+                //         // controls.object.position.set(g.x,g.y,g.z)
+                //         // gsap.to(child.parent.rotation, {
+                //         //     y: Math.PI * 4,
+                //         //     duration: 40,
+                //         //     repeat: -1,
+                //         //     ease: "linear",
+                //         // })
+                //         gsap.to(camera.position, {
+                //             x: g.x - 0.5,
+                //             y: g.y - 0.9,
+                //             z: g.z + 1.8,
+                //             duration: 2,
+                //             ease: "back.inOut(1.7)",
+                //         })
+                //         console.log(camera.position)
+                //         // gsap.to(camera.position, {
+                //         //     x: -2.5,
+                //         //     y: -9.18,
+                //         //     z: 2.26,
+                //         //     duration: 2,
+                //         //     ease: "back.inOut(1.7)",
+                //         // })
+                //         // gsap.to(camera.rotation, {
+                //         //     x: -6.55,
+                //         //     y: -0.356,
+                //         //     z: 0.17,
+                //         //     duration: 2,
+                //         //     ease: "back.inOut(1.7)",
+                //         // })
+                //         sceneReady = true
+                //         controls.enabled = false
+                //         // camera.lookAt(g)
+                //     }
+                // })
                 aboutSection.classList.remove('show')
                 setTimeout(() => {
                     locationSection.classList.add('show')
@@ -779,115 +801,7 @@ window.addEventListener('click', () => {
             // }
 
         }
-            // let number = getRandomInt(1, 4)
-            // if(number === lastNumber){
-            //     number = getRandomInt(1, 4)
-            // }
-            // if (number === 1){
-                // lastNumber = 1
-            // }
-            // if (number === 2){
-            //     const octGroup = new THREE.Group()
-            //     const octGeometry = new THREE.OctahedronGeometry(.2)
-            //     for(let i = 0; i < 1000; i++){
-            //         const oct = new THREE.Mesh(
-            //             octGeometry,
-            //             new THREE.MeshMatcapMaterial({
-            //                 matcap: matcapTexture2,
-            //                 color: new THREE.Color("#"+genHex(6)),
-            //             })
-            //         )
-            //         oct.position.x = (Math.random() - 0.5) * 10
-            //         oct.position.y = (Math.random() - 0.5) * 10
-            //         oct.position.z = (Math.random() - 0.5) * 10
-            //         oct.rotation.x = Math.random() * Math.PI
-            //         oct.rotation.y = Math.random() * Math.PI
-            //         const scale = Math.random()
-            //         oct.scale.set(scale, scale, scale)
-            //         octGroup.add(oct)
-            //     }
-            //     scene.add(octGroup)
-            //     scene.add(coin)
-            //     scene.add(pointLight)
-            //     scene.add(hemisphereLight)
-            //     lastNumber = 2
-            // }
-            // if (number === 3){
-            //     const sphereGroup = new THREE.Group()
-            //     const sphereGeometry = new THREE.SphereGeometry(.2, 20, 20)
-            //     for(let i = 0; i < 600; i++){
-            //         const sphere = new THREE.Mesh(
-            //             sphereGeometry,
-            //             new THREE.MeshMatcapMaterial({
-            //                 matcap: matcapTexture2,
-            //                 color: new THREE.Color("#"+genHex(6))
-            //             })
-            //         )
-            //         // sphere.material.color = new THREE.Color("rgb(159, 1, 134)")
-            //         sphere.position.x = (Math.random() - 0.5) * 10
-            //         sphere.position.y = (Math.random() - 0.5) * 10
-            //         sphere.position.z = (Math.random() - 0.5) * 10
-            //         sphere.rotation.x = Math.random() * Math.PI
-            //         sphere.rotation.y = Math.random() * Math.PI
-            //         const scale = Math.random()
-            //         sphere.scale.set(scale, scale, scale)
-            //         sphereGroup.add(sphere)
-            //     }
-            //     scene.add(sphereGroup)
-            //     scene.add(coin)
-            //     scene.add(pointLight)
-            //     scene.add(hemisphereLight)
-            //     lastNumber = 3
-            // }
-            // if (number === 4){
-            //     // Donuts
-            //     const donutGroup = new THREE.Group()
-            //     const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
-            //     for(let i = 0; i < 400; i++){
-            //         const donut = new THREE.Mesh(
-            //             donutGeometry,
-            //             new THREE.MeshNormalMaterial({wireframe: true})
-            //         )
-            //         donut.position.x = (Math.random() - 0.5) * 10
-            //         donut.position.y = (Math.random() - 0.5) * 10
-            //         donut.position.z = (Math.random() - 0.5) * 10
-            //         donut.rotation.x = Math.random() * Math.PI
-            //         donut.rotation.y = Math.random() * Math.PI
-            //         const scale = Math.random()
-            //         donut.scale.set(scale, scale, scale)
-            //         donutGroup.add(donut)
-            //     }
-            //     scene.add(donutGroup)
-            //     scene.add(coin)
-            //     scene.add(pointLight)
-            //     scene.add(hemisphereLight)
-            //     lastNumber = 4
-            // }
-        }
-
-        // switch(currentIntersect.object) {
-        //     case objectsToTest[0]:
-        //         console.log('click on object 1')
-        //         objectsToTest[0].material.color.set('green')
-        //         //  object2.material.color.set('#ff0000')
-        //         //  object3.material.color.set('#ff0000')
-        //          break
-
-        //      case objectsToTest[1]:
-        //          console.log('click on object 2')
-        //          objectsToTest[1].material.color.set('#ff0030')
-        //         //  object1.material.color.set('#ff0000')
-        //         //  object3.material.color.set('#ff0000')
-        //          break
-
-            //  case object3:
-            //      console.log('click on object 3')
-            //      object3.material.color.set('#2e00ff')
-            //      object2.material.color.set('#ff0000')
-            //      object1.material.color.set('#ff0000')
-            //      break
-        //  }
-    //  }
+    }
  })
 
  const goHome = () => {
@@ -957,7 +871,6 @@ let composer = new EffectComposer( renderer )
 composer.addPass( renderScene )
 composer.addPass( bloomPass )
 
-
 /**
  * Base
  */
@@ -1009,15 +922,15 @@ composer.addPass( bloomPass )
 // Debug
 // const gui = new dat.GUI()
 
-// gui.add(matLine, 'linewidth', 0.1, 2 ).min(2).max(10).step(0.01).name('Line Width')
+// // gui.add(matLine, 'linewidth', 0.1, 2 ).min(2).max(10).step(0.01).name('Line Width')
 
 // gui.add(camera.position, 'x', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos X')
 // gui.add(camera.position, 'y', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos Y')
 // gui.add(camera.position, 'z', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos Z')
 
-// gui.add(camera.rotation, 'x', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation X')
-// gui.add(camera.rotation, 'y', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation Y')
-// gui.add(camera.rotation, 'z', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation Z')
+// gui.add(camera.rotation, 'x', 0.1, 2 ).min(-10).max(10).step(0.0001).name('CameraRotation X')
+// gui.add(camera.rotation, 'y', 0.1, 2 ).min(-10).max(10).step(0.0001).name('CameraRotation Y')
+// gui.add(camera.rotation, 'z', 0.1, 2 ).min(-10).max(10).step(0.0001).name('CameraRotation Z')
 
 // gui.add( params, 'exposure', 0.1, 2 ).onChange( function ( value ) {
 //     renderer.toneMappingExposure = Math.pow( value, 4.0 );
@@ -1036,26 +949,7 @@ composer.addPass( bloomPass )
 // } );
 
 let up = true;
-// let limit = .5;
-
-// const checkBloomStrength = () => {
-//     if (up == true && bloomPass.strength <= limit) {
-//         bloomPass.strength += 0.004
-//         if (bloomPass.strength == limit) {
-//           up = false;
-//         }
-//     } else {
-//         up = false
-//         bloomPass.strength -= 0.002
-//         if (bloomPass.strength == 0.2 || bloomPass.strength < 0.2) {
-//             up = true;
-//         }
-//     }
-// }
-
-// let changeBloomStrength = setInterval(checkBloomStrength, 16);
 let limit = params.bloomLimit;
-
 const checkBloomStrength = () => {
     if (up == true && bloomPass.strength <= limit) {
         bloomPass.strength += 0.0035
@@ -1070,7 +964,6 @@ const checkBloomStrength = () => {
         }
     }
 }
-
 let changeBloomStrength = setInterval(checkBloomStrength, 24);
 
 /**
@@ -1228,24 +1121,6 @@ const tick = () => {
         }
     // }
 
-    // for(let i = 0; i < sphereGroup.children.length; i++){
-    //     if(i % 2 === 0){
-    //         gsap.to(sphereGroup.children[i].position, {
-    //             x: sphereGroup.children[i].position.x + Math.cos(elapsedTime),
-    //             y: sphereGroup.children[i].position.y + Math.sin(elapsedTime),
-    //             duration: 4,
-    //             yoyo: true,
-    //         })
-    //     } else {
-    //         gsap.to(sphereGroup.children[i].position, {
-    //             x: sphereGroup.children[i].position.x + Math.sin(elapsedTime),
-    //             z: sphereGroup.children[i].position.z + Math.cos(elapsedTime),
-    //             duration: 8,
-    //             yoyo: true,
-    //         })
-    //     }
-    // }
-
     if(!firstScene){
         // gsap.to(scene.rotation, {
         //     y: scene.rotation.y = - elapsedTime * Math.PI / 16,
@@ -1275,6 +1150,47 @@ const tick = () => {
     //     // coin.position.z = - elapsedTime / 6
     // }
     // matLine.resolution.set( window.innerWidth, window.innerHeight ); // resolution of the viewport
+    // Update points only when the scene is ready
+    // if(sceneReady){
+    //     // Go through each point
+    //     for(const point of points){
+    //         // Get 2D screen position
+    //         const screenPosition = point.position.clone()
+    //         screenPosition.project(camera)
+
+    //         // Set the raycaster
+    //         raycaster.setFromCamera(screenPosition, camera)
+    //         const intersects = raycaster.intersectObjects(scene.children, true)
+
+    //         // // No intersect found
+    //         // if(intersects.length === 0){
+    //         //     // Show
+    //         //     point.element.classList.add('visible')
+    //         // }
+
+    //         // // Intersect found
+    //         // else {
+    //         //     // Get the distance of the intersection and the distance of the point
+    //         //     const intersectionDistance = intersects[0].distance
+    //         //     const pointDistance = point.position.distanceTo(camera.position)
+
+    //         //     // Intersection is close than the point
+    //         //     if(intersectionDistance < pointDistance){
+    //         //         // Hide
+    //         //         point.element.classList.remove('visible')
+    //         //     }
+    //         //     // Intersection is further than the point
+    //         //     else {
+    //         //         // Show
+    //         //         point.element.classList.add('visible')
+    //         //     }
+    //         // }
+
+    //         const translateX = screenPosition.x * sizes.width * 0.5
+    //         const translateY = - screenPosition.y * sizes.height * 0.5
+    //         point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+    //     }
+    // }
     // Render
     composer.render();
     // renderer.render(scene, camera)
@@ -1285,3 +1201,55 @@ const tick = () => {
 
 tick()
 
+
+// LOCATIONS
+/**
+ * Models
+ */
+
+// const gltfLoader = new GLTFLoader()
+// const dracoLoader = new DRACOLoader()
+// dracoLoader.setDecoderPath('/draco/')
+
+// const gltfLoader = new GLTFLoader()
+// gltfLoader.setDRACOLoader(dracoLoader)
+
+// let coin = {}
+// // gltfLoader.load('/models/btc.glb', (m) => {
+// //     const coinModel = m.scene.children[0]
+// //     coinModel.scale.set(0.75, 0.75, 0.75)
+// //     // coinModel.position.x = 3
+// //     // coinModel.position.y = 1
+// //     coinModel.position.x = 1
+// //     coinModel.position.y = 2
+// //     coin = coinModel
+// //     // console.log(scene.children)
+// // })
+
+// gltfLoader.load('/models/globe.glb', (m) => {
+//     const model = m.scene
+//     // console.log(m.scene)
+//     // model.scale.set(.05, .05, .05)
+//     model.rotation.x += .5
+//     model.position.set(0,-10,0)
+//     scene.add(model)
+// })
+
+
+// // **
+// //  * Points of interest
+// //  */
+// const points = [
+//     {
+//         position: new THREE.Vector3(-0.5, -11, 1.8),
+//         element: document.querySelector('.point-0')
+//     },
+//     {
+//         position: new THREE.Vector3(0.5, -10, 2.6),
+//         element: document.querySelector('.point-1')
+//     },
+//     // {
+//     //     position: new THREE.Vector3(1.6, - 1.3, - 0.7),
+//     //     element: document.querySelector('.point-2')
+//     // }
+// ]

@@ -14,9 +14,11 @@ body {
     color: #b6d8fa;
 }
 
+img{max-width: 100%;}
+
 .webgl {
     position: fixed;
-    z-index: 1;
+    /* z-index: 1; */
     top: 0;
     left: 0;
     outline: none;
@@ -273,6 +275,13 @@ ul{padding-left: 2rem;}
     color: #b6d8fa;
     background-size: 100%;
 }
+
+a#agencyvista-badge {
+    width: 150px;
+    position: absolute;
+    right: 1rem;
+}
+
 #locations {
     right: 7rem;
     left: initial;
@@ -281,7 +290,7 @@ ul{padding-left: 2rem;}
     background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
     box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
     padding: 2rem 2rem 4rem;
-    height: auto;
+    height: fit-content;
     border-radius: 16px;
 }
 #locations span.title {
@@ -292,6 +301,7 @@ ul{padding-left: 2rem;}
 }
 #locations span{
     font-size: 42px;
+    text-transform: uppercase;
 }
 #locations p {
     font-size: 16px;
@@ -300,7 +310,7 @@ ul{padding-left: 2rem;}
 }
 
 @keyframes bg{
-    0%, 35% {
+    0%, 30% {
         background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
     }
     50% {
@@ -310,6 +320,54 @@ ul{padding-left: 2rem;}
         background-image: url(https://media2.giphy.com/media/l3vRbTrGdpZrjjco8/giphy.gif?cid=790b761107897db13569da8f14938a34a6218a71940c1f09&rid=giphy.gif&ct=g);
     }
 }
+
+.point {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	/* pointer-events: none; */
+}
+.point .label {
+	position: absolute;
+	top: -20px;
+	left: -20px;
+    padding: 0 10px;
+	border-radius: 12px;
+	background: #00000077;
+	border: 1px solid #ffffff77;
+	color: #ffffff;
+	text-align: center;
+	line-height: 30px;
+	font-weight: 100;
+	font-size: 14px;
+	cursor: help;
+	transform: scale(0, 0);
+	transition: transform 0.3s;
+}
+.point .text {
+	position: absolute;
+	top: 30px;
+	left: -120px;
+	width: 200px;
+	padding: 20px;
+	border-radius: 4px;
+	background: #00000077;
+	border: 1px solid #ffffff77;
+	color: #ffffff;
+	line-height: 1.3em;
+	font-weight: 100;
+	font-size: 14px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	pointer-events: none;
+}
+.point:hover .text {
+	opacity: 1;
+}
+.point.visible .label {
+	transform: scale(1, 1);
+}
+
 
 @media(max-width: 1024px){
     section#contact{
@@ -359,6 +417,12 @@ ul{padding-left: 2rem;}
     #about span, #locations span{
         color: inherit;
         background-image: none;
+    }
+    a#agencyvista-badge {
+        position: relative;
+        right: inherit;
+        display: inline-block;
+        margin: 10px;
     }
     section#locations {
         right: 0;
