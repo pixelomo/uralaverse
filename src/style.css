@@ -12,6 +12,7 @@ html,
 body {
     overflow: hidden;
     color: #b6d8fa;
+    background: #000;
 }
 
 img{max-width: 100%;}
@@ -24,6 +25,7 @@ img{max-width: 100%;}
     outline: none;
 }
 .webgl.disable{pointer-events: none;}
+.webgl.fade{animation: fade 3.2s forwards;}
 
 .text-panel {
     position: absolute;
@@ -247,13 +249,14 @@ input:-webkit-autofill:active {
     font-size: 30px;
 }
 #about span, #locations span {
-    background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
+    /* background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g); */
+    background-image: url(https://media2.giphy.com/media/l3vRbTrGdpZrjjco8/giphy.gif?cid=790b761107897db13569da8f14938a34a6218a71940c1f09&rid=giphy.gif&ct=g);
     background-size: contain;
     background-size: 100%;
     color: transparent;
     -moz-background-clip: text;
     -webkit-background-clip: text;
-    animation: bg 17s infinite forwards;
+    animation: bg 10s infinite alternate;
     font-weight: 900;
     font-size: 55px;
 }
@@ -283,7 +286,7 @@ a#agencyvista-badge {
 }
 
 #locations {
-    right: 7rem;
+    right: 3rem;
     left: initial;
     bottom: 7rem;
     width: 370px;
@@ -310,15 +313,20 @@ a#agencyvista-badge {
 }
 
 @keyframes bg{
-    0%, 30% {
+    /* 0%, 30% {
         background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g);
-    }
-    50% {
+    } */
+    0%, 30% {
         background-image: url(https://media0.giphy.com/media/xT1XGMbENXj5IMKtnG/giphy.gif?cid=ecf05e47tbbfwk3t4x6i8781zq7m9qeqfnm6gceezwkgja99&rid=giphy.gif&ct=g);
     }
-    70% {
+    60% {
         background-image: url(https://media2.giphy.com/media/l3vRbTrGdpZrjjco8/giphy.gif?cid=790b761107897db13569da8f14938a34a6218a71940c1f09&rid=giphy.gif&ct=g);
     }
+}
+
+@keyframes fade{
+    0%{opacity: 1;}
+    50%{opacity: 0;}
 }
 
 .point {
