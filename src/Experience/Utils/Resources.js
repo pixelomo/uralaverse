@@ -10,7 +10,6 @@ export default class Resources extends EventEmitter {
         super()
 
         this.sources = sources
-
         this.items = {}
         this.toLoad = this.sources.length
         this.loaded = 0
@@ -30,9 +29,6 @@ export default class Resources extends EventEmitter {
         this.loaders.fontLoader = new FontLoader()
         this.loaders.svgLoader = new SVGLoader()
     }
-
-    // const dracoLoader = new DRACOLoader(loadingManager)
-    // const gltfLoader = new GLTFLoader(loadingManager)
 
     startLoading() {
         // Load each source

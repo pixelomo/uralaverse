@@ -21,13 +21,13 @@ export default class Renderer {
             canvas: this.canvas,
             antialias: true
         })
-        this.instance.physicallyCorrectLights = true
-        this.instance.outputEncoding = THREE.sRGBEncoding
-        this.instance.toneMapping = THREE.CineonToneMapping
-        this.instance.toneMappingExposure = 1.75
-        this.instance.shadowMap.enabled = true
-        this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-        this.instance.setClearColor('#211d20')
+        // this.instance.physicallyCorrectLights = true
+        // this.instance.outputEncoding = THREE.sRGBEncoding
+        this.instance.toneMapping = THREE.ReinhardToneMapping
+        this.instance.toneMappingExposure += 15
+        // this.instance.shadowMap.enabled = true
+        // this.instance.shadowMap.type = THREE.PCFSoftShadowMap
+        this.instance.setClearColor('#011020')
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
     }
@@ -94,40 +94,3 @@ export default class Renderer {
     //     clearInterval(changeBloomStrength)
     // }
 
-
-
-
-    // tick
-
-    // Cast a ray from the mouse and handle events
-    // raycaster.setFromCamera(mouse, camera)
-
-    // const intersects = raycaster.intersectObjects(objectsToTest)
-
-    // if(intersects.length) {
-    //     if(!currentIntersect) {
-    //         // console.log('mouse enter')
-    //     }
-    //     currentIntersect = intersects[0]
-    //     if(currentIntersect.object == window.entertext){
-    //         enterColor = new THREE.Color('#002034')
-    //     } else {
-    //         enterColor = new THREE.Color('#00c4eb')
-    //         gsap.to(currentIntersect.object.material.color, 4, {
-    //             r: enterColor.r,
-    //             g: enterColor.g,
-    //             b: enterColor.b
-    //         })
-    //     }
-    // }
-    // else {
-    //     if(currentIntersect) {
-    //         // console.log('mouse leave')
-    //         if(currentIntersect.object == window.entertext){
-    //             enterColor = new THREE.Color('#083b00')
-    //         } else {
-    //             enterColor = new THREE.Color('#00c4eb')
-    //         }
-    //     }
-    //     currentIntersect = null
-    // }

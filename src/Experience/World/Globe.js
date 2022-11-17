@@ -10,9 +10,9 @@ export default class Globe {
 		this.time = this.experience.time
 		this.debug = this.experience.debug
 		// Debug
-		if (this.debug.active) {
-			this.debugFolder = this.debug.ui.addFolder('fox')
-		}
+		// if (this.debug.active) {
+		// 	this.debugFolder = this.debug.ui.addFolder('fox')
+		// }
 		// Resource
 		this.resource = this.resources.items.globe
 		this.setModel()
