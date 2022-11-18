@@ -516,6 +516,10 @@ a#agencyvista-badge {
     .close-locations-button{
         right: 0.5rem;
         left: initial;
+        animation: none;
+        background: none;
+        box-shadow: none;
+        text-shadow: none;
     }
     /* section#about br {display: none;} */
     /* h3.section-subheading{
