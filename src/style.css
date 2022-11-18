@@ -535,6 +535,19 @@ a#agencyvista-badge {
     .controls-desktop{
         display: none;
     }
+    .close-locations-button{
+        height: 30px;
+        width: 30px;
+    }
+    #locations-hidden-button{
+        width: 100%;
+        border: none;
+        height: 2rem;
+        border: none;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
     /* .controls-mobile{
         display: block;
     } */
