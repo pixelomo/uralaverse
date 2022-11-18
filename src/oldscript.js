@@ -13,92 +13,28 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import gsap from 'gsap'
 // const tl = gsap.timeline();
 
-const params = {
-    exposure: 1,
-    bloomThreshold: 0.33,
-    bloomStrength: 0,
-    bloomRadius: 1,
-    bloomLimit: 0.65, // 1.5
-    donutsAmount: 20, // 70
-    spheresAmount: 20, // 100
-    diamondAmount: 40, // 170
-    particleCount: 800 // 3000
-};
+let locationScene = false
 
- // Canvas
- const canvas = document.querySelector('canvas.webgl')
+const initHome = () => {
 
- // Scene
- const scene = new THREE.Scene()
+    let sceneReady = false
+    locationScene = false
+    const params = {
+        exposure: 1,
+        bloomThreshold: 0.33,
+        bloomStrength: 0,
+        bloomRadius: 1,
+        bloomLimit: 0.65, // 1.5
+        donutsAmount: 20, // 70
+        spheresAmount: 20, // 100
+        diamondAmount: 40, // 170
+        particleCount: 800 // 3000
+    };
 
- /**
-  * Sizes
-  */
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-}
-
- window.addEventListener('resize', () => {
-     // Update sizes
-     sizes.width = window.innerWidth
-     sizes.height = window.innerHeight
-     // Update camera
-     camera.aspect = sizes.width / sizes.height
-     camera.updateProjectionMatrix()
-     // Update renderer
-     renderer.setSize(sizes.width, sizes.height)
-     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
- })
-
-/**
-  * Camera
-  */
- // Base camera
- const cameraGroup = new THREE.Group()
- scene.add(cameraGroup)
-
- const camera = new THREE.PerspectiveCamera(65, sizes.width / sizes.height, 0.1, 100)
- camera.position.set( - 2.5, -3, 6 );
- cameraGroup.add(camera)
-
- // Controls
- const controls = new OrbitControls(camera, canvas)
- controls.enableDamping = true
- controls.minDistance = 1;
- controls.maxDistance = 10;
-
- /**
-  * Renderer
-  */
- const renderer = new THREE.WebGLRenderer({
-     canvas: canvas
- })
- renderer.setSize(sizes.width, sizes.height)
- renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
- renderer.setClearColor( 0x000000, 0.0 );
- renderer.toneMapping = THREE.ReinhardToneMapping;
- renderer.toneMappingExposure += 5
-
- const renderScene = new RenderPass( scene, camera );
-
- const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
- bloomPass.threshold = params.bloomThreshold;
- bloomPass.strength = params.bloomStrength;
- bloomPass.radius = params.bloomRadius;
-
- let composer = new EffectComposer( renderer )
- composer.addPass( renderScene )
- composer.addPass( bloomPass )
-
-const loadHome = () => {
-    let firstScene = true
     /**
      * Textures
      */
     const textureLoader = new THREE.TextureLoader()
-    //  const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
-    // const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture, color: '#0b5400' })
     const material = new THREE.MeshStandardMaterial()
     const matcapTexture2 = textureLoader.load('/textures/matcaps/4.png')
     const material2 = new THREE.MeshMatcapMaterial({ matcap: matcapTexture2 })
@@ -259,6 +195,12 @@ const loadHome = () => {
     loadSVG('/images/urala-b.svg', 'urala', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.015)
     // loadSVG('/images/decapital.svg', 'decapital', 'https://de.capital/', {x: 1.5, y: -1.5, z: .5}, 0.0005)
     loadSVG('/images/ctb.svg', 'cointelegraph', 'https://jp.cointelegraph.com/', {x: -5.5, y: 4, z: -.5}, 0.015)
+
+    // Canvas
+    const canvas = document.querySelector('canvas.webgl')
+
+    // Scene
+    const scene = new THREE.Scene()
 
     /**
      * Lights
@@ -627,6 +569,28 @@ const loadHome = () => {
     rayDirection.normalize()
 
     /**
+     * Sizes
+     */
+    const sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    }
+
+    window.addEventListener('resize', () => {
+        // Update sizes
+        sizes.width = window.innerWidth
+        sizes.height = window.innerHeight
+
+        // Update camera
+        camera.aspect = sizes.width / sizes.height
+        camera.updateProjectionMatrix()
+
+        // Update renderer
+        renderer.setSize(sizes.width, sizes.height)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    })
+
+    /**
      * Mouse
      */
     const mouse = new THREE.Vector2()
@@ -687,7 +651,7 @@ const loadHome = () => {
                 //     }, 1200)
                 // }
 
-                ///////////////////////// HOME ///////////////////////////////
+                ////////////////////// HOME //////////////////////////
                 if(currentIntersect.object.name === 'home'){
                     gsap.to(camera.position, {
                         x: -2.5,
@@ -697,16 +661,22 @@ const loadHome = () => {
                         ease: "back.inOut(1.7)",
                     })
                     uralaLogo = scene.children.filter(obj => obj.name === 'urala')
-                    loadHome()
                     setTimeout(() => {
+                        // while(scene.children.length > 0){
+                        //     scene.remove(scene.children[0]);
+                        // }
                         renderer.toneMappingExposure = 4
-                        // uralaLogo[0].position.y = 3
+                        // aboutText.classList.remove('show')
+                        // homeButton[0].visible = false
+                        uralaLogo[0].position.y = 3
                         contactForm.classList.remove('show')
                         canvas.classList.remove('disable')
                         aboutSection.classList.remove('show')
+                        controls.enabled = true;
                     }, 700)
                 }
-                ///////////////////////// CONTACT ///////////////////////////////
+
+                /////////////////////////// CONTACT ///////////////////////////////
                 if(currentIntersect.object.name === 'contact'){
                     gsap.to(camera.position, {
                         x: -0.82,
@@ -720,13 +690,33 @@ const loadHome = () => {
                     uralaLogo = scene.children.filter(obj => obj.name === 'urala')
                     setTimeout(() => {
                         renderer.toneMappingExposure = 2.2
+                        // renderer.toneMappingExposure = 1
+                        // contact plane
+                        // const plane = new THREE.Mesh(
+                        //     new THREE.PlaneGeometry(6, 4),
+                        //     new THREE.MeshBasicMaterial({
+                        //         color: '#000',
+                        //         transparent: true
+                        //     })
+                        // )
+                        // plane.rotation.x = Math.PI / 1.2
+                        // plane.position.z = 2
+                        // plane.position.x = 1.5
+                        // plane.position.y = 1
+                        // objectsToTest.push(plane)
+                        // scene.add(plane)
                         uralaLogo[0].position.y = 6
                         contactForm.classList.add('show')
                         canvas.classList.add('disable')
                         document.getElementById("name").focus();
+                        // homeButton[0].position.set(1, -1.5, 2)
+                        // homeButton[0].visible = true
+                        // homeButton[0].lookAt(camera.position)
+                        // pointLight.lookAt(homeButton[0].position)
                     }, 1200)
                 }
-                ////////////////////////// ABOUT ///////////////////////////////
+
+                /////////////////////////// ABOUT ///////////////////////////////
                 if(currentIntersect.object.name === 'about'){
                     gsap.to(camera.position, {
                         x: 5,
@@ -738,19 +728,30 @@ const loadHome = () => {
                     locationSection.classList.remove('show')
                     setTimeout(() => {
                         aboutSection.classList.add('show')
+                        // homeButton[0].visible = true
+                        // homeButton[0].position.set(-4,3,2)
+                        // homeButton[0].lookAt(camera.position)
+                        // homeButton[0].rotation.y = 500
                     }, 1200)
                 }
-                //////////////////////// LOGO LINKS ///////////////////////////////
-                if(currentIntersect.object.parent.userData.url){
+                if(typeof currentIntersect !== null && currentIntersect.object.parent.userData.url){
                     window.open(currentIntersect.object.parent.userData.url, '_blank').focus();
                 }
-                //////////////////////// LOCATIONS ///////////////////////////////
+                /////////////////////////// LOCATIONS ///////////////////////////////
                 if(currentIntersect.object.name === 'locations'){
-                    // scene.remove(donutGroup, sphereGroup, octGroup, ctObject, welcome)
-                    while(scene.children.length > 0){
-                        scene.remove(scene.children[0]);
-                    }
-                    loadLocations()
+                    canvas.classList.add('fade')
+                    gsap.globalTimeline.clear()
+                    setTimeout(() => {
+                        while(scene.children.length > 0){
+                            scene.remove(scene.children[0]);
+                        }
+                        initLocations()
+                        locationScene = true
+                    }, 1000)
+                    setTimeout(() => {
+                        canvas.classList.remove('fade')
+                        locationSection.classList.add('show')
+                    }, 3000)
                     // gsap.to(camera.position, {
                     //     x: -3.4,
                     //     y: 16.25,
@@ -758,160 +759,93 @@ const loadHome = () => {
                     //     duration: 2,
                     //     ease: "back.inOut(1.7)",
                     // })
+                    // scene.traverse((child) =>{
+                    //     if(child.name === 'globe'){
+                    //         // console.log(child.parent)
+                    //         let g = child.parent.position
+                    //         // cameraGroup.position.set(g.x, g.y, g.z)
+                    //         // pointLight.lookAt(g)
+                    //         pointLight.position.set(camera.position.x, camera.position.y, camera.position.z)
+                    //         // controls.object.position.set(g.x,g.y,g.z)
+                    //         gsap.to(child.parent.rotation, {
+                    //             y: Math.PI * 4,
+                    //             duration: 40,
+                    //             repeat: -1,
+                    //             ease: "linear",
+                    //         })
+                    //         gsap.to(camera.position, {
+                    //             x: g.x - 0.4,
+                    //             y: g.y - 0.9,
+                    //             z: g.z + 1.75,
+                    //             duration: 2,
+                    //             ease: "back.inOut(1.7)",
+                    //         })
+                    //         console.log(camera.position)
+                    //         // gsap.to(camera.position, {
+                    //         //     x: -2.5,
+                    //         //     y: -9.18,
+                    //         //     z: 2.26,
+                    //         //     duration: 2,
+                    //         //     ease: "back.inOut(1.7)",
+                    //         // })
+                    //         // gsap.to(camera.rotation, {
+                    //         //     x: -6.55,
+                    //         //     y: -0.356,
+                    //         //     z: 0.17,
+                    //         //     duration: 2,
+                    //         //     ease: "back.inOut(1.7)",
+                    //         // })
+                    //         sceneReady = true
+                    //         controls.enabled = false
+                    //         // camera.lookAt(g)
+                    //     }
+                    // })
                     aboutSection.classList.remove('show')
-                    setTimeout(() => {
-                        locationSection.classList.add('show')
-                        const cameraGroup = new THREE.Group()
-                        scene.add(cameraGroup)
-                        const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-                        camera.position.set( -3.4, 12, 0 );
-                        cameraGroup.add(camera)
-                        // Hemisphere light - low cost
-                        const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, .8)
-                        scene.add(hemisphereLight)
-                        // Point light - moderate cost
-                        const pointLight = new THREE.PointLight(0xffffff, 0.7, 30, 2)
-                        pointLight.position.set(1, 3, 10)
-                        scene.add(pointLight)
-                        // console.log(scene)
-                    }, 2000)
-                    gsap.to(camera.position, {
-                        x: -3.4,
-                        y: 12.25,
-                        z: -0.6,
-                        duration: 2,
-                        ease: "back.inOut(1.7)",
-                    })
+                    // setTimeout(() => {
+                    //     locationSection.classList.add('show')
+                    // }, 1200)
                 }
+                // if(currentIntersect.object.name === 'about'){
+                //     setTimeout(() => {
+                //         while(scene.children.length > 0){
+                //             scene.remove(scene.children[0]);
+                //         }
+                //         renderer.toneMappingExposure = 4
+                //         scene.add(camera)
+                //         aboutScene()
+                //     }, 1200)
+                // }
+
             }
-                // let number = getRandomInt(1, 4)
-                // if(number === lastNumber){
-                //     number = getRandomInt(1, 4)
-                // }
-                // if (number === 1){
-                    // lastNumber = 1
-                // }
-                // if (number === 2){
-                //     const octGroup = new THREE.Group()
-                //     const octGeometry = new THREE.OctahedronGeometry(.2)
-                //     for(let i = 0; i < 1000; i++){
-                //         const oct = new THREE.Mesh(
-                //             octGeometry,
-                //             new THREE.MeshMatcapMaterial({
-                //                 matcap: matcapTexture2,
-                //                 color: new THREE.Color("#"+genHex(6)),
-                //             })
-                //         )
-                //         oct.position.x = (Math.random() - 0.5) * 10
-                //         oct.position.y = (Math.random() - 0.5) * 10
-                //         oct.position.z = (Math.random() - 0.5) * 10
-                //         oct.rotation.x = Math.random() * Math.PI
-                //         oct.rotation.y = Math.random() * Math.PI
-                //         const scale = Math.random()
-                //         oct.scale.set(scale, scale, scale)
-                //         octGroup.add(oct)
-                //     }
-                //     scene.add(octGroup)
-                //     scene.add(coin)
-                //     scene.add(pointLight)
-                //     scene.add(hemisphereLight)
-                //     lastNumber = 2
-                // }
-                // if (number === 3){
-                //     const sphereGroup = new THREE.Group()
-                //     const sphereGeometry = new THREE.SphereGeometry(.2, 20, 20)
-                //     for(let i = 0; i < 600; i++){
-                //         const sphere = new THREE.Mesh(
-                //             sphereGeometry,
-                //             new THREE.MeshMatcapMaterial({
-                //                 matcap: matcapTexture2,
-                //                 color: new THREE.Color("#"+genHex(6))
-                //             })
-                //         )
-                //         // sphere.material.color = new THREE.Color("rgb(159, 1, 134)")
-                //         sphere.position.x = (Math.random() - 0.5) * 10
-                //         sphere.position.y = (Math.random() - 0.5) * 10
-                //         sphere.position.z = (Math.random() - 0.5) * 10
-                //         sphere.rotation.x = Math.random() * Math.PI
-                //         sphere.rotation.y = Math.random() * Math.PI
-                //         const scale = Math.random()
-                //         sphere.scale.set(scale, scale, scale)
-                //         sphereGroup.add(sphere)
-                //     }
-                //     scene.add(sphereGroup)
-                //     scene.add(coin)
-                //     scene.add(pointLight)
-                //     scene.add(hemisphereLight)
-                //     lastNumber = 3
-                // }
-                // if (number === 4){
-                //     // Donuts
-                //     const donutGroup = new THREE.Group()
-                //     const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
-                //     for(let i = 0; i < 400; i++){
-                //         const donut = new THREE.Mesh(
-                //             donutGeometry,
-                //             new THREE.MeshNormalMaterial({wireframe: true})
-                //         )
-                //         donut.position.x = (Math.random() - 0.5) * 10
-                //         donut.position.y = (Math.random() - 0.5) * 10
-                //         donut.position.z = (Math.random() - 0.5) * 10
-                //         donut.rotation.x = Math.random() * Math.PI
-                //         donut.rotation.y = Math.random() * Math.PI
-                //         const scale = Math.random()
-                //         donut.scale.set(scale, scale, scale)
-                //         donutGroup.add(donut)
-                //     }
-                //     scene.add(donutGroup)
-                //     scene.add(coin)
-                //     scene.add(pointLight)
-                //     scene.add(hemisphereLight)
-                //     lastNumber = 4
-                // }
-            }
-
-            // switch(currentIntersect.object) {
-            //     case objectsToTest[0]:
-            //         console.log('click on object 1')
-            //         objectsToTest[0].material.color.set('green')
-            //         //  object2.material.color.set('#ff0000')
-            //         //  object3.material.color.set('#ff0000')
-            //          break
-
-            //      case objectsToTest[1]:
-            //          console.log('click on object 2')
-            //          objectsToTest[1].material.color.set('#ff0030')
-            //         //  object1.material.color.set('#ff0000')
-            //         //  object3.material.color.set('#ff0000')
-            //          break
-
-                //  case object3:
-                //      console.log('click on object 3')
-                //      object3.material.color.set('#2e00ff')
-                //      object2.material.color.set('#ff0000')
-                //      object1.material.color.set('#ff0000')
-                //      break
-            //  }
-        //  }
+        }
     })
 
     const goHome = () => {
-        gsap.to(camera.position, {
-            x: -2.5,
-            y: -3,
-            z: 6,
-            duration: 2,
-            ease: "back.inOut(1.7)",
-        })
-        uralaLogo = scene.children.filter(obj => obj.name === 'urala')
-        setTimeout(() => {
-            renderer.toneMappingExposure = 4
-            // uralaLogo[0].position.y = 3
-            contactForm.classList.remove('show')
-            canvas.classList.remove('disable')
-            aboutSection.classList.remove('show')
+        if(locationScene) {
+            while(scene.children.length > 0){
+                scene.remove(scene.children[0]);
+            }
+            initHome()
             locationSection.classList.remove('show')
-        }, 700)
+            renderer.toneMappingExposure = 4
+        } else {
+            gsap.to(camera.position, {
+                x: -2.5,
+                y: -3,
+                z: 6,
+                duration: 2,
+                ease: "back.inOut(1.7)",
+            })
+            uralaLogo = scene.children.filter(obj => obj.name === 'urala')
+            setTimeout(() => {
+                renderer.toneMappingExposure = 4
+                uralaLogo[0].position.y = 3
+                contactForm.classList.remove('show')
+                canvas.classList.remove('disable')
+                aboutSection.classList.remove('show')
+                locationSection.classList.remove('show')
+            }, 700)
+        }
     }
 
     const close = document.querySelectorAll('.close-button')
@@ -920,6 +854,47 @@ const loadHome = () => {
         goHome()
     })
     )
+    /**
+     * Camera
+     */
+    // Base camera
+    const cameraGroup = new THREE.Group()
+    scene.add(cameraGroup)
+
+    const camera = new THREE.PerspectiveCamera(65, sizes.width / sizes.height, 0.1, 100)
+    camera.position.set( - 2.5, -3, 6 );
+    cameraGroup.add(camera)
+
+    // Controls
+    const controls = new OrbitControls(camera, canvas)
+    controls.enableDamping = true
+    controls.minDistance = 1;
+    controls.maxDistance = 10;
+
+    let firstScene = true
+
+    /**
+     * Renderer
+     */
+    const renderer = new THREE.WebGLRenderer({
+        canvas: canvas
+    })
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setClearColor( 0x000000, 0.0 );
+    renderer.toneMapping = THREE.ReinhardToneMapping;
+    renderer.toneMappingExposure += 5
+
+    const renderScene = new RenderPass( scene, camera );
+
+    const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
+    bloomPass.threshold = params.bloomThreshold;
+    bloomPass.strength = params.bloomStrength;
+    bloomPass.radius = params.bloomRadius;
+
+    let composer = new EffectComposer( renderer )
+    composer.addPass( renderScene )
+    composer.addPass( bloomPass )
 
     /**
      * Base
@@ -972,15 +947,15 @@ const loadHome = () => {
     // Debug
     // const gui = new dat.GUI()
 
-    // gui.add(matLine, 'linewidth', 0.1, 2 ).min(2).max(10).step(0.01).name('Line Width')
+    // // gui.add(matLine, 'linewidth', 0.1, 2 ).min(2).max(10).step(0.01).name('Line Width')
 
     // gui.add(camera.position, 'x', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos X')
     // gui.add(camera.position, 'y', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos Y')
     // gui.add(camera.position, 'z', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraPos Z')
 
-    // gui.add(camera.rotation, 'x', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation X')
-    // gui.add(camera.rotation, 'y', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation Y')
-    // gui.add(camera.rotation, 'z', 0.1, 2 ).min(-10).max(10).step(0.01).name('CameraRotation Z')
+    // gui.add(camera.rotation, 'x', 0.1, 2 ).min(-10).max(10).step(0.0001).name('CameraRotation X')
+    // gui.add(camera.rotation, 'y', 0.1, 2 ).min(-10).max(10).step(0.0001).name('CameraRotation Y')
+    // gui.add(camera.rotation, 'z', 0.1, 2 ).min(-10).max(10).step(0.0001).name('CameraRotation Z')
 
     // gui.add( params, 'exposure', 0.1, 2 ).onChange( function ( value ) {
     //     renderer.toneMappingExposure = Math.pow( value, 4.0 );
@@ -1103,6 +1078,12 @@ const loadHome = () => {
         // Cast a ray from the mouse and handle events
         raycaster.setFromCamera(mouse, camera)
 
+        // if(enterObjects.length > 0){
+        //     for(const obj in enterObjects){
+        //         objectsToTest.push(enterObjects[obj])
+        //     }
+        // }
+        // const objectsToTest = [object1, object2, object3]
         const intersects = raycaster.intersectObjects(objectsToTest)
 
         // if(!clicked) {
@@ -1166,6 +1147,12 @@ const loadHome = () => {
         // }
 
         if(!firstScene){
+            // gsap.to(scene.rotation, {
+            //     y: scene.rotation.y = - elapsedTime * Math.PI / 16,
+            //     z: scene.rotation.z = - elapsedTime * Math.PI / 16
+            // })
+
+            // renderer.toneMappingExposure += 0.02
             clearInterval(changeBloomStrength)
         }
         uralaObject = scene.children.filter(obj => obj.name === 'urala')
@@ -1188,6 +1175,47 @@ const loadHome = () => {
         //     // coin.position.z = - elapsedTime / 6
         // }
         // matLine.resolution.set( window.innerWidth, window.innerHeight ); // resolution of the viewport
+        // Update points only when the scene is ready
+        // if(sceneReady){
+        //     // Go through each point
+        //     for(const point of points){
+        //         // Get 2D screen position
+        //         const screenPosition = point.position.clone()
+        //         screenPosition.project(camera)
+
+        //         // Set the raycaster
+        //         raycaster.setFromCamera(screenPosition, camera)
+        //         const intersects = raycaster.intersectObjects(scene.children, true)
+
+        //         // // No intersect found
+        //         // if(intersects.length === 0){
+        //         //     // Show
+        //         //     point.element.classList.add('visible')
+        //         // }
+
+        //         // // Intersect found
+        //         // else {
+        //         //     // Get the distance of the intersection and the distance of the point
+        //         //     const intersectionDistance = intersects[0].distance
+        //         //     const pointDistance = point.position.distanceTo(camera.position)
+
+        //         //     // Intersection is close than the point
+        //         //     if(intersectionDistance < pointDistance){
+        //         //         // Hide
+        //         //         point.element.classList.remove('visible')
+        //         //     }
+        //         //     // Intersection is further than the point
+        //         //     else {
+        //         //         // Show
+        //         //         point.element.classList.add('visible')
+        //         //     }
+        //         // }
+
+        //         const translateX = screenPosition.x * sizes.width * 0.5
+        //         const translateY = - screenPosition.y * sizes.height * 0.5
+        //         point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+        //     }
+        // }
         // Render
         composer.render();
         // renderer.render(scene, camera)
@@ -1198,38 +1226,349 @@ const loadHome = () => {
 
     tick()
 }
-loadHome()
 
-const loadLocations = () => {
-    // LOCATIONS
+initHome()
+
+
+const initLocations = () => {
+    /**
+     * Loaders
+     */
+    // const loadingBarElement = document.querySelector('.loading-bar')
+
+    let sceneReady = true
+    const loadingManager = new THREE.LoadingManager(() => {
+            // Wait a little
+            // window.setTimeout(() => {
+            //     // Animate overlay
+            //     gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
+
+            //     // Update loadingBarElement
+            //     loadingBarElement.classList.add('ended')
+            //     loadingBarElement.style.transform = ''
+            // }, 500)
+
+            window.setTimeout(() => {
+                sceneReady = true
+                // gui.add(globe.rotation, 'x', 0.1, 2 ).min(-15).max(15).step(0.1).name('Globe Rotation x')
+                // gui.add(globe.rotation, 'y', 0.1, 2 ).min(-15).max(15).step(0.1).name('Globe Rotation y')
+                // gui.add(globe.rotation, 'z', 0.1, 2 ).min(-15).max(15).step(0.1).name('Globe Rotation z')
+                // globe.rotation.set(locations.tokyo.rotation.x,locations.tokyo.rotation.y,locations.tokyo.rotation.z)
+            }, 2000)
+        },
+
+        // Progress
+        // (itemUrl, itemsLoaded, itemsTotal) => {
+        //     // Calculate the progress and update the loadingBarElement
+        //     const progressRatio = itemsLoaded / itemsTotal
+        //     loadingBarElement.style.transform = `scaleX(${progressRatio})`
+        // }
+    )
+
+    const dracoLoader = new DRACOLoader(loadingManager)
+    dracoLoader.setDecoderPath('/draco/')
+
+    const gltfLoader = new GLTFLoader(loadingManager)
+    gltfLoader.setDRACOLoader(dracoLoader)
+    const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
+
+    /**
+     * Base
+     */
+    // Debug
+    const debugObject = {}
+
+    // Canvas
+    const canvas = document.querySelector('canvas.webgl')
+
+    // Scene
+    const scene = new THREE.Scene()
+
+    // /**
+    //  * Overlay
+    //  */
+    // const overlayGeometry = new THREE.PlaneGeometry(2, 2, 1, 1)
+    // const overlayMaterial = new THREE.ShaderMaterial({
+    //     // wireframe: true,
+    //     transparent: true,
+    //     uniforms:
+    //     {
+    //         uAlpha: { value: 1 }
+    //     },
+    //     vertexShader: `
+    //         void main()
+    //         {
+    //             gl_Position = vec4(position, 1.0);
+    //         }
+    //     `,
+    //     fragmentShader: `
+    //         uniform float uAlpha;
+
+    //         void main()
+    //         {
+    //             gl_FragColor = vec4(0.0, 0.0, 0.0, uAlpha);
+    //         }
+    //     `
+    // })
+    // const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
+    // scene.add(overlay)
+
+    /**
+     * Update all materials
+     */
+    // const updateAllMaterials = () => {
+    //     scene.traverse((child) =>
+    //     {
+    //         if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
+    //         {
+    //             // child.material.envMap = environmentMap
+    //             child.material.envMapIntensity = debugObject.envMapIntensity
+    //             child.material.needsUpdate = true
+    //             child.castShadow = true
+    //             child.receiveShadow = true
+    //         }
+    //     })
+    // }
+
+    /**
+     * Environment map
+     */
+    // const environmentMap = cubeTextureLoader.load([
+    //     '/textures/environmentMaps/0/px.jpg',
+    //     '/textures/environmentMaps/0/nx.jpg',
+    //     '/textures/environmentMaps/0/py.jpg',
+    //     '/textures/environmentMaps/0/ny.jpg',
+    //     '/textures/environmentMaps/0/pz.jpg',
+    //     '/textures/environmentMaps/0/nz.jpg'
+    // ])
+
+    // environmentMap.encoding = THREE.sRGBEncoding
+
+    // scene.background = environmentMap
+    // scene.environment = environmentMap
+
+    // debugObject.envMapIntensity = 2.5
+
     /**
      * Models
      */
+    let globe = {}
+    gltfLoader.load(
+        '/models/earthText.glb',
+        (gltf) =>
+        {
+            gltf.scene.scale.set(3.4, 3.4, 3.4)
+            gltf.scene.rotation.set(0, 1.3, -0.4)
+            globe = gltf.scene
+            scene.add(globe)
+        }
+    )
 
-    // const gltfLoader = new GLTFLoader()
-    const dracoLoader = new DRACOLoader()
-    dracoLoader.setDecoderPath('/draco/')
+    // const locations = {
+    //     tokyo: {
+    //         rotation: new THREE.Vector3(0, 1.3, -0.4)
+    //     }
+    // }
 
-    const gltfLoader = new GLTFLoader()
-    gltfLoader.setDRACOLoader(dracoLoader)
+    /**
+    // Particles
+    */
+    //
+    const textureLoader = new THREE.TextureLoader()
+    const particleTexture = textureLoader.load('/textures/particles/1.png')
+    const particlesGeometry = new THREE.BufferGeometry()
+    const count = 1000
 
-    // let coin = {}
-    // // gltfLoader.load('/models/btc.glb', (m) => {
-    // //     const coinModel = m.scene.children[0]
-    // //     coinModel.scale.set(0.75, 0.75, 0.75)
-    // //     // coinModel.position.x = 3
-    // //     // coinModel.position.y = 1
-    // //     coinModel.position.x = 1
-    // //     coinModel.position.y = 2
-    // //     coin = coinModel
-    // //     // console.log(scene.children)
-    // // })
+    const positions = new Float32Array(count * 3)
+    const colors = new Float32Array(count * 3)
 
-    gltfLoader.load('/models/globe.glb', (m) => {
-        const model = m.scene
-        // console.log(m.scene)
-        // model.scale.set(.05, .05, .05)
-        // m.scene.position.set(0,0,0)
-        scene.add(model)
+    for(let i = 0; i < count * 3; i++){
+        positions[i] = (Math.random() - 0.5) * 20
+        colors[i] = Math.random()
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.1,
+        sizeAttenuation: true,
+        map: particleTexture,
+        transparent: true,
+        alphaMap: particleTexture,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        vertexColors: true
     })
+
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+    scene.add(particles)
+
+    // **
+    //  * Mouse
+    //  */
+    // const mouse = new THREE.Vector2()
+    // window.addEventListener('mousemove', (event) => {
+    //     mouse.x = event.clientX / sizes.width * 2 - 1
+    //     mouse.y = - (event.clientY / sizes.height) * 2 + 1
+    // })
+
+    /**
+     * Raycaster
+     */
+    // const raycaster = new THREE.Raycaster()
+    //  let currentIntersect = null
+    //  const rayOrigin = new THREE.Vector3(- 3, 0, 0)
+    //  const rayDirection = new THREE.Vector3(10, 0, 0)
+    //  rayDirection.normalize()
+    // let objectsToTest = []
+    // const intersects = raycaster.intersectObjects(objectsToTest)
+    // window.addEventListener('click', () => {
+    //     console.log(currentIntersect)
+    //     // console.log(scene.children)
+    // })
+
+    /**
+     * Lights
+     */
+    const directionalLight = new THREE.DirectionalLight('#ffffff', 1.5)
+    directionalLight.position.set(4, 1, -4)
+    scene.add(directionalLight)
+
+    // const directionalLight2 = new THREE.DirectionalLight('#ffffff', 3)
+    // directionalLight2.position.set(0, -3, 4)
+    // scene.add(directionalLight2)
+
+    // const gui = new dat.GUI()
+    // gui.add(points[2].position, 'x', 0.1, 2 ).min(-15).max(15).step(0.1).name('Singapore x')
+    // gui.add(points[2].position, 'y', 0.1, 2 ).min(-15).max(15).step(0.1).name('Singapore y')
+    // gui.add(points[2].position, 'z', 0.1, 2 ).min(-15).max(15).step(0.1).name('Singapore z')
+    // gui.add(directionalLight.position, 'x', 0.1, 2 ).min(-5).max(5).step(0.01).name('Light X')
+    // gui.add(directionalLight.position, 'y', 0.1, 2 ).min(-5).max(5).step(0.01).name('Light Y')
+    // gui.add(directionalLight.position, 'z', 0.1, 2 ).min(-5).max(5).step(0.01).name('Light Z')
+    // gui.add(directionalLight2.position, 'x', 0.1, 2 ).min(-5).max(5).step(0.01).name('Light2 X')
+    // gui.add(directionalLight2.position, 'y', 0.1, 2 ).min(-5).max(5).step(0.01).name('Light2 Y')
+    // gui.add(directionalLight2.position, 'z', 0.1, 2 ).min(-5).max(5).step(0.01).name('Light2 Z')
+
+    /**
+     * Sizes
+     */
+    const sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    }
+
+    window.addEventListener('resize', () =>
+    {
+        // Update sizes
+        sizes.width = window.innerWidth
+        sizes.height = window.innerHeight
+
+        // Update camera
+        camera.aspect = sizes.width / sizes.height
+        camera.updateProjectionMatrix()
+
+        // Update renderer
+        renderer.setSize(sizes.width, sizes.height)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    })
+
+    /**
+     * Camera
+     */
+    // Base camera
+    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+    camera.position.set(4, 1, -2.5)
+    scene.add(camera)
+
+    // Controls
+    const controls = new OrbitControls(camera, canvas)
+    controls.enableDamping = true
+    controls.minDistance = 4.5;
+    controls.maxDistance = 5.7;
+
+    /**
+     * Renderer
+     */
+    const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true
+    })
+    // renderer.physicallyCorrectLights = true
+    renderer.outputEncoding = THREE.sRGBEncoding
+    renderer.toneMapping = THREE.ReinhardToneMapping
+    renderer.toneMappingExposure = 3
+    // renderer.shadowMap.enabled = true
+    // renderer.shadowMap.type = THREE.PCFSoftShadowMap
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+    /**
+     * Animate
+     */
+    const tick = () =>
+    {
+        // Update controls
+        controls.update()
+        directionalLight.position.set(controls.object.position.x, controls.object.position.y, controls.object.position.z)
+
+        // Render
+        renderer.render(scene, camera)
+
+        // Call tick again on the next frame
+        window.requestAnimationFrame(tick)
+    }
+
+    tick()
 }
+
+// LOCATIONS
+/**
+ * Models
+ */
+
+// const dracoLoader = new DRACOLoader()
+// dracoLoader.setDecoderPath('/draco/')
+
+// const gltfLoader = new GLTFLoader()
+// gltfLoader.setDRACOLoader(dracoLoader)
+
+// // let coin = {}
+// // // gltfLoader.load('/models/btc.glb', (m) => {
+// // //     const coinModel = m.scene.children[0]
+// // //     coinModel.scale.set(0.75, 0.75, 0.75)
+// // //     // coinModel.position.x = 3
+// // //     // coinModel.position.y = 1
+// // //     coinModel.position.x = 1
+// // //     coinModel.position.y = 2
+// // //     coin = coinModel
+// // //     // console.log(scene.children)
+// // // })
+
+// gltfLoader.load('/models/earthText.glb', (m) => {
+//     const model = m.scene
+//     // console.log(m.scene)
+//     // model.scale.set(.05, .05, .05)
+//     model.rotation.x += .5
+//     model.position.set(0,-10,0)
+//     scene.add(model)
+// })
+
+
+// // **
+// //  * Points of interest
+// //  */
+// const points = [
+//     {
+//         position: new THREE.Vector3(-0.5, -11, 1.8),
+//         element: document.querySelector('.point-0')
+//     },
+//     {
+//         position: new THREE.Vector3(0.5, -10, 2.6),
+//         element: document.querySelector('.point-1')
+//     },
+//     // {
+//     //     position: new THREE.Vector3(1.6, - 1.3, - 0.7),
+//     //     element: document.querySelector('.point-2')
+//     // }
+// ]
