@@ -14,10 +14,26 @@ export default class Raycaster {
         this.contactForm = document.querySelector('.contactForm')
         this.aboutSection = document.querySelector('#about')
         this.locationSection = document.querySelector('#locations')
+
         const close = document.querySelectorAll('.close-button')
         close.forEach(btn => btn.addEventListener('click', () => {
             this.goHome()
         }))
+
+        const closeModal = document.querySelector('.close-modal-button')
+        const controlsInstructions = document.querySelector('.controls')
+        closeModal.addEventListener('click', () => {
+            controlsInstructions.classList.add('hide')
+        })
+
+        const closeLocationsModal = document.querySelector('.close-locations-button')
+        const locationsModal = document.querySelector('#locations')
+        this.locationsHiddenButton = document.querySelector('#locations-hidden-button')
+        closeLocationsModal.addEventListener('click', () => {
+            locationsModal.classList.add('hide')
+            this.locationsHiddenButton.classList.remove('hide')
+        })
+
         this.color = null
         this.mouse = new THREE.Vector2()
         window.addEventListener('mousemove', (event) => {
@@ -218,6 +234,7 @@ export default class Raycaster {
                 ease: "back.inOut(1.7)",
             })
             this.experience.world.showHome()
+            this.locationsHiddenButton.classList.add('hide')
             // uralaLogo = scene.children.filter(obj => obj.name === 'urala')
             setTimeout(() => {
                 // renderer.toneMappingExposure = 4

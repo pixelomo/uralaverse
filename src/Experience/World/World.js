@@ -34,8 +34,8 @@ export default class World {
         this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 3.2, y: -2.2, z: -2}, 'locations')
         this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.015)
         this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.5, y: 4, z: -.5}, 0.015)
-        this.globe = new Globe()
-        this.globe.model.visible = false
+        // this.globe = new Globe()
+        // this.globe.model.visible = false
     }
 
     showHome() {
@@ -48,10 +48,12 @@ export default class World {
         this.contact.mesh.visible = true
         this.about.mesh.visible = true
         this.locations.mesh.visible = true
-        this.globe.model.visible = false
         this.uralaLogo.model.visible = true
         this.ctLogo.model.visible = true
         this.experience.world.environment.pointLight.position.set(1, 3, 10)
+        if(this.globe){
+            this.globe.model.visible = false
+        }
     }
 
     hideHome() {
@@ -69,6 +71,7 @@ export default class World {
     }
 
     showLocations() {
+        this.globe = new Globe()
         this.globe.model.visible = true
         this.hideHome()
         this.lightFollowControls()

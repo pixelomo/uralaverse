@@ -13,6 +13,7 @@ body {
     overflow: hidden;
     color: #b6d8fa;
     background: #000;
+    font-family: 'Roboto', sans-serif;
 }
 
 img{max-width: 100%;}
@@ -198,7 +199,7 @@ input:-webkit-autofill:active {
    transition-delay: 9999s;
 }
 
-.close-button {
+.close-button, .close-modal-button, .close-locations-button {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
@@ -216,10 +217,35 @@ input:-webkit-autofill:active {
     cursor: pointer;
     transition: .2s ease-in-out;
 }
-.close-button:hover{
+.close-button:hover, .close-modal-button:hover, .close-locations-button:hover {
     box-shadow: 0px 0px 8px 5px rgb(45 149 252 / 40%);
 }
 
+.close-locations-button{
+    left: 0.5rem;
+    right: initial;
+    background: transparent;
+    text-shadow: none;
+    box-shadow: none;
+    font-size: 14px;
+    height: 25px;
+    width: 25px;
+}
+
+.controls {
+    position: absolute;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgb(255 255 255 / 40%);
+    background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
+    box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
+    right: 1rem;
+    bottom: 1rem;
+    width: fit-content;
+    margin: auto;
+}
+
+.hide{display: none;}
 /* #about, #locations {
     border-radius: 0;;
     bottom: 5rem;
@@ -286,9 +312,11 @@ ul{padding-left: 2rem;}
 }
 
 a#agencyvista-badge {
-    width: 150px;
-    position: absolute;
-    right: 1rem;
+    width: 140px;
+    position: relative;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    display: inline-block;
 }
 
 #locations {
@@ -316,6 +344,16 @@ a#agencyvista-badge {
     font-size: 16px;
     color: #fff;
     margin: 0 auto 10px;
+}
+
+#locations-hidden-button {
+    background: none;
+    box-shadow: none;
+    left: 1.5rem;
+    font-size: 20px;
+    color: #fff;
+    bottom: 0.5rem;
+    top: initial;
 }
 
 @keyframes bg{
@@ -384,6 +422,7 @@ a#agencyvista-badge {
 
 
 @media(max-width: 1024px){
+    .controls{display: none;}
     section#contact{
         top: 1rem;
     }
@@ -433,22 +472,30 @@ a#agencyvista-badge {
         background-image: none;
     }
     a#agencyvista-badge {
-        position: relative;
-        right: inherit;
-        display: inline-block;
-        margin: 10px;
+        display: block;
+        margin: 0 auto;
+    }
+    .sortlist-badge {
+        display: block;
+        margin: 10px auto;
     }
     section#locations {
         right: 0;
         left: 0;
         bottom: 2rem;
         max-width: 80%;
+        padding: 0.5rem 0.7rem 1rem;
     }
     section#locations span {
-        font-size: 34px;
+        font-size: 18px;
     }
     #locations span.title{
-        font-size: 28px;
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+    #locations p {
+        font-size: 14px;
+        margin: 0 auto;
     }
     /* section#locations {
         width: 260px;
@@ -460,6 +507,10 @@ a#agencyvista-badge {
         right: 0;
         width: 100%;
         font-size: 20px;
+    }
+    .close-locations-button{
+        right: 0.5rem;
+        left: initial;
     }
     /* section#about br {display: none;} */
     /* h3.section-subheading{

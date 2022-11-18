@@ -31,7 +31,7 @@ export default class Environment {
         this.scene.add(this.hemisphereLight)
 
         // Point light - moderate cost
-        this.pointLight = new THREE.PointLight(0xffffff, 0.7, 30, 2)
+        this.pointLight = new THREE.DirectionalLight(0xffffff, .7)
         this.pointLight.position.set(1, 3, 10)
         this.scene.add(this.pointLight)
 
