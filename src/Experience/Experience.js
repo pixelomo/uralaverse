@@ -90,4 +90,18 @@ export default class Experience {
         if(this.debug.active)
             this.debug.ui.destroy()
     }
+
+    // clean() {
+    //     const meshes = [];
+    //     this.scene.traverse( function ( object ) {
+    //         if ( object.isMesh ) meshes.push( object );
+    //     });
+
+    //     for ( let i = 0; i < meshes.length; i ++ ) {
+    //         const mesh = meshes[ i ];
+    //         mesh.material.dispose();
+    //         mesh.geometry.dispose();
+    //         this.scene.remove( mesh );
+    //     }
+    // }
 }

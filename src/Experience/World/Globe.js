@@ -21,13 +21,10 @@ export default class Globe {
 	setModel() {
 		this.model = this.resource.scene
 		this.model.scale.set(3.4, 3.4, 3.4)
+		// this.model.position.set(0, -5, 0)
         // this.model.rotation.set(0, 1.3, -0.4)
 		this.scene.add(this.model)
-		// this.model.traverse((child) => {
-		// 	if (child instanceof THREE.Mesh) {
-		// 		child.castShadow = true
-		// 	}
-		// })
+		// console.log(this.experience.world.environment.pointLight)
 	}
 
 	// setAnimation() {
@@ -70,6 +67,7 @@ export default class Globe {
 	// }
 
 	update() {
+
         // directionalLight.position.set(controls.object.position.x, controls.object.position.y, controls.object.position.z)
 
 		// this.animation.mixer.update(this.time.delta * 0.001)

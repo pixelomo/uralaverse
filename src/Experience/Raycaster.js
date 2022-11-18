@@ -50,6 +50,7 @@ export default class Raycaster {
                             duration: 2,
                             ease: "back.inOut(1.7)",
                         })
+                        this.experience.world.showHome()
                         // uralaLogo = scene.children.filter(obj => obj.name === 'urala')
                         setTimeout(() => {
                             // while(scene.children.length > 0){
@@ -131,24 +132,40 @@ export default class Raycaster {
 
                     /////////////////////////// LOCATIONS ///////////////////////////////
                     if(this.currentIntersect.object.name === 'locations'){
-                        this.experience.canvas.classList.add('fade')
-                        gsap.globalTimeline.clear()
+                        gsap.to(this.camera.position, {
+                            x: 25,
+                            y: 25,
+                            z: 25,
+                            duration: 2,
+                            ease: "back.inOut(1.7)",
+                        })
+                        setTimeout(() => {
+                            this.experience.world.showLocations()
+                        }, 500)
+                        // this.experience.canvas.classList.add('fade')
+                        // gsap.globalTimeline.clear()
                         this.aboutSection.classList.remove('show')
                         setTimeout(() => {
-                            while(this.experience.scene.children.length > 0){
-                                this.experience.scene.remove(this.experience.scene.children[0]);
-                            }
-                            this.experience.world.showLocations()
-                            this.camera.controls.minDistance = 4.5;
-                            this.camera.controls.maxDistance = 5.7;
-                            // this.experience.scene.children.destroy()
-                            // initLocations()
-                            // locationScene = true
-                        }, 1000)
-                        setTimeout(() => {
-                            // canvas.classList.remove('fade')
+                            // while(this.experience.scene.children.length > 0){
+                            //     this.experience.scene.remove(this.experience.scene.children[0]);
+                            // }
                             this.locationSection.classList.add('show')
-                        }, 3000)
+                            // this.camera.controls.minDistance = 4.5;
+                            // this.camera.controls.maxDistance = 5.7;
+                            // this.experience.scene.children.destroy()
+                            // locationScene = true
+                            gsap.to(this.camera.position, {
+                                x: 3,
+                                y: 3,
+                                z: 3,
+                                duration: 2,
+                                ease: "back.inOut(1.3)",
+                            })
+                        }, 2000)
+                        // setTimeout(() => {
+                        //     // canvas.classList.remove('fade')
+                        //     this.locationSection.classList.add('show')
+                        // }, 3000)
                     }
                 }
             }
@@ -200,12 +217,13 @@ export default class Raycaster {
                 duration: 2,
                 ease: "back.inOut(1.7)",
             })
+            this.experience.world.showHome()
             // uralaLogo = scene.children.filter(obj => obj.name === 'urala')
             setTimeout(() => {
                 // renderer.toneMappingExposure = 4
                 // uralaLogo[0].position.y = 3
-                this.contactForm.classList.remove('show')
                 // canvas.classList.remove('disable')
+                this.contactForm.classList.remove('show')
                 this.aboutSection.classList.remove('show')
                 this.locationSection.classList.remove('show')
             }, 700)

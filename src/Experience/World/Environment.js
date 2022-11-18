@@ -27,13 +27,13 @@ export default class Environment {
         // this.scene.add(this.sunLight)
 
         //  Hemisphere light - low cost
-        const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, .8)
-        this.scene.add(hemisphereLight)
+        this.hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, .8)
+        this.scene.add(this.hemisphereLight)
 
         // Point light - moderate cost
-        const pointLight = new THREE.PointLight(0xffffff, 0.7, 30, 2)
-        pointLight.position.set(1, 3, 10)
-        this.scene.add(pointLight)
+        this.pointLight = new THREE.PointLight(0xffffff, 0.7, 30, 2)
+        this.pointLight.position.set(1, 3, 10)
+        this.scene.add(this.pointLight)
 
         // // Debug
         // if(this.debug.active) {

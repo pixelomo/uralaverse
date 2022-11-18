@@ -67,6 +67,7 @@ export default class SVG {
             }
         }
         group.name = name
+        this.model = group
         group.userData.url = url
         this.raycaster.objectsToTest.push(group)
         group.position.set(position.x, position.y, position.z)
