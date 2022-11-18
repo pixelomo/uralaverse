@@ -199,7 +199,7 @@ input:-webkit-autofill:active {
    transition-delay: 9999s;
 }
 
-.close-button, .close-modal-button, .close-locations-button {
+.close-button, .close-controls-button, .close-locations-button {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
@@ -221,7 +221,7 @@ input:-webkit-autofill:active {
     box-shadow: 0px 0px 8px 5px rgb(45 149 252 / 40%);
 }
 
-.close-locations-button{
+/* .close-controls-button{
     left: 0.5rem;
     right: initial;
     background: transparent;
@@ -230,17 +230,17 @@ input:-webkit-autofill:active {
     font-size: 14px;
     height: 25px;
     width: 25px;
-}
+} */
 
 .controls {
     position: absolute;
     padding: 1rem;
     border-radius: 12px;
     border: 1px solid rgb(255 255 255 / 40%);
-    background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
+    background: linear-gradient(-8deg, #3b1e65 65%, transparent 100%);
     box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
     right: 1rem;
-    bottom: 1rem;
+    top: 1rem;
     width: fit-content;
     margin: auto;
 }
@@ -421,8 +421,13 @@ a#agencyvista-badge {
 }
 
 
+/* //////////////////////////////////// */
+
+/* /////     1024         //// */
+
+/* //////////////////////////////////// */
+
 @media(max-width: 1024px){
-    .controls{display: none;}
     section#contact{
         top: 1rem;
     }
@@ -519,5 +524,14 @@ a#agencyvista-badge {
     form{
         padding: 2rem;
         button{margin-top: 1rem;}
+    } */
+}
+
+@media(max-width: 980px){
+    .controls-desktop{
+        display: none;
+    }
+    /* .controls-mobile{
+        display: block;
     } */
 }

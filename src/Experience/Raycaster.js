@@ -20,17 +20,24 @@ export default class Raycaster {
             this.goHome()
         }))
 
-        const closeModal = document.querySelector('.close-modal-button')
+        const closeControls = document.querySelectorAll('.close-controls-button')
         const controlsInstructions = document.querySelector('.controls')
-        closeModal.addEventListener('click', () => {
-            controlsInstructions.classList.add('hide')
-        })
+        // closeModal.addEventListener('click', () => {
+        //     controlsInstructions.classList.add('hide')
+        // })
 
-        const closeLocationsModal = document.querySelector('.close-locations-button')
-        const locationsModal = document.querySelector('#locations')
+        this.closeLocationsModal = document.querySelector('.close-locations-button')
+        // console.log(this.closeLocationsModal)
+        // this.closeLocationsModal.forEach(btn => btn.addEventListener('click', () => {
+        //     controlsInstructions.classList.add('hide')
+        // }))
+
+        this.locationsModal = document.querySelector('#locations')
+
         this.locationsHiddenButton = document.querySelector('#locations-hidden-button')
-        closeLocationsModal.addEventListener('click', () => {
-            locationsModal.classList.add('hide')
+
+        this.closeLocationsModal.addEventListener('click', () => {
+            this.locationsModal.classList.add('hide')
             this.locationsHiddenButton.classList.remove('hide')
         })
 
@@ -165,7 +172,6 @@ export default class Raycaster {
                             // while(this.experience.scene.children.length > 0){
                             //     this.experience.scene.remove(this.experience.scene.children[0]);
                             // }
-                            this.locationSection.classList.add('show')
                             // this.camera.controls.minDistance = 4.5;
                             // this.camera.controls.maxDistance = 5.7;
                             // this.experience.scene.children.destroy()
@@ -178,6 +184,9 @@ export default class Raycaster {
                                 ease: "back.inOut(1.3)",
                             })
                         }, 2000)
+                        setTimeout(() => {
+                            this.locationSection.classList.add('show')
+                        }, 5000)
                         // setTimeout(() => {
                         //     // canvas.classList.remove('fade')
                         //     this.locationSection.classList.add('show')
@@ -235,6 +244,7 @@ export default class Raycaster {
             })
             this.experience.world.showHome()
             this.locationsHiddenButton.classList.add('hide')
+            this.locationsHiddenButton.classList.add('hide')
             // uralaLogo = scene.children.filter(obj => obj.name === 'urala')
             setTimeout(() => {
                 // renderer.toneMappingExposure = 4
@@ -243,6 +253,7 @@ export default class Raycaster {
                 this.contactForm.classList.remove('show')
                 this.aboutSection.classList.remove('show')
                 this.locationSection.classList.remove('show')
+                this.locationsModal.classList.remove('hide')
             }, 700)
         // }
     }
