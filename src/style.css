@@ -289,7 +289,8 @@ input:-webkit-autofill:active {
     max-width: 100%;
     top: 3rem;
     margin: 0 auto;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     height: 80vh;
     font-family: 'Roboto', sans-serif;
     /* background: linear-gradient(50deg, #3b1e65 40%, transparent 100%); */
