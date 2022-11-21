@@ -20,17 +20,13 @@ export default class Raycaster {
             this.goHome()
         }))
 
-        const closeControls = document.querySelectorAll('.close-controls-button')
+        const closeControlsButton = document.querySelector('.close-controls-button')
         const controlsInstructions = document.querySelector('.controls')
-        // closeModal.addEventListener('click', () => {
-        //     controlsInstructions.classList.add('hide')
-        // })
+        closeControlsButton.addEventListener('click', () => {
+            controlsInstructions.classList.add('hide')
+        })
 
         this.closeLocationsModal = document.querySelector('.close-locations-button')
-        // console.log(this.closeLocationsModal)
-        // this.closeLocationsModal.forEach(btn => btn.addEventListener('click', () => {
-        //     controlsInstructions.classList.add('hide')
-        // }))
 
         this.locationsModal = document.querySelector('#locations')
 
@@ -160,7 +156,7 @@ export default class Raycaster {
                             y: 25,
                             z: 25,
                             duration: 2,
-                            ease: "back.inOut(1.7)",
+                            ease: "back.inOut(1.3)",
                         })
                         setTimeout(() => {
                             this.experience.world.showLocations()
@@ -177,13 +173,13 @@ export default class Raycaster {
                             // this.experience.scene.children.destroy()
                             // locationScene = true
                             gsap.to(this.camera.position, {
-                                x: 3,
-                                y: 3,
-                                z: 3,
+                                x: 3.5,
+                                y: 3.5,
+                                z: 3.5,
                                 duration: 2,
-                                ease: "back.inOut(1.3)",
+                                ease: "back.inOut(1.2)",
                             })
-                        }, 2000)
+                        }, 1500)
                         setTimeout(() => {
                             this.locationSection.classList.add('show')
                         }, 5000)
