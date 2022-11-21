@@ -35,7 +35,7 @@ export default [
     {
         name: 'globe',
         type: 'gltfModel',
-        path: 'models/globeMin.glb'
+        path: 'models/globeGold.glb'
     },
     {
         name: 'galaxyFont',

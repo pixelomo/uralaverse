@@ -35,6 +35,7 @@ export default class Environment {
         this.pointLight.position.set(1, 3, 10)
         this.scene.add(this.pointLight)
 
+
         // // Debug
         // if(this.debug.active) {
         //     this.debugFolder
