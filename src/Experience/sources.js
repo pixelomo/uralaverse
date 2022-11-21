@@ -45,7 +45,7 @@ export default [
     {
         name: 'uralaLogo',
         type: 'svg',
-        path: 'images/urala-b.svg'
+        path: 'images/urala-bubble.svg'
     },
     {
         name: 'ctLogo',
