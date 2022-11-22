@@ -212,7 +212,7 @@ input:-webkit-autofill:active {
     justify-content: center;
     padding: 9px;
     border-radius: 50%;
-    border: 1px solid rgb(45 149 252);
+    /* border: 1px solid rgb(45 149 252); */
     color: rgb(45 149 252);
     cursor: pointer;
     transition: .2s ease-in-out;
@@ -554,6 +554,7 @@ a#agencyvista-badge {
     #locations span.title{
         font-size: 20px;
         margin-bottom: 0;
+        margin-top: 0;
     }
     #locations p {
         font-size: 14px;
