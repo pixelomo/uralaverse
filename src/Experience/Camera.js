@@ -8,6 +8,11 @@ export default class Camera {
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
+        this.debug = this.experience.debug
+        // Debug
+		if (this.debug.active) {
+			this.debugFolder = this.debug.ui.addFolder('camera')
+		}
 
         this.setInstance()
         this.setControls()
@@ -17,6 +22,11 @@ export default class Camera {
         this.instance = new THREE.PerspectiveCamera(65, this.sizes.width / this.sizes.height, 0.1, 100)
         this.instance.position.set(-2.5, -3, 6)
         this.scene.add(this.instance)
+        if(this.debug.active) {
+                this.debugFolder.add(this.instance.position, 'x').name('x').min(-25).max(25).step(0.1)
+                this.debugFolder.add(this.instance.position, 'y').name('y').min(-25).max(25).step(0.1)
+                this.debugFolder.add(this.instance.position, 'z').name('z').min(-25).max(25).step(0.1)
+        }
     }
 
     setControls() {
