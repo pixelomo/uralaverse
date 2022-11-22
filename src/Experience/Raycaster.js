@@ -151,15 +151,15 @@ export default class Raycaster {
                     /////////////////////////// LOCATIONS ///////////////////////////////
                     if(this.currentIntersect.object.name === 'locations'){
                         gsap.to(this.camera.position, {
-                            x: 25,
+                            x: -25,
                             y: 25,
-                            z: 25,
+                            z: -10,
                             duration: 2,
-                            ease: "back.inOut(1.3)",
+                            ease: "back.inOut(1.1)",
                         })
                         setTimeout(() => {
                             this.experience.world.showLocations()
-                        }, 500)
+                        }, 800)
                         // this.experience.canvas.classList.add('fade')
                         // gsap.globalTimeline.clear()
                         this.aboutSection.classList.remove('show')
@@ -172,9 +172,9 @@ export default class Raycaster {
                             // this.experience.scene.children.destroy()
                             // locationScene = true
                             gsap.to(this.camera.position, {
-                                x: 3.5,
-                                y: 3.5,
-                                z: 3.5,
+                                x: 3.8,
+                                y: 2,
+                                z: 8,
                                 duration: 2,
                                 ease: "back.inOut(1.2)",
                             })
@@ -241,7 +241,8 @@ export default class Raycaster {
             })
             this.experience.world.showHome()
             this.locationsHiddenButton.classList.add('hide')
-            this.locationsHiddenButton.classList.add('hide')
+            this.locationsModal.classList.remove('hide')
+            this.locationSection.classList.remove('show')
             // uralaLogo = scene.children.filter(obj => obj.name === 'urala')
             setTimeout(() => {
                 // renderer.toneMappingExposure = 4
@@ -249,8 +250,6 @@ export default class Raycaster {
                 // canvas.classList.remove('disable')
                 this.contactForm.classList.remove('show')
                 this.aboutSection.classList.remove('show')
-                this.locationSection.classList.remove('show')
-                this.locationsModal.classList.remove('hide')
             }, 700)
         // }
     }
