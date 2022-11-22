@@ -252,7 +252,7 @@ input:-webkit-autofill:active {
     border-radius: 12px;
     /* border: 1px solid rgb(255 255 255 / 40%); */
     background: linear-gradient(-8deg, #3b1e65 65%, transparent 100%);
-    box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
+    box-shadow: 0px 0px 65px 20px rgb(45 149 252 / 50%);
     right: 1rem;
     top: 1rem;
     width: fit-content;
