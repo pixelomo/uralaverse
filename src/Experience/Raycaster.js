@@ -181,7 +181,7 @@ export default class Raycaster {
                         }, 1500)
                         setTimeout(() => {
                             this.locationSection.classList.add('show')
-                        }, 5000)
+                        }, 4000)
                         // setTimeout(() => {
                         //     // canvas.classList.remove('fade')
                         //     this.locationSection.classList.add('show')
