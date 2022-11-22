@@ -9,6 +9,7 @@ export default class Globe {
 		this.resources = this.experience.resources
 		this.time = this.experience.time
 		this.debug = this.experience.debug
+		this.raycaster = this.experience.raycaster
 		// Debug
 		// if (this.debug.active) {
 		// 	this.debugFolder = this.debug.ui.addFolder('fox')
@@ -24,6 +25,7 @@ export default class Globe {
 		this.model.name = 'globe'
 		// this.model.position.set(0, -5, 0)
         // this.model.rotation.set(0, 1.3, -0.4)
+		// this.raycaster.objectsToTest.push(this.model)
 		this.scene.add(this.model)
 		// console.log(this.experience.world.environment.pointLight)
 	}

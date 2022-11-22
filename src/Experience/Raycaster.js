@@ -52,7 +52,6 @@ export default class Raycaster {
                 this.currentIntersect = intersects[0]
             } else {
                 if(this.currentIntersect) {
-                    // console.log(currentIntersect)
                     this.color = new THREE.Color('#490561')
                     gsap.to(this.currentIntersect.object.material.color, 1, {
                         r: this.color.r,
@@ -208,12 +207,14 @@ export default class Raycaster {
         const intersects = this.raycaster.intersectObjects(this.objectsToTest)
         if(intersects.length) { // mouse enter
             this.currentIntersect = intersects[0]
-            this.color = new THREE.Color('#00c4eb')
-            gsap.to(this.currentIntersect.object.material.color, 4, {
-                r: this.color.r,
-                g: this.color.g,
-                b: this.color.b
-            })
+            if(this.currentIntersect.object.name === 'about' || this.currentIntersect.object.name === 'contact' || this.currentIntersect.object.name === 'locations'){
+                this.color = new THREE.Color('#00c4eb')
+                gsap.to(this.currentIntersect.object.material.color, 4, {
+                    r: this.color.r,
+                    g: this.color.g,
+                    b: this.color.b
+                })
+            }
         } else { // mouse leave
             if(this.currentIntersect) {
                 this.color = new THREE.Color('#00c4eb')
