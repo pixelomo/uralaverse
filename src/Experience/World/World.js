@@ -20,6 +20,10 @@ export default class World {
         })
     }
 
+    // intro() {
+    //     this.camera.position.lerp(vec.set(state.mouse.x * 5, 3 + state.mouse.y * 2, 14), 0.05)
+    // }
+
     initHome(params) {
         this.particles = new Particles(params.particlesAmount)
         this.environment = new Environment()
