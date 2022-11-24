@@ -37,7 +37,7 @@ export default class World {
         this.about = new Text('ABOUT', 0.4, '#00f208', {x: -3, y: -2, z: -2}, 'about')
         this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 3.4, y: -2, z: -2}, 'locations')
         this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.015)
-        this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.5, y: 4, z: -.5}, 0.015)
+        this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 1.5}, 0.015)
         // this.globe = new Globe()
         // this.globe.model.visible = false
     }
