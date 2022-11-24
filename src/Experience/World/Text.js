@@ -19,8 +19,8 @@ export default class Text {
             text, {
                 font:  this.resources.items.galaxyFont,
                 size: size,
-                height: 0.3,
-                // curveSegments: 1,
+                height: 0.15,
+                // curveSegments: 5,
                 // bevelEnabled: true,
                 // bevelSize: 0.01,
                 // bevelThickness: 0.03,

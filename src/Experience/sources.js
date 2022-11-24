@@ -40,7 +40,7 @@ export default [
     {
         name: 'galaxyFont',
         type: 'font',
-        path: 'fonts/galaxy.json'
+        path: 'fonts/unibody.json'
     },
     {
         name: 'uralaLogo',
