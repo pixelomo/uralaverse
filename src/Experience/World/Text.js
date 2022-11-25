@@ -17,7 +17,7 @@ export default class Text {
     setGeometry(text, size) {
         this.geometry = new TextGeometry(
             text, {
-                font:  this.resources.items.galaxyFont,
+                font:  this.resources.items.mainFont,
                 size: size,
                 height: 0.15,
                 // curveSegments: 5,
