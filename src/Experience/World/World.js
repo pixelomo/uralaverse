@@ -28,17 +28,17 @@ export default class World {
     intro() {
         gsap.to(this.camera, {
             fov: 75,
-            duration: 3.5,
-            ease: "power3.inOut",
-            delay: 0.25
+            duration: 2.5,
+            ease: "power1.inOut",
+            delay: 0.5
         })
         gsap.from(this.camera.position, {
             x: -5,
             y: 6,
             z: 6,
-            duration: 3,
+            duration: 1,
             ease: "power2.inOut",
-            delay: 2.5
+            delay: 1.5
         })
     }
 
@@ -50,32 +50,32 @@ export default class World {
             this.diamonds = new Diamonds(params.diamondAmount)
             this.donuts = new Donuts(params.donutsAmount)
             this.spheres = new Spheres(params.spheresAmount)
-        }, 2000)
+        }, 1000)
         setTimeout(() => {
             this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 3.5, z: -2.5})
-        }, 4400)
+        }, 2400)
         setTimeout(() => {
             this.to = new Text('to the', 0.6, '#bd4500', {x: 1, y: 2.4, z: -2.8})
-        }, 4700)
+        }, 2700)
         setTimeout(() => {
             this.uralaverse = new Text('URALAVERSE!', 0.9, '#7d09a7', {x: 2, y: 1, z: -2.5})
-        }, 5000)
+        }, 3000)
         setTimeout(() => {
             this.about = new Text('ABOUT', 0.4, '#00f208', {x: -3, y: -1, z: -2}, 'about')
-        }, 5400)
+        }, 3400)
         setTimeout(() => {
             this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 1, y: -2, z: -2.5}, 'contact')
-        }, 5700)
+        }, 3700)
         setTimeout(() => {
             this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations')
-        }, 6000)
+        }, 4000)
         setTimeout(() => {
             this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.015)
-        }, 5200)
+        }, 5000)
         setTimeout(() => {
             this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015)
-        }, 5500)
-        // this.globe = new Globe()
+        }, 4600)
+        // his.globe = new Globe()
         // this.globe.model.visible = false
     }
 
