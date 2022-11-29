@@ -553,22 +553,23 @@ a#agencyvista-badge {
         right: 0;
         left: 0;
         /* bottom: 2rem; */
-        max-width: 90%;
-        top: 0;
+        max-width: 95%;
+        top: -5px;
         padding: 0.5rem 0.7rem 2.5rem;
     }
     section#locations span {
-        font-size: 18px;
+        font-size: 17px;
     }
     #locations span.title{
-        font-size: 20px;
+        font-size: 19px;
         margin-bottom: 0;
         margin-top: 0;
     }
     #locations p {
-        font-size: 14px;
+        font-size: 13px;
         margin: 0 auto;
     }
+    #locations p.mt-10{margin-top: 10px;}
     /* section#locations {
         width: 260px;
     } */
