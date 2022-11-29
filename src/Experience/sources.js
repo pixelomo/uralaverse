@@ -68,6 +68,11 @@ export default [
         path: 'images/neon.jpg'
     },
     {
+        name: 'ctGif',
+        type: 'texture',
+        path: 'images/ct.gif'
+    },
+    {
         name: 'uralaLogo',
         type: 'svg',
         path: 'images/urala-bubble.svg'

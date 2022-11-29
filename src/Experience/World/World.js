@@ -7,39 +7,74 @@ import Spheres from './Spheres.js'
 import Particles from './Particles.js'
 import Text from './Text.js'
 import SVG from './SVG.js'
-import UI from './UI.js'
+// import UI from './UI.js'
+import gsap from 'gsap'
 
 export default class World {
     constructor(params) {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
+        this.camera = this.experience.camera.instance
 
         // Wait for resources
         this.resources.on('ready', () => {
+            this.intro()
             this.initHome(params)
+            // fov 180 - 80
         })
     }
 
-    // intro() {
-    //     this.camera.position.lerp(vec.set(state.mouse.x * 5, 3 + state.mouse.y * 2, 14), 0.05)
-    // }
+    intro() {
+        gsap.to(this.camera, {
+            fov: 75,
+            duration: 6.5,
+            ease: "power4.inOut",
+            delay: 0.5
+        })
+        gsap.from(this.camera.position, {
+            x: -5,
+            y: 6,
+            z: 6,
+            duration: 3,
+            ease: "power2.inOut",
+            delay: 3
+        })
+    }
 
     initHome(params) {
         this.particles = new Particles(params.particlesAmount)
         this.environment = new Environment()
-        this.diamonds = new Diamonds(params.diamondAmount)
-        this.donuts = new Donuts(params.donutsAmount)
-        this.spheres = new Spheres(params.spheresAmount)
-        this.ui = new UI()
-        this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 2.5, z: -2.5})
-        this.to = new Text('to the', 0.6, '#bd4500', {x: 1, y: 1.4, z: -2.8})
-        this.uralaverse = new Text('URALAVERSE!', 0.9, '#7d09a7', {x: 1, y: 0.2, z: -2.5})
-        this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 0, y: -3, z: -2.5}, 'contact')
-        this.about = new Text('ABOUT', 0.4, '#00f208', {x: -3, y: -2, z: -2}, 'about')
-        this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 3.4, y: -2, z: -2}, 'locations')
-        this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 3, z: 0}, 0.015)
-        this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015)
+        // this.ui = new UI()
+        setTimeout(() => {
+            this.diamonds = new Diamonds(params.diamondAmount)
+            this.donuts = new Donuts(params.donutsAmount)
+            this.spheres = new Spheres(params.spheresAmount)
+        }, 2000)
+        setTimeout(() => {
+            this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 3.5, z: -2.5})
+        }, 4400)
+        setTimeout(() => {
+            this.to = new Text('to the', 0.6, '#bd4500', {x: 1, y: 2.4, z: -2.8})
+        }, 4700)
+        setTimeout(() => {
+            this.uralaverse = new Text('URALAVERSE!', 0.9, '#7d09a7', {x: 2, y: 1, z: -2.5})
+        }, 5000)
+        setTimeout(() => {
+            this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 1, y: -2, z: -2.5}, 'contact')
+        }, 5300)
+        setTimeout(() => {
+            this.about = new Text('ABOUT', 0.4, '#00f208', {x: -3, y: -1, z: -2}, 'about')
+        }, 5600)
+        setTimeout(() => {
+            this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations')
+        }, 5900)
+        setTimeout(() => {
+            this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.015)
+        }, 5200)
+        setTimeout(() => {
+            this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015)
+        }, 5500)
         // this.globe = new Globe()
         // this.globe.model.visible = false
     }

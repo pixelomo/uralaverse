@@ -143,6 +143,7 @@ export default class UI {
 		container.add(contentContainer);
 
 		//
+		// console.log(this.resources.items.ctGif)
 
 		new THREE.TextureLoader().load(this.resources.items.neonTexture.source.data.currentSrc, (texture) => {
 		  leftSubBlock.set({

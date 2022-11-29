@@ -19,13 +19,14 @@ export default class Camera {
     }
 
     setInstance() {
-        this.instance = new THREE.PerspectiveCamera(65, this.sizes.width / this.sizes.height, 0.1, 100)
+        this.instance = new THREE.PerspectiveCamera(180, this.sizes.width / this.sizes.height, 0.1, 100)
         this.instance.position.set(-2.5, -3, 6)
         this.scene.add(this.instance)
         if(this.debug.active) {
-                this.debugFolder.add(this.instance.position, 'x').name('x').min(-25).max(25).step(0.1)
-                this.debugFolder.add(this.instance.position, 'y').name('y').min(-25).max(25).step(0.1)
-                this.debugFolder.add(this.instance.position, 'z').name('z').min(-25).max(25).step(0.1)
+            this.debugFolder.add(this.instance, 'fov').name('fov').min(-150).max(200).step(0.1).onChange(() =>{this.instance.updateProjectionMatrix()})
+            this.debugFolder.add(this.instance.position, 'x').name('x').min(-125).max(125).step(0.1)
+            this.debugFolder.add(this.instance.position, 'y').name('y').min(-125).max(125).step(0.1)
+            this.debugFolder.add(this.instance.position, 'z').name('z').min(-125).max(125).step(0.1)
         }
     }
 
@@ -43,6 +44,7 @@ export default class Camera {
 
     update() {
         this.controls.update()
+        this.instance.updateProjectionMatrix()
         // console.log(this.controls.object.position)
     }
 }

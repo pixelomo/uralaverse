@@ -17,7 +17,7 @@ export default class Text {
     setGeometry(text, size) {
         this.geometry = new TextGeometry(
             text, {
-                font:  this.resources.items.mainFont,
+                font: this.resources.items.mainFont,
                 size: size,
                 height: 0.15,
                 // curveSegments: 5,
@@ -38,8 +38,9 @@ export default class Text {
     setMesh(position, name) {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.position.set(position.x, position.y, position.z)
-        gsap.to(this.mesh.rotation, 1, {
-            x: - Math.PI * 2
+        gsap.from(this.mesh.rotation, 0.5, {
+            x: - Math.PI * 0.5,
+            ease: "back.inOut(1.7)",
         })
         this.raycaster.objectsToTest.push(this.mesh)
         if(name){

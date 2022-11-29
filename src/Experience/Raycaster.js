@@ -52,7 +52,7 @@ export default class Raycaster {
                 this.currentIntersect = intersects[0]
             } else {
                 if(this.currentIntersect) {
-                    this.color = new THREE.Color('#490561')
+                    this.color = new THREE.Color('#00ff0d')
                     gsap.to(this.currentIntersect.object.material.color, 1, {
                         r: this.color.r,
                         g: this.color.g,
@@ -203,23 +203,29 @@ export default class Raycaster {
 
     update() {
         this.raycaster.setFromCamera(this.mouse, this.camera)
-        // console.log(this.intersects)
         const intersects = this.raycaster.intersectObjects(this.objectsToTest)
         if(intersects.length) { // mouse enter
             this.currentIntersect = intersects[0]
+            // console.log(this.currentIntersect.object.material.color)
             if(this.currentIntersect.object.name === 'about' || this.currentIntersect.object.name === 'contact' || this.currentIntersect.object.name === 'locations'){
                 this.color = new THREE.Color('#00c4eb')
-                gsap.to(this.currentIntersect.object.material.color, 4, {
+                gsap.to(this.currentIntersect.object.material.color, 2, {
                     r: this.color.r,
                     g: this.color.g,
                     b: this.color.b
                 })
             }
         } else { // mouse leave
-            if(this.currentIntersect) {
-                this.color = new THREE.Color('#00c4eb')
-            }
             this.currentIntersect = null
+            // console.log(this.scene.children)
+            // if(this.currentIntersect.object.name === 'about'){
+            //     this.color = new THREE.Color('#00f208')
+            // }
+            // gsap.to(this.currentIntersect.object.material.color, 2, {
+            //     r: this.color.r,
+            //     g: this.color.g,
+            //     b: this.color.b
+            // })
         }
     }
 

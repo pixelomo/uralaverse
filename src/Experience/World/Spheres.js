@@ -12,16 +12,17 @@ export default class Spheres {
         this.createSpheres(geometry, amount)
         this.scene.add(this.sphereGroup)
         let spherePositions = this.sphereGroup.children.map(i => i.position)
-        gsap.to(spherePositions, {
-            x: Math.cos(100),
-            y: Math.sin(100),
-            z: Math.sin(100),
-            duration: 25,
+        gsap.from(spherePositions, {
+            x: Math.cos(11),
+            y: Math.sin(11),
+            z: Math.sin(11),
+            duration: 12.5,
             yoyo: true,
             repeat: -1,
             stagger: 0.01,
             ease: "back.inOut(1.7)",
-            repeatDelay: 8
+            repeatDelay: 8,
+            delay: 12
         })
     }
 
@@ -38,7 +39,7 @@ export default class Spheres {
             d.position.z = (Math.random() - 0.5) * 10
             d.rotation.x = Math.random() * Math.PI
             d.rotation.y = Math.random() * Math.PI
-            const s = Math.random() * 1.25
+            const s = Math.random() * 0.75
             d.scale.set(s,s,s)
             this.sphereGroup.add(d);
         }

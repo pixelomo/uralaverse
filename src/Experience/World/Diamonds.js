@@ -12,21 +12,22 @@ export default class Diamonds {
         this.createDiamonds(geometry, amount)
         this.scene.add(this.diamondGroup)
         let diamondPositions = this.diamondGroup.children.map(i => i.position)
-        gsap.to(diamondPositions, {
-            x: Math.cos(100),
-            y: Math.sin(100),
-            z: Math.sin(100),
-            duration: 25,
+        gsap.from(diamondPositions, {
+            x: Math.cos(11),
+            y: Math.sin(11),
+            z: Math.sin(11),
+            duration: 12.5,
             yoyo: true,
             repeat: -1,
             stagger: 0.01,
             ease: "back.inOut(1.7)",
-            repeatDelay: 8
+            repeatDelay: 8,
+            delay: 12
         })
         let diamondRotations = this.diamondGroup.children.map(i => i.rotation)
-        gsap.to(diamondRotations, {
-            x: Math.PI * 8,
-            duration: 20,
+        gsap.from(diamondRotations, {
+            x: Math.PI * 6,
+            duration: 30,
             yoyo: true,
             repeat: -1,
             ease: "power1.inOut()",
