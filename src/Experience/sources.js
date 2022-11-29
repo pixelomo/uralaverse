@@ -38,9 +38,39 @@ export default [
         path: 'models/globeB.glb'
     },
     {
-        name: 'galaxyFont',
+        name: 'mainFont',
         type: 'font',
         path: 'fonts/unibody.json'
+    },
+    // {
+    //     name: 'uiFont',
+    //     type: 'font',
+    //     path: 'fonts/roboto.json'
+    // },
+    // {
+    //     name: 'uiTexture',
+    //     type: 'texture',
+    //     path: 'fonts/roboto.png'
+    // },
+    {
+        name: 'uiFont',
+        type: 'font',
+        path: 'fonts/unibody-msdf.json'
+    },
+    {
+        name: 'uiTexture',
+        type: 'texture',
+        path: 'fonts/unibody.png'
+    },
+    {
+        name: 'neonTexture',
+        type: 'texture',
+        path: 'images/neon.jpg'
+    },
+    {
+        name: 'ctGif',
+        type: 'texture',
+        path: 'images/ct.gif'
     },
     {
         name: 'uralaLogo',

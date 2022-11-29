@@ -12,28 +12,30 @@ export default class Donuts {
         this.createDonuts(geometry, amount)
         this.scene.add(this.donutGroup)
         let donutPositions = this.donutGroup.children.map(i => i.position)
-        gsap.to(donutPositions, {
-            x: Math.cos(100),
-            y: Math.sin(100),
-            z: Math.sin(100),
-            duration: 25,
+        gsap.from(donutPositions, {
+            x: Math.cos(11),
+            y: Math.sin(11),
+            z: Math.sin(11),
+            duration: 12.5,
             yoyo: true,
             repeat: -1,
             stagger: 0.01,
             ease: "back.inOut(1.7)",
-            repeatDelay: 8
+            repeatDelay: 8,
+            delay: 12
         })
         let donutScales = this.donutGroup.children.map(i => i.scale)
-        gsap.to(donutScales, {
+        gsap.from(donutScales, {
             x: 0.5,
             y: 0.5,
             z: 0.5,
-            duration: 25,
+            duration: 12.5,
             yoyo: true,
             repeat: -1,
             stagger: 0.01,
             ease: "back.inOut(1.7)",
-            repeatDelay: 8
+            repeatDelay: 8,
+            delay: 12
         })
         let donutRotations = this.donutGroup.children.map(i => i.rotation)
         gsap.to(donutRotations, {
@@ -58,7 +60,7 @@ export default class Donuts {
             d.position.z = (Math.random() - 0.5) * 10
             d.rotation.x = Math.random() * Math.PI
             d.rotation.y = Math.random() * Math.PI
-            const s = Math.random() * 1.25
+            const s = Math.random() * .75
             d.scale.set(s,s,s)
             this.donutGroup.add(d);
         }

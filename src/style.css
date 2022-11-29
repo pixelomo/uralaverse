@@ -247,6 +247,9 @@ input:-webkit-autofill:active {
 } */
 
 .controls {
+    animation: slowFadeIn 2s forwards;
+    animation-delay: 7s;
+    opacity: 0;
     position: absolute;
     padding: 1rem;
     border-radius: 12px;
@@ -361,13 +364,14 @@ a#agencyvista-badge {
 }
 
 #locations {
-    right: 3rem;
-    left: initial;
+    left: 3rem;
+    right: initial;
     bottom: 7rem;
     width: 370px;
     background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
     box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
-    padding: 2rem 2rem 4rem;
+    /* padding: 2rem 2rem 4rem; */
+    padding: 2rem;
     height: fit-content;
     border-radius: 16px;
 }
@@ -376,10 +380,10 @@ a#agencyvista-badge {
     margin-bottom: 20px;
     display: inline-block;
     font-size: 30px;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
 }
 #locations span{
-    font-size: 42px;
+    font-size: 32px;
     text-transform: uppercase;
 }
 #locations p {
@@ -420,6 +424,11 @@ a#agencyvista-badge {
 @keyframes fade{
     0%{opacity: 1;}
     50%{opacity: 0;}
+}
+
+@keyframes slowFadeIn{
+    0%{opacity: 0;}
+    90%, 100%{opacity: 1;}
 }
 
 .point {
@@ -544,22 +553,23 @@ a#agencyvista-badge {
         right: 0;
         left: 0;
         /* bottom: 2rem; */
-        max-width: 90%;
-        top: 0;
+        max-width: 95%;
+        top: -5px;
         padding: 0.5rem 0.7rem 2.5rem;
     }
     section#locations span {
-        font-size: 18px;
+        font-size: 17px;
     }
     #locations span.title{
-        font-size: 20px;
+        font-size: 19px;
         margin-bottom: 0;
         margin-top: 0;
     }
     #locations p {
-        font-size: 14px;
+        font-size: 13px;
         margin: 0 auto;
     }
+    #locations p.mt-10{margin-top: 10px;}
     /* section#locations {
         width: 260px;
     } */
