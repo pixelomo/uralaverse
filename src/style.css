@@ -522,6 +522,8 @@ a#agencyvista-badge {
         font-size: 16px;
         height: auto;
         max-height: 85vh;
+        width: 100%;
+        top: 0;
         /* height: 89vh; */
         /* height: 600px; */
     }
