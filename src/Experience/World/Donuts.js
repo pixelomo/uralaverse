@@ -7,15 +7,16 @@ export default class Donuts {
     constructor(amount) {
         this.experience = new Experience()
         this.scene = this.experience.scene
+        this.isMobile = this.experience.world.isMobile()
         this.donutGroup = new THREE.Group()
         let geometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
         this.createDonuts(geometry, amount)
         this.scene.add(this.donutGroup)
         let donutPositions = this.donutGroup.children.map(i => i.position)
         gsap.from(donutPositions, {
-            x: Math.cos(11),
-            y: Math.sin(11),
-            z: Math.sin(11),
+            x: Math.cos(this.isMobile ? 5.2 : 11),
+            y: Math.sin(this.isMobile ? 5.2 : 11),
+            z: Math.sin(this.isMobile ? 5.2 : 11),
             duration: 12.5,
             yoyo: true,
             repeat: -1,

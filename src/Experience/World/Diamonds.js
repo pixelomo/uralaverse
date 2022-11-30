@@ -7,15 +7,16 @@ export default class Diamonds {
     constructor(amount) {
         this.experience = new Experience()
         this.scene = this.experience.scene
+        this.isMobile = this.experience.world.isMobile()
         this.diamondGroup = new THREE.Group()
         let geometry = new THREE.OctahedronGeometry(0.2)
         this.createDiamonds(geometry, amount)
         this.scene.add(this.diamondGroup)
         let diamondPositions = this.diamondGroup.children.map(i => i.position)
         gsap.from(diamondPositions, {
-            x: Math.cos(11),
-            y: Math.sin(11),
-            z: Math.sin(11),
+            x: Math.cos(this.isMobile ? 5.2 : 11),
+            y: Math.sin(this.isMobile ? 5.2 : 11),
+            z: Math.sin(this.isMobile ? 5.2 : 11),
             duration: 12.5,
             yoyo: true,
             repeat: -1,

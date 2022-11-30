@@ -21,7 +21,6 @@ export default class World {
         this.resources.on('ready', () => {
             this.intro()
             this.initHome(params)
-            // fov 180 - 80
         })
     }
 
@@ -33,9 +32,9 @@ export default class World {
             delay: 0.5
         })
         gsap.from(this.camera.position, {
-            x: -5,
-            y: 6,
-            z: 6,
+            x: this.isMobile() ? -4 : -5,
+            y: this.isMobile() ? -4 : 6,
+            z: this.isMobile() ? 8.7 : 6,
             duration: 1,
             ease: "power2.inOut",
             delay: 1.5
@@ -51,32 +50,59 @@ export default class World {
             this.donuts = new Donuts(params.donutsAmount)
             this.spheres = new Spheres(params.spheresAmount)
         }, 1000)
-        setTimeout(() => {
-            this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 3.5, z: -2.5})
-        }, 2400)
-        setTimeout(() => {
-            this.to = new Text('to the', 0.6, '#bd4500', {x: 1, y: 2.4, z: -2.8})
-        }, 2700)
-        setTimeout(() => {
-            this.uralaverse = new Text('URALAVERSE!', 0.9, '#7d09a7', {x: 2, y: 1, z: -2.5})
-        }, 3000)
-        setTimeout(() => {
-            this.about = new Text('ABOUT', 0.4, '#00f208', {x: -3, y: -1, z: -2}, 'about')
-        }, 3400)
-        setTimeout(() => {
-            this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 1, y: -2, z: -2.5}, 'contact')
-        }, 3700)
-        setTimeout(() => {
-            this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations')
-        }, 4000)
-        setTimeout(() => {
-            this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.015)
-        }, 5000)
-        setTimeout(() => {
-            this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015)
-        }, 4600)
-        // his.globe = new Globe()
-        // this.globe.model.visible = false
+
+        if(this.isMobile()){
+            setTimeout(() => {
+                this.welcome = new Text('Welcome', 0.6, '#002056', {x: 1.3, y: 3, z: -2.5})
+            }, 2400)
+            setTimeout(() => {
+                this.to = new Text('to the', 0.4, '#bd4500', {x: 1.3, y: 2.2, z: -2.8})
+            }, 2700)
+            setTimeout(() => {
+                this.uralaverse = new Text('URALAVERSE!', 0.6, '#7d09a7', {x: 1.7, y: 1.2, z: -2.5})
+            }, 3000)
+            setTimeout(() => {
+                this.about = new Text('ABOUT', 0.4, '#00f208', {x: 1.1, y: -1.7, z: -2.5}, 'about')
+            }, 3400)
+            setTimeout(() => {
+                this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.8, z: -2.5}, 'locations')
+            }, 3700)
+            setTimeout(() => {
+                this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.9, z: -2.5}, 'contact')
+            }, 4000)
+            setTimeout(() => {
+                this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.011)
+            }, 5000)
+            setTimeout(() => {
+                this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3.5, y: 8, z: 0}, 0.011)
+            }, 4600)
+
+        } else {
+            setTimeout(() => {
+                this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 3.5, z: -2.5})
+            }, 2400)
+            setTimeout(() => {
+                this.to = new Text('to the', 0.6, '#bd4500', {x: 1, y: 2.4, z: -2.8})
+            }, 2700)
+            setTimeout(() => {
+                this.uralaverse = new Text('URALAVERSE!', 0.9, '#7d09a7', {x: 2, y: 1, z: -2.5})
+            }, 3000)
+            setTimeout(() => {
+                this.about = new Text('ABOUT', 0.4, '#00f208', {x: -3, y: -1, z: -2}, 'about')
+            }, 3400)
+            setTimeout(() => {
+                this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 1, y: -2, z: -2.5}, 'contact')
+            }, 3700)
+            setTimeout(() => {
+                this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations')
+            }, 4000)
+            setTimeout(() => {
+                this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.015)
+            }, 5000)
+            setTimeout(() => {
+                this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015)
+            }, 4600)
+        }
     }
 
     showHome() {
@@ -121,6 +147,14 @@ export default class World {
     lightFollowControls() {
         let controlsPosition = this.experience.camera.controls.object.position
         this.experience.world.environment.pointLight.position.set(controlsPosition.x, controlsPosition.y, controlsPosition.z)
+    }
+
+    isMobile() {
+        if(window.innerWidth < 426) {
+            return true
+        } else {
+            return false
+        }
     }
 
     update() {
