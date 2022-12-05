@@ -75,13 +75,3 @@ export default class SVG {
         this.scene.add(group)
     }
 }
-
-
-// tick
-
-// uralaObject = scene.children.filter(obj => obj.name === 'urala')
-//         ctObject = scene.children.filter(obj => obj.name === 'cointelegraph')
-//         if(uralaObject.length > 0 && elapsedTime > 2){
-//             uralaObject[0].lookAt(camera.position)
-//             ctObject[0].lookAt(camera.position)
-//         }

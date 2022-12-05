@@ -81,5 +81,35 @@ export default [
         name: 'ctLogo',
         type: 'svg',
         path: 'images/ctb.svg'
-    }
+    },
+    {
+        name: 'reckitt',
+        type: 'texture',
+        path: 'images/work/reckitt.jpg'
+    },
+    {
+        name: 'kaplan',
+        type: 'texture',
+        path: 'images/work/kaplan.jpg'
+    },
+    {
+        name: 'coin360',
+        type: 'texture',
+        path: 'images/work/coin360.jpg'
+    },
+    {
+        name: 'nft',
+        type: 'texture',
+        path: 'images/work/nft.jpg'
+    },
+    {
+        name: 'lawork',
+        type: 'texture',
+        path: 'images/work/lawork.jpg'
+    },
+    {
+        name: 'coint',
+        type: 'texture',
+        path: 'images/work/coint.jpg'
+    },
 ]
