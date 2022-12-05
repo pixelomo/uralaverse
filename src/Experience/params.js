@@ -4,8 +4,8 @@ export default {
     bloomStrength: 0,
     bloomRadius: 1,
     bloomLimit: 0.65, // 1.5
-    donutsAmount: 22, // 70
+    donutsAmount: 24, // 70
     spheresAmount: 20, // 100
-    diamondAmount: 40, // 170
+    diamondAmount: 50, // 170
     particlesAmount: 800 // 3000
 }

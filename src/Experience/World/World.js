@@ -7,6 +7,7 @@ import Spheres from './Spheres.js'
 import Particles from './Particles.js'
 import Text from './Text.js'
 import SVG from './SVG.js'
+import Plane from './Plane.js'
 // import UI from './UI.js'
 import gsap from 'gsap'
 
@@ -16,6 +17,7 @@ export default class World {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.camera = this.experience.camera.instance
+        this.renderer = this.experience.renderer
 
         // Wait for resources
         this.resources.on('ready', () => {
@@ -62,14 +64,17 @@ export default class World {
                 this.uralaverse = new Text('URALAVERSE!', 0.6, '#7d09a7', {x: 1.7, y: 1.2, z: -2.5})
             }, 3000)
             setTimeout(() => {
-                this.about = new Text('ABOUT', 0.4, '#00f208', {x: 1.1, y: -1.7, z: -2.5}, 'about')
+                this.about = new Text('ABOUT', 0.4, '#00f208', {x: 1.2, y: -1.2, z: -2.5}, 'about')
             }, 3400)
             setTimeout(() => {
-                this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.8, z: -2.5}, 'locations')
+                this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.2, z: -2.5}, 'locations')
             }, 3700)
             setTimeout(() => {
-                this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.9, z: -2.5}, 'contact')
+                this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.2, z: -2.5}, 'contact')
             }, 4000)
+            setTimeout(() => {
+                this.work = new Text('WORK', 0.4, '#9900ff', {x: 1.2, y: -4.2, z: -2.5}, 'work')
+            }, 4400)
             setTimeout(() => {
                 this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.011)
             }, 5000)
@@ -91,11 +96,14 @@ export default class World {
                 this.about = new Text('ABOUT', 0.4, '#00f208', {x: -3, y: -1, z: -2}, 'about')
             }, 3400)
             setTimeout(() => {
-                this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 1, y: -2, z: -2.5}, 'contact')
+                this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 5, y: -2.3, z: -2.5}, 'contact')
             }, 3700)
             setTimeout(() => {
                 this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations')
             }, 4000)
+            setTimeout(() => {
+                this.work = new Text('WORK', 0.4, '#9900ff', {x: -2.4, y: -2.3, z: -2.2}, 'work')
+            }, 4400)
             setTimeout(() => {
                 this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.015)
             }, 5000)
@@ -115,12 +123,29 @@ export default class World {
         this.contact.mesh.visible = true
         this.about.mesh.visible = true
         this.locations.mesh.visible = true
+        this.work.mesh.visible = true
+        gsap.to(this.work.mesh.position, {
+            x: -2.4,
+            y: -2.3,
+            z: -2.2,
+            duration: 1.5,
+            ease: "back.inOut(1.7)",
+        })
         this.uralaLogo.model.visible = true
         this.ctLogo.model.visible = true
         this.experience.world.environment.pointLight.position.set(1, 3, 10)
         if(this.globe){
             this.globe.model.visible = false
         }
+        if(this.portfolio_1){
+            this.portfolio_1.mesh.visible = false
+            this.portfolio_2.mesh.visible = false
+            this.portfolio_3.mesh.visible = false
+            this.portfolio_4.mesh.visible = false
+            this.portfolio_5.mesh.visible = false
+            this.portfolio_6.mesh.visible = false
+        }
+        this.renderer.setReinhardTone()
     }
 
     hideHome() {
@@ -133,14 +158,36 @@ export default class World {
         this.contact.mesh.visible = false
         this.about.mesh.visible = false
         this.locations.mesh.visible = false
+        this.work.mesh.visible = false
         this.uralaLogo.model.visible = false
         this.ctLogo.model.visible = false
     }
 
+    showWork() {
+        if(!this.portfolio_1 || this.portfolio_1.mesh.visible === false){
+            this.hideHome()
+            this.work.mesh.visible = true
+            this.renderer.setNoTone()
+            gsap.to(this.work.mesh.position, {
+                x: -4,
+                y: 4,
+                z: 1,
+                duration: 1.5,
+                ease: "back.inOut(1.7)",
+            })
+            this.portfolio_1 = new Plane('coin360', 3, 2, {x: -3.5, y: 1.5, z: 0})
+            this.portfolio_2 = new Plane('kaplan', 3, 2, {x: 0, y: 1.5, z: 0})
+            this.portfolio_3 = new Plane('nft', 3, 2, {x: 3.5, y: 1.5, z: 0})
+            this.portfolio_4 = new Plane('reckitt', 3, 2, {x: -3.5, y: -1, z: 0})
+            this.portfolio_5 = new Plane('lawork', 3, 2, {x: 0, y: -1, z: 0})
+            this.portfolio_6 = new Plane('coint', 3, 2, {x: 3.5, y: -1, z: 0})
+        }
+    }
+
     showLocations() {
+        this.hideHome()
         this.globe = new Globe()
         this.globe.model.visible = true
-        this.hideHome()
         this.lightFollowControls()
     }
 
@@ -161,7 +208,16 @@ export default class World {
         if(this.globe && this.globe.model.visible === true){
             this.lightFollowControls()
         }
-        if(this.ui)
+        if(this.ui) {
             this.ui.update()
+        }
+        if(this.portfolio_1) {
+            this.portfolio_1.update()
+            this.portfolio_2.update()
+            this.portfolio_3.update()
+            this.portfolio_4.update()
+            this.portfolio_5.update()
+            this.portfolio_6.update()
+        }
     }
 }

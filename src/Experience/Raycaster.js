@@ -14,6 +14,7 @@ export default class Raycaster {
         this.contactForm = document.querySelector('.contactForm')
         this.aboutSection = document.querySelector('#about')
         this.locationSection = document.querySelector('#locations')
+        this.testObjects = true
 
         const close = document.querySelectorAll('.close-button')
         close.forEach(btn => btn.addEventListener('click', () => {
@@ -45,152 +46,135 @@ export default class Raycaster {
         })
 
         window.addEventListener('click', () => {
-            if(this.intersects.length) {
-                if(!this.currentIntersect) {
-                    // console.log('click enter')
-                }
-                this.currentIntersect = intersects[0]
-            } else {
-                if(this.currentIntersect) {
-                    this.color = new THREE.Color('#00ff0d')
-                    gsap.to(this.currentIntersect.object.material.color, 1, {
-                        r: this.color.r,
-                        g: this.color.g,
-                        b: this.color.b
-                    })
-
-                    ////////////////////// HOME //////////////////////////
-                    if(this.currentIntersect.object.name === 'home'){
-                        gsap.to(this.camera.position, {
-                            x: -2.5,
-                            y: -3,
-                            z: 6,
-                            duration: 2,
-                            ease: "back.inOut(1.7)",
-                        })
-                        this.experience.world.showHome()
-                        // uralaLogo = scene.children.filter(obj => obj.name === 'urala')
-                        setTimeout(() => {
-                            // while(scene.children.length > 0){
-                            //     scene.remove(scene.children[0]);
-                            // }
-                            // renderer.toneMappingExposure = 4
-                            // homeButton[0].visible = false
-                            // uralaLogo[0].position.y = 3
-                            this.contactForm.classList.remove('show')
-                            // canvas.classList.remove('disable')
-                            this.aboutSection.classList.remove('show')
-                            // controls.enabled = true;
-                        }, 700)
+            if(this.testObjects === true){
+                if(this.intersects.length) {
+                    if(!this.currentIntersect) {
+                        // console.log('click enter')
                     }
-
-                    /////////////////////////// CONTACT ///////////////////////////////
-                    if(this.currentIntersect.object.name === 'contact'){
-                        gsap.to(this.camera.position, {
-                            x: -0.82,
-                            y: -0.33,
-                            z: -1.8,
-                            duration: 2,
-                            ease: "back.inOut(1.7)",
+                    this.currentIntersect = intersects[0]
+                } else {
+                    if(this.currentIntersect) {
+                        // console.log(this.currentIntersect.object.name)
+                        this.color = new THREE.Color('#00ff0d')
+                        gsap.to(this.currentIntersect.object.material.color, 1, {
+                            r: this.color.r,
+                            g: this.color.g,
+                            b: this.color.b
                         })
-                        this.aboutSection.classList.remove('show')
-                        this.locationSection.classList.remove('show')
-                        // uralaLogo = scene.children.filter(obj => obj.name === 'urala')
-                        setTimeout(() => {
-                            // renderer.toneMappingExposure = 2.2
-                            // renderer.toneMappingExposure = 1
-                            // contact plane
-                            // const plane = new THREE.Mesh(
-                            //     new THREE.PlaneGeometry(6, 4),
-                            //     new THREE.MeshBasicMaterial({
-                            //         color: '#000',
-                            //         transparent: true
-                            //     })
-                            // )
-                            // plane.rotation.x = Math.PI / 1.2
-                            // plane.position.z = 2
-                            // plane.position.x = 1.5
-                            // plane.position.y = 1
-                            // objectsToTest.push(plane)
-                            // scene.add(plane)
-                            // uralaLogo[0].position.y = 6
-                            this.contactForm.classList.add('show')
-                            // canvas.classList.add('disable')
-                            document.getElementById("name").focus();
-                            // homeButton[0].position.set(1, -1.5, 2)
-                            // homeButton[0].visible = true
-                            // homeButton[0].lookAt(camera.position)
-                            // pointLight.lookAt(homeButton[0].position)
-                        }, 1200)
-                    }
 
-                    /////////////////////////// ABOUT ///////////////////////////////
-                    if(this.currentIntersect.object.name === 'about'){
-                        gsap.to(this.camera.position, {
-                            x: 5,
-                            y: 14,
-                            z: 5,
-                            duration: 2,
-                            ease: "back.inOut(1.7)",
-                        })
-                        this.locationSection.classList.remove('show')
-                        setTimeout(() => {
-                            this.aboutSection.classList.add('show')
-                            // homeButton[0].visible = true
-                            // homeButton[0].position.set(-4,3,2)
-                            // homeButton[0].lookAt(camera.position)
-                            // homeButton[0].rotation.y = 500
-                        }, 1200)
-                    }
+                        ////////////////////// HOME //////////////////////////
+                        // if(this.currentIntersect.object.name === 'home'){
+                        //     gsap.to(this.camera.position, {
+                        //         x: -2.5,
+                        //         y: -3,
+                        //         z: 6,
+                        //         duration: 2,
+                        //         ease: "back.inOut(1.7)",
+                        //     })
+                        //     this.experience.world.showHome()
+                        //     setTimeout(() => {
+                        //         this.contactForm.classList.remove('show')
+                        //         this.aboutSection.classList.remove('show')
+                        //     }, 700)
+                        // }
 
-                    /////////////////////////// SVG LINK ///////////////////////////
-                    if(typeof this.currentIntersect !== null && this.currentIntersect.object.parent.userData.url){
-                        window.open(this.currentIntersect.object.parent.userData.url, '_blank').focus();
-                    }
-
-                    /////////////////////////// LOCATIONS ///////////////////////////////
-                    if(this.currentIntersect.object.name === 'locations'){
-                        gsap.to(this.camera.position, {
-                            x: -25,
-                            y: 25,
-                            z: -10,
-                            duration: 2,
-                            ease: "back.inOut(1.1)",
-                        })
-                        setTimeout(() => {
-                            this.experience.world.showLocations()
-                        }, 800)
-                        // this.experience.canvas.classList.add('fade')
-                        // gsap.globalTimeline.clear()
-                        this.aboutSection.classList.remove('show')
-                        setTimeout(() => {
-                            // while(this.experience.scene.children.length > 0){
-                            //     this.experience.scene.remove(this.experience.scene.children[0]);
-                            // }
-                            // this.camera.controls.minDistance = 4.5;
-                            // this.camera.controls.maxDistance = 5.7;
-                            // this.experience.scene.children.destroy()
-                            // locationScene = true
+                        /////////////////////////// CONTACT ///////////////////////////////
+                        if(this.currentIntersect.object.name === 'contact'){
                             gsap.to(this.camera.position, {
-                                x: 3.8,
-                                y: 2,
-                                z: 8,
+                                x: -0.82,
+                                y: -0.33,
+                                z: -1.8,
                                 duration: 2,
-                                ease: "back.inOut(1.2)",
+                                ease: "back.inOut(1.7)",
                             })
-                        }, 1500)
-                        setTimeout(() => {
-                            this.locationSection.classList.add('show')
-                        }, 4000)
-                        // setTimeout(() => {
-                        //     // canvas.classList.remove('fade')
-                        //     this.locationSection.classList.add('show')
-                        // }, 3000)
+                            this.testObjects = false
+                            this.aboutSection.classList.remove('show')
+                            this.locationSection.classList.remove('show')
+                            setTimeout(() => {
+                                this.contactForm.classList.add('show')
+                                document.getElementById("name").focus();
+                            }, 1200)
+                        }
+
+                        /////////////////////////// ABOUT ///////////////////////////////
+                        if(this.currentIntersect.object.name === 'about'){
+                            gsap.to(this.camera.position, {
+                                x: 5,
+                                y: 14,
+                                z: 5,
+                                duration: 2,
+                                ease: "back.inOut(1.7)",
+                            })
+                            this.testObjects = false
+                            this.locationSection.classList.remove('show')
+                            setTimeout(() => {
+                                this.aboutSection.classList.add('show')
+                            }, 1200)
+                        }
+
+                        /////////////////////////// SVG LINK ///////////////////////////
+                        if(typeof this.currentIntersect !== null && this.currentIntersect.object.parent.userData.url){
+                            window.open(this.currentIntersect.object.parent.userData.url, '_blank').focus();
+                        }
+
+                        /////////////////////////// LOCATIONS ///////////////////////////////
+                        if(this.currentIntersect.object.name === 'locations'){
+                            gsap.to(this.camera.position, {
+                                x: -25,
+                                y: 25,
+                                z: -10,
+                                duration: 2,
+                                ease: "back.inOut(1.1)",
+                            })
+                            this.testObjects = false
+                            setTimeout(() => {
+                                this.experience.world.showLocations()
+                            }, 800)
+                            this.aboutSection.classList.remove('show')
+                            setTimeout(() => {
+                                // while(this.experience.scene.children.length > 0){
+                                //     this.experience.scene.remove(this.experience.scene.children[0]);
+                                // }
+                                // this.camera.controls.minDistance = 4.5;
+                                // this.camera.controls.maxDistance = 5.7;
+                                // this.experience.scene.children.destroy()
+                                // locationScene = true
+                                gsap.to(this.camera.position, {
+                                    x: 3.8,
+                                    y: 2,
+                                    z: 8,
+                                    duration: 2,
+                                    ease: "back.inOut(1.2)",
+                                })
+                            }, 1500)
+                            setTimeout(() => {
+                                this.locationSection.classList.add('show')
+                            }, 4000)
+                            // setTimeout(() => {
+                            //     // canvas.classList.remove('fade')
+                            //     this.locationSection.classList.add('show')
+                            // }, 3000)
+                        }
+
+                         /////////////////////////// WORK ///////////////////////////////
+                         if(this.currentIntersect.object.name === 'work'){
+                            gsap.to(this.camera.position, {
+                                x: 2,
+                                y: -3,
+                                z: 8,
+                                duration: 1.5,
+                                ease: "back.inOut(1.7)",
+                            })
+                            this.testObjects = false
+                            this.locationsHiddenButton.classList.remove('hide')
+                            this.experience.world.showWork()
+                        }
                     }
                 }
             }
         })
 
+        // Accordion on locations modal mobile view
         let acc = document.getElementsByClassName("location")
         for (let i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function() {
@@ -243,33 +227,21 @@ export default class Raycaster {
     }
 
     goHome() {
-        // if(locationScene) {
-        //     while(scene.children.length > 0){
-        //         scene.remove(scene.children[0]);
-        //     }
-        //     initHome()
-        //     locationSection.classList.remove('show')
-        //     renderer.toneMappingExposure = 4
-        // } else {
-            gsap.to(this.camera.position, {
-                x: -2.5,
-                y: -3,
-                z: 6,
-                duration: 2,
-                ease: "back.inOut(1.7)",
-            })
-            this.experience.world.showHome()
-            this.locationsHiddenButton.classList.add('hide')
-            this.locationsModal.classList.remove('hide')
-            this.locationSection.classList.remove('show')
-            // uralaLogo = scene.children.filter(obj => obj.name === 'urala')
-            setTimeout(() => {
-                // renderer.toneMappingExposure = 4
-                // uralaLogo[0].position.y = 3
-                // canvas.classList.remove('disable')
-                this.contactForm.classList.remove('show')
-                this.aboutSection.classList.remove('show')
-            }, 700)
-        // }
+        this.testObjects = true
+        gsap.to(this.camera.position, {
+            x: -2.5,
+            y: -3,
+            z: 6,
+            duration: 2,
+            ease: "back.inOut(1.7)",
+        })
+        this.experience.world.showHome()
+        this.locationsHiddenButton.classList.add('hide')
+        this.locationsModal.classList.remove('hide')
+        this.locationSection.classList.remove('show')
+        setTimeout(() => {
+            this.contactForm.classList.remove('show')
+            this.aboutSection.classList.remove('show')
+        }, 700)
     }
 }

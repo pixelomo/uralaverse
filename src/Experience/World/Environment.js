@@ -33,39 +33,68 @@ export default class Environment {
         // Point light - moderate cost
         this.pointLight = new THREE.DirectionalLight(0xffffff, .7)
         this.pointLight.position.set(1, 3, 10)
+        // this.pointLight = new THREE.DirectionalLight(0xffffff, 5.2)
+        // this.pointLight.position.set(-0.5, -4, 0.9)
         this.scene.add(this.pointLight)
 
-
         // // Debug
-        // if(this.debug.active) {
-        //     this.debugFolder
-        //         .add(this.sunLight, 'intensity')
-        //         .name('sunLightIntensity')
-        //         .min(0)
-        //         .max(10)
-        //         .step(0.001)
+        if(this.debug.active) {
+            this.debugFolder
+                .add(this.pointLight, 'intensity')
+                .name('pointLightIntensity')
+                .min(0)
+                .max(10)
+                .step(0.1)
 
-        //     this.debugFolder
-        //         .add(this.sunLight.position, 'x')
-        //         .name('sunLightX')
-        //         .min(- 5)
-        //         .max(5)
-        //         .step(0.001)
+            this.debugFolder
+                .add(this.pointLight.position, 'x')
+                .name('pLightX')
+                .min(- 5)
+                .max(5)
+                .step(0.1)
 
-        //     this.debugFolder
-        //         .add(this.sunLight.position, 'y')
-        //         .name('sunLightY')
-        //         .min(- 5)
-        //         .max(5)
-        //         .step(0.001)
+            this.debugFolder
+                .add(this.pointLight.position, 'y')
+                .name('pLightY')
+                .min(- 5)
+                .max(5)
+                .step(0.1)
 
-        //     this.debugFolder
-        //         .add(this.sunLight.position, 'z')
-        //         .name('sunLightZ')
-        //         .min(- 5)
-        //         .max(5)
-        //         .step(0.001)
-        // }
+            this.debugFolder
+                .add(this.pointLight.position, 'z')
+                .name('pLightZ')
+                .min(- 5)
+                .max(5)
+                .step(0.1)
+
+            this.debugFolder
+                .add(this.hemisphereLight, 'intensity')
+                .name('hemiLightIntensity')
+                .min(0)
+                .max(10)
+                .step(0.1)
+
+            this.debugFolder
+                .add(this.hemisphereLight.position, 'x')
+                .name('hLightX')
+                .min(- 5)
+                .max(5)
+                .step(0.1)
+
+            this.debugFolder
+                .add(this.hemisphereLight.position, 'y')
+                .name('hLightY')
+                .min(- 5)
+                .max(5)
+                .step(0.1)
+
+            this.debugFolder
+                .add(this.hemisphereLight.position, 'z')
+                .name('hLightZ')
+                .min(- 5)
+                .max(5)
+                .step(0.1)
+        }
     }
 
     /**

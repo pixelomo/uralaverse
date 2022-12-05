@@ -393,6 +393,25 @@ a#agencyvista-badge {
     margin: 0 auto 10px;
 }
 
+.location:after{
+    content: 'ᐁ';
+    position: absolute;
+    right: -20px;
+    bottom: 20px;
+    font-size: 14px;
+    width: 10px;
+    height: 10px;
+    color: #0bb0fa;
+}
+#locations .panel{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+#locations .location.active:after {
+    content: 'ᐃ';
+}
+
 #locations-hidden-button {
     box-shadow: none;
     left: 1rem;
@@ -633,20 +652,9 @@ a#agencyvista-badge {
         border-radius: 0;
     }
     .location:after{
-        content: 'ᐁ';
-        position: absolute;
         right: -15px;
         bottom: 9px;
         font-size: 11px;
-        width: 10px;
-        height: 10px;
     }
-    #locations .panel{
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-    }
-    #locations .location.active:after {
-        content: 'ᐃ';
-    }
+
 }
