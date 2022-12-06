@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 346.15 75.73">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 5px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill: none;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-3 {
+        stroke: aqua;
+      }
+
+      .cls-2 {
+        stroke-width: 2px;
+      }
+
+      .cls-2, .cls-4 {
+        stroke: #fff;
+      }
+
+      .cls-3 {
+        stroke-width: 11px;
+      }
+
+      .cls-4 {
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <g id="thicker">
+    <g>
+      <rect class="cls-1" x="9" y="8.81" width="328.11" height="58.11" rx="28.56" ry="28.56"/>
+      <rect class="cls-2" x="9" y="8.81" width="328.11" height="58.11" rx="28.56" ry="28.56"/>
+    </g>
+    <g>
+      <path class="cls-3" d="M57.84,67.65h-17.29c-17.35,0-31.55-13.21-31.55-29.35v-.87c0-16.15,14.2-29.35,31.55-29.35"/>
+      <path class="cls-4" d="M57.84,67.65h-17.29c-17.35,0-31.55-13.21-31.55-29.35v-.87c0-16.15,14.2-29.35,31.55-29.35"/>
+    </g>
+    <g>
+      <path class="cls-3" d="M297.01,8.08h8.59c7.08,0,13.64,2.2,18.92,5.9,7.66,5.37,12.63,13.9,12.63,23.45v.87c0,16.15-14.2,29.35-31.55,29.35"/>
+      <path class="cls-4" d="M297.01,8.08h8.59c7.08,0,13.64,2.2,18.92,5.9,7.66,5.37,12.63,13.9,12.63,23.45v.87c0,16.15-14.2,29.35-31.55,29.35"/>
+    </g>
+  </g>
+</svg>
