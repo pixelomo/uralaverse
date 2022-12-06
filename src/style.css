@@ -645,6 +645,15 @@ a#agencyvista-badge {
         box-shadow: none;
         text-shadow: none;
     }
+    #work {
+        bottom: 15%;
+        max-width: 300px;
+        font-size: 14px;
+        padding: 10px;
+    }
+    #work p{
+        margin: 0;
+    }
     /* section#about br {display: none;} */
     /* h3.section-subheading{
         font-size: 12px;
