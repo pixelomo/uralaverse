@@ -28,15 +28,15 @@ export default class Raycaster {
         })
 
         this.closeLocationsModal = document.querySelector('.close-locations-button')
-
         this.locationsModal = document.querySelector('#locations')
-
         this.locationsHiddenButton = document.querySelector('#locations-hidden-button')
 
         this.closeLocationsModal.addEventListener('click', () => {
             this.locationsModal.classList.add('hide')
             this.locationsHiddenButton.classList.remove('hide')
         })
+
+        this.workModal = document.querySelector('#work')
 
         this.color = null
         this.mouse = new THREE.Vector2()
@@ -166,6 +166,7 @@ export default class Raycaster {
                                 ease: "back.inOut(1.7)",
                             })
                             this.testObjects = false
+                            this.workModal.classList.add('show')
                             this.locationsHiddenButton.classList.remove('hide')
                             this.experience.world.showWork()
                         }
@@ -239,6 +240,7 @@ export default class Raycaster {
         this.locationsHiddenButton.classList.add('hide')
         this.locationsModal.classList.remove('hide')
         this.locationSection.classList.remove('show')
+        this.workModal.classList.remove('show')
         setTimeout(() => {
             this.contactForm.classList.remove('show')
             this.aboutSection.classList.remove('show')

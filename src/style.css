@@ -145,7 +145,7 @@ button{
 button.gif-button:hover{
     background-image: url('./../static/images/tv.webp');
 }
-input, textarea{
+input, textarea, label{
     width: 100%;
     background: transparent;
     border: none;
@@ -159,6 +159,28 @@ input, textarea{
     font-size: 22px;
     font-weight: 900;
 }
+label{
+    width: 100%;
+    display: block;
+    border: none;
+    padding-bottom: 0;
+}
+select{
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    border: 1px solid #347cb6;
+    border-radius: 4px;
+    padding: 8px 6px;
+    font-family: 'Roboto', sans-serif;
+    background: transparent;
+    color: #b6d8fa;
+    font-size: 16px;
+}
+/* .select.row{
+    border-bottom: 1px solid rgba(1, 198, 251, 0.5);
+    padding-bottom: 10px;
+} */
 textarea {
     height: 180px;
 }
@@ -496,6 +518,15 @@ a#agencyvista-badge {
 }
 .point.visible .label {
 	transform: scale(1, 1);
+}
+
+#work {
+    top: initial;
+    bottom: 10%;
+    width: 100%;
+    max-width: 650px;
+    font-size: 18px;
+    padding: 5px 20px;
 }
 
 
