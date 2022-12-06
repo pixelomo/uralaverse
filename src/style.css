@@ -168,7 +168,7 @@ label{
 select{
     display: block;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     border: 1px solid #347cb6;
     border-radius: 4px;
     padding: 8px 6px;
@@ -546,8 +546,9 @@ a#agencyvista-badge {
     textarea{
         height: 90px;
     }
-    input, textarea{
+    input, textarea, label{
         font-size: 16px;
+        margin-bottom: 0;
     }
     button {
         font-size: 20px;
