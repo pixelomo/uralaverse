@@ -539,9 +539,11 @@ a#agencyvista-badge {
 @media(max-width: 1024px){
     section#contact{
         top: 1rem;
+        padding-bottom: 0.25rem;
     }
     section#contact h3{
         font-size: 42px;
+        margin-top: 0;
     }
     textarea{
         height: 90px;
