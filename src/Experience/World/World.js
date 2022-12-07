@@ -124,13 +124,23 @@ export default class World {
         this.about.mesh.visible = true
         this.locations.mesh.visible = true
         this.work.mesh.visible = true
-        gsap.to(this.work.mesh.position, {
-            x: -2.4,
-            y: -2.3,
-            z: -2.2,
-            duration: 1.5,
-            ease: "back.inOut(1.7)",
-        })
+        if(this.isMobile()){
+            gsap.to(this.work.mesh.position, {
+                x: 1.2,
+                y: -4.2,
+                z: -2.5,
+                duration: 1.5,
+                ease: "back.inOut(1.7)",
+            })
+        } else {
+            gsap.to(this.work.mesh.position, {
+                x: -2.4,
+                y: -2.3,
+                z: -2.2,
+                duration: 1.5,
+                ease: "back.inOut(1.7)",
+            })
+        }
         this.uralaLogo.model.visible = true
         this.ctLogo.model.visible = true
         this.experience.world.environment.pointLight.position.set(1, 3, 10)
