@@ -517,6 +517,11 @@ ul{padding-left: 2rem;}
     background-position: center;
     width: 240px;
     height: 240px;
+    transition: .2s ease-in-out;
+}
+.list-item:not(.buffer):hover{
+    text-shadow: 0 0 50px #00f0f3;
+    font-weight: 700;
 }
 
 .mobile-item{display: none;}
