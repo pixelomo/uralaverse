@@ -33,6 +33,7 @@ export default class Text {
 
     setMaterial(color) {
         this.material = new THREE.MeshStandardMaterial({ color: color })
+        this.material.userData.color = new THREE.Color(color)
     }
 
     setMesh(position, name) {

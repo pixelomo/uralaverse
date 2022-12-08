@@ -173,6 +173,7 @@ export default class Raycaster {
                     }
                 }
             }
+            console.log(this.objectsToTest)
         })
 
         // Accordion on locations modal mobile view
@@ -205,25 +206,37 @@ export default class Raycaster {
         if(intersects.length) { // mouse enter
             this.currentIntersect = intersects[0]
             // console.log(this.currentIntersect.object.material.color)
-            if(this.currentIntersect.object.name === 'about' || this.currentIntersect.object.name === 'contact' || this.currentIntersect.object.name === 'locations'){
+            if(this.currentIntersect.object.name === 'about' || this.currentIntersect.object.name === 'contact' || this.currentIntersect.object.name === 'locations' || this.currentIntersect.object.name === 'work'){
                 this.color = new THREE.Color('#00c4eb')
-                gsap.to(this.currentIntersect.object.material.color, 2, {
+                gsap.to(this.currentIntersect.object.material.color, 0.5, {
                     r: this.color.r,
                     g: this.color.g,
                     b: this.color.b
                 })
+                // gsap.to(this.currentIntersect.object.scale, 0.5, {
+                //     x: 1.1,
+                //     y: 1.1,
+                //     z: 1.1
+                // })
             }
         } else { // mouse leave
             this.currentIntersect = null
-            // console.log(this.scene.children)
-            // if(this.currentIntersect.object.name === 'about'){
-            //     this.color = new THREE.Color('#00f208')
-            // }
-            // gsap.to(this.currentIntersect.object.material.color, 2, {
-            //     r: this.color.r,
-            //     g: this.color.g,
-            //     b: this.color.b
-            // })
+            if(this.experience.world.work){
+                this.resetTextColor(this.experience.world.about.mesh)
+                this.resetTextColor(this.experience.world.locations.mesh)
+                this.resetTextColor(this.experience.world.contact.mesh)
+                this.resetTextColor(this.experience.world.work.mesh)
+            }
+        }
+    }
+
+    resetTextColor(mesh) {
+        if(mesh.material.color != mesh.material.userData.color){
+            gsap.to(mesh.material.color, 0.5, {
+                r: mesh.material.userData.color.r,
+                g: mesh.material.userData.color.g,
+                b: mesh.material.userData.color.b
+            })
         }
     }
 

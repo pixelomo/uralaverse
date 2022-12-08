@@ -386,7 +386,7 @@ ul{padding-left: 2rem;}
 /* //////////////// about tabs /////////////////*/
 .tabbed {
     max-width: 1064px;
-    margin: 10px auto 0;
+    margin: 20px auto 0;
 }
 [role="tablist"] {
     padding: 0;
@@ -404,7 +404,7 @@ ul{padding-left: 2rem;}
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 65px;
+    height: 125px;
     position: absolute;
     pointer-events: none;
 }
@@ -921,6 +921,7 @@ a#agencyvista-badge {
 }
 
 @media(max-width: 768px){
+    .tabbed{margin: 0 auto;}
     [role="tablist"] a{
         width: 100%;
         font-size: 20px;
