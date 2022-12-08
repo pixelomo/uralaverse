@@ -173,7 +173,7 @@ export default class Raycaster {
                     }
                 }
             }
-            console.log(this.objectsToTest)
+            // console.log(this.objectsToTest)
         })
 
         // Accordion on locations modal mobile view

@@ -399,7 +399,7 @@ ul{padding-left: 2rem;}
 
 [role="tablist"]:before {
     content: '';
-    background-image: url('./../static/images/base-lines.svg');
+    background-image: url('./../static/images/title-base.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -444,16 +444,14 @@ ul{padding-left: 2rem;}
     font-weight: 700;
 }
 [role="tablist"] [aria-selected]:after {
-    /* content: "";
-    background-image: url('./../static/images/thick-croped.svg');
+    content: "";
+    background-image: url('./../static/images/title-thick.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     position: absolute;
-    left: -15px;
-    top: -15px;
-    height: 70px;
-    width: 330px; */
+    height: 126px;
+    width: 400px;
 }
 
 [role="tabpanel"] {
@@ -517,11 +515,12 @@ ul{padding-left: 2rem;}
     background-position: center;
     width: 240px;
     height: 240px;
-    transition: .2s ease-in-out;
+    /* transition: .2s ease-in-out; */
 }
 .list-item:not(.buffer):hover{
+    background-image: url('./../static/images/honey-hover.svg');
     text-shadow: 0 0 50px #00f0f3;
-    font-weight: 700;
+    background-size: 115%;
 }
 
 .mobile-item{display: none;}
@@ -756,6 +755,7 @@ a#agencyvista-badge {
 /* //////////////////////////////////// */
 
 @media(max-width: 1024px){
+    [role="tablist"] [aria-selected]:after {display: none;}
     section#contact{
         top: 1rem;
         padding-bottom: 0.25rem;

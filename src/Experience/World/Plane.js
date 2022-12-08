@@ -13,7 +13,7 @@ export default class Plane {
         this.raycaster = this.experience.raycaster
         this.setGeometry(width, height)
         this.setMaterial(img)
-        this.setMesh(position)
+        this.setMesh(position, img)
         this.clock = new THREE.Clock()
         // Debug
         // this.debug = this.experience.debug
@@ -60,11 +60,11 @@ export default class Plane {
         // }
     }
 
-    setMesh(position) {
+    setMesh(position, img) {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.position.set(position.x, position.y, position.z)
-        this.mesh.name = 'portfolio'
-        this.raycaster.objectsToTest.push(this.mesh)
+        this.mesh.name = 'portfolio'+img
+        // this.raycaster.objectsToTest.push(this.mesh)
         this.scene.add(this.mesh)
     }
 
