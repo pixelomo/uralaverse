@@ -36,7 +36,7 @@ export default class UI {
 		ThreeMeshUI.update();
 	}
 
-	createUI() {
+	createUI(text) {
 		const container = new ThreeMeshUI.Block({
 			ref: "container",
 			padding: 0.025,
@@ -48,7 +48,7 @@ export default class UI {
 			backgroundOpacity: 0,
 		});
 
-		container.position.set(1, 5.5, -3)
+		container.position.set(0, 0, 3)
 		container.rotation.x = 0.15;
 		this.scene.add(container);
 
@@ -56,36 +56,32 @@ export default class UI {
 
 		const title = new ThreeMeshUI.Block({
 			height: 1.1,
-			width: 7.5,
+			width: 7,
 			margin: 0.025,
 			justifyContent: "center",
-			fontSize: 0.45,
-			fontColor: new THREE.Color('#00f2be'),
-			backgroundColor: new THREE.Color('#680080'),
+			fontSize: 0.28,
+			fontColor: new THREE.Color('#ffffff'),
+			backgroundColor: new THREE.Color('#26002f'),
 			backgroundOpacity: 0.4,
 			bestFit: 'grow',
 			borderRadius: .2,
 		});
 
-		title.add(
-		  new ThreeMeshUI.Text({
-			content: "We Are URALA!",
-		  })
-		);
+		title.add(new ThreeMeshUI.Text({ content: text.title }));
 
 		container.add(title);
 
 		//
 
-		const leftSubBlock = new ThreeMeshUI.Block({
-			height: 2.5,
-			width: 3.9,
-			margin: 0.025,
-			padding: 0.025,
-			textAlign: "left",
-			justifyContent: "end",
-			borderRadius: .2,
-		});
+		// const leftSubBlock = new ThreeMeshUI.Block({
+		// 	height: 2.5,
+		// 	width: 3.9,
+		// 	margin: 0.025,
+		// 	padding: 0.025,
+		// 	textAlign: "left",
+		// 	justifyContent: "end",
+		// 	borderRadius: .2,
+		// });
 
 		// const caption = new ThreeMeshUI.Block({
 		//   height: 0.07,
@@ -111,21 +107,21 @@ export default class UI {
 		});
 
 		const subSubBlock1 = new ThreeMeshUI.Block({
-			height: 2.5,
-			width: 3.5,
+			height: 1.15,
+			width: 7,
 			margin: 0.025,
 			padding: 0.1,
-			fontSize: 0.16,
+			fontSize: 0.17,
 			textAlign: "left",
 			// justifyContent: "center",
-			fontColor: new THREE.Color('#00f2be'),
-			backgroundColor: new THREE.Color('#680080'),
+			fontColor: new THREE.Color('#ffffff'),
+			backgroundColor: new THREE.Color('#26002f'),
 			backgroundOpacity: 0.5,
 			bestFit: 'grow',
 			borderRadius: .2,
 		})
 		.add(new ThreeMeshUI.Text({
-			content: "a new-era, cross-border creative marketing and communications/PR agency. We help brands scale globally and across new markets.",
+			content: text.description,
 		}))
 
 		rightSubBlock.add(subSubBlock1)
@@ -139,16 +135,13 @@ export default class UI {
 		  backgroundOpacity: 0,
 		});
 
-		contentContainer.add(leftSubBlock, rightSubBlock);
+		contentContainer.add(rightSubBlock);
 		container.add(contentContainer);
 
-		//
-		// console.log(this.resources.items.ctGif)
-
-		new THREE.TextureLoader().load(this.resources.items.neonTexture.source.data.currentSrc, (texture) => {
-		  leftSubBlock.set({
-			backgroundTexture: texture,
-		  });
-		});
+		// new THREE.TextureLoader().load(this.resources.items.neonTexture.source.data.currentSrc, (texture) => {
+		//   leftSubBlock.set({
+		// 	backgroundTexture: texture,
+		//   });
+		// });
 	}
 }

@@ -65,7 +65,6 @@ export default class Experience {
     destroy() {
         this.sizes.off('resize')
         this.time.off('tick')
-
         // Traverse the whole scene
         this.scene.traverse((child) => {
             // Test if it's a mesh
@@ -75,7 +74,6 @@ export default class Experience {
                 // Loop through the material properties
                 for(const key in child.material) {
                     const value = child.material[key]
-
                     // Test if there is a dispose function
                     if(value && typeof value.dispose === 'function') {
                         value.dispose()
@@ -85,13 +83,17 @@ export default class Experience {
         })
 
         this.camera.controls.dispose()
-        this.renderer.instance.dispose()
 
         if(this.debug.active){
             this.debug.ui.destroy()
         }
 
-        console.log(this.scene)
+        this.renderer.instance.dispose()
+        this.renderer.instance.renderLists.dispose()
+        // this.scene.children = []
+        // this.world = undefined
+
+        // console.log(this.scene)
     }
 
     // clean() {

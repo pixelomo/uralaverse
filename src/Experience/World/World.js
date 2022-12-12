@@ -8,22 +8,26 @@ import Particles from './Particles.js'
 import Text from './Text.js'
 import SVG from './SVG.js'
 import Plane from './Plane.js'
-// import UI from './UI.js'
+import UI from './UI.js'
 import gsap from 'gsap'
 
 export default class World {
     constructor(params) {
-        this.experience = new Experience()
-        this.scene = this.experience.scene
-        this.resources = this.experience.resources
-        this.camera = this.experience.camera.instance
-        this.renderer = this.experience.renderer
-
+        this.createScene()
         // Wait for resources
         this.resources.on('ready', () => {
             this.intro()
             this.initHome(params)
         })
+    }
+
+    createScene() {
+        this.experience = new Experience()
+        this.scene = this.experience.scene
+        this.resources = this.experience.resources
+        this.camera = this.experience.camera.instance
+        this.renderer = this.experience.renderer
+        this.environment = new Environment()
     }
 
     intro() {
@@ -45,7 +49,6 @@ export default class World {
 
     initHome(params) {
         this.particles = new Particles(params.particlesAmount)
-        this.environment = new Environment()
         // this.ui = new UI()
         setTimeout(() => {
             this.diamonds = new Diamonds(params.diamondAmount)
@@ -159,6 +162,9 @@ export default class World {
     }
 
     hideHome() {
+        // this.experience.destroy()
+        // this.createScene()
+        // this.welcome = undefined
         this.diamonds.diamondGroup.visible = false
         this.donuts.donutGroup.visible = false
         this.spheres.sphereGroup.visible = false
@@ -185,12 +191,15 @@ export default class World {
                 duration: 1.5,
                 ease: "back.inOut(1.7)",
             })
-            this.portfolio_1 = new Plane('coin360', 3, 2, {x: -3.5, y: 1.5, z: 0})
-            this.portfolio_2 = new Plane('kaplan', 3, 2, {x: 0, y: 1.5, z: 0})
-            this.portfolio_3 = new Plane('nft', 3, 2, {x: 3.5, y: 1.5, z: 0})
-            this.portfolio_4 = new Plane('reckitt', 3, 2, {x: -3.5, y: -1, z: 0})
-            this.portfolio_5 = new Plane('lawork', 3, 2, {x: 0, y: -1, z: 0})
-            this.portfolio_6 = new Plane('coint', 3, 2, {x: 3.5, y: -1, z: 0})
+            this.portfolio_1 = new Plane('coin360', 3, 2, {x: -3.5, y: 1.5, z: 0}, 'Coin360 - crypto heatmap website development', 'Ongoing project for Coin360 in the Banking & Financials industry for a B2C audience since 2019.')
+            this.portfolio_2 = new Plane('kaplan', 3, 2, {x: 0, y: 1.5, z: 0}, 'Kaplan Singapore - Website, Content Marketing, PR', 'Project made for Kaplan Singapore in the Education industry for a B2C audience in 2021.')
+            this.portfolio_3 = new Plane('nft', 3, 2, {x: 3.5, y: 1.5, z: 0}, 'Global Marketing for a Prominent NFT Project', 'Ongoing project for Global NFT Avatar Project in the Others industry for a B2C audience since 2022.')
+            this.portfolio_4 = new Plane('reckitt', 3, 2, {x: -3.5, y: -1, z: 0}, 'Reckitt Benckiser - Campaign Landing Page', 'Project made for Reckitt Benckiser in the Household Products industry for a B2C audience.')
+            this.portfolio_5 = new Plane('lawork', 3, 2, {x: 0, y: -1, z: 0}, 'Online recruiting website and service development', 'Ongoing project for Japanese clients in the Industrial Goods & Services industry for a B2C audience since 2022.')
+            this.portfolio_6 = new Plane('coint', 3, 2, {x: 3.5, y: -1, z: 0}, 'Growth Strategy for Global Fintech Media Brands', 'Ongoing project for Cointelegraph.com & Investing.com in the Media industry for a B2C audience since 2017.')
+            this.ui = new UI({title: '', description: ''})
+            // this.ui.mesh.visible = false
+            console.log(this.ui)
         }
     }
 

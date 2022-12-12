@@ -144,7 +144,8 @@ button{
     text-shadow: 3px 3px 5px #2d95fc, -3px -3px 5px #2d95fc;
 }
 button.gif-button:hover{
-    background-image: url('./../static/images/tv.webp');
+    /* background-image: url('./../static/images/tv.webp'); */
+    background-image: url('./../static/images/trip.webp');
 }
 input, textarea, label{
     width: 100%;
