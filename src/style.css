@@ -944,12 +944,14 @@ a#agencyvista-badge {
 
 /* /////////////////////////////////// 768 768 768//////// */
 @media(max-width: 768px){
+    h1{line-height: 1;}
     .tabbed{
         margin: 0 auto;
         max-width: 305px;
         display: flex;
         flex-direction: column;
     }
+    [role="tablist"]{height: auto; padding-bottom: 0.5rem;}
     [role="tablist"] a{
         width: 100%;
         font-size: 20px;
@@ -968,9 +970,9 @@ a#agencyvista-badge {
     .mobile-item{
         display: flex;
     }
-    .list-block{
+    /* .list-block{
         max-height: 430px;
-    }
+    } */
     .list-block .list-item:not(.buffer){
         width: 130px;
         height: 130px;
