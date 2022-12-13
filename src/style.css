@@ -868,12 +868,13 @@ a#agencyvista-badge {
     }
     #about button.close-button{
         position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        height: 40px;
-        top: initial;
-        background-size: 50%;
+        min-width: 70px;
+        right: 8px;
+        font-size: 14px;
+        top: 8px;
+        padding: 4px;
+        height: 30px;
+        background-size: 200%;
     }
     .close-locations-button{
         right: 0.5rem;
