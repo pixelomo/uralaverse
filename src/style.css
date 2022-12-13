@@ -858,13 +858,22 @@ a#agencyvista-badge {
     /* section#locations {
         width: 260px;
     } */
-    #about button.close-button, #locations button.close-button {
+    #locations button.close-button {
         bottom: 1rem;
         position: relative;
         left: 0;
         right: 0;
         width: 100%;
         font-size: 20px;
+    }
+    #about button.close-button{
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 40px;
+        top: initial;
+        background-size: 50%;
     }
     .close-locations-button{
         right: 0.5rem;
@@ -928,6 +937,9 @@ a#agencyvista-badge {
         bottom: 9px;
         font-size: 11px;
     }
+    .tabbed {
+        margin: 20px auto 30px;
+    }
 }
 
 /* /////////////////////////////////// 768 768 768//////// */
@@ -955,6 +967,9 @@ a#agencyvista-badge {
     }
     .mobile-item{
         display: flex;
+    }
+    .list-block{
+        max-height: 430px;
     }
     .list-block .list-item:not(.buffer){
         width: 130px;
