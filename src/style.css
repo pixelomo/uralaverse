@@ -463,11 +463,11 @@ ul{padding-left: 2rem;}
 }
 
 #section1 {
-    max-width: 600px;
+    max-width: 570px;
     margin: 0 auto;
 }
 #section2 {
-    max-width: 780px;
+    max-width: 750px;
     margin: 0 auto;
 }
 
@@ -481,7 +481,9 @@ ul{padding-left: 2rem;}
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     text-align: center;
+    justify-content: center;
     margin-top: -120px;
+    padding-top: 1rem;
 }
 
 .list-block.hide{
@@ -510,25 +512,31 @@ ul{padding-left: 2rem;}
 }
 
 .list-item:not(.buffer){
-    background-image: url('./../static/images/hcomb.svg');
+    background-image: url('./../static/images/honey.svg');
     background-repeat: no-repeat;
     background-position: center;
     width: 240px;
     height: 240px;
-    /* transition: .2s ease-in-out; */
+    background-size: 110%;
+    transition: .1s;
 }
 .list-item:not(.buffer):hover{
     background-image: url('./../static/images/honey-hover.svg');
-    text-shadow: 0 0 50px #00f0f3;
+    /* text-shadow: 0 0 50px #00f0f3; */
     background-size: 105%;
 }
 
+.list-item:not(.buffer).alt-honey{background-image: url('./../static/images/honey-alt.svg');}
+.list-item:not(.buffer).alt-honey:hover{background-image: url('./../static/images/honey-alt-hover.svg');}
+
+.h-0{height: 0;}
+
 .mobile-item{display: none;}
 
-.mr-60{margin-right: -60px;}
-.ml-60{margin-left: -60px;}
-.mb-135{bottom: -135px; position: relative;}
-.mt-135{margin-top: -135px;}
+.mr-60{margin-right: -70px;}
+.ml-60{margin-left: -70px;}
+.mb-135{bottom: -140px; position: relative;}
+.mt-135{margin-top: -142px;}
 .l-20{left: -20px;}
 
 .align-start{
@@ -558,10 +566,12 @@ ul{padding-left: 2rem;}
     border-radius: 8px;
 }
 .legs{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 0.5rem 0.75rem;
+    grid-gap: 0.5rem 0.75rem; */
+    display: flex;
 }
+.d-none, .d-none.legs{display: none;}
 
 .lists{
     margin-top: 1rem;
@@ -920,8 +930,14 @@ a#agencyvista-badge {
     }
 }
 
+/* /////////////////////////////////// 768 768 768//////// */
 @media(max-width: 768px){
-    .tabbed{margin: 0 auto;}
+    .tabbed{
+        margin: 0 auto;
+        max-width: 305px;
+        display: flex;
+        flex-direction: column;
+    }
     [role="tablist"] a{
         width: 100%;
         font-size: 20px;
@@ -956,6 +972,8 @@ a#agencyvista-badge {
         margin-top: -210px;
         margin-right: -35px;
     }
+    /* .spider.active{margin: 0 auto 1rem;} */
+    .spider.active{margin: 0 0 1rem;}
     .spider h2 {
         margin: 0.75rem auto 0.5rem;
         font-size: 18px;
