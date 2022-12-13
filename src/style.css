@@ -571,7 +571,7 @@ ul{padding-left: 2rem;}
     grid-gap: 0.5rem 0.75rem; */
     display: flex;
 }
-.d-none, .d-none.legs{display: none;}
+.d-none, .d-none.legs{display: none; height: 0;}
 
 .lists{
     margin-top: 1rem;
