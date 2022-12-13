@@ -944,7 +944,8 @@ a#agencyvista-badge {
 
 /* /////////////////////////////////// 768 768 768//////// */
 @media(max-width: 768px){
-    section#about h1 span{line-height: 1; font-size: 16px;}
+    section#about h1{line-height: 1;}
+    section#about h1 span{font-size: 16px;}
     .tabbed{
         margin: 0 auto;
         max-width: 305px;
