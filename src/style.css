@@ -944,7 +944,7 @@ a#agencyvista-badge {
 
 /* /////////////////////////////////// 768 768 768//////// */
 @media(max-width: 768px){
-    h1{line-height: 1;}
+    section#about h1 span{line-height: 1; font-size: 16px;}
     .tabbed{
         margin: 0 auto;
         max-width: 305px;
@@ -954,7 +954,7 @@ a#agencyvista-badge {
     [role="tablist"]{height: auto; padding-bottom: 0.5rem;}
     [role="tablist"] a{
         width: 100%;
-        font-size: 20px;
+        font-size: 18px;
         border-radius: 30px;
         border: 2px solid;
         padding: 4px;
@@ -976,6 +976,7 @@ a#agencyvista-badge {
     .list-block .list-item:not(.buffer){
         width: 130px;
         height: 130px;
+        font-size: 14px;
     }
     .mr-60{margin-right: -35px; margin-left: -8px;}
     .ml-60{margin-left: -35px;}
