@@ -203,6 +203,8 @@ export default class Raycaster {
                                 duration: 1.2,
                             })
                             this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
+                            this.ui.container.scale.set(1,1,1)
+                            console.log(this.scene.children)
                         }
                     }
                 }

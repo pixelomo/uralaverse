@@ -22,11 +22,11 @@ export default [
     //     type: 'texture',
     //     path: 'textures/dirt/normal.jpg'
     // },
-    {
-        name: 'matcap1',
-        type: 'texture',
-        path: 'textures/matcaps/4.png'
-    },
+    // {
+    //     name: 'matcap1',
+    //     type: 'texture',
+    //     path: 'textures/matcaps/4.png'
+    // },
     {
         name: 'particles',
         type: 'texture',
@@ -62,16 +62,16 @@ export default [
         type: 'texture',
         path: 'fonts/unibody.png'
     },
-    {
-        name: 'neonTexture',
-        type: 'texture',
-        path: 'images/neon.jpg'
-    },
-    {
-        name: 'ctGif',
-        type: 'texture',
-        path: 'images/ct.gif'
-    },
+    // {
+    //     name: 'neonTexture',
+    //     type: 'texture',
+    //     path: 'images/neon.jpg'
+    // },
+    // {
+    //     name: 'ctGif',
+    //     type: 'texture',
+    //     path: 'images/ct.gif'
+    // },
     {
         name: 'uralaLogo',
         type: 'svg',

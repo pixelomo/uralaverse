@@ -7,6 +7,7 @@ export default class UI {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
+		this.container = {}
         this.createUI(text, size)
     }
 
@@ -37,7 +38,7 @@ export default class UI {
 	}
 
 	createUI(text) {
-		const container = new ThreeMeshUI.Block({
+		this.container = new ThreeMeshUI.Block({
 			ref: "container",
 			padding: 0.025,
 			fontFamily: 'https://unpkg.com/three-mesh-ui/examples/assets/Roboto-msdf.json',
@@ -48,11 +49,10 @@ export default class UI {
 			backgroundOpacity: 0,
 		});
 
-		container.position.set(0, 0, 3)
-		container.rotation.x = 0.15;
-		this.scene.add(container);
-
-		//
+		this.container.position.set(0, 0, 3)
+		this.container.rotation.x = 0.15;
+		this.container.scale.set(0,0,0)
+		this.scene.add(this.container);
 
 		const title = new ThreeMeshUI.Block({
 			height: 1.1,
@@ -69,9 +69,7 @@ export default class UI {
 
 		title.add(new ThreeMeshUI.Text({ content: text.title }));
 
-		container.add(title);
-
-		//
+		this.container.add(title);
 
 		// const leftSubBlock = new ThreeMeshUI.Block({
 		// 	height: 2.5,
@@ -99,8 +97,6 @@ export default class UI {
 
 		// leftSubBlock.add(caption);
 
-		//
-
 		const rightSubBlock = new ThreeMeshUI.Block({
 		  margin: 0.025,
 		  backgroundOpacity: 0,
@@ -126,8 +122,6 @@ export default class UI {
 
 		rightSubBlock.add(subSubBlock1)
 
-		//
-
 		const contentContainer = new ThreeMeshUI.Block({
 		  contentDirection: "row",
 		  padding: 0.02,
@@ -136,7 +130,7 @@ export default class UI {
 		});
 
 		contentContainer.add(rightSubBlock);
-		container.add(contentContainer);
+		this.container.add(contentContainer);
 
 		// new THREE.TextureLoader().load(this.resources.items.neonTexture.source.data.currentSrc, (texture) => {
 		//   leftSubBlock.set({
