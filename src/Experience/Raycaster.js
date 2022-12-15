@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Experience from './Experience.js'
 import gsap from 'gsap'
+import UI from './World/UI.js'
 
 export default class Raycaster {
     constructor() {
@@ -14,7 +15,8 @@ export default class Raycaster {
         this.contactForm = document.querySelector('.contactForm')
         this.aboutSection = document.querySelector('#about')
         this.locationSection = document.querySelector('#locations')
-        this.testObjects = true
+        this.testHomeObjects = true
+        this.testPortfolioObjects = false
 
         const close = document.querySelectorAll('.close-button')
         close.forEach(btn => btn.addEventListener('click', () => {
@@ -46,7 +48,7 @@ export default class Raycaster {
         })
 
         window.addEventListener('click', () => {
-            if(this.testObjects === true){
+            if(this.testHomeObjects === true){
                 if(this.intersects.length) {
                     if(!this.currentIntersect) {
                         // console.log('click enter')
@@ -87,7 +89,7 @@ export default class Raycaster {
                                 duration: 2,
                                 ease: "back.inOut(1.7)",
                             })
-                            this.testObjects = false
+                            this.testHomeObjects = false
                             this.aboutSection.classList.remove('show')
                             this.locationSection.classList.remove('show')
                             setTimeout(() => {
@@ -105,7 +107,7 @@ export default class Raycaster {
                                 duration: 2,
                                 ease: "back.inOut(1.7)",
                             })
-                            this.testObjects = false
+                            this.testHomeObjects = false
                             this.locationSection.classList.remove('show')
                             setTimeout(() => {
                                 this.aboutSection.classList.add('show')
@@ -126,7 +128,7 @@ export default class Raycaster {
                                 duration: 2,
                                 ease: "back.inOut(1.1)",
                             })
-                            this.testObjects = false
+                            this.testHomeObjects = false
                             setTimeout(() => {
                                 this.experience.world.showLocations()
                             }, 800)
@@ -165,10 +167,74 @@ export default class Raycaster {
                                 duration: 1.5,
                                 ease: "back.inOut(1.7)",
                             })
-                            this.testObjects = false
-                            this.workModal.classList.add('show')
+                            this.testHomeObjects = false
+                            this.testPortfolioObjects = true
+                            // this.workModal.classList.add('show')
                             this.locationsHiddenButton.classList.remove('hide')
                             this.experience.world.showWork()
+                        }
+                    }
+                }
+            } // end of textHomeObjects
+            if(this.testPortfolioObjects === true){
+                if(this.intersects.length) {
+                    this.currentIntersect = intersects[0]
+                } else {
+                    if(this.currentIntersect) {
+                        if(this.currentIntersect.object.name === 'portfolio'){
+                            // console.log(this.currentIntersect.object.userData)
+                            let portfolioItem = this.currentIntersect.object
+                            gsap.to(this.camera.position, {
+                                x: 0,
+                                y: 3,
+                                z: 8,
+                                duration: 1.2
+                            })
+                            // userData back to original position
+                            gsap.to(portfolioItem.position, {
+                                x: 0,
+                                y: 0,
+                                z: 2,
+                                duration: 1.2,
+                            })
+                            // if no UI create
+                            if(typeof this.ui === 'undefined'){
+                                this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
+                            } else {
+                                this.ui.title.children[1].set({content: portfolioItem.userData.title})
+                                this.ui.description.children[1].set({content: portfolioItem.userData.description})
+                            }
+                            // if UI scale = 1 => 0
+                            // console.log(portfolioItem.scale.x)
+                            if(this.ui.container.scale.x === 0){
+                                this.ui.container.scale.set(1,1,1)
+                                gsap.to(portfolioItem.scale, {
+                                    x: 3,
+                                    y: 3,
+                                    z: 3,
+                                    duration: 1.2,
+                                })
+                                gsap.to(portfolioItem.position, {
+                                    x: 0,
+                                    y: 0,
+                                    z: 2,
+                                    duration: 1.2,
+                                })
+                            } else {
+                                this.ui.container.scale.set(0,0,0)
+                                gsap.to(portfolioItem.scale, {
+                                    x: 1,
+                                    y: 1,
+                                    z: 1,
+                                    duration: 1.2,
+                                })
+                                gsap.to(portfolioItem.position, {
+                                    x: portfolioItem.userData.position.x,
+                                    y: portfolioItem.userData.position.y,
+                                    z: portfolioItem.userData.position.z,
+                                    duration: 1.2,
+                                })
+                            }
                         }
                     }
                 }
@@ -241,7 +307,8 @@ export default class Raycaster {
     }
 
     goHome() {
-        this.testObjects = true
+        this.testHomeObjects = true
+        this.testPortfolioObjects = false
         gsap.to(this.camera.position, {
             x: -2.5,
             y: -3,
@@ -253,7 +320,12 @@ export default class Raycaster {
         this.locationsHiddenButton.classList.add('hide')
         this.locationsModal.classList.remove('hide')
         this.locationSection.classList.remove('show')
-        this.workModal.classList.remove('show')
+        if(typeof this.ui != 'undefined'){
+            // reset portfolio
+            this.ui.container.scale.set(0,0,0)
+            this.experience.world.resetWork()
+        }
+        // this.workModal.classList.remove('show')
         setTimeout(() => {
             this.contactForm.classList.remove('show')
             this.aboutSection.classList.remove('show')

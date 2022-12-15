@@ -5,7 +5,7 @@ import vertexShader from './../shaders/vertex.glsl'
 import fragmentShader from './../shaders/fragment.glsl'
 
 export default class Plane {
-    constructor(img, width, height, position) {
+    constructor(img, width, height, position, title, description) {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
@@ -13,7 +13,7 @@ export default class Plane {
         this.raycaster = this.experience.raycaster
         this.setGeometry(width, height)
         this.setMaterial(img)
-        this.setMesh(position, img)
+        this.setMesh(position, img, title, description)
         this.clock = new THREE.Clock()
         // Debug
         // this.debug = this.experience.debug
@@ -32,26 +32,26 @@ export default class Plane {
             randoms[i] = Math.random()
         }
 
-        this.geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1))
+        // this.geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1))
     }
 
     setMaterial(img) {
         const texture = this.resources.items[img]
         // texture.anisotropy = this.renderer.instance.capabilities.getMaxAnisotropy()
-        // this.material = new THREE.MeshBasicMaterial({
-        //     map: texture,
-        //     side: THREE.DoubleSide
-        // })
-        this.material = new THREE.ShaderMaterial({
-            vertexShader: vertexShader,
-            fragmentShader: fragmentShader,
-            uniforms: {
-                uFrequency: { value: new THREE.Vector2(10, 5) },
-                uTime: { value: 0 },
-                uColor: { value: new THREE.Color('green') },
-                uTexture: { value: texture }
-            }
+        this.material = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.DoubleSide
         })
+        // this.material = new THREE.ShaderMaterial({
+        //     vertexShader: vertexShader,
+        //     fragmentShader: fragmentShader,
+        //     uniforms: {
+        //         uFrequency: { value: new THREE.Vector2(10, 5) },
+        //         uTime: { value: 0 },
+        //         uColor: { value: new THREE.Color('green') },
+        //         uTexture: { value: texture }
+        //     }
+        // })
         this.material.side = THREE.DoubleSide
         // // Debug
         // if(this.debug.active) {
@@ -60,16 +60,20 @@ export default class Plane {
         // }
     }
 
-    setMesh(position, img) {
+    setMesh(position, img, title, description) {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.position.set(position.x, position.y, position.z)
-        this.mesh.name = 'portfolio'+img
-        // this.raycaster.objectsToTest.push(this.mesh)
+        this.mesh.name = 'portfolio'
+        // this.mesh.name = 'portfolio'+img
+        this.mesh.userData.title = title
+        this.mesh.userData.description = description
+        this.mesh.userData.position = position;
+        this.raycaster.objectsToTest.push(this.mesh)
         this.scene.add(this.mesh)
     }
 
     update() {
         const elapsedTime = this.clock.getElapsedTime()
-        this.material.uniforms.uTime.value = elapsedTime
+        // this.material.uniforms.uTime.value = elapsedTime
     }
 }
