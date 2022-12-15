@@ -67,6 +67,7 @@ export default class Plane {
         // this.mesh.name = 'portfolio'+img
         this.mesh.userData.title = title
         this.mesh.userData.description = description
+        this.mesh.userData.position = position;
         this.raycaster.objectsToTest.push(this.mesh)
         this.scene.add(this.mesh)
     }

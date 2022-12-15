@@ -190,26 +190,55 @@ export default class Raycaster {
                                 z: 8,
                                 duration: 1.2
                             })
-                            gsap.to(this.currentIntersect.object.scale, {
-                                x: 3,
-                                y: 3,
-                                z: 3,
-                                duration: 1.2,
-                            })
-                            gsap.to(this.currentIntersect.object.position, {
+                            // userData back to original position
+                            gsap.to(portfolioItem.position, {
                                 x: 0,
                                 y: 0,
                                 z: 2,
                                 duration: 1.2,
                             })
-                            this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
-                            this.ui.container.scale.set(1,1,1)
-                            console.log(this.scene.children)
+                            // if no UI create
+                            if(typeof this.ui === 'undefined'){
+                                this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
+                            } else {
+                                this.ui.title.children[1].set({content: portfolioItem.userData.title})
+                                this.ui.description.children[1].set({content: portfolioItem.userData.description})
+                            }
+                            // if UI scale = 1 => 0
+                            // console.log(portfolioItem.scale.x)
+                            if(this.ui.container.scale.x === 0){
+                                this.ui.container.scale.set(1,1,1)
+                                gsap.to(portfolioItem.scale, {
+                                    x: 3,
+                                    y: 3,
+                                    z: 3,
+                                    duration: 1.2,
+                                })
+                                gsap.to(portfolioItem.position, {
+                                    x: 0,
+                                    y: 0,
+                                    z: 2,
+                                    duration: 1.2,
+                                })
+                            } else {
+                                this.ui.container.scale.set(0,0,0)
+                                gsap.to(portfolioItem.scale, {
+                                    x: 1,
+                                    y: 1,
+                                    z: 1,
+                                    duration: 1.2,
+                                })
+                                gsap.to(portfolioItem.position, {
+                                    x: portfolioItem.userData.position.x,
+                                    y: portfolioItem.userData.position.y,
+                                    z: portfolioItem.userData.position.z,
+                                    duration: 1.2,
+                                })
+                            }
                         }
                     }
                 }
             }
-
             // console.log(this.objectsToTest)
         })
 
@@ -291,6 +320,11 @@ export default class Raycaster {
         this.locationsHiddenButton.classList.add('hide')
         this.locationsModal.classList.remove('hide')
         this.locationSection.classList.remove('show')
+        if(typeof this.ui != 'undefined'){
+            // reset portfolio
+            this.ui.container.scale.set(0,0,0)
+            this.experience.world.resetWork()
+        }
         // this.workModal.classList.remove('show')
         setTimeout(() => {
             this.contactForm.classList.remove('show')

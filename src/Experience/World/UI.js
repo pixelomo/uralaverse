@@ -37,7 +37,7 @@ export default class UI {
 		ThreeMeshUI.update();
 	}
 
-	createUI(text) {
+	createUI(text = {title: "", description: ""}) {
 		this.container = new ThreeMeshUI.Block({
 			ref: "container",
 			padding: 0.025,
@@ -54,7 +54,7 @@ export default class UI {
 		this.container.scale.set(0,0,0)
 		this.scene.add(this.container);
 
-		const title = new ThreeMeshUI.Block({
+		this.title = new ThreeMeshUI.Block({
 			height: 1.1,
 			width: 7,
 			margin: 0.025,
@@ -67,9 +67,9 @@ export default class UI {
 			borderRadius: .2,
 		});
 
-		title.add(new ThreeMeshUI.Text({ content: text.title }));
+		this.title.add(new ThreeMeshUI.Text({ content: text.title }));
 
-		this.container.add(title);
+		this.container.add(this.title);
 
 		// const leftSubBlock = new ThreeMeshUI.Block({
 		// 	height: 2.5,
@@ -102,7 +102,7 @@ export default class UI {
 		  backgroundOpacity: 0,
 		});
 
-		const subSubBlock1 = new ThreeMeshUI.Block({
+		this.description = new ThreeMeshUI.Block({
 			height: 1.15,
 			width: 7,
 			margin: 0.025,
@@ -120,7 +120,7 @@ export default class UI {
 			content: text.description,
 		}))
 
-		rightSubBlock.add(subSubBlock1)
+		rightSubBlock.add(this.description)
 
 		const contentContainer = new ThreeMeshUI.Block({
 		  contentDirection: "row",
