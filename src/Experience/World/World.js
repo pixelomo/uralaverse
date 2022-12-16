@@ -1,6 +1,7 @@
 import Experience from '../Experience.js'
 import Environment from './Environment.js'
 import Globe from './Globe.js'
+import Doge from './Doge.js'
 import Diamonds from './Diamonds.js'
 import Donuts from './Donuts.js'
 import Spheres from './Spheres.js'
@@ -49,6 +50,7 @@ export default class World {
 
     initHome(params) {
         this.particles = new Particles(params.particlesAmount)
+        this.doge = new Doge()
         // this.ui = new UI()
         setTimeout(() => {
             this.diamonds = new Diamonds(params.diamondAmount)
@@ -230,6 +232,7 @@ export default class World {
         this.hideHome()
         this.globe = new Globe()
         this.globe.model.visible = true
+        // this.doge.position.set(3, 3, 2)
         this.lightFollowControls()
     }
 
@@ -252,6 +255,9 @@ export default class World {
         }
         if(this.ui) {
             this.ui.update()
+        }
+        if(this.doge) {
+            this.doge.update()
         }
         if(this.portfolio_1) {
             this.portfolio_1.update()
