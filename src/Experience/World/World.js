@@ -50,7 +50,6 @@ export default class World {
 
     initHome(params) {
         this.particles = new Particles(params.particlesAmount)
-        this.doge = new Doge()
         // this.ui = new UI()
         setTimeout(() => {
             this.diamonds = new Diamonds(params.diamondAmount)
@@ -88,6 +87,7 @@ export default class World {
             }, 4600)
 
         } else {
+            this.doge = new Doge()
             setTimeout(() => {
                 this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 3.5, z: -2.5})
             }, 2400)
