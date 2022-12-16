@@ -276,7 +276,7 @@ input:-webkit-autofill:active {
 .controls p{
     margin: 0 0 4px;
 }
-.controls .mobile{
+.mobile, .controls .mobile{
     display: none;
 }
 
@@ -972,6 +972,8 @@ a#agencyvista-badge {
     .mobile-item{
         display: flex;
     }
+    .desktop{display: none;}
+    .mobile{display: block;}
     /* .list-block{
         max-height: 430px;
     } */

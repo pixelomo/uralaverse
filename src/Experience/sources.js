@@ -38,6 +38,11 @@ export default [
         path: 'models/globeB.glb'
     },
     {
+        name: 'doge',
+        type: 'gltfModel',
+        path: 'models/doge.glb'
+    },
+    {
         name: 'mainFont',
         type: 'font',
         path: 'fonts/unibody.json'
