@@ -101,7 +101,8 @@ export default class Doge {
 	update() {
 		gsap.from(this.model.position, {
             x: this.cursor.x * 20,
-            y: - this.cursor.y * 10
+            y: - this.cursor.y * 10,
+            z: (this.model.position.z += this.cursor.x / 3)
         })
 		// this.model.position.x = this.cursor.x * 20
 		// this.model.position.y = - this.cursor.y * 10
