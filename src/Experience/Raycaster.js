@@ -57,12 +57,14 @@ export default class Raycaster {
                 } else {
                     if(this.currentIntersect) {
                         // console.log(this.currentIntersect.object.name)
-                        this.color = new THREE.Color('#00ff0d')
-                        gsap.to(this.currentIntersect.object.material.color, 1, {
-                            r: this.color.r,
-                            g: this.color.g,
-                            b: this.color.b
-                        })
+                        if(this.currentIntersect.object.name != 'portfolio') {
+                            this.color = new THREE.Color('#00ff0d')
+                            gsap.to(this.currentIntersect.object.material.color, 1, {
+                                r: this.color.r,
+                                g: this.color.g,
+                                b: this.color.b
+                            })
+                        }
 
                         ////////////////////// HOME //////////////////////////
                         // if(this.currentIntersect.object.name === 'home'){
@@ -80,6 +82,7 @@ export default class Raycaster {
                         //     }, 700)
                         // }
 
+                        /////////////////////////// CONTACT ///////////////////////////////
                         /////////////////////////// CONTACT ///////////////////////////////
                         if(this.currentIntersect.object.name === 'contact'){
                             gsap.to(this.camera.position, {
@@ -99,26 +102,44 @@ export default class Raycaster {
                         }
 
                         /////////////////////////// ABOUT ///////////////////////////////
+                        /////////////////////////// ABOUT ///////////////////////////////
                         if(this.currentIntersect.object.name === 'about'){
+                            // gsap.to(this.camera.position, {
+                            //     x: 5,
+                            //     y: 14,
+                            //     z: 5,
+                            //     duration: 2,
+                            //     ease: "back.inOut(1.7)",
+                            // })
+                            this.testHomeObjects = false
+                            this.experience.camera.disableControls()
+                            this.locationSection.classList.remove('show')
                             gsap.to(this.camera.position, {
-                                x: 5,
-                                y: 14,
-                                z: 5,
+                                x: -2.2,
+                                y: -3,
+                                z: 8.9,
                                 duration: 2,
                                 ease: "back.inOut(1.7)",
                             })
-                            this.testHomeObjects = false
-                            this.locationSection.classList.remove('show')
+                            gsap.to(this.camera.rotation, {
+                                x: 1.2,
+                                y: 0.1,
+                                z: -0.1,
+                                duration: 2,
+                                ease: "back.inOut(1.7)",
+                            })
                             setTimeout(() => {
                                 this.aboutSection.classList.add('show')
                             }, 1200)
                         }
 
                         /////////////////////////// SVG LINK ///////////////////////////
+                        /////////////////////////// SVG LINK ///////////////////////////
                         if(typeof this.currentIntersect !== null && this.currentIntersect.object.parent.userData.url){
                             window.open(this.currentIntersect.object.parent.userData.url, '_blank').focus();
                         }
 
+                        /////////////////////////// LOCATIONS ///////////////////////////////
                         /////////////////////////// LOCATIONS ///////////////////////////////
                         if(this.currentIntersect.object.name === 'locations'){
                             gsap.to(this.camera.position, {
@@ -158,8 +179,9 @@ export default class Raycaster {
                             // }, 3000)
                         }
 
-                         /////////////////////////// WORK ///////////////////////////////
-                         if(this.currentIntersect.object.name === 'work'){
+                        /////////////////////////// WORK ///////////////////////////////
+                        /////////////////////////// WORK ///////////////////////////////
+                        if(this.currentIntersect.object.name === 'work'){
                             gsap.to(this.camera.position, {
                                 x: 2,
                                 y: -3,
@@ -173,9 +195,13 @@ export default class Raycaster {
                             this.locationsHiddenButton.classList.remove('hide')
                             this.experience.world.showWork()
                         }
+                        /////////////////////////// WORK  END ///////////////////////////////
+                        /////////////////////////// WORK END ///////////////////////////////
                     }
                 }
             } // end of textHomeObjects
+            ///////////////////////////// PORTFOLIO ///////////////////////////////////
+            ///////////////////////////// PORTFOLIO ///////////////////////////////////
             if(this.testPortfolioObjects === true){
                 if(this.intersects.length) {
                     this.currentIntersect = intersects[0]
@@ -238,7 +264,7 @@ export default class Raycaster {
                         }
                     }
                 }
-            }
+            } // end of portfolio
             // console.log(this.objectsToTest)
         })
 
@@ -307,6 +333,7 @@ export default class Raycaster {
     }
 
     goHome() {
+        this.experience.camera.enableControls()
         this.testHomeObjects = true
         this.testPortfolioObjects = false
         gsap.to(this.camera.position, {
@@ -317,6 +344,7 @@ export default class Raycaster {
             ease: "back.inOut(1.7)",
         })
         this.experience.world.showHome()
+        this.aboutSection.classList.remove('show')
         this.locationsHiddenButton.classList.add('hide')
         this.locationsModal.classList.remove('hide')
         this.locationSection.classList.remove('show')
@@ -328,7 +356,6 @@ export default class Raycaster {
         // this.workModal.classList.remove('show')
         setTimeout(() => {
             this.contactForm.classList.remove('show')
-            this.aboutSection.classList.remove('show')
         }, 700)
     }
 }

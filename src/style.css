@@ -39,13 +39,11 @@ img{max-width: 100%;}
     width: 80%;
     max-width: 400px;
     background-color: rgba(0,0,0,0.5);
-    /* color: #fff; */
     font-size: 24px;
     font-family: sans-serif;
     padding: 20px 25px 25px;
     border-radius: 16px;
-    /* box-shadow: -1px -1px 55px 25px rgb(59 30 102 / 50%); */
-    box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
+    /* box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%); */
     display: none;
     /* pointer-events: none; */
     /* border: 2px solid #fff; */
@@ -73,11 +71,9 @@ svg path{
 }
 
 section#contact {
-    /* background-color: rgba(0,0,0,0.8); */
-    /* background: linear-gradient(152deg, #3b1e65 20%, transparent 70%); */
     background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
+    /* box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%); */
     color: #fff;
-    /* font-family: 'Nabla', cursive; */
     z-index: 999;
 }
 section#contact h3{
@@ -141,7 +137,7 @@ button{
     font-size: 32px;
     cursor: pointer;
     transition: .3s ease-in-out;
-    box-shadow: 1px 1px 11px 6px rgb(45 149 252 / 80%);
+    /* box-shadow: 1px 1px 11px 6px rgb(45 149 252 / 80%); */
     text-shadow: 3px 3px 5px #2d95fc, -3px -3px 5px #2d95fc;
 }
 button.gif-button:hover{
@@ -268,7 +264,7 @@ input:-webkit-autofill:active {
     border-radius: 12px;
     /* border: 1px solid rgb(255 255 255 / 40%); */
     background: linear-gradient(-8deg, #3b1e65 65%, transparent 100%);
-    box-shadow: 0px 0px 65px 20px rgb(45 149 252 / 50%);
+    /* box-shadow: 0px 0px 65px 20px rgb(45 149 252 / 50%); */
     right: 1rem;
     top: 1rem;
     width: fit-content;
@@ -312,6 +308,7 @@ input:-webkit-autofill:active {
     /* background: linear-gradient(50deg, #3b1e65 40%, transparent 100%); */
     /* background: linear-gradient(153deg, #3b1e65 50%, transparent 100%); */
     background: rgb(59 30 101 / 90%);
+    background: transparent;
     font-size: 22px;
 }
 
@@ -597,11 +594,21 @@ ul{padding-left: 2rem;}
     border-radius: 9px;
     border-width: 2px;
     height: auto;
-    top: 1rem;
-    right: 1rem;
+    /* top: 1rem; */
+    top: initial;
+    bottom: 0;
+    /* right: 1rem; */
+    right: initial;
+    left: 0;
     font-size: 22px;
     color: #b6d8fa;
     background-size: 200%;
+}
+#locations button.close-button{
+    top: 1rem;
+    bottom: initial;
+    right: 1rem;
+    left: initial;
 }
 
 a#agencyvista-badge {
@@ -621,7 +628,7 @@ a#agencyvista-badge {
     bottom: 7rem;
     width: 370px;
     background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
-    box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%);
+    /* box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%); */
     /* padding: 2rem 2rem 4rem; */
     padding: 2rem;
     height: fit-content;
@@ -808,6 +815,7 @@ a#agencyvista-badge {
         max-height: 85vh;
         width: 100%;
         top: 0;
+        box-shadow: none;
         /* height: 89vh; */
         /* height: 600px; */
     }
@@ -869,13 +877,15 @@ a#agencyvista-badge {
         font-size: 20px;
     }
     #about button.close-button{
-        position: absolute;
+        /* position: absolute;
         min-width: 70px;
         right: 8px;
         font-size: 14px;
         top: 8px;
         padding: 4px;
-        height: 30px;
+        height: 30px; */
+        /* border-radius: 0; */
+        width: 100%;
         background-size: 200%;
     }
     .close-locations-button{
@@ -947,8 +957,21 @@ a#agencyvista-badge {
 
 /* /////////////////////////////////// 768 768 768//////// */
 @media(max-width: 768px){
+    section#about{max-height: 90vh;}
     section#about h1{line-height: 1;}
     section#about h1 span{font-size: 16px;}
+    #about button.close-button {
+        /* border-radius: 0; */
+        /* width: 100%; */
+        background-size: 200%;
+        top: 7px;
+        bottom: initial;
+        right: 4px;
+        left: initial;
+        padding: 2px;
+        min-width: 80px;
+        width: auto;
+    }
     .tabbed{
         margin: 0 auto;
         max-width: 305px;
@@ -976,6 +999,10 @@ a#agencyvista-badge {
     }
     .desktop{display: none;}
     .mobile{display: block;}
+    .spider img.mobile{
+        height: 400px;
+        margin: 0 auto;
+    }
     /* .list-block{
         max-height: 430px;
     } */
