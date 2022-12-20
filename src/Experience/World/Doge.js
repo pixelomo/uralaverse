@@ -36,7 +36,7 @@ export default class Doge {
 		this.model.scale.set(1, 1, 1)
 		this.model.name = 'doge'
 		// this.model.position.set(-2.2, -2.8, 4.7)
-		// this.model.position.set(0, 3, 0)
+		this.model.position.set(0, 0, -10)
 		// this.model.position.set(3, 3, 2)
 		// this.raycaster.objectsToTest.push(this.model)
 		this.scene.add(this.model)
