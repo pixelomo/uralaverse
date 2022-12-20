@@ -27,6 +27,9 @@ export default class Camera {
             this.debugFolder.add(this.instance.position, 'x').name('x').min(-125).max(125).step(0.1)
             this.debugFolder.add(this.instance.position, 'y').name('y').min(-125).max(125).step(0.1)
             this.debugFolder.add(this.instance.position, 'z').name('z').min(-125).max(125).step(0.1)
+            this.debugFolder.add(this.instance.rotation, 'x').name('x rotation').min(-125).max(125).step(0.1)
+            this.debugFolder.add(this.instance.rotation, 'y').name('y rotation').min(-125).max(125).step(0.1)
+            this.debugFolder.add(this.instance.rotation, 'z').name('z rotation').min(-125).max(125).step(0.1)
         }
     }
 
@@ -37,14 +40,31 @@ export default class Camera {
         this.controls.maxDistance = 10
     }
 
+    enableControls() {
+        this.controls.enabled = true
+    }
+
+    disableControls() {
+        this.controls.enabled = false
+    }
+
     resize() {
         this.instance.aspect = this.sizes.width / this.sizes.height
         this.instance.updateProjectionMatrix()
     }
 
     update() {
-        this.controls.update()
+        if(this.controls.enabled){
+            this.controls.update()
+        }
+        // if(this.controlsEnabled){
+        //     this.controls.update()
+        //     this.controls.enabled = true
+        //     this.controls.rotate = true
+        // } else {
+        //     this.controls.enabled = false
+        //     this.controls.rotate = false
+        // }
         this.instance.updateProjectionMatrix()
-        // console.log(this.controls.object.position)
-    }
+  }
 }
