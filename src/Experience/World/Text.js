@@ -32,7 +32,13 @@ export default class Text {
     }
 
     setMaterial(color) {
-        this.material = new THREE.MeshStandardMaterial({ color: color })
+        this.material = new THREE.MeshPhongMaterial({
+            color: color,
+            shininess: 0,
+            reflectivity: 0,
+            fog: false,
+            flatShading: true
+        })
         this.material.userData.color = new THREE.Color(color)
     }
 

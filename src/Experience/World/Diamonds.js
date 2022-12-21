@@ -39,7 +39,7 @@ export default class Diamonds {
         for(let i = 0; i < amount; i++){
             const d = new THREE.Mesh(
                 geometry,
-                new THREE.MeshStandardMaterial({
+                new THREE.MeshPhongMaterial({
                     color: new THREE.Color("#"+genHex(6))
                 })
             )
