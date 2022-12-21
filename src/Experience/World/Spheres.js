@@ -31,9 +31,10 @@ export default class Spheres {
         for(let i = 0; i < amount; i++){
             const d = new THREE.Mesh(
                 geometry,
-                new THREE.MeshStandardMaterial({
-                    color: new THREE.Color("#"+genHex(6))
-                })
+                // new THREE.MeshPhongMaterial({
+                //     color: new THREE.Color("#"+genHex(6))
+                // })
+                new THREE.MeshNormalMaterial()
             )
             d.position.x = (Math.random() - 0.5) * 10
             d.position.y = (Math.random() - 0.5) * 10
