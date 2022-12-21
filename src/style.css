@@ -622,6 +622,28 @@ a#agencyvista-badge {
     display: inline-block;
 }
 
+.whatsapp-chat.timed_day {
+    display: block;
+}
+.whatsapp-chat {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(0deg,#25cf43 0,#61fd7d 100%);
+    border-radius: 60px;
+    z-index: 1;
+}
+.whatsapp-chat__btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(./../static/images/whatsapp.svg);
+}
+
 #locations {
     left: 3rem;
     right: initial;
