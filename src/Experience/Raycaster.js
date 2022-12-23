@@ -278,11 +278,9 @@ export default class Raycaster {
                     this.currentIntersect = intersects[0]
                 } else {
                     if(this.currentIntersect) {
-                        // console.log(this.currentIntersect.object.name)
-                        //for loop locations, if current includes locations[i].name
-                        // this.locationsNames
                         for(let i = 0; i < this.locationsNames.length; i++){
-                            if(this.currentIntersect.object.name.includes(this.locationsNames[i]) && typeof this.currentIntersect.object.userData.address != 'undefined'){
+                            if(this.currentIntersect.object.name.includes(this.locationsNames[i])
+                            && typeof this.currentIntersect.object.userData.address != 'undefined'){
                                 // console.log(this.currentIntersect.object.userData)
                                 // if no UI create
                                 if(typeof this.ui === 'undefined'){
