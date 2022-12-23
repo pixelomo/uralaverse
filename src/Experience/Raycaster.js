@@ -59,14 +59,14 @@ export default class Raycaster {
                 } else {
                     if(this.currentIntersect) {
                         // console.log(this.currentIntersect.object.name)
-                        if(this.currentIntersect.object.name != 'portfolio') {
-                            this.color = new THREE.Color('#00ff0d')
-                            gsap.to(this.currentIntersect.object.material.color, 1, {
-                                r: this.color.r,
-                                g: this.color.g,
-                                b: this.color.b
-                            })
-                        }
+                        // if(this.currentIntersect.object.name != 'portfolio') {
+                        //     this.color = new THREE.Color('#00ff0d')
+                        //     gsap.to(this.currentIntersect.object.material.color, 1, {
+                        //         r: this.color.r,
+                        //         g: this.color.g,
+                        //         b: this.color.b
+                        //     })
+                        // }
 
                         ////////////////////// HOME //////////////////////////
                         // if(this.currentIntersect.object.name === 'home'){
@@ -391,9 +391,11 @@ export default class Raycaster {
         this.locationsHiddenButton.classList.add('hide')
         this.locationsModal.classList.remove('hide')
         this.locationSection.classList.remove('show')
-        if(typeof this.ui != 'undefined'){
+        console.log(this.ui)
+        if(this.ui){
             // reset portfolio
             this.ui.container.scale.set(0,0,0)
+            this.ui.container.position.set(30,0,0)
             this.experience.world.resetWork()
         }
         // this.workModal.classList.remove('show')
