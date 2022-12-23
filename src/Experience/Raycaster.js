@@ -17,6 +17,8 @@ export default class Raycaster {
         this.locationSection = document.querySelector('#locations')
         this.testHomeObjects = true
         this.testPortfolioObjects = false
+        this.testLocationsObjects = false
+        this.locationsNames = ['Tokyo', 'London', 'Jakarta', 'Ho Chi Minh', 'Kuala Lumpur', 'Fukui', 'Singapore', 'Seoul', 'Manila', 'Melbourne']
 
         const close = document.querySelectorAll('.close-button')
         close.forEach(btn => btn.addEventListener('click', () => {
@@ -150,6 +152,7 @@ export default class Raycaster {
                                 ease: "back.inOut(1.1)",
                             })
                             this.testHomeObjects = false
+                            this.testLocationsObjects = true
                             setTimeout(() => {
                                 this.experience.world.showLocations()
                             }, 800)
@@ -171,7 +174,8 @@ export default class Raycaster {
                                 })
                             }, 1500)
                             setTimeout(() => {
-                                this.locationSection.classList.add('show')
+                                // this.locationSection.classList.add('show')
+                                this.locationsHiddenButton.classList.remove('hide')
                             }, 4000)
                             // setTimeout(() => {
                             //     // canvas.classList.remove('fade')
@@ -234,6 +238,8 @@ export default class Raycaster {
                             // console.log(portfolioItem.scale.x)
                             if(this.ui.container.scale.x === 0){
                                 this.ui.container.scale.set(1,1,1)
+                                this.ui.container.rotation.set(0.15,0,0)
+                                this.ui.container.position.set(0, 0, 3)
                                 gsap.to(portfolioItem.scale, {
                                     x: 3,
                                     y: 3,
@@ -265,6 +271,65 @@ export default class Raycaster {
                     }
                 }
             } // end of portfolio
+            ///////////////////////////// GLOBE ///////////////////////////////////
+            ///////////////////////////// GLOBE ///////////////////////////////////
+            if(this.testLocationsObjects === true){
+                if(this.intersects.length) {
+                    this.currentIntersect = intersects[0]
+                } else {
+                    if(this.currentIntersect) {
+                        // console.log(this.currentIntersect.object.name)
+                        //for loop locations, if current includes locations[i].name
+                        // this.locationsNames
+                        for(let i = 0; i < this.locationsNames.length; i++){
+                            if(this.currentIntersect.object.name.includes(this.locationsNames[i]) && typeof this.currentIntersect.object.userData.address != 'undefined'){
+                                // console.log(this.currentIntersect.object.userData)
+                                // if no UI create
+                                if(typeof this.ui === 'undefined'){
+                                    this.ui = new UI({title: this.locationsNames[i], description: this.currentIntersect.object.userData.address})
+                                } else {
+                                    this.ui.title.children[1].set({content: this.locationsNames[i]})
+                                    this.ui.description.children[1].set({content: this.currentIntersect.object.userData.address})
+                                }
+                                // if UI scale = 1 => 0
+                                if(this.ui.container.scale.x === 0){
+                                    this.ui.container.scale.set(0.45,0.45,0.45)
+                                    // this.ui.container.position.set(-1,2.7,4.5)
+                                    this.ui.container.position.set(2.2,1,4.6)
+                                }
+                                this.ui.container.lookAt(this.camera.position)
+                                // else {
+                                //     this.ui.container.scale.set(0,0,0)
+                                // }
+                            } else {
+                                if(typeof this.currentIntersect.object.userData.address === 'undefined'){
+                                    if(this.ui){
+                                        this.ui.container.scale.set(0,0,0)
+                                    }
+                                }
+                            }
+                        }
+                        // if(this.currentIntersect.object.name.includes('Tokyo')){
+                            // console.log(this.currentIntersect.object.userData.address)
+                            // console.log(this.currentIntersect.object.userData)
+                            // let portfolioItem = this.currentIntersect.object
+                            // gsap.to(this.camera.position, {
+                            //     x: 0,
+                            //     y: 3,
+                            //     z: 8,
+                            //     duration: 1.2
+                            // })
+                            // // userData back to original position
+                            // gsap.to(portfolioItem.position, {
+                            //     x: 0,
+                            //     y: 0,
+                            //     z: 2,
+                            //     duration: 1.2,
+                            // })
+                        // }
+                    }
+                }
+            } // end of globe
             // console.log(this.objectsToTest)
         })
 
@@ -336,6 +401,7 @@ export default class Raycaster {
         this.experience.camera.enableControls()
         this.testHomeObjects = true
         this.testPortfolioObjects = false
+        this.testLocationsObjects = false
         gsap.to(this.camera.position, {
             x: -2.5,
             y: -3,

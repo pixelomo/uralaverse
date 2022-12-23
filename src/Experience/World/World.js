@@ -214,24 +214,27 @@ export default class World {
 
     resetWork() {
         //for
-        this.portfolio_1.mesh.position.set(this.portfolio_1.mesh.userData.position.x, this.portfolio_1.mesh.userData.position.y, this.portfolio_1.mesh.userData.position.z)
-        this.portfolio_1.mesh.scale.set(1,1,1)
-        this.portfolio_2.mesh.position.set(this.portfolio_2.mesh.userData.position.x, this.portfolio_2.mesh.userData.position.y, this.portfolio_2.mesh.userData.position.z)
-        this.portfolio_2.mesh.scale.set(1,1,1)
-        this.portfolio_3.mesh.position.set(this.portfolio_3.mesh.userData.position.x, this.portfolio_3.mesh.userData.position.y, this.portfolio_3.mesh.userData.position.z)
-        this.portfolio_3.mesh.scale.set(1,1,1)
-        this.portfolio_4.mesh.position.set(this.portfolio_4.mesh.userData.position.x, this.portfolio_4.mesh.userData.position.y, this.portfolio_4.mesh.userData.position.z)
-        this.portfolio_4.mesh.scale.set(1,1,1)
-        this.portfolio_5.mesh.position.set(this.portfolio_5.mesh.userData.position.x, this.portfolio_5.mesh.userData.position.y, this.portfolio_5.mesh.userData.position.z)
-        this.portfolio_5.mesh.scale.set(1,1,1)
-        this.portfolio_6.mesh.position.set(this.portfolio_6.mesh.userData.position.x, this.portfolio_6.mesh.userData.position.y, this.portfolio_6.mesh.userData.position.z)
-        this.portfolio_6.mesh.scale.set(1,1,1)
+        if(typeof this.portfolio_1 != 'undefined') {
+            this.portfolio_1.mesh.position.set(this.portfolio_1.mesh.userData.position.x, this.portfolio_1.mesh.userData.position.y, this.portfolio_1.mesh.userData.position.z)
+            this.portfolio_1.mesh.scale.set(1,1,1)
+            this.portfolio_2.mesh.position.set(this.portfolio_2.mesh.userData.position.x, this.portfolio_2.mesh.userData.position.y, this.portfolio_2.mesh.userData.position.z)
+            this.portfolio_2.mesh.scale.set(1,1,1)
+            this.portfolio_3.mesh.position.set(this.portfolio_3.mesh.userData.position.x, this.portfolio_3.mesh.userData.position.y, this.portfolio_3.mesh.userData.position.z)
+            this.portfolio_3.mesh.scale.set(1,1,1)
+            this.portfolio_4.mesh.position.set(this.portfolio_4.mesh.userData.position.x, this.portfolio_4.mesh.userData.position.y, this.portfolio_4.mesh.userData.position.z)
+            this.portfolio_4.mesh.scale.set(1,1,1)
+            this.portfolio_5.mesh.position.set(this.portfolio_5.mesh.userData.position.x, this.portfolio_5.mesh.userData.position.y, this.portfolio_5.mesh.userData.position.z)
+            this.portfolio_5.mesh.scale.set(1,1,1)
+            this.portfolio_6.mesh.position.set(this.portfolio_6.mesh.userData.position.x, this.portfolio_6.mesh.userData.position.y, this.portfolio_6.mesh.userData.position.z)
+            this.portfolio_6.mesh.scale.set(1,1,1)
+        }
     }
 
     showLocations() {
         this.hideHome()
         this.globe = new Globe()
         this.globe.model.visible = true
+        this.ui = new UI({title: '', description: ''})
         // this.doge.position.set(3, 3, 2)
         this.lightFollowControls()
     }
