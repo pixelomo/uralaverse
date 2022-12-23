@@ -298,9 +298,6 @@ export default class Raycaster {
                                     this.ui.container.position.set(2.2,1,4.6)
                                 }
                                 this.ui.container.lookAt(this.camera.position)
-                                // else {
-                                //     this.ui.container.scale.set(0,0,0)
-                                // }
                             } else {
                                 if(typeof this.currentIntersect.object.userData.address === 'undefined'){
                                     if(this.ui){
@@ -309,24 +306,6 @@ export default class Raycaster {
                                 }
                             }
                         }
-                        // if(this.currentIntersect.object.name.includes('Tokyo')){
-                            // console.log(this.currentIntersect.object.userData.address)
-                            // console.log(this.currentIntersect.object.userData)
-                            // let portfolioItem = this.currentIntersect.object
-                            // gsap.to(this.camera.position, {
-                            //     x: 0,
-                            //     y: 3,
-                            //     z: 8,
-                            //     duration: 1.2
-                            // })
-                            // // userData back to original position
-                            // gsap.to(portfolioItem.position, {
-                            //     x: 0,
-                            //     y: 0,
-                            //     z: 2,
-                            //     duration: 1.2,
-                            // })
-                        // }
                     }
                 }
             } // end of globe
