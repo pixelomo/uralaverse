@@ -29,6 +29,8 @@ export default class World {
         this.camera = this.experience.camera.instance
         this.renderer = this.experience.renderer
         this.environment = new Environment()
+        this.ui = new UI({title: '', description: ''})
+        this.ui.container.position.set(0,30,0)
     }
 
     intro() {
@@ -50,7 +52,6 @@ export default class World {
 
     initHome(params) {
         this.particles = new Particles(params.particlesAmount)
-        // this.ui = new UI()
         setTimeout(() => {
             this.diamonds = new Diamonds(params.diamondAmount)
             this.donuts = new Donuts(params.donutsAmount)
@@ -150,7 +151,16 @@ export default class World {
         this.ctLogo.model.visible = true
         this.experience.world.environment.pointLight.position.set(1, 3, 10)
         if(this.globe){
-            this.globe.model.visible = false
+            // this.globe.model.position.set(0,30,0)
+            gsap.to(this.globe.model.position, {
+                x: 0,
+                y: -10,
+                z: 0,
+                duration: 1.5,
+            })
+            setTimeout(() => {
+                this.globe.model.visible = false
+            }, 2000)
         }
         if(this.portfolio_1){
             this.portfolio_1.mesh.visible = false
@@ -200,7 +210,7 @@ export default class World {
             this.portfolio_5 = new Plane('lawork', 3, 2, {x: 0, y: -1, z: 0}, 'Online recruiting website and service development', 'Ongoing project for Japanese clients in the Industrial Goods & Services industry for a B2C audience since 2022.')
             this.portfolio_6 = new Plane('coint', 3, 2, {x: 3.5, y: -1, z: 0}, 'Growth Strategy for Global Fintech Media Brands', 'Ongoing project for Cointelegraph.com & Investing.com in the Media industry for a B2C audience since 2017.')
             // blank UI required before updating
-            this.ui = new UI({title: '', description: ''})
+            // this.ui = new UI({title: '', description: ''})
         }
         if(this.portfolio_1.mesh.visible === false) {
             this.portfolio_1.mesh.visible = true
@@ -232,10 +242,16 @@ export default class World {
 
     showLocations() {
         this.hideHome()
-        this.globe = new Globe()
+        if(typeof this.globe === 'undefined'){
+            this.globe = new Globe()
+        }
         this.globe.model.visible = true
-        this.ui = new UI({title: '', description: ''})
-        // this.doge.position.set(3, 3, 2)
+        gsap.to(this.globe.model.position, {
+            x: 0,
+            y: 0,
+            z: 0,
+            duration: 1.5,
+        })
         this.lightFollowControls()
     }
 

@@ -50,6 +50,7 @@ export default class Raycaster {
         })
 
         window.addEventListener('click', () => {
+            this.ui = this.experience.world.ui
             if(this.testHomeObjects === true){
                 if(this.intersects.length) {
                     if(!this.currentIntersect) {
@@ -211,6 +212,7 @@ export default class Raycaster {
                     this.currentIntersect = intersects[0]
                 } else {
                     if(this.currentIntersect) {
+                        // console.log(this.currentIntersect.object.name)
                         if(this.currentIntersect.object.name === 'portfolio'){
                             // console.log(this.currentIntersect.object.userData)
                             let portfolioItem = this.currentIntersect.object
@@ -228,12 +230,12 @@ export default class Raycaster {
                                 duration: 1.2,
                             })
                             // if no UI create
-                            if(typeof this.ui === 'undefined'){
-                                this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
-                            } else {
+                            // if(typeof this.ui === 'undefined'){
+                            //     this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
+                            // } else {
                                 this.ui.title.children[1].set({content: portfolioItem.userData.title})
                                 this.ui.description.children[1].set({content: portfolioItem.userData.description})
-                            }
+                            // }
                             // if UI scale = 1 => 0
                             // console.log(portfolioItem.scale.x)
                             if(this.ui.container.scale.x === 0){
@@ -283,12 +285,12 @@ export default class Raycaster {
                             && typeof this.currentIntersect.object.userData.address != 'undefined'){
                                 // console.log(this.currentIntersect.object.userData)
                                 // if no UI create
-                                if(typeof this.ui === 'undefined'){
-                                    this.ui = new UI({title: this.locationsNames[i], description: this.currentIntersect.object.userData.address})
-                                } else {
+                                // if(typeof this.ui === 'undefined'){
+                                //     this.ui = new UI({title: this.locationsNames[i], description: this.currentIntersect.object.userData.address})
+                                // } else {
                                     this.ui.title.children[1].set({content: this.locationsNames[i]})
                                     this.ui.description.children[1].set({content: this.currentIntersect.object.userData.address})
-                                }
+                                // }
                                 // if UI scale = 1 => 0
                                 if(this.ui.container.scale.x === 0){
                                     this.ui.container.scale.set(0.45,0.45,0.45)
@@ -391,11 +393,13 @@ export default class Raycaster {
         this.locationsHiddenButton.classList.add('hide')
         this.locationsModal.classList.remove('hide')
         this.locationSection.classList.remove('show')
-        console.log(this.ui)
         if(this.ui){
             // reset portfolio
             this.ui.container.scale.set(0,0,0)
-            this.ui.container.position.set(30,0,0)
+            this.ui.container.position.set(0,30,0)
+            // this.world.globe.position.set(0,30,0)
+            // console.log(this.world)
+            // console.log(this.scene.children)
             this.experience.world.resetWork()
         }
         // this.workModal.classList.remove('show')

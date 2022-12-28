@@ -22,6 +22,7 @@ export default class Globe {
 	setModel() {
 		this.model = this.resource.scene
 		this.model.scale.set(3.4, 3.4, 3.4)
+		this.model.position.set(0,-10,0)
 		this.model.name = 'globe'
 		// this.model.position.set(0, -5, 0)
         // this.model.rotation.set(0, 1.3, -0.4)

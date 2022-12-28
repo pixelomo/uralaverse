@@ -51,6 +51,7 @@ export default class UI {
 
 		this.container.position.set(0, 0, 3)
 		this.container.rotation.x = 0.15;
+		this.container.name = 'UI'
 		this.container.scale.set(0,0,0)
 		this.scene.add(this.container);
 
