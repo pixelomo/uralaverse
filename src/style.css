@@ -647,7 +647,8 @@ a#agencyvista-badge {
 #locations {
     left: 3rem;
     right: initial;
-    bottom: 7rem;
+    bottom: initial;
+    top: 9rem;
     width: 370px;
     background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
     /* box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%); */

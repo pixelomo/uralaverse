@@ -175,7 +175,7 @@ export default class Raycaster {
                                 })
                             }, 1500)
                             setTimeout(() => {
-                                // this.locationSection.classList.add('show')
+                                this.locationSection.classList.add('show')
                                 this.locationsHiddenButton.classList.remove('hide')
                             }, 4000)
                             // setTimeout(() => {

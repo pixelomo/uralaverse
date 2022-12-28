@@ -151,7 +151,6 @@ export default class World {
         this.ctLogo.model.visible = true
         this.experience.world.environment.pointLight.position.set(1, 3, 10)
         if(this.globe){
-            // this.globe.model.position.set(0,30,0)
             gsap.to(this.globe.model.position, {
                 x: 0,
                 y: -10,
