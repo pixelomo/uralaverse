@@ -22,13 +22,33 @@ export default class Globe {
 	setModel() {
 		this.model = this.resource.scene
 		this.model.scale.set(3.4, 3.4, 3.4)
+		this.model.position.set(0,-10,0)
 		this.model.name = 'globe'
 		// this.model.position.set(0, -5, 0)
         // this.model.rotation.set(0, 1.3, -0.4)
 		// this.raycaster.objectsToTest.push(this.model)
+		// this.setLocationsToTest(this.model)
+		this.raycaster.objectsToTest.push(this.model)
+		// this.setAddresses(this.model)
 		this.scene.add(this.model)
 		// console.log(this.experience.world.environment.pointLight)
 	}
+
+	// setAddresses(model){
+	// 	console.log(model.children)
+	// 	const locations = ['Tokyo', 'London', 'Jakarta', 'Ho Chi Minh']
+	// 	for(let i = 0; i < model.children.length; i++){
+	// 		if(model.children[i].name.includes('Tokyo')){
+	// 			console.log(model.children[i])
+	// 			model.children[i].userData.address = ''
+	// 		}
+	// 	}
+	// }
+	// setLocationsToTest(model) {
+
+
+	// 	// this.raycaster.objectsToTest.push(this.mesh)
+	// }
 
 	// setAnimation() {
 	// 	this.animation = {}

@@ -17,6 +17,8 @@ export default class Raycaster {
         this.locationSection = document.querySelector('#locations')
         this.testHomeObjects = true
         this.testPortfolioObjects = false
+        this.testLocationsObjects = false
+        this.locationsNames = ['Tokyo', 'London', 'Jakarta', 'Ho Chi Minh', 'Kuala Lumpur', 'Fukui', 'Singapore', 'Seoul', 'Manila', 'Melbourne']
 
         const close = document.querySelectorAll('.close-button')
         close.forEach(btn => btn.addEventListener('click', () => {
@@ -48,6 +50,7 @@ export default class Raycaster {
         })
 
         window.addEventListener('click', () => {
+            this.ui = this.experience.world.ui
             if(this.testHomeObjects === true){
                 if(this.intersects.length) {
                     if(!this.currentIntersect) {
@@ -57,14 +60,14 @@ export default class Raycaster {
                 } else {
                     if(this.currentIntersect) {
                         // console.log(this.currentIntersect.object.name)
-                        if(this.currentIntersect.object.name != 'portfolio') {
-                            this.color = new THREE.Color('#00ff0d')
-                            gsap.to(this.currentIntersect.object.material.color, 1, {
-                                r: this.color.r,
-                                g: this.color.g,
-                                b: this.color.b
-                            })
-                        }
+                        // if(this.currentIntersect.object.name != 'portfolio') {
+                        //     this.color = new THREE.Color('#00ff0d')
+                        //     gsap.to(this.currentIntersect.object.material.color, 1, {
+                        //         r: this.color.r,
+                        //         g: this.color.g,
+                        //         b: this.color.b
+                        //     })
+                        // }
 
                         ////////////////////// HOME //////////////////////////
                         // if(this.currentIntersect.object.name === 'home'){
@@ -150,6 +153,7 @@ export default class Raycaster {
                                 ease: "back.inOut(1.1)",
                             })
                             this.testHomeObjects = false
+                            this.testLocationsObjects = true
                             setTimeout(() => {
                                 this.experience.world.showLocations()
                             }, 800)
@@ -171,7 +175,8 @@ export default class Raycaster {
                                 })
                             }, 1500)
                             setTimeout(() => {
-                                this.locationSection.classList.add('show')
+                                // this.locationSection.classList.add('show')
+                                this.locationsHiddenButton.classList.remove('hide')
                             }, 4000)
                             // setTimeout(() => {
                             //     // canvas.classList.remove('fade')
@@ -207,6 +212,7 @@ export default class Raycaster {
                     this.currentIntersect = intersects[0]
                 } else {
                     if(this.currentIntersect) {
+                        // console.log(this.currentIntersect.object.name)
                         if(this.currentIntersect.object.name === 'portfolio'){
                             // console.log(this.currentIntersect.object.userData)
                             let portfolioItem = this.currentIntersect.object
@@ -224,16 +230,18 @@ export default class Raycaster {
                                 duration: 1.2,
                             })
                             // if no UI create
-                            if(typeof this.ui === 'undefined'){
-                                this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
-                            } else {
+                            // if(typeof this.ui === 'undefined'){
+                            //     this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
+                            // } else {
                                 this.ui.title.children[1].set({content: portfolioItem.userData.title})
                                 this.ui.description.children[1].set({content: portfolioItem.userData.description})
-                            }
+                            // }
                             // if UI scale = 1 => 0
                             // console.log(portfolioItem.scale.x)
                             if(this.ui.container.scale.x === 0){
                                 this.ui.container.scale.set(1,1,1)
+                                this.ui.container.rotation.set(0.15,0,0)
+                                this.ui.container.position.set(0, 0, 3)
                                 gsap.to(portfolioItem.scale, {
                                     x: 3,
                                     y: 3,
@@ -265,6 +273,42 @@ export default class Raycaster {
                     }
                 }
             } // end of portfolio
+            ///////////////////////////// GLOBE ///////////////////////////////////
+            ///////////////////////////// GLOBE ///////////////////////////////////
+            if(this.testLocationsObjects === true){
+                if(this.intersects.length) {
+                    this.currentIntersect = intersects[0]
+                } else {
+                    if(this.currentIntersect) {
+                        for(let i = 0; i < this.locationsNames.length; i++){
+                            if(this.currentIntersect.object.name.includes(this.locationsNames[i])
+                            && typeof this.currentIntersect.object.userData.address != 'undefined'){
+                                // console.log(this.currentIntersect.object.userData)
+                                // if no UI create
+                                // if(typeof this.ui === 'undefined'){
+                                //     this.ui = new UI({title: this.locationsNames[i], description: this.currentIntersect.object.userData.address})
+                                // } else {
+                                    this.ui.title.children[1].set({content: this.locationsNames[i]})
+                                    this.ui.description.children[1].set({content: this.currentIntersect.object.userData.address})
+                                // }
+                                // if UI scale = 1 => 0
+                                if(this.ui.container.scale.x === 0){
+                                    this.ui.container.scale.set(0.45,0.45,0.45)
+                                    // this.ui.container.position.set(-1,2.7,4.5)
+                                    this.ui.container.position.set(2.2,1,4.6)
+                                }
+                                this.ui.container.lookAt(this.camera.position)
+                            } else {
+                                if(typeof this.currentIntersect.object.userData.address === 'undefined'){
+                                    if(this.ui){
+                                        this.ui.container.scale.set(0,0,0)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } // end of globe
             // console.log(this.objectsToTest)
         })
 
@@ -336,6 +380,7 @@ export default class Raycaster {
         this.experience.camera.enableControls()
         this.testHomeObjects = true
         this.testPortfolioObjects = false
+        this.testLocationsObjects = false
         gsap.to(this.camera.position, {
             x: -2.5,
             y: -3,
@@ -348,9 +393,13 @@ export default class Raycaster {
         this.locationsHiddenButton.classList.add('hide')
         this.locationsModal.classList.remove('hide')
         this.locationSection.classList.remove('show')
-        if(typeof this.ui != 'undefined'){
+        if(this.ui){
             // reset portfolio
             this.ui.container.scale.set(0,0,0)
+            this.ui.container.position.set(0,30,0)
+            // this.world.globe.position.set(0,30,0)
+            // console.log(this.world)
+            // console.log(this.scene.children)
             this.experience.world.resetWork()
         }
         // this.workModal.classList.remove('show')
