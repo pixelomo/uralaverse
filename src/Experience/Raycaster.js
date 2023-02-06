@@ -15,6 +15,7 @@ export default class Raycaster {
         this.contactForm = document.querySelector('.contactForm')
         this.aboutSection = document.querySelector('#about')
         this.locationSection = document.querySelector('#locations')
+        this.globeMask = document.querySelector('#maskPanel')
         this.testHomeObjects = true
         this.testPortfolioObjects = false
         this.testLocationsObjects = false
@@ -35,10 +36,10 @@ export default class Raycaster {
         this.locationsModal = document.querySelector('#locations')
         this.locationsHiddenButton = document.querySelector('#locations-hidden-button')
 
-        this.closeLocationsModal.addEventListener('click', () => {
-            this.locationsModal.classList.add('hide')
-            this.locationsHiddenButton.classList.remove('hide')
-        })
+        // this.closeLocationsModal.addEventListener('click', () => {
+        //     this.locationsModal.classList.add('hide')
+        //     this.locationsHiddenButton.classList.remove('hide')
+        // })
 
         this.workModal = document.querySelector('#work')
 
@@ -176,6 +177,7 @@ export default class Raycaster {
                             }, 1500)
                             setTimeout(() => {
                                 this.locationSection.classList.add('show')
+                                this.globeMask.classList.add('show')
                                 this.locationsHiddenButton.classList.remove('hide')
                             }, 4000)
                             // setTimeout(() => {
@@ -393,6 +395,7 @@ export default class Raycaster {
         this.locationsHiddenButton.classList.add('hide')
         this.locationsModal.classList.remove('hide')
         this.locationSection.classList.remove('show')
+        this.globeMask.classList.remove('show')
         if(this.ui){
             // reset portfolio
             this.ui.container.scale.set(0,0,0)

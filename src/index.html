@@ -137,71 +137,52 @@
             </div>
         </section>
 
-        <section class="page-section pt-5 pb-0 text-panel" id="locations">
+        <section class="page-section pt-5 pb-0 text-panel location-details" id="locations">
             <div class="container">
-                <span class="title">OUR LOCATIONS</span><br>
-                <div>
-                    <span class="location">Tokyo</span>
-                    <div class="panel">
-                        <p>Toranomon Hills Business Tower 15F, 1-17-1 Toranomon, Minato-ku, 105-6401</p>
-                        <p class="mt-10">6/F Aristo Toranomon, 1-17-16 Nishi Shinbashi, Minatoku, 105-0003</p>
+                <span class="title">TOKYO</span><br>
+                <div class="row">
+                    <div class="locations-col">
+                        <div>
+                            <div class="box">
+                                <p>Toranomon Hills Business Tower 15F, 1-17-1 Toranomon, Minato-ku, 105-6401</p>
+                                <p><a target="_blank" href="mailto:build@uralaverse.com">build@uralaverse.com</a></p>
+                                <p><a target="_blank" href="tel:08086977574">080 8697 7574</a></p>
+                                <a target="_blank" class="map-btn" href="https://goo.gl/maps/4VBqu4tBtjw8iFKP9">Map ></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="box">
+                                <p class="mt-10">6/F Aristo Toranomon, 1-17-16 Nishi Shinbashi, Minatoku, 105-0003</p>
+                                <p><a target="_blank" href="mailto:build@uralaverse.com">build@uralaverse.com</a></p>
+                                <p><a target="_blank" href="tel:08086977574">080 8697 7574</a></p>
+                                <a target="_blank" class="map-btn" href="https://goo.gl/maps/bKSXC7rG6G2zwJWE6">Map ></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="locations-col"></div>
+                    <div class="locations-col">
+                        <div class="people">
+                            <h4 class="name">Hose Mitamura</h4>
+                            <span>CEO</span>
+                        </div>
+                        <div class="people">
+                            <h4 class="name">Alan Sutherland</h4>
+                            <span>Lead Developer</span>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <span class="location">London</span>
-                    <div class="panel">
-                        <p>Level 1, Devonshire House, 1 Mayfair Place, Mayfair, W1J8AJ</p>
-                    </div>
-                </div>
-                <div>
-                    <span class="location">Jakarta</span>
-                    <div class="panel">
-                        <p>Jl. Jendral Sudirman Kav. 29-31 WTC5, RT.8/RW.3, Kuningan, Daerah Khusus Ibukota, 12920</p>
-                    </div>
-                </div>
-                <div>
-                    <span class="location">Ho Chi Minh</span>
-                    <div class="panel">
-                        <p>Level 72, Vincom Landmark 81, 720A Dien Bien Phu, Binh Thanh District</p>
-                    </div>
-                </div>
-                <div>
-                    <span class="location">Kuala Lumpur</span>
-                    <div class="panel">
-                        <p>Level 23, Menara Exchange 106, Lingkaran TRX, Tun Razak Exchange, 55188</p>
-                    </div>
-                </div>
-                <div>
-                    <span class="location">West Japan</span>
-                    <div class="panel">
-                        <p>3-1510, Itagaki, Fukui City, 918-8104</p>
-                    </div>
-                </div>
-                <div>
-                    <span class="location">Singapore</span>
-                    <div class="panel">
-                        <p>9 Raffles Place, #06-00 Republic Plaza, 048619</p>
-                    </div>
-                </div>
-                <div>
-                    <span class="location">Seoul</span>
-                    <div class="panel">
-                        <p>15th KBS Media Center, 45, Maebongsan-ro, Mapo-gu, 03909</p>
-                    </div>
-                </div>
-                <div>
-                    <span class="location">Manila</span>
-                    <div class="panel">
-                        <p>28/F, Tower 2, The Enterprise Centre, Corner Paseo De Roxas and Ayala Avenue, Makati, 1226</p>
-                    </div>
-                </div>
-                <div>
-                    <span>Melbourne</span>
-                </div>
-                <button class="close-button gif-button">HOME</button>
-                <button class="close-locations-button"></button>
             </div>
         </section>
+        <svg id="maskPanel" class="mask" width="725" height="1500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <mask id="circleMask">
+                    <rect width="100%" height="100%" fill="white"/>
+                    <circle cx="728" cy="466" r="244" fill="black"/>
+                </mask>
+            </defs>
+            <rect x="0" y="0" width="725" height="950" fill="#9226ff" mask="url(#circleMask)"/>
+            <circle id="shadow" cx="728" cy="466" r="244" fill="black"/>
+        </svg>
 
         <button class="close-button hide gif-button" id="locations-hidden-button">HOME</button>
 
