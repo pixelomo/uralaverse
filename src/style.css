@@ -1,7 +1,8 @@
 /* @import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@500;900&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;900&display=swap');
 
 * {
     margin: 0;
@@ -13,7 +14,7 @@ body {
     overflow: hidden;
     color: #b6d8fa;
     background: #000;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
     cursor: pointer;
 }
 
@@ -40,7 +41,7 @@ img{max-width: 100%;}
     /* width: 80%; */
     /* max-width: 400px; */
     font-size: 24px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
     padding: 20px 25px 25px;
     border-radius: 16px;
     display: none;
@@ -66,6 +67,7 @@ svg path{
 section#contact {
     background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
     /* box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%); */
+    max-width: 460px;
     color: #fff;
     z-index: 999;
 }
@@ -73,7 +75,7 @@ section#contact h3{
     font-size: 62px;
     text-align: center;
     margin-top: 1rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
     font-weight: 900;
     background-image: url('./../static/images/blue.webp');
     background-size: contain;
@@ -125,7 +127,7 @@ button{
     padding: 8px;
     position: relative;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
     /* text-shadow: 0px 0px 16px rgb(255 255 255 / 60%); */
     font-size: 32px;
     cursor: pointer;
@@ -146,7 +148,7 @@ input, textarea, label{
     resize: none;
     margin-bottom: 1rem;
     color: #b6d8fa !important;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
     font-size: 22px;
     font-weight: 900;
 }
@@ -163,7 +165,7 @@ select{
     border: 1px solid #347cb6;
     border-radius: 4px;
     padding: 8px 6px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
     background: transparent;
     color: #b6d8fa;
     font-size: 16px;
@@ -580,8 +582,8 @@ ul{padding-left: 2rem;}
 
 /* /////////// about tabs end ///////////////////// */
 
-#about button.close-button, #locations button.close-button{
-    width: auto;
+#about button.close-button{
+    width: 12rem;
     min-width: 110px;
     border-radius: 9px;
     border-width: 2px;
@@ -596,12 +598,12 @@ ul{padding-left: 2rem;}
     color: #b6d8fa;
     background-size: 200%;
 }
-#locations button.close-button{
+/* #locations button.close-button{
     top: 1rem;
     bottom: initial;
     right: 1rem;
     left: initial;
-}
+} */
 
 a#agencyvista-badge {
     width: 140px;
@@ -636,27 +638,36 @@ a#agencyvista-badge {
     background-image: url(./../static/images/whatsapp.svg);
 }
 
-#locations {
-    /* left: 3rem; */
-    /* right: initial; */
-    /* bottom: initial; */
-    top: 9rem;
-    /* width: 370px; */
-    /* background: linear-gradient(132deg, #3b1e65 35%, transparent 100%); */
-    /* box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%); */
-    /* padding: 2rem 2rem 4rem; */
-    padding: 2rem;
-    /* height: fit-content; */
+.locations {
+    position: absolute;
+    box-sizing: border-box;
+    z-index: 1;
+    left: 0;
+    margin: auto;
+    font-size: 24px;
+    font-family: 'Red Hat Display', sans-serif;
+    border-radius: 16px;
+    display: none;
 }
-#locations span.title {
+
+.locations.show {
+    /* top: 9rem; */
+    top: 0rem;
+    right: initial;
+    padding: 2rem;
+}
+.locations.title.show, .location-details .title {
     margin-bottom: 4rem;
     display: inline-block;
     font-weight: 700;
-    color: #000;
-    font-size: 42px;
-    background: #9226ff;
+    color: #fff;
     padding: 1rem 1.5rem 0.5rem 3rem;
-    margin-left: -2rem;
+    margin-top: 2rem;
+    font-size: 60px;
+}
+.location-details span.title {
+    color: #222;
+    text-transform: uppercase;
 }
 .location{
     color: #fff;
@@ -664,30 +675,77 @@ a#agencyvista-badge {
     position: relative;
     text-transform: uppercase;
     padding: 0.2rem 2.5rem 0.2rem 0.75rem;
+    margin-bottom: 0;
+    font-weight: 400;
 }
-#locations p {
-    font-size: 16px;
+.locations p, .location-details p {
+    font-size: 20px;
     color: #fff;
     margin: 0 auto 10px;
 }
-#locations .row{
+.location-details .row{
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
     padding: 0 2rem;
 }
 
-.locations-col {
+.icon {
+    padding-left: 3rem;
+    padding-bottom: 0.75rem;
+    position: relative;
+    min-height: 2rem;
+}
+.icon:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 2rem;
+    height: 2rem;
+}
+
+.address-icon:before {
+    background-image: url('./../static/images/location-dot.svg');
+}
+.mail-icon:before {
+    background-image: url('./../static/images/envelope.svg');
+}
+.tel-icon:before {
+    background-image: url('./../static/images/phone.svg');
+}
+
+.location-select{
     display: flex;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.locations-col.show {
+    display: inline-flex;
     flex-direction: column;
     row-gap: 1.7rem;
+    /* top: 17rem; */
+    top: 10rem;
 }
+.locations-col:first-of-type{
+    left: 5%;
+}
+.locations-col:nth-of-type(2){
+    right: 5%;
+    left: inherit;
+}
+.buffer-col{pointer-events: none;}
 
 .location:hover{
     color: #000;
     background: #9226ff;
 }
 
-.location:after{
+.location:after, .map-btn:after{
     content: '';
     background-image: url('./../static/images/chevron-right-white.svg');
     position: absolute;
@@ -702,27 +760,83 @@ a#agencyvista-badge {
 .location:hover:after{
     background-image: url('./../static/images/chevron-right-black.svg');
 }
-#locations .panel{
+.locations .panel{
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
-/* #locations .location.active:after {
-    content: 'ᐃ';
-} */
-#locations.location-details{
+.location-details{
+    display: block;
     top: 0;
+    left: -100vw;
     padding: 0;
     height: 100vh;
-    /* width: 50%; */
-    /* background: #9226ff; */
+    padding: 2rem;
+    width: 100%;
     margin: 0;
     border-radius: 0;
-    /* clip-path: polygon(100% 72%, 100% 74%, 97% 73%, 97% 73%, 93% 73%, 90% 73%, 88% 72%, 85% 71%, 83% 71%, 82% 70%, 74% 63%, 72% 59%, 70% 57%, 68% 52%, 72% 39%, 76% 35%, 81% 30%, 82% 30%, 85% 28%, 87% 28%, 89% 28%, 93% 27%, 96% 26%, 98% 25.8%, 99% 25.4%, 100% 25%, 100% 0%, 0% 0%, 0% 100%, 100% 100%); */
+    /* background: linear-gradient(to right, #9ba9ffff 0%, #9ba9ffff 12.5%, #a5adffff 12.5%, #a5adffff 25%, #b9b5ffff 25%, #b9b5ffff 37.5%, #c4baffff 37.5%, #c4baffff 50%, #cebeffff 50%, #cebeffff 62.5%, #d8c2ffff 62.5%, #d8c2ffff 75%, #e2c6ffff 75%, #e2c6ffff 87.5%, #eccaffff 87.5%, #eccaffff 100%);
+    border-radius: 0;
+    background-size: 50%;
+    background-repeat: no-repeat; */
+}
+.location-details .title {
+    color: #222;
+    text-transform: uppercase;
+}
+
+.location-details .box{
+    /* background: #fff; */
+    padding: 1rem;
+}
+
+.location-details .box p{
+    color: #222;
+}
+.location-details .box a{
+    color: #222;
+    cursor: pointer;
+    text-decoration: none;
+}
+.location-details a.map-btn {
+    display: block;
+    position: relative;
+    text-align: center;
+    margin: 20px auto 10px;
+    font-size: 1.2rem;
+    background: #000;
+    width: 110px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+}
+.location-details a.map-btn:after {
+    right: 2rem;
+    top: 1rem;
+    width: 12px;
+    height: 12px;
+}
+.people{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 4rem;
+}
+.people h4 {
+    color: #9226ff;
+    margin-bottom: 0;
+    font-size: 28px;
+}
+.people img{
+    width: 160px;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }
 #maskPanel{
     position: absolute;
-    left: 0;
+    left: -100vw;
     top: 0;
     margin: 0;
     width: 50%;
@@ -730,13 +844,13 @@ a#agencyvista-badge {
 }
 #maskPanel rect{
     height: 100vh;
-    width: 100%;
+    width: 50vw;
 }
 
 #maskPanel circle {
-    cx: 100%;
+    cx: 50vw;
     cy: 50%;
-    r: 28.5%;
+    r: 27.5vh;
 }
 #maskPanel #shadow{
     fill: none;
@@ -745,11 +859,12 @@ a#agencyvista-badge {
     stroke-width: 12px;
     cy: 50%;
 }
-.mask{
-    display: none;
+.mask, .location-details{
+    /* display: none; */
 }
 
-#locations-hidden-button {
+#locations-hidden-button, #back-to-locations {
+    position: absolute;
     box-shadow: none;
     font-size: 24px;
     color: #fff;
@@ -765,6 +880,10 @@ a#agencyvista-badge {
     height: auto;
     border: none;
     text-shadow: none;
+    z-index: 999;
+}
+#back-to-locations {
+    z-index: 9999;
 }
 
 @keyframes bg{
@@ -851,6 +970,11 @@ a#agencyvista-badge {
     display: block;
 }
 
+@media(max-width: 1200px){
+    .location-details p{
+        font-size: 16px;
+    }
+}
 /* //////////////////////////////////// */
 
 /* /////     1024         //// */
@@ -877,7 +1001,7 @@ a#agencyvista-badge {
     button {
         font-size: 20px;
     }
-    section#about, section#locations{
+    section#about{
         top: 1rem;
         bottom: initial;
         /* background: linear-gradient(132deg, #3b1e65 55%, transparent 100%); */
@@ -928,7 +1052,7 @@ a#agencyvista-badge {
         display: block;
         margin: 10px auto;
     }
-    section#locations {
+    .locations {
         right: 0;
         left: 0;
         /* bottom: 2rem; */
@@ -936,23 +1060,20 @@ a#agencyvista-badge {
         top: 0;
         padding: 0.5rem 0.7rem 2.5rem;
     }
-    section#locations span {
-        font-size: 17px;
-    }
-    #locations span.title{
+    .locations .title{
         font-size: 19px;
         margin-bottom: 0;
         margin-top: 0;
     }
-    #locations p {
+    .locations p {
         font-size: 13px;
         margin: 0 auto;
     }
-    #locations p.mt-10{margin-top: 10px;}
+    .locations p.mt-10{margin-top: 10px;}
     /* section#locations {
         width: 260px;
     } */
-    #locations button.close-button {
+    .locations button.close-button {
         bottom: 1rem;
         position: relative;
         left: 0;
@@ -1029,13 +1150,39 @@ a#agencyvista-badge {
         background-size: 100%;
         border-radius: 0;
     }
-    .location:after{
-        right: -15px;
-        bottom: 9px;
-        font-size: 11px;
-    }
     .tabbed {
         margin: 20px auto 30px;
+    }
+    .locations.title.show, .location-details .title{
+        top: 0;
+        font-size: 34px;
+        width: 100%;
+        right: initial;
+        left: 1rem;
+        padding: 0;
+    }
+    .locations-col.show{
+        top: 6rem;
+        padding: 0;
+        left: 1rem !important;
+        right: initial;
+        width: 100%;
+        max-width: 100%;
+        row-gap: 0.25rem;
+    }
+    .locations-col:nth-of-type(2) {
+        left: 0;
+        bottom: 4rem;
+        top: initial;
+    }
+    .location{
+        font-size: 28px;
+        padding: 0;
+    }
+    .location:after {
+        right: 2rem;
+        bottom: 9px;
+        font-size: 11px;
     }
 }
 
@@ -1126,7 +1273,9 @@ a#agencyvista-badge {
 }
 
 @media (max-width: 550px) {
-
+    .locations.title.show, .location-details .title{
+        font-size: 28px;
+    }
     /* [role="tablist"] li, [role="tablist"] a {
         display: block;
         position: static;

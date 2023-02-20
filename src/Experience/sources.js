@@ -87,6 +87,11 @@ export default [
         type: 'svg',
         path: 'images/ctb.svg'
     },
+    // {
+    //     name: 'maskPanel',
+    //     type: 'svg',
+    //     path: 'images/maskPanel.svg'
+    // },
     {
         name: 'reckitt',
         type: 'texture',

@@ -19,7 +19,7 @@ export default class Text {
             text, {
                 font: this.resources.items.mainFont,
                 size: size,
-                height: 0.16,
+                height: 0.4,
                 // curveSegments: 5,
                 // bevelEnabled: true,
                 // bevelSize: 0.01,

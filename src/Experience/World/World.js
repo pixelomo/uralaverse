@@ -20,6 +20,11 @@ export default class World {
             this.intro()
             this.initHome(params)
         })
+        // Debug
+        this.debug = this.experience.debug
+		if (this.debug.active) {
+			this.debugFolder = this.debug.ui.addFolder('world')
+		}
     }
 
     createScene() {
@@ -66,7 +71,7 @@ export default class World {
                 this.to = new Text('to the', 0.4, '#bd4500', {x: 1.3, y: 2.2, z: -2.8})
             }, 2700)
             setTimeout(() => {
-                this.uralaverse = new Text('URALAVERSE!', 0.6, '#7d09a7', {x: 1.7, y: 1.2, z: -2.5})
+                this.uralaverse = new Text('URALAVERSE!', 0.6, '#520004', {x: 1.7, y: 1.2, z: -2.5})
             }, 3000)
             setTimeout(() => {
                 this.about = new Text('ABOUT', 0.4, '#00f208', {x: 1.2, y: -1.2, z: -2.5}, 'about')
@@ -96,10 +101,16 @@ export default class World {
                 this.to = new Text('to the', 0.6, '#bd4500', {x: 1, y: 2.4, z: -2.8})
             }, 2700)
             setTimeout(() => {
-                this.uralaverse = new Text('URALAVERSE!', 0.9, '#7d09a7', {x: 2, y: 1, z: -2.5})
+                // '#7d09a7'
+                this.uralaverse = new Text('URALAVERSE!', 0.9, '#520004', {x: 2, y: 1, z: -2.5})
             }, 3000)
             setTimeout(() => {
-                this.about = new Text('ABOUT', 0.4, '#00f208', {x: -3, y: -1, z: -2}, 'about')
+                if (this.debug.active) {
+                    this.debug.ui.addColor(this.uralaverse.material, 'color').onChange((value) => {
+                        this.uralaverse.material = value
+                    })
+                }
+                this.about = new Text('ABOUT', 0.4, '#00ff11', {x: -3, y: -1, z: -2}, 'about')
             }, 3400)
             setTimeout(() => {
                 this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 5, y: -2.3, z: -2.5}, 'contact')
@@ -108,7 +119,7 @@ export default class World {
                 this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations')
             }, 4000)
             setTimeout(() => {
-                this.work = new Text('WORK', 0.4, '#9900ff', {x: -2.4, y: -2.3, z: -2.2}, 'work')
+                this.work = new Text('WORK', 0.4, '#180052', {x: -2.4, y: -2.3, z: -2.2}, 'work')
             }, 4400)
             setTimeout(() => {
                 this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.015)
@@ -243,6 +254,21 @@ export default class World {
         this.hideHome()
         if(typeof this.globe === 'undefined'){
             this.globe = new Globe()
+            // this.maskPanel = new SVG('maskPanel', '', {x: -16.7, y: 8.2, z: 7}, 0.025)
+            // this.maskPanel.model.rotation.set(0,0.4,0)
+            // // this.maskPanel.model.material.opacity = 1
+            // console.log(this.maskPanel.model)
+            // if(this.debug.active) {
+            //     this.debugFolder.add(this.maskPanel.model.position, 'x').name('mask x').min(-30).max(18).step(0.1)
+            //     this.debugFolder.add(this.maskPanel.model.position, 'y').name('mask y').min(-30).max(18).step(0.1)
+            //     this.debugFolder.add(this.maskPanel.model.position, 'z').name('mask z').min(-30).max(18).step(0.1)
+            //     this.debugFolder.add(this.maskPanel.model.rotation, 'x').name('rotation x').min(-18).max(18).step(0.1)
+            //     this.debugFolder.add(this.maskPanel.model.rotation, 'y').name('rotation y').min(-18).max(18).step(0.1)
+            //     this.debugFolder.add(this.maskPanel.model.rotation, 'z').name('rotation z').min(-18).max(18).step(0.1)
+            //     this.debugFolder.add(this.maskPanel.model.scale, 'x').name('scale x').min(-1).max(1).step(0.001)
+            //     this.debugFolder.add(this.maskPanel.model.scale, 'y').name('scale y').min(-1).max(1).step(0.001)
+            //     this.debugFolder.add(this.maskPanel.model.scale, 'z').name('scale z').min(-1).max(1).step(0.001)
+            // }
         }
         this.globe.model.visible = true
         gsap.to(this.globe.model.position, {

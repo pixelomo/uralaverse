@@ -14,7 +14,7 @@ export default class Raycaster {
         this.currentIntersect = null
         this.contactForm = document.querySelector('.contactForm')
         this.aboutSection = document.querySelector('#about')
-        this.locationSection = document.querySelector('#locations')
+        this.locationSection = document.querySelectorAll('.locations')
         this.globeMask = document.querySelector('#maskPanel')
         this.testHomeObjects = true
         this.testPortfolioObjects = false
@@ -27,14 +27,38 @@ export default class Raycaster {
         }))
 
         const closeControlsButton = document.querySelector('.close-controls-button')
-        const controlsInstructions = document.querySelector('.controls')
+        this.controlsInstructions = document.querySelector('.controls')
         closeControlsButton.addEventListener('click', () => {
-            controlsInstructions.classList.add('hide')
+            this.controlsInstructions.classList.add('hide')
         })
 
         this.closeLocationsModal = document.querySelector('.close-locations-button')
-        this.locationsModal = document.querySelector('#locations')
         this.locationsHiddenButton = document.querySelector('#locations-hidden-button')
+        this.locationDetails = document.querySelectorAll('.location-details')
+
+        document.querySelector('#back-to-locations').addEventListener('click', () => {
+            document.querySelectorAll('.locations').forEach((s) => {
+                gsap.to(s, {
+                    opacity: 1,
+                    duration: 1
+                })
+                s.classList.add('show')
+            })
+            document.querySelector('#back-to-locations').classList.add('hide');
+            // refactor foreach
+            this.locationDetails.forEach((d) => {
+                // d.classList.remove('show')
+                gsap.to(d, {
+                    left: "-100vw",
+                    duration: 1
+                })
+            })
+            const background = document.querySelector('#maskPanel');
+            gsap.to(background, {
+                left: "-100vw",
+                duration: 1
+            })
+        })
 
         // this.closeLocationsModal.addEventListener('click', () => {
         //     this.locationsModal.classList.add('hide')
@@ -42,7 +66,6 @@ export default class Raycaster {
         // })
 
         this.workModal = document.querySelector('#work')
-
         this.color = null
         this.mouse = new THREE.Vector2()
         window.addEventListener('mousemove', (event) => {
@@ -98,7 +121,10 @@ export default class Raycaster {
                             })
                             this.testHomeObjects = false
                             this.aboutSection.classList.remove('show')
-                            this.locationSection.classList.remove('show')
+                            // this.locationSection.classList.remove('show')
+                            this.locationSection.forEach((s) => {
+                                s.classList.remove('show')
+                            })
                             setTimeout(() => {
                                 this.contactForm.classList.add('show')
                                 document.getElementById("name").focus();
@@ -117,7 +143,10 @@ export default class Raycaster {
                             // })
                             this.testHomeObjects = false
                             this.experience.camera.disableControls()
-                            this.locationSection.classList.remove('show')
+                            // this.locationSection.classList.remove('show')
+                            this.locationSection.forEach((s) => {
+                                s.classList.remove('show')
+                            })
                             gsap.to(this.camera.position, {
                                 x: -2.2,
                                 y: -3,
@@ -171,14 +200,17 @@ export default class Raycaster {
                                     x: 3.8,
                                     y: 2,
                                     z: 8,
-                                    duration: 2,
+                                    duration: 1.8,
                                     ease: "back.inOut(1.2)",
                                 })
                             }, 1500)
                             setTimeout(() => {
-                                this.locationSection.classList.add('show')
-                                this.globeMask.classList.add('show')
+                                // this.locationSection.classList.add('show')
+                                this.locationSection.forEach((s) => {
+                                    s.classList.add('show')
+                                })
                                 this.locationsHiddenButton.classList.remove('hide')
+                                this.controlsInstructions.classList.add('hide')
                             }, 4000)
                             // setTimeout(() => {
                             //     // canvas.classList.remove('fade')
@@ -314,17 +346,33 @@ export default class Raycaster {
             // console.log(this.objectsToTest)
         })
 
-        // Accordion on locations modal mobile view
-        let acc = document.getElementsByClassName("location")
-        for (let i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active")
-                let panel = this.nextElementSibling
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px"
-                }
+        // Locations select UI
+        let l = document.getElementsByClassName("location")
+        for (let i = 0; i < l.length; i++) {
+            l[i].addEventListener("click", function() {
+                let id = this.classList[1]
+                let activeLocation = document.querySelector('#' + id)
+                // activeLocation.classList.add('show');
+                const background = document.querySelector('#maskPanel');
+                // background.classList.add('show');
+                gsap.to(activeLocation, {
+                    left: 0,
+                    duration: 1
+                })
+                gsap.to(background, {
+                    left: 0,
+                    duration: 1
+                })
+                document.querySelectorAll('.locations').forEach((s) => {
+                    gsap.to(s, {
+                        opacity: 0,
+                        duration: 1
+                    })
+                    setTimeout(() => {
+                        s.classList.remove('show')
+                    }, 1000)
+                })
+                document.querySelector('#back-to-locations').classList.remove('hide');
             })
         }
     }
@@ -393,8 +441,11 @@ export default class Raycaster {
         this.experience.world.showHome()
         this.aboutSection.classList.remove('show')
         this.locationsHiddenButton.classList.add('hide')
-        this.locationsModal.classList.remove('hide')
-        this.locationSection.classList.remove('show')
+        // this.locationsModal.classList.remove('hide')
+        // this.locationSection.classList.remove('show')
+        this.locationSection.forEach((s) => {
+            s.classList.remove('show')
+        })
         this.globeMask.classList.remove('show')
         if(this.ui){
             // reset portfolio

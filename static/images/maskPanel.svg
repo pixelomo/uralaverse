@@ -1,0 +1,11 @@
+<svg id="maskPanel" class="mask" width="725" height="1500" xmlns="http://www.w3.org/2000/svg">
+    <!-- <defs>
+        <mask id="circleMask">
+            <rect width="100%" height="100%" fill="white"/>
+            <circle cx="728" cy="466" r="244" fill="black"/>
+        </mask>
+    </defs> -->
+    <!-- <rect x="0" y="0" width="725" height="950" fill="#9226ff" mask="url(#circleMask)"/> -->
+    <rect x="0" y="0" width="725" height="950" fill="#9226ff"/>
+    <!-- <circle id="shadow" cx="728" cy="466" r="244" fill="black"/> -->
+</svg>

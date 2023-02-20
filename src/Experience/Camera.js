@@ -36,6 +36,8 @@ export default class Camera {
     setControls() {
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true
+        this.controls.enablePan = false
+        this.controls.enableZoom = false
         this.controls.minDistance = 1
         this.controls.maxDistance = 10
     }
