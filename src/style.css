@@ -1333,3 +1333,7 @@ a#agencyvista-badge {
     } */
 
 }
+
+@media(min-width: 1600px){
+    .locations-col.show{top: 18rem;}
+}
