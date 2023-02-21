@@ -74,7 +74,7 @@ export default class World {
                 this.uralaverse = new Text('URALAVERSE!', 0.6, '#520004', {x: 1.7, y: 1.2, z: -2.5})
             }, 3000)
             setTimeout(() => {
-                this.about = new Text('ABOUT', 0.4, '#00f208', {x: 1.2, y: -1.2, z: -2.5}, 'about')
+                this.about = new Text('ABOUT', 0.4, '#00ff11', {x: 1.2, y: -1.2, z: -2.5}, 'about')
             }, 3400)
             setTimeout(() => {
                 this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.2, z: -2.5}, 'locations')
@@ -83,7 +83,7 @@ export default class World {
                 this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.2, z: -2.5}, 'contact')
             }, 4000)
             setTimeout(() => {
-                this.work = new Text('WORK', 0.4, '#9900ff', {x: 1.2, y: -4.2, z: -2.5}, 'work')
+                this.work = new Text('WORK', 0.4, '#180052', {x: 1.2, y: -4.2, z: -2.5}, 'work')
             }, 4400)
             setTimeout(() => {
                 this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.011)

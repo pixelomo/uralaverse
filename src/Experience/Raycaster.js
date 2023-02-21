@@ -163,6 +163,7 @@ export default class Raycaster {
                             })
                             setTimeout(() => {
                                 this.aboutSection.classList.add('show')
+                                this.controlsInstructions.classList.add('hide')
                             }, 1200)
                         }
 
