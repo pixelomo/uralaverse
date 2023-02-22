@@ -56,7 +56,7 @@
      id="layer1">
     <path
        sodipodi:type="arc"
-       style="fill:transparent;fill-opacity:1;stroke:#2d95fc;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:transparent;fill-opacity:1;stroke:#5c00ec;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path1307"
        sodipodi:cx="24"
        sodipodi:cy="24"
@@ -64,7 +64,7 @@
        sodipodi:ry="22"
        d="M 46 24 A 22 22 0 1 1  2,24 A 22 22 0 1 1  46 24 z" />
     <path
-       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#2d95fc;stroke-width:6;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#5c00ec;stroke-width:6;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 16.221825,16.221825 L 31.778175,31.778175"
        id="path2186"
        sodipodi:nodetypes="cc" />
@@ -72,7 +72,7 @@
        sodipodi:nodetypes="cc"
        id="path3936"
        d="M 31.778175,16.221825 L 16.221825,31.778175"
-       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#2d95fc;stroke-width:6;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#5c00ec;stroke-width:6;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
        style="fill:none;fill-opacity:1;stroke:none;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3938"

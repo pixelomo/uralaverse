@@ -65,11 +65,16 @@ svg path{
 }
 
 section#contact {
-    background: linear-gradient(132deg, #3b1e65 35%, transparent 100%);
+    /* background: linear-gradient(132deg, #3b1e65 35%, transparent 100%); */
+    background: linear-gradient(338deg, #5826e2 0%, transparent 100%);
+    /* background: transparent; */
+    /* border: 2px solid #5c00ec; */
+    box-shadow: 0px 0px 58px 0px #5b28ec;
     /* box-shadow: -1px -1px 65px 25px rgb(45 149 252 / 80%); */
     max-width: 460px;
     color: #fff;
     z-index: 999;
+    top: 5rem;
 }
 section#contact h3{
     font-size: 62px;
@@ -77,7 +82,7 @@ section#contact h3{
     margin-top: 1rem;
     font-family: 'Red Hat Display', sans-serif;
     font-weight: 900;
-    color: #922ffc;
+    color: #5c00ec;
     /* background-image: url('./../static/images/blue.webp'); */
     /* background-size: contain; */
     /* background-size: 100%; */
@@ -85,6 +90,10 @@ section#contact h3{
     /* -moz-background-clip: text; */
     /* -webkit-background-clip: text; */
     /* text-shadow: 0px 0px 10px rgb(255 0 122 / 40%); */
+}
+#contact button {
+    background: linear-gradient(294deg, #5b28ec 0%, transparent 100%);
+    border-radius: 7px;
 }
 
 form {
@@ -100,7 +109,7 @@ section#contact .email{
 section#contact a {
     text-align: center;
     display: block;
-    color: rgb(45 149 252);
+    color: #5b28ec;
     font-weight: 900;
     text-decoration: none;
     font-size: 24px;
@@ -145,7 +154,7 @@ input, textarea, label{
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(1, 198, 251, 0.5);
+    border-bottom: 1px solid #5b28ec;
     padding-bottom: 10px;
     outline: none;
     resize: none;
@@ -297,12 +306,13 @@ input:-webkit-autofill:active {
     left: 3rem;
     right: 3rem;
     max-width: 100%;
-    top: 3rem;
+    top: 1rem;
     margin: 0 auto;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 80vh;
+    height: 90vh;
     border-radius: 0;
+    padding: 0;
     /* background: linear-gradient(50deg, #3b1e65 40%, transparent 100%); */
     /* background: linear-gradient(153deg, #3b1e65 50%, transparent 100%); */
     background: rgb(59 30 101 / 90%);
@@ -315,10 +325,12 @@ input:-webkit-autofill:active {
 }
 #about h1 span{
     font-size: 38px;
+    /* font-size: 75px; */
 }
 #about span {
-    /* color: #fff; */
-    color: #922ffc;
+    color: #fff;
+    /* color: #011121; */
+    /* text-shadow: 0px -1px 5px #922ffc; */
     /* background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g); */
     /* background-image: url(https://media2.giphy.com/media/l3vRbTrGdpZrjjco8/giphy.gif?cid=790b761107897db13569da8f14938a34a6218a71940c1f09&rid=giphy.gif&ct=g); */
     /* background-image: url('./../static/images/blue.webp');
@@ -330,6 +342,7 @@ input:-webkit-autofill:active {
     /* animation: bg 10s infinite alternate; */
     font-weight: 900;
     font-size: 55px;
+    /* font-size: 125px; */
     /* text-shadow: 0px 0px 10px rgb(255 0 122 / 40%); */
 }
 #about h2.about-select {
@@ -385,7 +398,7 @@ ul{padding-left: 2rem;}
 /* //////////////// about tabs /////////////////*/
 .tabbed {
     max-width: 1064px;
-    margin: 20px auto 0;
+    margin: 3rem auto 0;
 }
 [role="tablist"] {
     padding: 0;
@@ -603,6 +616,9 @@ ul{padding-left: 2rem;}
     font-size: 22px;
     /* color: #b6d8fa; */
     /* background-size: 200%; */
+    color: black;
+    border: 3px solid black;
+    font-weight: 700;
 }
 /* #locations button.close-button{
     top: 1rem;
@@ -663,12 +679,12 @@ a#agencyvista-badge {
     padding: 2rem;
 }
 .locations.title.show, .location-details .title {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     display: inline-block;
     font-weight: 700;
     color: #fff;
     padding: 1rem 1.5rem 0.5rem 3rem;
-    margin-top: 2rem;
+    margin-top: 0;
     font-size: 60px;
 }
 .location-details span.title {
@@ -734,8 +750,9 @@ a#agencyvista-badge {
     display: inline-flex;
     flex-direction: column;
     row-gap: 1.7rem;
-    /* top: 10rem; */
-    top: 20vw;
+    top: 0;
+    bottom: 0;
+    justify-content: center;
 }
 .locations-col:first-of-type{
     left: 5%;
@@ -808,7 +825,7 @@ a#agencyvista-badge {
     display: block;
     position: relative;
     text-align: center;
-    margin: 20px auto 10px;
+    margin: 20px auto 40px;
     font-size: 1.2rem;
     background: #000;
     width: 110px;
@@ -870,7 +887,6 @@ a#agencyvista-badge {
     position: absolute;
     box-shadow: none;
     font-size: 24px;
-    color: #fff;
     border-radius: 0;
     top: initial;
     bottom: 3rem;
@@ -883,6 +899,10 @@ a#agencyvista-badge {
     border: none;
     text-shadow: none;
     z-index: 999;
+    background: #f2dfce;
+    color: black;
+    border: 3px solid black;
+    font-weight: 700;
 }
 #back-to-locations {
     z-index: 9999;
@@ -981,7 +1001,6 @@ a#agencyvista-badge {
 @media(max-width: 1024px){
     [role="tablist"] [aria-selected]:after {display: none;}
     section#contact{
-        top: 1rem;
         padding-bottom: 0.25rem;
     }
     section#contact h3{
@@ -1088,6 +1107,10 @@ a#agencyvista-badge {
         height: 30px; */
         /* border-radius: 0; */
         width: 100%;
+        background: #9226ff;
+        color: black;
+        border: 3px solid black;
+        font-weight: 700;
         /* background-size: 200%; */
     }
     .close-locations-button{
@@ -1210,6 +1233,11 @@ a#agencyvista-badge {
 
 /* /////////////////////////////////// 768 768 768//////// */
 @media(max-width: 768px){
+    section#contact{
+        width: 90%;
+        top: 1rem;
+        box-shadow: 0px 0px 11px 0px #5b28ec;
+    }
     section#about{
         height: 100vh;
         max-height: 100vh;
@@ -1304,6 +1332,9 @@ a#agencyvista-badge {
 }
 
 @media (max-width: 550px) {
+    section#contact h3{
+        font-size: 40px;
+    }
     /* .locations.title.show, .location-details .title{
         font-size: 34px;
     } */
@@ -1334,6 +1365,6 @@ a#agencyvista-badge {
 
 }
 
-@media(min-width: 1600px){
-    .locations-col.show{top: 18rem;}
-}
+/* @media(min-width: 1600px){
+
+} */

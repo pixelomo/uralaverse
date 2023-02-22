@@ -22,9 +22,9 @@ export default class World {
         })
         // Debug
         this.debug = this.experience.debug
-		if (this.debug.active) {
-			this.debugFolder = this.debug.ui.addFolder('world')
-		}
+		// if (this.debug.active) {
+		// 	this.debugFolder = this.debug.ui.addFolder('world')
+		// }
     }
 
     createScene() {
@@ -230,6 +230,7 @@ export default class World {
             this.portfolio_5.mesh.visible = true
             this.portfolio_6.mesh.visible = true
         }
+        this.lightFollowControls()
     }
 
     resetWork() {

@@ -125,6 +125,7 @@ export default class Raycaster {
                             this.locationSection.forEach((s) => {
                                 s.classList.remove('show')
                             })
+                            this.controlsInstructions.classList.add('hide')
                             setTimeout(() => {
                                 this.contactForm.classList.add('show')
                                 document.getElementById("name").focus();
@@ -347,7 +348,8 @@ export default class Raycaster {
             // console.log(this.objectsToTest)
         })
 
-        // Locations select UI
+        //////////////////////////////// Locations select UI ///////////////////////////////////
+        //////////////////////////////// Locations select UI ///////////////////////////////////
         let l = document.getElementsByClassName("location")
         for (let i = 0; i < l.length; i++) {
             l[i].addEventListener("click", function() {
@@ -364,6 +366,80 @@ export default class Raycaster {
                     left: 0,
                     duration: 1
                 })
+                ///// rotate globe to location /////
+                const camera = window.experience.camera.instance.position
+                if(id === 'tokyo'){
+                    gsap.to(camera, {
+                        x: 5.4,
+                        y: 5.1,
+                        z: 5.2,
+                        duration: 1,
+                    })
+                } else if(id === 'london') {
+                    gsap.to(camera, {
+                        x: -5.6,
+                        y: 7.0,
+                        z: -1.0,
+                        duration: 1,
+                    })
+                } else if(id === 'jakarta') {
+                    gsap.to(camera, {
+                        x: 1.8,
+                        y: -0.5,
+                        z: 8.9,
+                        duration: 1,
+                    })
+                }else if(id === 'hochi') {
+                    gsap.to(camera, {
+                        x: 1.1,
+                        y: 2.2,
+                        z: 8.7,
+                        duration: 1,
+                    })
+                }else if(id === 'kuala') {
+                    gsap.to(camera, {
+                        x: 1.5,
+                        y: 0.7,
+                        z: 8.9,
+                        duration: 1,
+                    })
+                }else if(id === 'fukui') {
+                    gsap.to(camera, {
+                        x: 4.6,
+                        y: 5.3,
+                        z: 5.7,
+                        duration: 1,
+                    })
+                }else if(id === 'singapore') {
+                    gsap.to(camera, {
+                        x: 1.5,
+                        y: 0.7,
+                        z: 8.9,
+                        duration: 1,
+                    })
+                }else if(id === 'seoul') {
+                    gsap.to(camera, {
+                        x: 3,
+                        y: 6,
+                        z: 6,
+                        duration: 1,
+                    })
+                }else if(id === 'manila') {
+                    gsap.to(camera, {
+                        x: 3.7,
+                        y: 3.2,
+                        z: 7.7,
+                        duration: 1,
+                    })
+                }else if(id === 'melbourne') {
+                    gsap.to(camera, {
+                        x: 5.4,
+                        y: -5.3,
+                        z: 4.9,
+                        duration: 1,
+                    })
+                }
+
                 document.querySelectorAll('.locations').forEach((s) => {
                     gsap.to(s, {
                         opacity: 0,
@@ -376,6 +452,8 @@ export default class Raycaster {
                 document.querySelector('#back-to-locations').classList.remove('hide');
             })
         }
+
+
     }
 
     setInstance() {
