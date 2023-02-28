@@ -324,25 +324,19 @@ input:-webkit-autofill:active {
     overflow: hidden;
 }
 #about h1 span{
-    font-size: 38px;
-    /* font-size: 75px; */
+    /* font-size: 38px; */
+    font-size: 75px;
 }
 #about span {
-    color: #fff;
-    /* color: #011121; */
-    /* text-shadow: 0px -1px 5px #922ffc; */
-    /* background-image: url(https://media4.giphy.com/media/Ph0oIVQeuvh0k/giphy.gif?cid=790b761104de4520dabd28b0c8874d537537096f34ea8dec&rid=giphy.gif&ct=g); */
-    /* background-image: url(https://media2.giphy.com/media/l3vRbTrGdpZrjjco8/giphy.gif?cid=790b761107897db13569da8f14938a34a6218a71940c1f09&rid=giphy.gif&ct=g); */
-    /* background-image: url('./../static/images/blue.webp');
-    background-size: contain;
-    background-size: 100%;
-    color: transparent;
-    -moz-background-clip: text;
-    -webkit-background-clip: text; */
-    /* animation: bg 10s infinite alternate; */
+    /* color: #fff; */
+    color: #011121;
+    /* text-shadow: -1px -1px 2px #922ffc, 1px 1px 6px #922ffc; */
+    text-shadow: -1px -1px 2px #922ffc, 1px 1px 6px #2ff0fc;
+    text-shadow: -1px -1px 10px #922ffc, 1px 1px 6px #2ff0fc;
+    /* color: transparent; */
     font-weight: 900;
-    font-size: 55px;
-    /* font-size: 125px; */
+    /* font-size: 55px; */
+    font-size: 125px;
     /* text-shadow: 0px 0px 10px rgb(255 0 122 / 40%); */
 }
 #about h2.about-select {
@@ -386,6 +380,8 @@ input:-webkit-autofill:active {
 }
 #about ul {
     font-size: 16px;
+    max-width: 1064px;
+    margin: 0 auto;
 }
 ul{padding-left: 2rem;}
 #about strong{
@@ -397,7 +393,7 @@ ul{padding-left: 2rem;}
 
 /* //////////////// about tabs /////////////////*/
 .tabbed {
-    max-width: 1064px;
+    max-width: 1360px;
     margin: 3rem auto 0;
 }
 [role="tablist"] {
@@ -563,7 +559,7 @@ ul{padding-left: 2rem;}
 }
 .spider.active{
     display: block;
-    max-width: 700px;
+    max-width: 1000px;
     margin: 2rem auto 0;
     text-align: center;
 }
@@ -601,24 +597,29 @@ ul{padding-left: 2rem;}
 
 /* /////////// about tabs end ///////////////////// */
 
-#about button.close-button{
+#about button.close-button, #about .intro button{
     width: 12rem;
     min-width: 110px;
-    /* border-radius: 9px; */
-    /* border-width: 2px; */
     height: auto;
-    /* top: 1rem; */
     top: initial;
     bottom: 0;
-    /* right: 1rem; */
     right: initial;
     left: 0;
     font-size: 22px;
-    /* color: #b6d8fa; */
-    /* background-size: 200%; */
     color: black;
     border: 3px solid black;
     font-weight: 700;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+#about .intro button{
+    right: 0;
+    margin: auto;
+}
+#about .intro button img{
+    width: 12px;
 }
 /* #locations button.close-button{
     top: 1rem;
@@ -1044,12 +1045,12 @@ a#agencyvista-badge {
         /* height: 600px; */
     }
     section#about h1 span{
-        font-size: 18px;
+        font-size: 40px;
     }
     #about span{
-        font-size: 30px;
+        font-size: 46px;
     }
-    #about span, #locations span{
+    #locations span{
         color: inherit;
         background-image: none;
     }
@@ -1239,7 +1240,7 @@ a#agencyvista-badge {
         box-shadow: 0px 0px 11px 0px #5b28ec;
     }
     section#about{
-        height: 90vh;
+        height: 92vh;
         max-height: 100vh;
         border-radius: 0;
         max-width: 100%;
@@ -1248,10 +1249,11 @@ a#agencyvista-badge {
         z-index: 2;
     }
     section#about h1{line-height: 1;}
-    section#about h1 span{font-size: 16px;}
+    /* section#about h1 span{font-size: 16px;} */
     #about button.close-button {
         /* border-radius: 0; */
         /* width: 100%; */
+        border: 0;
         right:0;
         left: 0;
         min-width: 80px;
@@ -1262,13 +1264,17 @@ a#agencyvista-badge {
         right: 4px;
         bottom: 6px;
     }
-    .tabbed{
+    .tabbed:not(.hide){
         margin: 0 auto;
         max-width: 305px;
         display: flex;
         flex-direction: column;
     }
-    [role="tablist"]{height: auto; padding-bottom: 0.5rem;}
+    [role="tablist"]{
+        height: auto;
+        padding-bottom: 0.5rem;
+        margin: 0 !important;
+    }
     [role="tablist"] a{
         width: 100%;
         font-size: 18px;
