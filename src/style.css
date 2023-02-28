@@ -94,6 +94,7 @@ section#contact h3{
 #contact button {
     background: linear-gradient(294deg, #5b28ec 0%, transparent 100%);
     border-radius: 7px;
+    font-weight: 700;
 }
 
 form {
@@ -190,16 +191,16 @@ textarea {
     height: 180px;
 }
 ::placeholder {
-    color: #b6d8fa;
+    color: #fff;
 }
 ::-webkit-input-placeholder{
-    color: #b6d8fa;
+    color: #fff;
 }
 ::-moz-placeholder{
-    color: #b6d8fa;
+    color: #fff;
 }
 :-ms-input-placeholder {
-    color: #b6d8fa;
+    color: #fff;
 }
 
 input:-webkit-autofill,
@@ -1008,9 +1009,9 @@ a#agencyvista-badge {
         font-size: 42px;
         margin-top: 0;
     }
-    textarea{
+    /* textarea{
         height: 90px;
-    }
+    } */
     input, textarea, label{
         font-size: 16px;
         margin-bottom: 0;
@@ -1182,6 +1183,7 @@ a#agencyvista-badge {
         left: 1rem;
         padding: 0;
     }
+    .locations.title.show{margin-top: 10px;}
     .location-details .title{
         margin: 0 0 0.75rem;
     }
@@ -1194,7 +1196,7 @@ a#agencyvista-badge {
     }
     .location-details .box{padding: 0;}
     .locations-col.show{
-        top: 6rem;
+        /* top: 6rem; */
         padding: 0;
         left: 1rem !important;
         right: initial;
@@ -1248,7 +1250,7 @@ a#agencyvista-badge {
         margin: 0;
         z-index: 2;
     }
-    section#about h1{line-height: 1;}
+    section#about h1{line-height: 1.1;}
     /* section#about h1 span{font-size: 16px;} */
     #about button.close-button {
         /* border-radius: 0; */
