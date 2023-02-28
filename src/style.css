@@ -1343,6 +1343,9 @@ a#agencyvista-badge {
     section#contact h3{
         font-size: 40px;
     }
+    .locations p, .location-details p{
+        margin: 0 auto 4px;
+    }
     /* .locations.title.show, .location-details .title{
         font-size: 34px;
     } */
