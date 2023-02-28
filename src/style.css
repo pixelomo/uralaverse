@@ -1009,9 +1009,9 @@ a#agencyvista-badge {
         font-size: 42px;
         margin-top: 0;
     }
-    /* textarea{
-        height: 90px;
-    } */
+    textarea{
+        height: 100px;
+    }
     input, textarea, label{
         font-size: 16px;
         margin-bottom: 0;
@@ -1046,10 +1046,10 @@ a#agencyvista-badge {
         /* height: 600px; */
     }
     section#about h1 span{
-        font-size: 40px;
+        font-size: 30px;
     }
     #about span{
-        font-size: 46px;
+        font-size: 39px;
     }
     #locations span{
         color: inherit;
@@ -1341,10 +1341,27 @@ a#agencyvista-badge {
 
 @media (max-width: 550px) {
     section#contact h3{
-        font-size: 40px;
+        font-size: 34px;
     }
     .locations p, .location-details p{
         margin: 0 auto 4px;
+    }
+    .location-details{
+        padding: 0.5rem 1.125rem;
+    }
+    .icon {
+        padding-left: 2.5rem;
+        padding-bottom: 0.5rem;
+    }
+    .icon:before {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    section#about{
+        padding: 1rem 0;
+    }
+    section#about .intro {
+        padding: 0 1rem;
     }
     /* .locations.title.show, .location-details .title{
         font-size: 34px;
