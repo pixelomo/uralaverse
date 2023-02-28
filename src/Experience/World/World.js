@@ -230,7 +230,6 @@ export default class World {
             this.portfolio_5.mesh.visible = true
             this.portfolio_6.mesh.visible = true
         }
-        this.lightFollowControls()
     }
 
     resetWork() {

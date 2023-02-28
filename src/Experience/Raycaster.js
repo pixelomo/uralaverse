@@ -60,6 +60,11 @@ export default class Raycaster {
             })
         })
 
+        document.querySelector('#show-services').addEventListener('click', () => {
+            document.querySelector('.intro').classList.add('hide')
+            document.querySelector('#service-tabs').classList.remove('hide')
+        })
+
         // this.closeLocationsModal.addEventListener('click', () => {
         //     this.locationsModal.classList.add('hide')
         //     this.locationsHiddenButton.classList.remove('hide')
@@ -539,5 +544,7 @@ export default class Raycaster {
         setTimeout(() => {
             this.contactForm.classList.remove('show')
         }, 700)
+        document.querySelector('.intro').classList.remove('hide')
+        document.querySelector('#service-tabs').classList.add('hide')
     }
 }
