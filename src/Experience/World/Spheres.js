@@ -23,7 +23,7 @@ export default class Spheres {
             stagger: 0.01,
             ease: "back.inOut(1.7)",
             repeatDelay: 8,
-            delay: 12
+            // delay: 12
         })
     }
 

@@ -37,7 +37,7 @@ export default class Text {
             shininess: 0,
             reflectivity: 0,
             fog: false,
-            flatShading: true
+            flatShading: true,
         })
         this.material.userData.color = new THREE.Color(color)
     }

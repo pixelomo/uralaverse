@@ -23,7 +23,7 @@ export default class Diamonds {
             stagger: 0.01,
             ease: "back.inOut(1.7)",
             repeatDelay: 8,
-            delay: 12
+            // delay: 12
         })
         let diamondRotations = this.diamondGroup.children.map(i => i.rotation)
         gsap.from(diamondRotations, {
