@@ -32,9 +32,17 @@ export default class Raycaster {
             this.controlsInstructions.classList.add('hide')
         })
 
-        this.closeLocationsModal = document.querySelector('.close-locations-button')
+        this.closeLocationsModal = document.querySelector('#close-locations-button')
         this.locationsHiddenButton = document.querySelector('#locations-hidden-button')
         this.locationDetails = document.querySelectorAll('.location-details')
+        this.locationCols = document.querySelectorAll('.locations-col')
+
+        this.closeLocationsModal.addEventListener('click', () => {
+            this.closeLocationsModal.classList.add('hide')
+            this.locationCols.forEach((d) => {
+                d.classList.add('hide')
+            })
+        })
 
         document.querySelector('#back-to-locations').addEventListener('click', () => {
             document.querySelectorAll('.locations').forEach((s) => {
@@ -64,11 +72,6 @@ export default class Raycaster {
             document.querySelector('.intro').classList.add('hide')
             document.querySelector('#service-tabs').classList.remove('hide')
         })
-
-        // this.closeLocationsModal.addEventListener('click', () => {
-        //     this.locationsModal.classList.add('hide')
-        //     this.locationsHiddenButton.classList.remove('hide')
-        // })
 
         this.workModal = document.querySelector('#work')
         this.color = null
@@ -546,5 +549,9 @@ export default class Raycaster {
         }, 700)
         document.querySelector('.intro').classList.remove('hide')
         document.querySelector('#service-tabs').classList.add('hide')
+        this.closeLocationsModal.classList.remove('hide')
+        this.locationCols.forEach((d) => {
+            d.classList.remove('hide')
+        })
     }
 }

@@ -23,7 +23,7 @@ export default class Donuts {
             stagger: 0.01,
             ease: "back.inOut(1.7)",
             repeatDelay: 8,
-            delay: 12
+            // delay: 12
         })
         let donutScales = this.donutGroup.children.map(i => i.scale)
         gsap.from(donutScales, {
@@ -36,7 +36,7 @@ export default class Donuts {
             stagger: 0.01,
             ease: "back.inOut(1.7)",
             repeatDelay: 8,
-            delay: 12
+            // delay: 12
         })
         let donutRotations = this.donutGroup.children.map(i => i.rotation)
         gsap.to(donutRotations, {
