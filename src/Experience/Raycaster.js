@@ -242,6 +242,7 @@ export default class Raycaster {
                             this.testPortfolioObjects = true
                             // this.workModal.classList.add('show')
                             this.locationsHiddenButton.classList.remove('hide')
+                            this.controlsInstructions.classList.add('hide')
                             this.experience.world.showWork()
                         }
                         /////////////////////////// WORK  END ///////////////////////////////
@@ -283,21 +284,38 @@ export default class Raycaster {
                             // if UI scale = 1 => 0
                             // console.log(portfolioItem.scale.x)
                             if(this.ui.container.scale.x === 0){
-                                this.ui.container.scale.set(1,1,1)
                                 this.ui.container.rotation.set(0.15,0,0)
-                                this.ui.container.position.set(0, 0, 3)
-                                gsap.to(portfolioItem.scale, {
-                                    x: 3,
-                                    y: 3,
-                                    z: 3,
-                                    duration: 1.2,
-                                })
-                                gsap.to(portfolioItem.position, {
-                                    x: 0,
-                                    y: 0,
-                                    z: 2,
-                                    duration: 1.2,
-                                })
+                                if(portfolioItem.userData.isMobile){
+                                    this.ui.container.scale.set(0.8,1,1)
+                                    this.ui.container.position.set(0, 0, 1.5)
+                                    gsap.to(portfolioItem.scale, {
+                                        x: 2,
+                                        y: 2,
+                                        z: 2,
+                                        duration: 1.2,
+                                    })
+                                    gsap.to(portfolioItem.position, {
+                                        x: 0,
+                                        y: 0,
+                                        z: 1,
+                                        duration: 1.2,
+                                    })
+                                } else {
+                                    this.ui.container.scale.set(1,1,1)
+                                    this.ui.container.position.set(0, 0, 3)
+                                    gsap.to(portfolioItem.scale, {
+                                        x: 3,
+                                        y: 3,
+                                        z: 3,
+                                        duration: 1.2,
+                                    })
+                                    gsap.to(portfolioItem.position, {
+                                        x: 0,
+                                        y: 0,
+                                        z: 2,
+                                        duration: 1.2,
+                                    })
+                                }
                             } else {
                                 this.ui.container.scale.set(0,0,0)
                                 gsap.to(portfolioItem.scale, {
@@ -306,12 +324,21 @@ export default class Raycaster {
                                     z: 1,
                                     duration: 1.2,
                                 })
-                                gsap.to(portfolioItem.position, {
-                                    x: portfolioItem.userData.position.x,
-                                    y: portfolioItem.userData.position.y,
-                                    z: portfolioItem.userData.position.z,
-                                    duration: 1.2,
-                                })
+                                if(portfolioItem.userData.isMobile){
+                                    gsap.to(portfolioItem.position, {
+                                        x: portfolioItem.userData.mobilePosition.x,
+                                        y: portfolioItem.userData.mobilePosition.y,
+                                        z: portfolioItem.userData.mobilePosition.z,
+                                        duration: 1.2,
+                                    })
+                                } else {
+                                    gsap.to(portfolioItem.position, {
+                                        x: portfolioItem.userData.position.x,
+                                        y: portfolioItem.userData.position.y,
+                                        z: portfolioItem.userData.position.z,
+                                        duration: 1.2,
+                                    })
+                                }
                             }
                         }
                     }
@@ -460,8 +487,6 @@ export default class Raycaster {
                 document.querySelector('#back-to-locations').classList.remove('hide');
             })
         }
-
-
     }
 
     setInstance() {
