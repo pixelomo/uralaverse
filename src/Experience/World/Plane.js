@@ -5,7 +5,7 @@ import vertexShader from './../shaders/vertex.glsl'
 import fragmentShader from './../shaders/fragment.glsl'
 
 export default class Plane {
-    constructor(img, width, height, position, title, description) {
+    constructor(img, width, height, position, title, description, mobilePosition, isMobile) {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
@@ -13,8 +13,8 @@ export default class Plane {
         this.raycaster = this.experience.raycaster
         this.setGeometry(width, height)
         this.setMaterial(img)
-        this.setMesh(position, img, title, description)
-        this.clock = new THREE.Clock()
+        this.setMesh(position, title, description, mobilePosition, isMobile)
+        // this.clock = new THREE.Clock()
         // Debug
         // this.debug = this.experience.debug
         // console.log(this.debug)
@@ -25,12 +25,12 @@ export default class Plane {
 
     setGeometry(width, height) {
         this.geometry = new THREE.PlaneGeometry(width, height)
-        const count = this.geometry.attributes.position.count
-        const randoms = new Float32Array(count)
+        // const count = this.geometry.attributes.position.count
+        // const randoms = new Float32Array(count)
 
-        for(let i = 0; i < count; i++) {
-            randoms[i] = Math.random()
-        }
+        // for(let i = 0; i < count; i++) {
+        //     randoms[i] = Math.random()
+        // }
 
         // this.geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1))
     }
@@ -60,20 +60,25 @@ export default class Plane {
         // }
     }
 
-    setMesh(position, img, title, description) {
+    setMesh(position, title, description, mobilePosition, isMobile) {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.mesh.position.set(position.x, position.y, position.z)
+        if(isMobile){
+            this.mesh.position.set(mobilePosition.x, mobilePosition.y, mobilePosition.z)
+        } else {
+            this.mesh.position.set(position.x, position.y, position.z)
+        }
         this.mesh.name = 'portfolio'
-        // this.mesh.name = 'portfolio'+img
         this.mesh.userData.title = title
         this.mesh.userData.description = description
-        this.mesh.userData.position = position;
+        this.mesh.userData.position = position
+        this.mesh.userData.isMobile = isMobile
+        this.mesh.userData.mobilePosition = mobilePosition
         this.raycaster.objectsToTest.push(this.mesh)
         this.scene.add(this.mesh)
     }
 
     update() {
-        const elapsedTime = this.clock.getElapsedTime()
+        // const elapsedTime = this.clock.getElapsedTime()
         // this.material.uniforms.uTime.value = elapsedTime
     }
 }

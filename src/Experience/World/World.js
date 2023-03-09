@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import Experience from '../Experience.js'
 import Environment from './Environment.js'
 import Globe from './Globe.js'
@@ -205,20 +206,56 @@ export default class World {
         this.hideHome()
         this.work.mesh.visible = true
         this.renderer.setNoTone()
-        gsap.to(this.work.mesh.position, {
-            x: -4,
-            y: 4,
-            z: 1,
-            duration: 1.5,
-            ease: "back.inOut(1.7)",
+        this.color = new THREE.Color('#00c4eb')
+        gsap.to(this.work.material.color, 0.5, {
+            r: this.color.r,
+            g: this.color.g,
+            b: this.color.b
         })
+        if(this.isMobile()){
+            gsap.to(this.work.mesh.position, {
+                x: -2,
+                y: 6,
+                z: 1,
+                duration: 1.5,
+                ease: "back.inOut(1.7)",
+            })
+        } else {
+            gsap.to(this.work.mesh.position, {
+                x: -4,
+                y: 4,
+                z: 1,
+                duration: 1.5,
+                ease: "back.inOut(1.7)",
+            })
+        }
         if(!this.portfolio_1){
-            this.portfolio_1 = new Plane('coin360', 3, 2, {x: -3.5, y: 1.5, z: 0}, 'Coin360 - crypto heatmap website development', 'Ongoing project for Coin360 in the Banking & Financials industry for a B2C audience since 2019.')
-            this.portfolio_2 = new Plane('kaplan', 3, 2, {x: 0, y: 1.5, z: 0}, 'Kaplan Singapore - Website, Content Marketing, PR', 'Project made for Kaplan Singapore in the Education industry for a B2C audience in 2021.')
-            this.portfolio_3 = new Plane('nft', 3, 2, {x: 3.5, y: 1.5, z: 0}, 'Global Marketing for a Prominent NFT Project', 'Ongoing project for Global NFT Avatar Project in the Others industry for a B2C audience since 2022.')
-            this.portfolio_4 = new Plane('reckitt', 3, 2, {x: -3.5, y: -1, z: 0}, 'Reckitt Benckiser - Campaign Landing Page', 'Project made for Reckitt Benckiser in the Household Products industry for a B2C audience.')
-            this.portfolio_5 = new Plane('lawork', 3, 2, {x: 0, y: -1, z: 0}, 'Online recruiting website and service development', 'Ongoing project for Japanese clients in the Industrial Goods & Services industry for a B2C audience since 2022.')
-            this.portfolio_6 = new Plane('coint', 3, 2, {x: 3.5, y: -1, z: 0}, 'Growth Strategy for Global Fintech Media Brands', 'Ongoing project for Cointelegraph.com & Investing.com in the Media industry for a B2C audience since 2017.')
+            this.portfolio_1 = new Plane('coin360', 3, 2, {x: -3.5, y: 1.5, z: 0}, 'Coin360 - crypto heatmap website development', 'Ongoing project for Coin360 in the Banking & Financials industry for a B2C audience since 2019.', {x: -1.5, y: 5, z: 0}, this.isMobile())
+            this.portfolio_2 = new Plane('kaplan', 3, 2, {x: 0, y: 1.5, z: 0}, 'Kaplan Singapore - Website, Content Marketing, PR', 'Project made for Kaplan Singapore in the Education industry for a B2C audience in 2021.', {x: 2, y: 5, z: 0}, this.isMobile())
+            this.portfolio_3 = new Plane('nft', 3, 2, {x: 3.5, y: 1.5, z: 0}, 'Global Marketing for a Prominent NFT Project', 'Ongoing project for Global NFT Avatar Project in the Others industry for a B2C audience since 2022.', {x: -1.5, y: 2, z: 0}, this.isMobile())
+            this.portfolio_4 = new Plane('reckitt', 3, 2, {x: -3.5, y: -1, z: 0}, 'Reckitt Benckiser - Campaign Landing Page', 'Project made for Reckitt Benckiser in the Household Products industry for a B2C audience.', {x: 2, y: 2, z: 0}, this.isMobile())
+            this.portfolio_5 = new Plane('lawork', 3, 2, {x: 0, y: -1, z: 0}, 'Online recruiting website and service development', 'Ongoing project for Japanese clients in the Industrial Goods & Services industry for a B2C audience since 2022.', {x: -1.5, y: -1, z: 0}, this.isMobile())
+            this.portfolio_6 = new Plane('coint', 3, 2, {x: 3.5, y: -1, z: 0}, 'Growth Strategy for Global Fintech Media Brands', 'Ongoing project for Cointelegraph.com & Investing.com in the Media industry for a B2C audience since 2017.', {x: 2, y: -1, z: 0}, this.isMobile())
+            // if(this.isMobile()){
+                // rotate work circle idea \_/
+                // heatmap
+                // this.portfolio_1.mesh.position.set(0,0,0)
+                // // kaplan
+                // this.portfolio_2.mesh.position.set(3,0,1)
+                // this.portfolio_2.mesh.rotation.set(0,7,0)
+                // // NFT
+                // this.portfolio_3.mesh.position.set(6,0,2)
+                // this.portfolio_3.mesh.rotation.set(0,9,0)
+                // // reckitt
+                // this.portfolio_4.mesh.position.set(0,0,6)
+                // this.portfolio_4.mesh.rotation.set(0,11,0)
+                // // lala
+                // this.portfolio_5.mesh.position.set(-5,0,2)
+                // this.portfolio_5.mesh.rotation.set(0,-9,0)
+                // // CT
+                // this.portfolio_6.mesh.position.set(-3,0,1)
+                // this.portfolio_6.mesh.rotation.set(0,-7,0)
+            // }
             // blank UI required before updating
             // this.ui = new UI({title: '', description: ''})
         }
@@ -235,17 +272,26 @@ export default class World {
     resetWork() {
         //for
         if(typeof this.portfolio_1 != 'undefined') {
-            this.portfolio_1.mesh.position.set(this.portfolio_1.mesh.userData.position.x, this.portfolio_1.mesh.userData.position.y, this.portfolio_1.mesh.userData.position.z)
+            if(this.isMobile()){
+                this.portfolio_1.mesh.position.set(this.portfolio_1.mesh.userData.mobilePosition.x, this.portfolio_1.mesh.userData.mobilePosition.y, this.portfolio_1.mesh.userData.mobilePosition.z)
+                this.portfolio_2.mesh.position.set(this.portfolio_2.mesh.userData.mobilePosition.x, this.portfolio_2.mesh.userData.mobilePosition.y, this.portfolio_2.mesh.userData.mobilePosition.z)
+                this.portfolio_3.mesh.position.set(this.portfolio_3.mesh.userData.mobilePosition.x, this.portfolio_3.mesh.userData.mobilePosition.y, this.portfolio_3.mesh.userData.mobilePosition.z)
+                this.portfolio_4.mesh.position.set(this.portfolio_4.mesh.userData.mobilePosition.x, this.portfolio_4.mesh.userData.mobilePosition.y, this.portfolio_4.mesh.userData.mobilePosition.z)
+                this.portfolio_5.mesh.position.set(this.portfolio_5.mesh.userData.mobilePosition.x, this.portfolio_5.mesh.userData.mobilePosition.y, this.portfolio_5.mesh.userData.mobilePosition.z)
+                this.portfolio_6.mesh.position.set(this.portfolio_6.mesh.userData.mobilePosition.x, this.portfolio_6.mesh.userData.mobilePosition.y, this.portfolio_6.mesh.userData.mobilePosition.z)
+            } else {
+                this.portfolio_1.mesh.position.set(this.portfolio_1.mesh.userData.position.x, this.portfolio_1.mesh.userData.position.y, this.portfolio_1.mesh.userData.position.z)
+                this.portfolio_2.mesh.position.set(this.portfolio_2.mesh.userData.position.x, this.portfolio_2.mesh.userData.position.y, this.portfolio_2.mesh.userData.position.z)
+                this.portfolio_3.mesh.position.set(this.portfolio_3.mesh.userData.position.x, this.portfolio_3.mesh.userData.position.y, this.portfolio_3.mesh.userData.position.z)
+                this.portfolio_4.mesh.position.set(this.portfolio_4.mesh.userData.position.x, this.portfolio_4.mesh.userData.position.y, this.portfolio_4.mesh.userData.position.z)
+                this.portfolio_5.mesh.position.set(this.portfolio_5.mesh.userData.position.x, this.portfolio_5.mesh.userData.position.y, this.portfolio_5.mesh.userData.position.z)
+                this.portfolio_6.mesh.position.set(this.portfolio_6.mesh.userData.position.x, this.portfolio_6.mesh.userData.position.y, this.portfolio_6.mesh.userData.position.z)
+            }
             this.portfolio_1.mesh.scale.set(1,1,1)
-            this.portfolio_2.mesh.position.set(this.portfolio_2.mesh.userData.position.x, this.portfolio_2.mesh.userData.position.y, this.portfolio_2.mesh.userData.position.z)
             this.portfolio_2.mesh.scale.set(1,1,1)
-            this.portfolio_3.mesh.position.set(this.portfolio_3.mesh.userData.position.x, this.portfolio_3.mesh.userData.position.y, this.portfolio_3.mesh.userData.position.z)
             this.portfolio_3.mesh.scale.set(1,1,1)
-            this.portfolio_4.mesh.position.set(this.portfolio_4.mesh.userData.position.x, this.portfolio_4.mesh.userData.position.y, this.portfolio_4.mesh.userData.position.z)
             this.portfolio_4.mesh.scale.set(1,1,1)
-            this.portfolio_5.mesh.position.set(this.portfolio_5.mesh.userData.position.x, this.portfolio_5.mesh.userData.position.y, this.portfolio_5.mesh.userData.position.z)
             this.portfolio_5.mesh.scale.set(1,1,1)
-            this.portfolio_6.mesh.position.set(this.portfolio_6.mesh.userData.position.x, this.portfolio_6.mesh.userData.position.y, this.portfolio_6.mesh.userData.position.z)
             this.portfolio_6.mesh.scale.set(1,1,1)
         }
     }
