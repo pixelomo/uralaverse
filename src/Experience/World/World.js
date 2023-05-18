@@ -64,6 +64,12 @@ export default class World {
             this.spheres = new Spheres(params.spheresAmount)
         }, 1000)
 
+        // create a gsap.timeline() animation with a stagger effect that calls a different function for each element
+        // var tl = gsap.timeline();
+        // tl.staggerTo(".box", 1, {x: 100, y: 100, rotation: 360, scale: 2, ease: "bounce"}, 0.2, function() {
+        //     console.log("staggerTo complete");
+        // } );
+
         if(this.isMobile()){
             setTimeout(() => {
                 this.welcome = new Text('Welcome', 0.6, '#002056', {x: 1.3, y: 3, z: -2.5})
@@ -87,7 +93,7 @@ export default class World {
                 this.work = new Text('WORK', 0.4, '#180052', {x: 1.2, y: -4.2, z: -2.5}, 'work')
             }, 4400)
             setTimeout(() => {
-                this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.011)
+                this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.0037)
             }, 5000)
             setTimeout(() => {
                 this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3.5, y: 8, z: 0}, 0.011)
@@ -123,7 +129,7 @@ export default class World {
                 this.work = new Text('WORK', 0.4, '#180052', {x: -2.4, y: -2.3, z: -2.2}, 'work')
             }, 4400)
             setTimeout(() => {
-                this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.015)
+                this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.005)
             }, 5000)
             setTimeout(() => {
                 this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015)
