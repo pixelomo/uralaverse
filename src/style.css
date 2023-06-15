@@ -741,6 +741,9 @@ a#agencyvista-badge {
 .tel-icon:before {
     background-image: url('./../static/images/phone.svg');
 }
+.fax-icon:before {
+    background-image: url('./../static/images/fax.svg');
+}
 
 .location-select{
     display: flex;
