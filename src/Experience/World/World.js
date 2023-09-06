@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import Experience from '../Experience.js'
 import Environment from './Environment.js'
 import Globe from './Globe.js'
-import Doge from './Doge.js'
+// import Doge from './Doge.js'
 import Diamonds from './Diamonds.js'
 import Donuts from './Donuts.js'
 import Spheres from './Spheres.js'
@@ -64,12 +64,6 @@ export default class World {
             this.spheres = new Spheres(params.spheresAmount)
         }, 1000)
 
-        // create a gsap.timeline() animation with a stagger effect that calls a different function for each element
-        // var tl = gsap.timeline();
-        // tl.staggerTo(".box", 1, {x: 100, y: 100, rotation: 360, scale: 2, ease: "bounce"}, 0.2, function() {
-        //     console.log("staggerTo complete");
-        // } );
-
         if(this.isMobile()){
             setTimeout(() => {
                 this.welcome = new Text('Welcome', 0.6, '#002056', {x: 1.3, y: 3, z: -2.5})
@@ -100,7 +94,7 @@ export default class World {
             }, 4600)
 
         } else {
-            this.doge = new Doge()
+            // this.doge = new Doge()
             setTimeout(() => {
                 this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 3.5, z: -2.5})
             }, 2400)
@@ -352,9 +346,9 @@ export default class World {
         if(this.ui) {
             this.ui.update()
         }
-        if(this.doge) {
-            this.doge.update()
-        }
+        // if(this.doge) {
+        //     this.doge.update()
+        // }
         if(this.portfolio_1) {
             this.portfolio_1.update()
             this.portfolio_2.update()
