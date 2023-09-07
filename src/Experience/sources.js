@@ -37,11 +37,11 @@ export default [
         type: 'gltfModel',
         path: 'models/globeAddressSans.glb'
     },
-    {
-        name: 'doge',
-        type: 'gltfModel',
-        path: 'models/doge.glb'
-    },
+    // {
+    //     name: 'doge',
+    //     type: 'gltfModel',
+    //     path: 'models/doge.glb'
+    // },
     {
         name: 'mainFont',
         type: 'font',

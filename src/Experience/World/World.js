@@ -42,9 +42,9 @@ export default class World {
     intro() {
         gsap.to(this.camera, {
             fov: 75,
-            duration: 2.5,
+            duration: 1.2,
             ease: "power1.inOut",
-            delay: 0.5
+            // delay: 0.5
         })
         gsap.from(this.camera.position, {
             x: this.isMobile() ? -4 : -5,
@@ -52,7 +52,7 @@ export default class World {
             z: this.isMobile() ? 8.7 : 6,
             duration: 1,
             ease: "power2.inOut",
-            delay: 1.5
+            delay: 0.2
         })
     }
 
@@ -62,49 +62,49 @@ export default class World {
             this.diamonds = new Diamonds(params.diamondAmount)
             this.donuts = new Donuts(params.donutsAmount)
             this.spheres = new Spheres(params.spheresAmount)
-        }, 1000)
+        }, 500)
 
         if(this.isMobile()){
             setTimeout(() => {
                 this.welcome = new Text('Welcome', 0.6, '#002056', {x: 1.3, y: 3, z: -2.5})
-            }, 2400)
+            }, 1100)
             setTimeout(() => {
                 this.to = new Text('to the', 0.4, '#bd4500', {x: 1.3, y: 2.2, z: -2.8})
-            }, 2700)
+            }, 1400)
             setTimeout(() => {
                 this.uralaverse = new Text('URALAVERSE!', 0.6, '#520004', {x: 1.7, y: 1.2, z: -2.5})
-            }, 3000)
+            }, 1700)
             setTimeout(() => {
                 this.about = new Text('ABOUT', 0.4, '#00ff11', {x: 1.2, y: -1.2, z: -2.5}, 'about')
-            }, 3400)
+            }, 2000)
             setTimeout(() => {
                 this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.2, z: -2.5}, 'locations')
-            }, 3700)
+            }, 2300)
             setTimeout(() => {
                 this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.2, z: -2.5}, 'contact')
-            }, 4000)
+            }, 2500)
             setTimeout(() => {
                 this.work = new Text('WORK', 0.4, '#180052', {x: 1.2, y: -4.2, z: -2.5}, 'work')
-            }, 4400)
+            }, 2800)
             setTimeout(() => {
                 this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.0037)
-            }, 5000)
+            }, 3000)
             setTimeout(() => {
                 this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3.5, y: 8, z: 0}, 0.011)
-            }, 4600)
+            }, 3200)
 
         } else {
             // this.doge = new Doge()
             setTimeout(() => {
                 this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 3.5, z: -2.5})
-            }, 2400)
+            }, 1100)
             setTimeout(() => {
                 this.to = new Text('to the', 0.6, '#bd4500', {x: 1, y: 2.4, z: -2.8})
-            }, 2700)
+            }, 1400)
             setTimeout(() => {
                 // '#7d09a7'
                 this.uralaverse = new Text('URALAVERSE!', 0.9, '#520004', {x: 2, y: 1, z: -2.5})
-            }, 3000)
+            }, 1700)
             setTimeout(() => {
                 if (this.debug.active) {
                     this.debug.ui.addColor(this.uralaverse.material, 'color').onChange((value) => {
@@ -112,22 +112,22 @@ export default class World {
                     })
                 }
                 this.about = new Text('ABOUT', 0.4, '#00ff11', {x: -3, y: -1, z: -2}, 'about')
-            }, 3400)
+            }, 2000)
             setTimeout(() => {
                 this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 5, y: -2.3, z: -2.5}, 'contact')
-            }, 3700)
+            }, 2300)
             setTimeout(() => {
                 this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations')
-            }, 4000)
+            }, 2500)
             setTimeout(() => {
                 this.work = new Text('WORK', 0.4, '#180052', {x: -2.4, y: -2.3, z: -2.2}, 'work')
-            }, 4400)
+            }, 2800)
             setTimeout(() => {
                 this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.005)
-            }, 5000)
+            }, 3000)
             setTimeout(() => {
                 this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015)
-            }, 4600)
+            }, 3200)
         }
     }
 
@@ -270,31 +270,21 @@ export default class World {
     }
 
     resetWork() {
-        //for
-        if(typeof this.portfolio_1 != 'undefined') {
-            if(this.isMobile()){
-                this.portfolio_1.mesh.position.set(this.portfolio_1.mesh.userData.mobilePosition.x, this.portfolio_1.mesh.userData.mobilePosition.y, this.portfolio_1.mesh.userData.mobilePosition.z)
-                this.portfolio_2.mesh.position.set(this.portfolio_2.mesh.userData.mobilePosition.x, this.portfolio_2.mesh.userData.mobilePosition.y, this.portfolio_2.mesh.userData.mobilePosition.z)
-                this.portfolio_3.mesh.position.set(this.portfolio_3.mesh.userData.mobilePosition.x, this.portfolio_3.mesh.userData.mobilePosition.y, this.portfolio_3.mesh.userData.mobilePosition.z)
-                this.portfolio_4.mesh.position.set(this.portfolio_4.mesh.userData.mobilePosition.x, this.portfolio_4.mesh.userData.mobilePosition.y, this.portfolio_4.mesh.userData.mobilePosition.z)
-                this.portfolio_5.mesh.position.set(this.portfolio_5.mesh.userData.mobilePosition.x, this.portfolio_5.mesh.userData.mobilePosition.y, this.portfolio_5.mesh.userData.mobilePosition.z)
-                this.portfolio_6.mesh.position.set(this.portfolio_6.mesh.userData.mobilePosition.x, this.portfolio_6.mesh.userData.mobilePosition.y, this.portfolio_6.mesh.userData.mobilePosition.z)
-            } else {
-                this.portfolio_1.mesh.position.set(this.portfolio_1.mesh.userData.position.x, this.portfolio_1.mesh.userData.position.y, this.portfolio_1.mesh.userData.position.z)
-                this.portfolio_2.mesh.position.set(this.portfolio_2.mesh.userData.position.x, this.portfolio_2.mesh.userData.position.y, this.portfolio_2.mesh.userData.position.z)
-                this.portfolio_3.mesh.position.set(this.portfolio_3.mesh.userData.position.x, this.portfolio_3.mesh.userData.position.y, this.portfolio_3.mesh.userData.position.z)
-                this.portfolio_4.mesh.position.set(this.portfolio_4.mesh.userData.position.x, this.portfolio_4.mesh.userData.position.y, this.portfolio_4.mesh.userData.position.z)
-                this.portfolio_5.mesh.position.set(this.portfolio_5.mesh.userData.position.x, this.portfolio_5.mesh.userData.position.y, this.portfolio_5.mesh.userData.position.z)
-                this.portfolio_6.mesh.position.set(this.portfolio_6.mesh.userData.position.x, this.portfolio_6.mesh.userData.position.y, this.portfolio_6.mesh.userData.position.z)
+        const portfolios = [this.portfolio_1, this.portfolio_2, this.portfolio_3, this.portfolio_4, this.portfolio_5, this.portfolio_6];
+
+        for (const portfolio of portfolios) {
+            if (typeof portfolio !== 'undefined') {
+                if (this.isMobile()) {
+                    portfolio.mesh.position.set(portfolio.mesh.userData.mobilePosition.x, portfolio.mesh.userData.mobilePosition.y, portfolio.mesh.userData.mobilePosition.z);
+                } else {
+                    portfolio.mesh.position.set(portfolio.mesh.userData.position.x, portfolio.mesh.userData.position.y, portfolio.mesh.userData.position.z);
+                }
+
+                portfolio.mesh.scale.set(1, 1, 1);
             }
-            this.portfolio_1.mesh.scale.set(1,1,1)
-            this.portfolio_2.mesh.scale.set(1,1,1)
-            this.portfolio_3.mesh.scale.set(1,1,1)
-            this.portfolio_4.mesh.scale.set(1,1,1)
-            this.portfolio_5.mesh.scale.set(1,1,1)
-            this.portfolio_6.mesh.scale.set(1,1,1)
         }
     }
+
 
     showLocations() {
         this.hideHome()

@@ -328,6 +328,7 @@ input:-webkit-autofill:active {
 #about h1 span{
     /* font-size: 38px; */
     font-size: 75px;
+    line-height: 1;
 }
 #about span {
     /* color: #fff; */
