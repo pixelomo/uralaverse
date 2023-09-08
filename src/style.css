@@ -630,13 +630,14 @@ ul{padding-left: 2rem;}
     right: 1rem;
     left: initial;
 } */
-
+.scammers{
+    margin-top:2rem;
+}
 a#agencyvista-badge {
-    width: 140px;
-    position: relative;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    display: inline-block;
+    width: 120px;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 .sortlist-badge {
     display: inline-block;
@@ -1068,8 +1069,11 @@ a#agencyvista-badge {
     .services{border: none;}
     .badges{flex-direction: column;}
     a#agencyvista-badge {
-        display: block;
-        margin: 0 auto;
+        display: none;
+    }
+    #about p.scammers{
+        margin-top:1rem;
+        font-size: 11px;
     }
     .sortlist-badge {
         display: block;

@@ -67,44 +67,44 @@ export default class World {
         if(this.isMobile()){
             setTimeout(() => {
                 this.welcome = new Text('Welcome', 0.6, '#002056', {x: 1.3, y: 3, z: -2.5})
-            }, 1100)
+            }, 1000)
             setTimeout(() => {
                 this.to = new Text('to the', 0.4, '#bd4500', {x: 1.3, y: 2.2, z: -2.8})
-            }, 1400)
+            }, 1000)
             setTimeout(() => {
                 this.uralaverse = new Text('URALAVERSE!', 0.6, '#520004', {x: 1.7, y: 1.2, z: -2.5})
-            }, 1700)
+            }, 1000)
             setTimeout(() => {
                 this.about = new Text('ABOUT', 0.4, '#00ff11', {x: 1.2, y: -1.2, z: -2.5}, 'about')
-            }, 2000)
+            }, 1000)
             setTimeout(() => {
                 this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.2, z: -2.5}, 'locations')
-            }, 2300)
+            }, 1000)
             setTimeout(() => {
                 this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.2, z: -2.5}, 'contact')
-            }, 2500)
+            }, 1000)
             setTimeout(() => {
                 this.work = new Text('WORK', 0.4, '#180052', {x: 1.2, y: -4.2, z: -2.5}, 'work')
-            }, 2800)
+            }, 1000)
             setTimeout(() => {
                 this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.0037)
-            }, 3000)
+            }, 1200)
             setTimeout(() => {
                 this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3.5, y: 8, z: 0}, 0.011)
-            }, 3200)
+            }, 1200)
 
         } else {
             // this.doge = new Doge()
             setTimeout(() => {
                 this.welcome = new Text('Welcome', 0.9, '#002056', {x: 1, y: 3.5, z: -2.5})
-            }, 1100)
+            }, 1000)
             setTimeout(() => {
                 this.to = new Text('to the', 0.6, '#bd4500', {x: 1, y: 2.4, z: -2.8})
-            }, 1400)
+            }, 1000)
             setTimeout(() => {
                 // '#7d09a7'
                 this.uralaverse = new Text('URALAVERSE!', 0.9, '#520004', {x: 2, y: 1, z: -2.5})
-            }, 1700)
+            }, 1000)
             setTimeout(() => {
                 if (this.debug.active) {
                     this.debug.ui.addColor(this.uralaverse.material, 'color').onChange((value) => {
@@ -112,22 +112,22 @@ export default class World {
                     })
                 }
                 this.about = new Text('ABOUT', 0.4, '#00ff11', {x: -3, y: -1, z: -2}, 'about')
-            }, 2000)
+            }, 1000)
             setTimeout(() => {
                 this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 5, y: -2.3, z: -2.5}, 'contact')
-            }, 2300)
+            }, 1000)
             setTimeout(() => {
                 this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations')
-            }, 2500)
+            }, 1000)
             setTimeout(() => {
                 this.work = new Text('WORK', 0.4, '#180052', {x: -2.4, y: -2.3, z: -2.2}, 'work')
-            }, 2800)
+            }, 1000)
             setTimeout(() => {
                 this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.005)
-            }, 3000)
+            }, 1200)
             setTimeout(() => {
                 this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015)
-            }, 3200)
+            }, 1200)
         }
     }
 
