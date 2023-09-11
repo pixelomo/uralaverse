@@ -710,6 +710,9 @@ a#agencyvista-badge {
     color: #fff;
     margin: 0 auto 10px;
 }
+#china.location-details p{
+    font-size: 14px;
+}
 .location-details .row{
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
@@ -998,6 +1001,9 @@ a#agencyvista-badge {
 @media(max-width: 1200px){
     .location-details p{
         font-size: 16px;
+    }
+    #china.location-details p{
+        font-size: 13px;
     }
 }
 /* //////////////////////////////////// */
