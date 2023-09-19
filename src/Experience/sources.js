@@ -35,7 +35,7 @@ export default [
     {
         name: 'globe',
         type: 'gltfModel',
-        path: 'models/globeAddressSans.glb'
+        path: 'models/globeMacau.glb'
     },
     // {
     //     name: 'doge',

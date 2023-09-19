@@ -466,6 +466,13 @@ export default class Raycaster {
                         z: 7.7,
                         duration: 1,
                     })
+                }else if(id === 'macau') {
+                    gsap.to(camera, {
+                        x: 3.2,
+                        y: 3.2,
+                        z: 7.7,
+                        duration: 1,
+                    })
                 }else if(id === 'melbourne') {
                     gsap.to(camera, {
                         x: 5.4,
@@ -488,6 +495,9 @@ export default class Raycaster {
             })
         }
     }
+
+
+
 
     setInstance() {
     //  const rayOrigin = new THREE.Vector3(- 3, 0, 0)

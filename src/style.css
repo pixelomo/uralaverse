@@ -710,7 +710,7 @@ a#agencyvista-badge {
     color: #fff;
     margin: 0 auto 10px;
 }
-#china.location-details p{
+#macau.location-details p{
     font-size: 14px;
 }
 .location-details .row{
@@ -1002,7 +1002,7 @@ a#agencyvista-badge {
     .location-details p{
         font-size: 16px;
     }
-    #china.location-details p{
+    #macau.location-details p{
         font-size: 13px;
     }
 }
