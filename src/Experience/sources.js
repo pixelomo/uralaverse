@@ -95,31 +95,31 @@ export default [
     {
         name: 'reckitt',
         type: 'texture',
-        path: 'images/work/reckitt.jpg'
+        path: 'images/work/reckitt.webp'
     },
     {
         name: 'kaplan',
         type: 'texture',
-        path: 'images/work/kaplan.jpg'
+        path: 'images/work/kaplan.webp'
     },
     {
         name: 'coin360',
         type: 'texture',
-        path: 'images/work/coin360.jpg'
+        path: 'images/work/coin360.webp'
     },
     {
         name: 'nft',
         type: 'texture',
-        path: 'images/work/nft.jpg'
+        path: 'images/work/nft.webp'
     },
     {
         name: 'lawork',
         type: 'texture',
-        path: 'images/work/lawork.jpg'
+        path: 'images/work/lawork.webp'
     },
     {
         name: 'coint',
         type: 'texture',
-        path: 'images/work/coint.jpg'
+        path: 'images/work/coint.webp'
     },
 ]

@@ -29,6 +29,7 @@
     "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
+    "terser-webpack-plugin": "^5.3.9",
     "three-mesh-ui": "^6.5.2"
   }
 }

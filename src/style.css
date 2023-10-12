@@ -1,9 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@500;900&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;900&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -22,7 +16,6 @@ img{max-width: 100%;}
 
 .webgl {
     position: fixed;
-    /* z-index: 1; */
     top: 0;
     left: 0;
     outline: none;
@@ -38,8 +31,6 @@ img{max-width: 100%;}
     left: 0;
     right: 0;
     margin: auto;
-    /* width: 80%; */
-    /* max-width: 400px; */
     font-size: 24px;
     font-family: 'Red Hat Display', sans-serif;
     padding: 20px 25px 25px;
