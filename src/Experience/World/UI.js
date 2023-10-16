@@ -44,7 +44,7 @@ export default class UI {
 			// fontFamily: 'https://unpkg.com/three-mesh-ui/examples/assets/Roboto-msdf.json',
 		 	// fontTexture: 'https://unpkg.com/three-mesh-ui/examples/assets/Roboto-msdf.png',
 			fontFamily: '/fonts/roboto.json',
-		 	fontTexture: '/fonts/roboto.png',
+		 	fontTexture: '/fonts/roboto.webp',
 			// fontFamily: this.resources.items.uiFont.data,
 			// fontTexture: this.resources.items.uiTexture.source.data.currentSrc,
 			fontColor: new THREE.Color(0xffffff),

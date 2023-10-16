@@ -57,16 +57,16 @@ export default [
     //     type: 'texture',
     //     path: 'fonts/roboto.png'
     // },
-    {
-        name: 'uiFont',
-        type: 'font',
-        path: 'fonts/unibody-msdf.json'
-    },
-    {
-        name: 'uiTexture',
-        type: 'texture',
-        path: 'fonts/unibody.png'
-    },
+    // {
+    //     name: 'uiFont',
+    //     type: 'font',
+    //     path: 'fonts/unibody-msdf.json'
+    // },
+    // {
+    //     name: 'uiTexture',
+    //     type: 'texture',
+    //     path: 'fonts/unibody.webp'
+    // },
     // {
     //     name: 'neonTexture',
     //     type: 'texture',

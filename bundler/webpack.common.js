@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, '../src/script.js'),
@@ -92,14 +93,18 @@ module.exports = {
     },
     optimization: {
         minimize: true,
-        minimizer: [new TerserPlugin({
-            // If you have source maps, include this to properly minify them too
-            terserOptions: {
-                compress: {
-                    drop_console: true,  // Optionally remove console logs/statements
+        minimizer: [
+            new TerserPlugin({
+                // If you have source maps, include this to properly minify them too
+                terserOptions: {
+                    compress: {
+                        drop_console: true,  // Optionally remove console logs/statements
+                    },
                 },
-            },
-            extractComments: false,
-        })],
+                extractComments: false,
+            }),
+            // Add the CssMinimizerPlugin here
+            new CssMinimizerPlugin(),
+        ],
     },
 }
