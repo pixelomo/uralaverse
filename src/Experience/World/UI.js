@@ -41,8 +41,10 @@ export default class UI {
 		this.container = new ThreeMeshUI.Block({
 			ref: "container",
 			padding: 0.025,
-			fontFamily: 'https://unpkg.com/three-mesh-ui/examples/assets/Roboto-msdf.json',
-		 	fontTexture: 'https://unpkg.com/three-mesh-ui/examples/assets/Roboto-msdf.png',
+			// fontFamily: 'https://unpkg.com/three-mesh-ui/examples/assets/Roboto-msdf.json',
+		 	// fontTexture: 'https://unpkg.com/three-mesh-ui/examples/assets/Roboto-msdf.png',
+			fontFamily: '/fonts/roboto.json',
+		 	fontTexture: '/fonts/roboto.png',
 			// fontFamily: this.resources.items.uiFont.data,
 			// fontTexture: this.resources.items.uiTexture.source.data.currentSrc,
 			fontColor: new THREE.Color(0xffffff),
