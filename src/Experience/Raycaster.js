@@ -19,7 +19,7 @@ export default class Raycaster {
         this.testHomeObjects = true
         this.testPortfolioObjects = false
         this.testLocationsObjects = false
-        this.locationsNames = ['Tokyo', 'London', 'Jakarta', 'Ho Chi Minh', 'Kuala Lumpur', 'Fukui', 'Singapore', 'Seoul', 'Manila', 'Melbourne']
+        this.locationsNames = ['Tokyo', 'London', 'Jakarta', 'Ho Chi Minh', 'Kuala Lumpur', 'Singapore', 'Manila', 'Melbourne']
 
         const close = document.querySelectorAll('.close-button')
         close.forEach(btn => btn.addEventListener('click', () => {
@@ -346,42 +346,34 @@ export default class Raycaster {
             } // end of portfolio
             ///////////////////////////// GLOBE ///////////////////////////////////
             ///////////////////////////// GLOBE ///////////////////////////////////
-            if(this.testLocationsObjects === true){
-                if(this.intersects.length) {
-                    this.currentIntersect = intersects[0]
-                } else {
-                    if(this.currentIntersect) {
-                        for(let i = 0; i < this.locationsNames.length; i++){
-                            if(this.currentIntersect.object.name.includes(this.locationsNames[i])
-                            && typeof this.currentIntersect.object.userData.address != 'undefined'){
-                                // console.log(this.currentIntersect.object.userData)
-                                // if no UI create
-                                // if(typeof this.ui === 'undefined'){
-                                //     this.ui = new UI({title: this.locationsNames[i], description: this.currentIntersect.object.userData.address})
-                                // } else {
-                                    this.ui.title.children[1].set({content: this.locationsNames[i]})
-                                    this.ui.description.children[1].set({content: this.currentIntersect.object.userData.address})
-                                // }
-                                // if UI scale = 1 => 0
-                                if(this.ui.container.scale.x === 0){
-                                    this.ui.container.scale.set(0.45,0.45,0.45)
-                                    // this.ui.container.position.set(-1,2.7,4.5)
-                                    this.ui.container.position.set(2.2,1,4.6)
-                                }
-                                this.ui.container.lookAt(this.camera.position)
-                            } else {
-                                if(typeof this.currentIntersect.object.userData.address === 'undefined'){
-                                    if(this.ui){
-                                        this.ui.container.scale.set(0,0,0)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } // end of globe
-            // console.log(this.objectsToTest)
+            // if(this.testLocationsObjects === true){
+            //     if(this.intersects.length) {
+            //         this.currentIntersect = intersects[0]
+            //     } else {
+            //         if(this.currentIntersect) {
+            //             for(let i = 0; i < this.locationsNames.length; i++){
+            //                 if(this.currentIntersect.object.name.includes(this.locationsNames[i])
+            //                 && typeof this.currentIntersect.object.userData.address != 'undefined'){
+            //                     this.ui.title.children[1].set({content: this.locationsNames[i]})
+            //                     this.ui.description.children[1].set({content: this.currentIntersect.object.userData.address})
+            //                     if(this.ui.container.scale.x === 0){
+            //                         this.ui.container.scale.set(0.45,0.45,0.45)
+            //                         this.ui.container.position.set(2.2,1,4.6)
+            //                     }
+            //                     this.ui.container.lookAt(this.camera.position)
+            //                 } else {
+            //                     if(typeof this.currentIntersect.object.userData.address === 'undefined'){
+            //                         if(this.ui){
+            //                             this.ui.container.scale.set(0,0,0)
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // } // end of globe
         })
+
 
         //////////////////////////////// Locations select UI ///////////////////////////////////
         //////////////////////////////// Locations select UI ///////////////////////////////////

@@ -83,7 +83,7 @@ export default class World {
                     this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.0037);
                     this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3.5, y: 8, z: 0}, 0.011);
                 },
-                delay: 1.2
+                delay: 0.2
             });
         } else {
             tl.to(this, {
@@ -108,10 +108,9 @@ export default class World {
                     this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.005);
                     this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015);
                 },
-                delay: 1.2
+                delay: 0.2
             });
         }
-
     }
 
     showHome() {
@@ -213,12 +212,60 @@ export default class World {
             })
         }
         if(!this.portfolio_1){
-            this.portfolio_1 = new Plane('coin360', 3, 2, {x: -3.5, y: 1.5, z: 0}, 'Coin360 - crypto heatmap website development', 'Ongoing project for Coin360 in the Banking & Financials industry for a B2C audience since 2019.', {x: -1.5, y: 5, z: 0}, this.isMobile())
-            this.portfolio_2 = new Plane('kaplan', 3, 2, {x: 0, y: 1.5, z: 0}, 'Kaplan Singapore - Website, Content Marketing, PR', 'Project made for Kaplan Singapore in the Education industry for a B2C audience in 2021.', {x: 2, y: 5, z: 0}, this.isMobile())
-            this.portfolio_3 = new Plane('nft', 3, 2, {x: 3.5, y: 1.5, z: 0}, 'Global Marketing for a Prominent NFT Project', 'Ongoing project for Global NFT Avatar Project in the Others industry for a B2C audience since 2022.', {x: -1.5, y: 2, z: 0}, this.isMobile())
-            this.portfolio_4 = new Plane('reckitt', 3, 2, {x: -3.5, y: -1, z: 0}, 'Reckitt Benckiser - Campaign Landing Page', 'Project made for Reckitt Benckiser in the Household Products industry for a B2C audience.', {x: 2, y: 2, z: 0}, this.isMobile())
-            this.portfolio_5 = new Plane('lawork', 3, 2, {x: 0, y: -1, z: 0}, 'Online recruiting website and service development', 'Ongoing project for Japanese clients in the Industrial Goods & Services industry for a B2C audience since 2022.', {x: -1.5, y: -1, z: 0}, this.isMobile())
-            this.portfolio_6 = new Plane('coint', 3, 2, {x: 3.5, y: -1, z: 0}, 'Growth Strategy for Global Fintech Media Brands', 'Ongoing project for Cointelegraph.com & Investing.com in the Media industry for a B2C audience since 2017.', {x: 2, y: -1, z: 0}, this.isMobile())
+            this.portfolio_1 = new Plane(
+                'loreal',
+                3,
+                2,
+                {x: -3.5, y: 1.5, z: 0},
+                "L'oreal Philippines – Maybelline Compact Powder",
+                "TikTok series for L'oreal Philippines, showcasing Fit Me Compact Powder. Creative CGI traces the product's journey from Manila airport to the event, building anticipation for the All Star ambassador announcement.",
+                {x: -1.5, y: 5, z: 0}, this.isMobile()
+            )
+            this.portfolio_2 = new Plane(
+                'kaplan',
+                3,
+                2,
+                {x: 0, y: 1.5, z: 0},
+                'Kaplan Singapore - Website, Content Marketing, PR',
+                'Project made for Kaplan Singapore in the Education industry for a B2C audience in 2021.',
+                 {x: 2, y: 5, z: 0}, this.isMobile()
+            )
+            this.portfolio_3 = new Plane(
+                'coin360',
+                3,
+                2,
+                {x: 3.5, y: 1.5, z: 0},
+                'Coin360 - crypto heatmap website development',
+                'Ongoing project for Coin360 in the Banking & Financials industry for a B2C audience since 2019.',
+                {x: -1.5, y: 2, z: 0}, this.isMobile()
+            )
+            this.portfolio_4 = new Plane(
+                'reckitt',
+                3,
+                2,
+                {x: -3.5, y: -1, z: 0},
+                'Reckitt Benckiser - Campaign Landing Page',
+                'Project made for Reckitt Benckiser in the Household Products industry for a B2C audience.',
+                 {x: 2, y: 2, z: 0}, this.isMobile()
+            )
+            this.portfolio_5 = new Plane(
+                'lawork',
+                3,
+                2,
+                {x: 0, y: -1, z: 0},
+                'Online recruiting website and service development',
+                'Ongoing project for Japanese clients in the Industrial Goods & Services industry for a B2C audience since 2022.',
+                {x: -1.5, y: -1, z: 0}, this.isMobile()
+            )
+            this.portfolio_6 = new Plane(
+                'coint',
+                3,
+                2,
+                {x: 3.5, y: -1, z: 0},
+                'Growth Strategy for Global Fintech Media Brands',
+                'Ongoing project for Cointelegraph.com & Investing.com in the Media industry for a B2C audience since 2017.',
+                {x: 2, y: -1, z: 0}, this.isMobile()
+            )
             // if(this.isMobile()){
                 // rotate work circle idea \_/
                 // heatmap

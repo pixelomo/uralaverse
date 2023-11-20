@@ -108,11 +108,6 @@ export default [
         path: 'images/work/coin360.webp'
     },
     {
-        name: 'nft',
-        type: 'texture',
-        path: 'images/work/nft.webp'
-    },
-    {
         name: 'lawork',
         type: 'texture',
         path: 'images/work/lawork.webp'
@@ -121,5 +116,10 @@ export default [
         name: 'coint',
         type: 'texture',
         path: 'images/work/coint.webp'
+    },
+    {
+        name: 'loreal',
+        type: 'texture',
+        path: 'images/work/loreal.webp'
     },
 ]
