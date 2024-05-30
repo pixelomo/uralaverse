@@ -538,45 +538,45 @@ export default class Raycaster {
     }
 
     goHome() {
-        this.experience.camera.enableControls()
-        this.testHomeObjects = true
-        this.testPortfolioObjects = false
-        this.testLocationsObjects = false
-        gsap.to(this.camera.position, {
-            x: -2.5,
-            y: -3,
-            z: 6,
-            duration: 2,
-            ease: "back.inOut(1.7)",
-        })
-        this.experience.world.showHome()
-        this.aboutSection.classList.remove('show')
-        this.locationsHiddenButton.classList.add('hide')
-        // this.locationsModal.classList.remove('hide')
-        // this.locationSection.classList.remove('show')
-        this.locationSection.forEach((s) => {
-            s.classList.remove('show')
-        })
-        this.globeMask.classList.remove('show')
-        if(this.ui){
-            // reset portfolio
-            this.ui.container.scale.set(0,0,0)
-            this.ui.container.position.set(0,30,0)
-            // this.world.globe.position.set(0,30,0)
-            // console.log(this.world)
-            // console.log(this.scene.children)
-            this.experience.world.resetWork()
-        }
-        // this.workModal.classList.remove('show')
-        setTimeout(() => {
-            this.contactForm.classList.remove('show')
-        }, 700)
-        document.querySelector('.intro').classList.remove('hide')
-        document.querySelector('#service-tabs').classList.add('hide')
-        this.closeLocationsModal.classList.remove('hide')
-        this.locationCols.forEach((d) => {
-            d.classList.remove('hide')
-        })
-        // location.reload()
+        // this.experience.camera.enableControls()
+        // this.testHomeObjects = true
+        // this.testPortfolioObjects = false
+        // this.testLocationsObjects = false
+        // gsap.to(this.camera.position, {
+        //     x: -2.5,
+        //     y: -3,
+        //     z: 6,
+        //     duration: 2,
+        //     ease: "back.inOut(1.7)",
+        // })
+        // this.experience.world.showHome()
+        // this.aboutSection.classList.remove('show')
+        // this.locationsHiddenButton.classList.add('hide')
+        // // this.locationsModal.classList.remove('hide')
+        // // this.locationSection.classList.remove('show')
+        // this.locationSection.forEach((s) => {
+        //     s.classList.remove('show')
+        // })
+        // this.globeMask.classList.remove('show')
+        // if(this.ui){
+        //     // reset portfolio
+        //     this.ui.container.scale.set(0,0,0)
+        //     this.ui.container.position.set(0,30,0)
+        //     // this.world.globe.position.set(0,30,0)
+        //     // console.log(this.world)
+        //     // console.log(this.scene.children)
+        //     this.experience.world.resetWork()
+        // }
+        // // this.workModal.classList.remove('show')
+        // setTimeout(() => {
+        //     this.contactForm.classList.remove('show')
+        // }, 700)
+        // document.querySelector('.intro').classList.remove('hide')
+        // document.querySelector('#service-tabs').classList.add('hide')
+        // this.closeLocationsModal.classList.remove('hide')
+        // this.locationCols.forEach((d) => {
+        //     d.classList.remove('hide')
+        // })
+        location.reload()
     }
 }
