@@ -31,7 +31,7 @@ export default class Globe {
 		this.raycaster.objectsToTest.push(this.model)
 		// this.setAddresses(this.model)
 		this.scene.add(this.model)
-		console.log(this.model)
+		// console.log(this.model)
 		// console.log(this.experience.world.environment.pointLight)
 	}
 
