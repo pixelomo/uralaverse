@@ -642,7 +642,7 @@ ul{padding-left: 2rem;}
     margin-top:2rem;
 }
 a#agencyvista-badge {
-    width: 120px;
+    width: 100px;
     position: absolute;
     right: 0;
     top: 0;
@@ -1088,6 +1088,9 @@ a#agencyvista-badge {
     #about p.scammers{
         margin-top:1rem;
         font-size: 11px;
+    }
+    #about p.jp{
+        font-size: 14px;
     }
     .sortlist-badge {
         display: block;
