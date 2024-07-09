@@ -70,7 +70,7 @@ export default class World {
                 onComplete: () => {
                     this.welcome = new Text('Welcome', 0.6, '#002056', {x: 1.3, y: 3, z: -2.5});
                     this.to = new Text('to the', 0.4, '#bd4500', {x: 1.3, y: 2.2, z: -2.8});
-                    this.uralaverse = new Text('URALAVERSE!', 0.6, '#520004', {x: 1.7, y: 1.2, z: -2.5});
+                    this.uralaverse = new Text('URALAVERSE!', 0.5, '#520004', {x: 1.5, y: 1.2, z: -2.5});
                     this.about = new Text('ABOUT', 0.4, '#00ff11', {x: 1.2, y: -1.2, z: -2.5}, 'about');
                     this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.2, z: -2.5}, 'locations');
                     this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.2, z: -2.5}, 'contact');
@@ -80,8 +80,8 @@ export default class World {
             })
             .to(this, {
                 onComplete: () => {
-                    this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 0.5, y: 4.7, z: 0}, 0.0037);
-                    this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3.5, y: 8, z: 0}, 0.011);
+                    this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: -0.8, y: 5.2, z: 0}, 0.0037);
+                    this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3, y: 8, z: 0}, 0.011);
                 },
                 delay: 0.2
             });
@@ -352,7 +352,7 @@ export default class World {
     }
 
     isMobile() {
-        if(window.innerWidth < 426) {
+        if(window.innerWidth < 431) {
             return true
         } else {
             return false

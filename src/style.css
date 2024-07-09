@@ -1399,8 +1399,7 @@ a#agencyvista-badge {
         padding: 0 1rem;
     }
     .controls{
-        left: 0;
-        right: 0;
+        padding: 0.5rem;
     }
     /* .locations.title.show, .location-details .title{
         font-size: 34px;
