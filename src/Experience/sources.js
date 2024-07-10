@@ -87,6 +87,26 @@ export default [
         type: 'svg',
         path: 'images/ctb.svg'
     },
+    {
+        name: 'aboutJP',
+        type: 'svg',
+        path: 'images/about.svg'
+    },
+    {
+        name: 'locationsJP',
+        type: 'svg',
+        path: 'images/locations.svg'
+    },
+    {
+        name: 'contactJP',
+        type: 'svg',
+        path: 'images/contact.svg'
+    },
+    {
+        name: 'workJP',
+        type: 'svg',
+        path: 'images/work.svg'
+    },
     // {
     //     name: 'maskPanel',
     //     type: 'svg',

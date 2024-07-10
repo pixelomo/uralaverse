@@ -72,9 +72,13 @@ export default class World {
                     this.to = new Text('to the', 0.4, '#bd4500', {x: 1.3, y: 2.2, z: -2.8});
                     this.uralaverse = new Text('URALAVERSE!', 0.5, '#520004', {x: 1.5, y: 1.2, z: -2.5});
                     this.about = new Text('ABOUT', 0.4, '#00ff11', {x: 1.2, y: -1.2, z: -2.5}, 'about');
-                    this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.2, z: -2.5}, 'locations');
+                    this.aboutJP = new SVG('aboutJP', '', {x: 1.2, y: -1.4, z: -2}, 0.001);
                     this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.2, z: -2.5}, 'contact');
+                    this.contactJP = new SVG('contactJP', '', {x: 1.2, y: -3.3, z: -2}, 0.001);
+                    this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.2, z: -2.5}, 'locations');
+                    this.locationsJP = new SVG('locationsJP', '', {x: 1.2, y: -2.4, z: -1.7}, 0.001);
                     this.work = new Text('WORK', 0.4, '#180052', {x: 1.2, y: -4.2, z: -2.5}, 'work');
+                    this.workJP = new SVG('workJP', '', {x: 1.2, y: -4.3, z: -2.3}, 0.001);
                 },
                 delay: 1
             })
@@ -97,9 +101,14 @@ export default class World {
                         });
                     }
                     this.about = new Text('ABOUT', 0.4, '#00ff11', {x: -3, y: -1, z: -2}, 'about');
+                    this.aboutJP = new SVG('aboutJP', '', {x: -3, y: -1.2, z: -2.2}, 0.001);
                     this.contact = new Text('CONTACT', 0.5, '#bd4500', {x: 5, y: -2.3, z: -2.5}, 'contact');
+                    this.contactJP = new SVG('contactJP', '', {x: 5.6, y: -2.65, z: -2.7}, 0.001);
                     this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 5.5, y: -1, z: -2}, 'locations');
+                    this.locationsJP = new SVG('locationsJP', '', {x: 5.9, y: -1.3, z: -2.2}, 0.001);
+                    this.locationsJP.model.rotation.x = 0.33;
                     this.work = new Text('WORK', 0.4, '#180052', {x: -2.4, y: -2.3, z: -2.2}, 'work');
+                    this.workJP = new SVG('workJP', '', {x: -2.4, y: -2.5, z: -2.4}, 0.001);
                 },
                 delay: 1
             })
@@ -124,6 +133,10 @@ export default class World {
         this.about.mesh.visible = true
         this.locations.mesh.visible = true
         this.work.mesh.visible = true
+        this.contactJP.model.visible = true
+        this.aboutJP.model.visible = true
+        this.locationsJP.model.visible = true
+        this.workJP.model.visible = true
         if(this.isMobile()){
             gsap.to(this.work.mesh.position, {
                 x: 1.2,
@@ -180,6 +193,10 @@ export default class World {
         this.about.mesh.visible = false
         this.locations.mesh.visible = false
         this.work.mesh.visible = false
+        this.contactJP.model.visible = false
+        this.aboutJP.model.visible = false
+        this.locationsJP.model.visible = false
+        this.workJP.model.visible = false
         this.uralaLogo.model.visible = false
         this.ctLogo.model.visible = false
     }
