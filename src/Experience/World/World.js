@@ -68,17 +68,17 @@ export default class World {
         if (this.isMobile()) {
             tl.to(this, {
                 onComplete: () => {
-                    this.welcome = new Text('Welcome', 0.6, '#002056', {x: 1.3, y: 3, z: -2.5});
-                    this.to = new Text('to the', 0.4, '#bd4500', {x: 1.3, y: 2.2, z: -2.8});
-                    this.uralaverse = new Text('URALAVERSE!', 0.5, '#520004', {x: 1.5, y: 1.2, z: -2.5});
-                    this.about = new Text('ABOUT', 0.4, '#00ff11', {x: 1.2, y: -1.2, z: -2.5}, 'about');
-                    this.aboutJP = new SVG('aboutJP', '', {x: 1.2, y: -1.4, z: -2}, 0.001);
-                    this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: -3.2, z: -2.5}, 'contact');
-                    this.contactJP = new SVG('contactJP', '', {x: 1.2, y: -3.3, z: -2}, 0.001);
-                    this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -2.2, z: -2.5}, 'locations');
-                    this.locationsJP = new SVG('locationsJP', '', {x: 1.2, y: -2.4, z: -1.7}, 0.001);
-                    this.work = new Text('WORK', 0.4, '#180052', {x: 1.2, y: -4.2, z: -2.5}, 'work');
-                    this.workJP = new SVG('workJP', '', {x: 1.2, y: -4.3, z: -2.3}, 0.001);
+                    this.welcome = new Text('Welcome', 0.6, '#002056', {x: 1.3, y: 6, z: -2.5});
+                    this.to = new Text('to the', 0.4, '#bd4500', {x: 1.3, y: 5.2, z: -2.8});
+                    this.uralaverse = new Text('URALAVERSE!', 0.5, '#520004', {x: 1.5, y: 4.2, z: -2.5});
+                    this.about = new Text('ABOUT', 0.4, '#00ff11', {x: 1.2, y: 2.2, z: -2.5}, 'about');
+                    this.aboutJP = new SVG('aboutJP', '', {x: 1.2, y: 1.7, z: -2}, 0.001);
+                    this.contact = new Text('CONTACT', 0.4, '#bd4500', {x: 1.2, y: 0.2, z: -2.5}, 'contact');
+                    this.contactJP = new SVG('contactJP', '', {x: 1.2, y: -0.3, z: -2}, 0.001);
+                    this.locations = new Text('LOCATIONS', 0.4, '#002056', {x: 1.2, y: -1.7, z: -2.5}, 'locations');
+                    this.locationsJP = new SVG('locationsJP', '', {x: 1.2, y: -2, z: -1.7}, 0.001);
+                    this.work = new Text('WORK', 0.4, '#180052', {x: 1.2, y: -3.5, z: -2.5}, 'work');
+                    this.workJP = new SVG('workJP', '', {x: 1.2, y: -3.7, z: -2.3}, 0.001);
                 },
                 delay: 1
             })

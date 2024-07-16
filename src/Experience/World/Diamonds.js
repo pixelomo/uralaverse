@@ -49,7 +49,7 @@ export default class Diamonds {
             d.position.z = (Math.random() - 0.5) * 10
             d.rotation.x = Math.random() * Math.PI
             d.rotation.y = Math.random() * Math.PI
-            const s = Math.random() * 1.25
+            const s = Math.random() * 1.5 // 1.25
             d.scale.set(s,s,s)
             this.diamondGroup.add(d);
         }

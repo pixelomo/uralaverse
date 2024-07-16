@@ -61,7 +61,7 @@ export default class Donuts {
             d.position.z = (Math.random() - 0.5) * 10
             d.rotation.x = Math.random() * Math.PI
             d.rotation.y = Math.random() * Math.PI
-            const s = Math.random() * .75
+            const s = Math.random() * 1.75 // 0.75
             d.scale.set(s,s,s)
             this.donutGroup.add(d);
         }
