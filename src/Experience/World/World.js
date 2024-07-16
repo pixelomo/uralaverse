@@ -239,12 +239,12 @@ export default class World {
                 {x: -1.5, y: 5, z: 0}, this.isMobile()
             )
             this.portfolio_2 = new Plane(
-                'kaplan',
+                'amos',
                 3,
                 2,
                 {x: 0, y: 1.5, z: 0},
-                'Kaplan Singapore - Website, Content Marketing, PR',
-                'Project made for Kaplan Singapore in the Education industry for a B2C audience in 2021.',
+                'Amos Sweets Japan Marketing Operation',
+                'Project made for Amos in the Food industry for a B2C audience.',
                  {x: 2, y: 5, z: 0}, this.isMobile()
             )
             this.portfolio_3 = new Plane(
@@ -266,12 +266,12 @@ export default class World {
                  {x: 2, y: 2, z: 0}, this.isMobile()
             )
             this.portfolio_5 = new Plane(
-                'lawork',
+                'kohler',
                 3,
                 2,
                 {x: 0, y: -1, z: 0},
-                'Online recruiting website and service development',
-                'Ongoing project for Japanese clients in the Industrial Goods & Services industry for a B2C audience since 2022.',
+                'Kohler Power - conference in Osaka',
+                'Project made for Kohler Power in the Energy & Oil industry for a B2B audience in 2023.',
                 {x: -1.5, y: -1, z: 0}, this.isMobile()
             )
             this.portfolio_6 = new Plane(

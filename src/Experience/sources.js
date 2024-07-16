@@ -117,21 +117,21 @@ export default [
         type: 'texture',
         path: 'images/work/reckitt.webp'
     },
-    {
-        name: 'kaplan',
-        type: 'texture',
-        path: 'images/work/kaplan.webp'
-    },
+    // {
+    //     name: 'kaplan',
+    //     type: 'texture',
+    //     path: 'images/work/kaplan.webp'
+    // },
     {
         name: 'coin360',
         type: 'texture',
         path: 'images/work/coin360.webp'
     },
-    {
-        name: 'lawork',
-        type: 'texture',
-        path: 'images/work/lawork.webp'
-    },
+    // {
+    //     name: 'lawork',
+    //     type: 'texture',
+    //     path: 'images/work/lawork.webp'
+    // },
     {
         name: 'coint',
         type: 'texture',
@@ -141,5 +141,15 @@ export default [
         name: 'loreal',
         type: 'texture',
         path: 'images/work/loreal.webp'
+    },
+    {
+        name: 'amos',
+        type: 'texture',
+        path: 'images/work/amos.webp'
+    },
+    {
+        name: 'kohler',
+        type: 'texture',
+        path: 'images/work/kohler.webp'
     },
 ]
