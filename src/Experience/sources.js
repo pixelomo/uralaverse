@@ -113,9 +113,9 @@ export default [
     //     path: 'images/maskPanel.svg'
     // },
     {
-        name: 'reckitt',
+        name: 'aboitz',
         type: 'texture',
-        path: 'images/work/reckitt.webp'
+        path: 'images/work/aboitz.webp'
     },
     // {
     //     name: 'kaplan',
@@ -123,9 +123,9 @@ export default [
     //     path: 'images/work/kaplan.webp'
     // },
     {
-        name: 'coin360',
+        name: 'spotify',
         type: 'texture',
-        path: 'images/work/coin360.webp'
+        path: 'images/work/spotify.webp'
     },
     // {
     //     name: 'lawork',

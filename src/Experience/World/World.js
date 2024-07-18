@@ -248,21 +248,21 @@ export default class World {
                  {x: 2, y: 5, z: 0}, this.isMobile()
             )
             this.portfolio_3 = new Plane(
-                'coin360',
+                'aboitz',
                 3,
                 2,
                 {x: 3.5, y: 1.5, z: 0},
-                'Coin360 - crypto heatmap website development',
-                'Ongoing project for Coin360 in the Banking & Financials industry for a B2C audience since 2019.',
+                'Aboitiz InfraCapital Tokyo-Osaka Investment Forum',
+                'Project made for Aboitiz InfraCapital in the Real Estate industry in 2023.',
                 {x: -1.5, y: 2, z: 0}, this.isMobile()
             )
             this.portfolio_4 = new Plane(
-                'reckitt',
+                'spotify',
                 3,
                 2,
                 {x: -3.5, y: -1, z: 0},
-                'Reckitt Benckiser - Campaign Landing Page',
-                'Project made for Reckitt Benckiser in the Household Products industry for a B2C audience.',
+                'Spotify/TBWA',
+                'Project made for Spotify Philippines/ TBWA in the Media industry in 2023.',
                  {x: 2, y: 2, z: 0}, this.isMobile()
             )
             this.portfolio_5 = new Plane(
