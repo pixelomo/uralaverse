@@ -186,8 +186,8 @@ export default class Raycaster {
                         /////////////////////////// LOCATIONS ///////////////////////////////
                         if(this.currentIntersect.object.name === 'locations'){
                             gsap.to(this.camera.position, {
-                                x: -25,
-                                y: 25,
+                                x: -2,
+                                y: 5,
                                 z: -10,
                                 duration: 2,
                                 ease: "back.inOut(1.1)",
@@ -232,11 +232,11 @@ export default class Raycaster {
                         /////////////////////////// WORK ///////////////////////////////
                         if(this.currentIntersect.object.name === 'work'){
                             gsap.to(this.camera.position, {
-                                x: 2,
-                                y: -3,
-                                z: 8,
+                                x: 3,
+                                y: 15,
+                                z: 6,
                                 duration: 1.5,
-                                ease: "back.inOut(1.7)",
+                                ease: "back.inOut(1.2)",
                             })
                             this.testHomeObjects = false
                             this.testPortfolioObjects = true

@@ -112,44 +112,44 @@ export default [
     //     type: 'svg',
     //     path: 'images/maskPanel.svg'
     // },
-    {
-        name: 'aboitz',
-        type: 'texture',
-        path: 'images/work/aboitz.webp'
-    },
+    // {
+    //     name: 'aboitz',
+    //     type: 'texture',
+    //     path: 'images/work/aboitz.webp'
+    // },
     // {
     //     name: 'kaplan',
     //     type: 'texture',
     //     path: 'images/work/kaplan.webp'
     // },
-    {
-        name: 'spotify',
-        type: 'texture',
-        path: 'images/work/spotify.webp'
-    },
+    // {
+    //     name: 'spotify',
+    //     type: 'texture',
+    //     path: 'images/work/spotify.webp'
+    // },
     // {
     //     name: 'lawork',
     //     type: 'texture',
     //     path: 'images/work/lawork.webp'
     // },
-    {
-        name: 'coint',
-        type: 'texture',
-        path: 'images/work/coint.webp'
-    },
-    {
-        name: 'loreal',
-        type: 'texture',
-        path: 'images/work/loreal.webp'
-    },
-    {
-        name: 'amos',
-        type: 'texture',
-        path: 'images/work/amos.webp'
-    },
-    {
-        name: 'kohler',
-        type: 'texture',
-        path: 'images/work/kohler.webp'
-    },
+    // {
+    //     name: 'coint',
+    //     type: 'texture',
+    //     path: 'images/work/coint.webp'
+    // },
+    // {
+    //     name: 'loreal',
+    //     type: 'texture',
+    //     path: 'images/work/loreal.webp'
+    // },
+    // {
+    //     name: 'amos',
+    //     type: 'texture',
+    //     path: 'images/work/amos.webp'
+    // },
+    // {
+    //     name: 'kohler',
+    //     type: 'texture',
+    //     path: 'images/work/kohler.webp'
+    // },
 ]

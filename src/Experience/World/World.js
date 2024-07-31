@@ -168,14 +168,14 @@ export default class World {
                 this.globe.model.visible = false
             }, 2000)
         }
-        if(this.portfolio_1){
-            this.portfolio_1.mesh.visible = false
-            this.portfolio_2.mesh.visible = false
-            this.portfolio_3.mesh.visible = false
-            this.portfolio_4.mesh.visible = false
-            this.portfolio_5.mesh.visible = false
-            this.portfolio_6.mesh.visible = false
-        }
+        // if(this.portfolio_1){
+        //     this.portfolio_1.mesh.visible = false
+        //     this.portfolio_2.mesh.visible = false
+        //     this.portfolio_3.mesh.visible = false
+        //     this.portfolio_4.mesh.visible = false
+        //     this.portfolio_5.mesh.visible = false
+        //     this.portfolio_6.mesh.visible = false
+        // }
         this.renderer.setReinhardTone()
     }
 
@@ -202,9 +202,10 @@ export default class World {
     }
 
     showWork() {
-        this.hideHome()
+        // this.hideHome()
+        this.loadWork();
         this.work.mesh.visible = true
-        this.renderer.setNoTone()
+        // this.renderer.setNoTone()
         this.color = new THREE.Color('#00c4eb')
         gsap.to(this.work.material.color, 0.5, {
             r: this.color.r,
@@ -213,107 +214,42 @@ export default class World {
         })
         if(this.isMobile()){
             gsap.to(this.work.mesh.position, {
-                x: -2,
-                y: 6,
+                x: -6,
+                y: 8,
                 z: 1,
                 duration: 1.5,
-                ease: "back.inOut(1.7)",
-            })
+                ease: "back.inOut(1.3)",
+            });
         } else {
             gsap.to(this.work.mesh.position, {
-                x: -4,
-                y: 4,
+                x: -6,
+                y: 8,
                 z: 1,
                 duration: 1.5,
-                ease: "back.inOut(1.7)",
+                ease: "back.inOut(1.3)",
             })
         }
-        if(!this.portfolio_1){
-            this.portfolio_1 = new Plane(
-                'loreal',
-                3,
-                2,
-                {x: -3.5, y: 1.5, z: 0},
-                "L'oreal Philippines – Maybelline Compact Powder",
-                "TikTok series for L'oreal Philippines, showcasing Fit Me Compact Powder. Creative CGI traces the product's journey from Manila airport to the event, building anticipation for the All Star ambassador announcement.",
-                {x: -1.5, y: 5, z: 0}, this.isMobile()
-            )
-            this.portfolio_2 = new Plane(
-                'amos',
-                3,
-                2,
-                {x: 0, y: 1.5, z: 0},
-                'Amos Sweets Japan Marketing Operation',
-                'Project made for Amos in the Food industry for a B2C audience.',
-                 {x: 2, y: 5, z: 0}, this.isMobile()
-            )
-            this.portfolio_3 = new Plane(
-                'aboitz',
-                3,
-                2,
-                {x: 3.5, y: 1.5, z: 0},
-                'Aboitiz InfraCapital Tokyo-Osaka Investment Forum',
-                'Project made for Aboitiz InfraCapital in the Real Estate industry in 2023.',
-                {x: -1.5, y: 2, z: 0}, this.isMobile()
-            )
-            this.portfolio_4 = new Plane(
-                'spotify',
-                3,
-                2,
-                {x: -3.5, y: -1, z: 0},
-                'Spotify/TBWA',
-                'Project made for Spotify Philippines/ TBWA in the Media industry in 2023.',
-                 {x: 2, y: 2, z: 0}, this.isMobile()
-            )
-            this.portfolio_5 = new Plane(
-                'kohler',
-                3,
-                2,
-                {x: 0, y: -1, z: 0},
-                'Kohler Power - conference in Osaka',
-                'Project made for Kohler Power in the Energy & Oil industry for a B2B audience in 2023.',
-                {x: -1.5, y: -1, z: 0}, this.isMobile()
-            )
-            this.portfolio_6 = new Plane(
-                'coint',
-                3,
-                2,
-                {x: 3.5, y: -1, z: 0},
-                'Growth Strategy for Global Fintech Media Brands',
-                'Ongoing project for Cointelegraph.com & Investing.com in the Media industry for a B2C audience since 2017.',
-                {x: 2, y: -1, z: 0}, this.isMobile()
-            )
-            // if(this.isMobile()){
-                // rotate work circle idea \_/
-                // heatmap
-                // this.portfolio_1.mesh.position.set(0,0,0)
-                // // kaplan
-                // this.portfolio_2.mesh.position.set(3,0,1)
-                // this.portfolio_2.mesh.rotation.set(0,7,0)
-                // // NFT
-                // this.portfolio_3.mesh.position.set(6,0,2)
-                // this.portfolio_3.mesh.rotation.set(0,9,0)
-                // // reckitt
-                // this.portfolio_4.mesh.position.set(0,0,6)
-                // this.portfolio_4.mesh.rotation.set(0,11,0)
-                // // lala
-                // this.portfolio_5.mesh.position.set(-5,0,2)
-                // this.portfolio_5.mesh.rotation.set(0,-9,0)
-                // // CT
-                // this.portfolio_6.mesh.position.set(-3,0,1)
-                // this.portfolio_6.mesh.rotation.set(0,-7,0)
-            // }
-            // blank UI required before updating
-            // this.ui = new UI({title: '', description: ''})
-        }
-        if(this.portfolio_1.mesh.visible === false) {
-            this.portfolio_1.mesh.visible = true
-            this.portfolio_2.mesh.visible = true
-            this.portfolio_3.mesh.visible = true
-            this.portfolio_4.mesh.visible = true
-            this.portfolio_5.mesh.visible = true
-            this.portfolio_6.mesh.visible = true
-        }
+        gsap.to(this.work.mesh.rotation, {
+            x: 0,
+            y: 1,
+            z: 0,
+            duration: 1.5,
+            ease: "back.inOut(1.3)",
+        })
+    }
+
+    loadWork() {
+        let iframe = document.createElement('iframe');
+        iframe.src = "https://uralverse-work-6o7d.vercel.app/";
+
+        // Append the iframe immediately but keep it invisible
+        document.getElementById('workFrame').appendChild(iframe);
+
+        // Set timeout to change visibility after 1.5 seconds
+        setTimeout(() => {
+            iframe.style.visibility = 'visible';
+            iframe.style.opacity = 1;
+        }, 1400);
     }
 
     resetWork() {
@@ -386,13 +322,13 @@ export default class World {
         // if(this.doge) {
         //     this.doge.update()
         // }
-        if(this.portfolio_1) {
-            this.portfolio_1.update()
-            this.portfolio_2.update()
-            this.portfolio_3.update()
-            this.portfolio_4.update()
-            this.portfolio_5.update()
-            this.portfolio_6.update()
-        }
+        // if(this.portfolio_1) {
+        //     this.portfolio_1.update()
+        //     this.portfolio_2.update()
+        //     this.portfolio_3.update()
+        //     this.portfolio_4.update()
+        //     this.portfolio_5.update()
+        //     this.portfolio_6.update()
+        // }
     }
 }

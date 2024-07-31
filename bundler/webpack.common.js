@@ -1,24 +1,22 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, '../src/script.js'),
-    output:
-    {
+    output: {
         hashFunction: 'xxhash64',
         filename: 'bundle.[contenthash].js',
         path: path.resolve(__dirname, '../dist')
     },
     devtool: 'source-map',
-    plugins:
-    [
+    plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                { from: path.resolve(__dirname, '../static') }
+                { from: path.resolve(__dirname, '../static') },
             ]
         }),
         new HtmlWebpackPlugin({
@@ -27,15 +25,12 @@ module.exports = {
         }),
         new MiniCSSExtractPlugin()
     ],
-    module:
-    {
-        rules:
-        [
+    module: {
+        rules: [
             // HTML
             {
                 test: /\.(html)$/,
-                use:
-                [
+                use: [
                     'html-loader'
                 ]
             },
@@ -44,8 +39,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use:
-                [
+                use: [
                     'babel-loader'
                 ]
             },
@@ -53,8 +47,7 @@ module.exports = {
             // CSS
             {
                 test: /\.css$/,
-                use:
-                [
+                use: [
                     MiniCSSExtractPlugin.loader,
                     'css-loader'
                 ]
@@ -64,8 +57,7 @@ module.exports = {
             {
                 test: /\.(jpg|png|gif|svg)$/,
                 type: 'asset/resource',
-                generator:
-                {
+                generator: {
                     filename: 'assets/images/[hash][ext]'
                 }
             },
@@ -74,8 +66,7 @@ module.exports = {
             {
                 test: /\.(ttf|eot|woff|woff2)$/,
                 type: 'asset/resource',
-                generator:
-                {
+                generator: {
                     filename: 'assets/fonts/[hash][ext]'
                 }
             },
@@ -84,8 +75,7 @@ module.exports = {
             {
                 test: /\.(glsl|vs|fs|vert|frag)$/,
                 type: 'asset/source',
-                generator:
-                {
+                generator: {
                     filename: 'assets/images/[hash][ext]'
                 }
             }
@@ -95,7 +85,6 @@ module.exports = {
         minimize: true,
         minimizer: [
             new TerserPlugin({
-                // If you have source maps, include this to properly minify them too
                 terserOptions: {
                     compress: {
                         drop_console: true,  // Optionally remove console logs/statements
@@ -103,8 +92,7 @@ module.exports = {
                 },
                 extractComments: false,
             }),
-            // Add the CssMinimizerPlugin here
             new CssMinimizerPlugin(),
         ],
     },
-}
+};

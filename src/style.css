@@ -1002,6 +1002,19 @@ a#agencyvista-badge {
     padding: 5px 20px;
 }
 
+#workFrame iframe {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    border: none;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+
 .show{
     display: block;
 }
@@ -1268,6 +1281,9 @@ a#agencyvista-badge {
 
 /* /////////////////////////////////// 768 768 768//////// */
 @media(max-width: 768px){
+    #workFrame iframe{
+        height: 94vh;
+    }
     section#contact{
         width: 90%;
         top: 1rem;
