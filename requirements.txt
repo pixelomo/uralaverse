@@ -88,7 +88,7 @@ kiwisolver==1.4.4
 kombu==5.2.4
 langchain==0.0.131
 linkify-it-py==2.0.0
-llvmlite==0.36.0
+llvmlite==0.40.1
 lxml==4.9.2
 Mako==1.2.4
 markdown-it-py==2.2.0
