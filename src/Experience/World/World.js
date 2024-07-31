@@ -10,7 +10,7 @@ import Particles from './Particles.js'
 import Text from './Text.js'
 import SVG from './SVG.js'
 import Plane from './Plane.js'
-import UI from './UI.js'
+// import UI from './UI.js'
 import gsap from 'gsap'
 
 export default class World {
@@ -35,8 +35,8 @@ export default class World {
         this.camera = this.experience.camera.instance
         this.renderer = this.experience.renderer
         this.environment = new Environment()
-        this.ui = new UI({title: '', description: ''})
-        this.ui.container.position.set(0,30,0)
+        // this.ui = new UI({title: '', description: ''})
+        // this.ui.container.position.set(0,30,0)
     }
 
     intro() {
@@ -316,9 +316,9 @@ export default class World {
         if(this.globe && this.globe.model.visible === true){
             this.lightFollowControls()
         }
-        if(this.ui) {
-            this.ui.update()
-        }
+        // if(this.ui) {
+        //     this.ui.update()
+        // }
         // if(this.doge) {
         //     this.doge.update()
         // }

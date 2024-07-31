@@ -120,8 +120,7 @@ platformdirs==3.5.0
 prompt-toolkit==3.0.38
 Protego==0.2.1
 protobuf==4.22.3
-psycopg2==2.9.6
-psycopg2-binary==2.9.1
+psycopg2-binary==2.9.6
 pyasn1==0.5.0
 pyasn1-modules==0.3.0
 pycparser==2.21
