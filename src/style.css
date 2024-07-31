@@ -1249,7 +1249,7 @@ a#agencyvista-badge {
     .locations-col.hide{
         display: none;
     }
-    .locations-col:nth-of-type(2) {
+    .locations-col:nth-of-type(3) {
         display: none;
     }
     .location.mobile{display: block;}
