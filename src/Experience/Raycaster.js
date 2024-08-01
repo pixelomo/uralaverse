@@ -186,17 +186,17 @@ export default class Raycaster {
                         /////////////////////////// LOCATIONS ///////////////////////////////
                         if(this.currentIntersect.object.name === 'locations'){
                             gsap.to(this.camera.position, {
-                                x: -2,
+                                x: 5,
                                 y: 5,
-                                z: -10,
-                                duration: 2,
-                                ease: "back.inOut(1.1)",
+                                z: 12,
+                                duration: 1,
+                                ease: "back.in(1)",
                             })
                             this.testHomeObjects = false
                             this.testLocationsObjects = true
                             setTimeout(() => {
                                 this.experience.world.showLocations()
-                            }, 800)
+                            }, 1000)
                             this.aboutSection.classList.remove('show')
                             setTimeout(() => {
                                 // while(this.experience.scene.children.length > 0){
@@ -210,10 +210,10 @@ export default class Raycaster {
                                     x: 3.8,
                                     y: 2,
                                     z: 8,
-                                    duration: 1.8,
-                                    ease: "back.inOut(1.2)",
+                                    duration: 1.2,
+                                    ease: "back.in(1)",
                                 })
-                            }, 1500)
+                            }, 1000)
                             setTimeout(() => {
                                 // this.locationSection.classList.add('show')
                                 this.locationSection.forEach((s) => {
