@@ -221,7 +221,7 @@ export default class Raycaster {
                                 })
                                 this.locationsHiddenButton.classList.remove('hide')
                                 this.controlsInstructions.classList.add('hide')
-                            }, 4000)
+                            }, 2300)
                             // setTimeout(() => {
                             //     // canvas.classList.remove('fade')
                             //     this.locationSection.classList.add('show')
