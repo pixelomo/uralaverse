@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { PlaneGeometry, MeshBasicMaterial, DoubleSide, Mesh } from 'three';
 import Experience from '../Experience.js';
 import gsap from 'gsap';
 import vertexShader from './../shaders/vertex.glsl';
@@ -17,20 +17,20 @@ export default class Plane {
     }
 
     setGeometry(width, height) {
-        this.geometry = new THREE.PlaneGeometry(width, height);
+        this.geometry = new PlaneGeometry(width, height);
     }
 
     setMaterial(img) {
         const texture = this.resources.items[img];
-        this.material = new THREE.MeshBasicMaterial({
+        this.material = new MeshBasicMaterial({
             map: texture,
-            side: THREE.DoubleSide
+            side: DoubleSide
         });
-        this.material.side = THREE.DoubleSide;
+        this.material.side = DoubleSide;
     }
 
     setMesh(position, title, description, mobilePosition, isMobile) {
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.mesh = new Mesh(this.geometry, this.material);
 
         // Fallback for position with default values
         const safePosition = {

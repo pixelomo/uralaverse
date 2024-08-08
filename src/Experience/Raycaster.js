@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import Experience from './Experience.js'
 import gsap from 'gsap'
-import UI from './World/UI.js'
+// import UI from './World/UI.js'
 
 export default class Raycaster {
     constructor() {
@@ -82,7 +82,7 @@ export default class Raycaster {
         })
 
         window.addEventListener('click', () => {
-            this.ui = this.experience.world.ui
+            // this.ui = this.experience.world.ui
             if(this.testHomeObjects === true){
                 if(this.intersects.length) {
                     if(!this.currentIntersect) {
@@ -278,68 +278,68 @@ export default class Raycaster {
                             // if(typeof this.ui === 'undefined'){
                             //     this.ui = new UI({title: portfolioItem.userData.title, description: portfolioItem.userData.description})
                             // } else {
-                                this.ui.title.children[1].set({content: portfolioItem.userData.title})
-                                this.ui.description.children[1].set({content: portfolioItem.userData.description})
+                                // this.ui.title.children[1].set({content: portfolioItem.userData.title})
+                                // this.ui.description.children[1].set({content: portfolioItem.userData.description})
                             // }
                             // if UI scale = 1 => 0
                             // console.log(portfolioItem.scale.x)
-                            if(this.ui.container.scale.x === 0){
-                                this.ui.container.rotation.set(0.15,0,0)
-                                if(portfolioItem.userData.isMobile){
-                                    this.ui.container.scale.set(0.8,1,1)
-                                    this.ui.container.position.set(0, 0, 1.5)
-                                    gsap.to(portfolioItem.scale, {
-                                        x: 2,
-                                        y: 2,
-                                        z: 2,
-                                        duration: 1.2,
-                                    })
-                                    gsap.to(portfolioItem.position, {
-                                        x: 0,
-                                        y: 0,
-                                        z: 1,
-                                        duration: 1.2,
-                                    })
-                                } else {
-                                    this.ui.container.scale.set(1,1,1)
-                                    this.ui.container.position.set(0, 0, 3)
-                                    gsap.to(portfolioItem.scale, {
-                                        x: 3,
-                                        y: 3,
-                                        z: 3,
-                                        duration: 1.2,
-                                    })
-                                    gsap.to(portfolioItem.position, {
-                                        x: 0,
-                                        y: 0,
-                                        z: 2,
-                                        duration: 1.2,
-                                    })
-                                }
-                            } else {
-                                this.ui.container.scale.set(0,0,0)
-                                gsap.to(portfolioItem.scale, {
-                                    x: 1,
-                                    y: 1,
-                                    z: 1,
-                                    duration: 1.2,
-                                })
-                                if(portfolioItem.userData.isMobile){
-                                    gsap.to(portfolioItem.position, {
-                                        x: portfolioItem.userData.mobilePosition.x,
-                                        y: portfolioItem.userData.mobilePosition.y,
-                                        z: portfolioItem.userData.mobilePosition.z,
-                                        duration: 1.2,
-                                    })
-                                } else {
-                                    gsap.to(portfolioItem.position, {
-                                        x: portfolioItem.userData.position.x,
-                                        y: portfolioItem.userData.position.y,
-                                        z: portfolioItem.userData.position.z,
-                                        duration: 1.2,
-                                    })
-                                }
-                            }
+                            // if(this.ui.container.scale.x === 0){
+                            //     this.ui.container.rotation.set(0.15,0,0)
+                            //     if(portfolioItem.userData.isMobile){
+                            //         this.ui.container.scale.set(0.8,1,1)
+                            //         this.ui.container.position.set(0, 0, 1.5)
+                            //         gsap.to(portfolioItem.scale, {
+                            //             x: 2,
+                            //             y: 2,
+                            //             z: 2,
+                            //             duration: 1.2,
+                            //         })
+                            //         gsap.to(portfolioItem.position, {
+                            //             x: 0,
+                            //             y: 0,
+                            //             z: 1,
+                            //             duration: 1.2,
+                            //         })
+                            //     } else {
+                            //         this.ui.container.scale.set(1,1,1)
+                            //         this.ui.container.position.set(0, 0, 3)
+                            //         gsap.to(portfolioItem.scale, {
+                            //             x: 3,
+                            //             y: 3,
+                            //             z: 3,
+                            //             duration: 1.2,
+                            //         })
+                            //         gsap.to(portfolioItem.position, {
+                            //             x: 0,
+                            //             y: 0,
+                            //             z: 2,
+                            //             duration: 1.2,
+                            //         })
+                            //     }
+                            // } else {
+                            //     this.ui.container.scale.set(0,0,0)
+                            //     gsap.to(portfolioItem.scale, {
+                            //         x: 1,
+                            //         y: 1,
+                            //         z: 1,
+                            //         duration: 1.2,
+                            //     })
+                            //     if(portfolioItem.userData.isMobile){
+                            //         gsap.to(portfolioItem.position, {
+                            //             x: portfolioItem.userData.mobilePosition.x,
+                            //             y: portfolioItem.userData.mobilePosition.y,
+                            //             z: portfolioItem.userData.mobilePosition.z,
+                            //             duration: 1.2,
+                            //         })
+                            //     } else {
+                            //         gsap.to(portfolioItem.position, {
+                            //             x: portfolioItem.userData.position.x,
+                            //             y: portfolioItem.userData.position.y,
+                            //             z: portfolioItem.userData.position.z,
+                            //             duration: 1.2,
+                            //         })
+                            //     }
+                            // }
                         }
                     }
                 }

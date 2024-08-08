@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Color } from 'three'
 import Experience from '../Experience.js'
 import Environment from './Environment.js'
 import Globe from './Globe.js'
@@ -9,7 +9,7 @@ import Spheres from './Spheres.js'
 import Particles from './Particles.js'
 import Text from './Text.js'
 import SVG from './SVG.js'
-import Plane from './Plane.js'
+// import Plane from './Plane.js'
 // import UI from './UI.js'
 import gsap from 'gsap'
 
@@ -23,9 +23,6 @@ export default class World {
         })
         // Debug
         this.debug = this.experience.debug
-		// if (this.debug.active) {
-		// 	this.debugFolder = this.debug.ui.addFolder('world')
-		// }
     }
 
     createScene() {
@@ -35,8 +32,6 @@ export default class World {
         this.camera = this.experience.camera.instance
         this.renderer = this.experience.renderer
         this.environment = new Environment()
-        // this.ui = new UI({title: '', description: ''})
-        // this.ui.container.position.set(0,30,0)
     }
 
     intro() {
@@ -168,21 +163,10 @@ export default class World {
                 this.globe.model.visible = false
             }, 2000)
         }
-        // if(this.portfolio_1){
-        //     this.portfolio_1.mesh.visible = false
-        //     this.portfolio_2.mesh.visible = false
-        //     this.portfolio_3.mesh.visible = false
-        //     this.portfolio_4.mesh.visible = false
-        //     this.portfolio_5.mesh.visible = false
-        //     this.portfolio_6.mesh.visible = false
-        // }
         this.renderer.setReinhardTone()
     }
 
     hideHome() {
-        // this.experience.destroy()
-        // this.createScene()
-        // this.welcome = undefined
         this.diamonds.diamondGroup.visible = false
         this.donuts.donutGroup.visible = false
         this.spheres.sphereGroup.visible = false
@@ -206,7 +190,7 @@ export default class World {
         this.loadWork();
         this.work.mesh.visible = true
         // this.renderer.setNoTone()
-        this.color = new THREE.Color('#00c4eb')
+        this.color = new Color('#00c4eb')
         gsap.to(this.work.material.color, 0.5, {
             r: this.color.r,
             g: this.color.g,
@@ -273,21 +257,6 @@ export default class World {
         this.hideHome()
         if(typeof this.globe === 'undefined'){
             this.globe = new Globe()
-            // this.maskPanel = new SVG('maskPanel', '', {x: -16.7, y: 8.2, z: 7}, 0.025)
-            // this.maskPanel.model.rotation.set(0,0.4,0)
-            // // this.maskPanel.model.material.opacity = 1
-            // console.log(this.maskPanel.model)
-            // if(this.debug.active) {
-            //     this.debugFolder.add(this.maskPanel.model.position, 'x').name('mask x').min(-30).max(18).step(0.1)
-            //     this.debugFolder.add(this.maskPanel.model.position, 'y').name('mask y').min(-30).max(18).step(0.1)
-            //     this.debugFolder.add(this.maskPanel.model.position, 'z').name('mask z').min(-30).max(18).step(0.1)
-            //     this.debugFolder.add(this.maskPanel.model.rotation, 'x').name('rotation x').min(-18).max(18).step(0.1)
-            //     this.debugFolder.add(this.maskPanel.model.rotation, 'y').name('rotation y').min(-18).max(18).step(0.1)
-            //     this.debugFolder.add(this.maskPanel.model.rotation, 'z').name('rotation z').min(-18).max(18).step(0.1)
-            //     this.debugFolder.add(this.maskPanel.model.scale, 'x').name('scale x').min(-1).max(1).step(0.001)
-            //     this.debugFolder.add(this.maskPanel.model.scale, 'y').name('scale y').min(-1).max(1).step(0.001)
-            //     this.debugFolder.add(this.maskPanel.model.scale, 'z').name('scale z').min(-1).max(1).step(0.001)
-            // }
         }
         this.globe.model.visible = true
         gsap.to(this.globe.model.position, {
@@ -316,19 +285,8 @@ export default class World {
         if(this.globe && this.globe.model.visible === true){
             this.lightFollowControls()
         }
-        // if(this.ui) {
-        //     this.ui.update()
-        // }
-        // if(this.doge) {
-        //     this.doge.update()
-        // }
-        // if(this.portfolio_1) {
-        //     this.portfolio_1.update()
-        //     this.portfolio_2.update()
-        //     this.portfolio_3.update()
-        //     this.portfolio_4.update()
-        //     this.portfolio_5.update()
-        //     this.portfolio_6.update()
-        // }
+        if(this.doge) {
+            this.doge.update()
+        }
     }
 }

@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Group, OctahedronGeometry, Mesh, MeshPhongMaterial, Color } from 'three';
 import Experience from '../Experience.js'
 import gsap from 'gsap'
 
@@ -9,8 +9,8 @@ export default class Diamonds {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.isMobile = this.experience.world.isMobile()
-        this.diamondGroup = new THREE.Group()
-        let geometry = new THREE.OctahedronGeometry(0.2)
+        this.diamondGroup = new Group()
+        let geometry = new OctahedronGeometry(0.2)
         this.createDiamonds(geometry, amount)
         this.scene.add(this.diamondGroup)
         let diamondPositions = this.diamondGroup.children.map(i => i.position)
@@ -38,10 +38,10 @@ export default class Diamonds {
 
     createDiamonds(geometry, amount) {
         for(let i = 0; i < amount; i++){
-            const d = new THREE.Mesh(
+            const d = new Mesh(
                 geometry,
-                new THREE.MeshPhongMaterial({
-                    color: new THREE.Color("#"+genHex(6))
+                new MeshPhongMaterial({
+                    color: new Color("#"+genHex(6))
                 })
             )
             d.position.x = (Math.random() - 0.5) * 10

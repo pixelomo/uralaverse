@@ -1,17 +1,17 @@
-import * as THREE from 'three'
-import Experience from '../Experience.js'
-import gsap from 'gsap'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
+import { Mesh, MeshPhongMaterial, Color } from 'three';
+import Experience from '../Experience.js';
+import gsap from 'gsap';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 export default class Text {
     constructor(text, size, color, position, name) {
-        this.experience = new Experience()
-        this.scene = this.experience.scene
-        this.raycaster = this.experience.raycaster
-        this.resources = this.experience.resources
-        this.setGeometry(text, size)
-        this.setMaterial(color)
-        this.setMesh(position, name)
+        this.experience = new Experience();
+        this.scene = this.experience.scene;
+        this.raycaster = this.experience.raycaster;
+        this.resources = this.experience.resources;
+        this.setGeometry(text, size);
+        this.setMaterial(color);
+        this.setMesh(position, name);
     }
 
     setGeometry(text, size) {
@@ -27,32 +27,32 @@ export default class Text {
                 // bevelOffset: 0,
                 // bevelSegments: 1
             }
-        )
-        this.geometry.center()
+        );
+        this.geometry.center();
     }
 
     setMaterial(color) {
-        this.material = new THREE.MeshPhongMaterial({
+        this.material = new MeshPhongMaterial({
             color: color,
             shininess: 0,
             reflectivity: 0,
             fog: false,
             flatShading: true,
-        })
-        this.material.userData.color = new THREE.Color(color)
+        });
+        this.material.userData.color = new Color(color);
     }
 
     setMesh(position, name) {
-        this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.mesh.position.set(position.x, position.y, position.z)
+        this.mesh = new Mesh(this.geometry, this.material);
+        this.mesh.position.set(position.x, position.y, position.z);
         gsap.from(this.mesh.rotation, 0.5, {
-            x: - Math.PI * 0.5,
+            x: -Math.PI * 0.5,
             ease: "back.inOut(1.7)",
-        })
-        this.raycaster.objectsToTest.push(this.mesh)
-        if(name){
-            this.mesh.name = name
+        });
+        this.raycaster.objectsToTest.push(this.mesh);
+        if (name) {
+            this.mesh.name = name;
         }
-        this.scene.add(this.mesh)
+        this.scene.add(this.mesh);
     }
 }

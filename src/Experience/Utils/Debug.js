@@ -1,11 +1,11 @@
-import * as dat from 'lil-gui'
-
 export default class Debug {
     constructor() {
-        this.active = window.location.hash === '#debug'
+        this.active = window.location.hash === '#debug';
 
-        if(this.active) {
-            this.ui = new dat.GUI()
+        if (this.active && process.env.NODE_ENV !== 'production') {
+            import('lil-gui').then((dat) => {
+                this.ui = new dat.GUI();
+            });
         }
     }
 }
