@@ -8,7 +8,7 @@ module.exports = merge(commonConfiguration, {
     mode: 'production',
     optimization: {
         usedExports: true,  // Enable tree shaking
-        sideEffects: false, // Ensure side effects are correctly configured
+        // sideEffects: false, // Ensure side effects are correctly configured
         splitChunks: {
             chunks: 'all',   // Enable code splitting
         },

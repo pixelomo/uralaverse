@@ -8,6 +8,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="preload" href="./../static/images/whatsapp.svg" as="image">
         <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;900&display=swap" rel="stylesheet"> -->
@@ -320,7 +321,11 @@
                 <p>🔬 Visit different sections to see more</p>
             </div>
         </div>
-        <div class="has-whatsapp"><div class="whatsapp-chat"><a class="whatsapp-chat__btn" data-country="sg" href="https://shorturl.at/Z5SOR" target="_blank" rel="nofollow" aria-label="Hey there! Let me answer your questions"></a></div></div>
+        <div class="has-whatsapp">
+            <div class="whatsapp-chat">
+                <a class="whatsapp-chat__btn" data-country="sg" href="https://api.whatsapp.com/send?phone=+818086978464&text=H%C2%AD%E2%80%8B%E2%80%8F%E2%80%8E%E2%80%8F%E2%80%8C%E2%80%8F%C2%AD%C2%AD%E2%80%8C%E2%80%8C%E2%80%8F%E2%80%8C%C2%AD%C2%AD%C2%AD%E2%80%8F%E2%80%8Ei!%20To%20get%20started%2C%20please%20send%20this%20message" target="_blank" rel="nofollow" aria-label="Hey there! Let me answer your questions"></a>
+            </div>
+        </div>
     </body>
     <script>
         !function(){let e=document.querySelector(".tabbed"),t=e.querySelector(".tabbed ul"),r=t.querySelectorAll(".tabbed a"),i=e.querySelectorAll('[id^="section"]'),l=document.querySelectorAll(".list-block"),a=document.querySelectorAll(".list-item"),c=document.querySelectorAll(".spider"),d=Array.from(c),o=(e,t)=>{t.focus(),t.removeAttribute("tabindex"),t.setAttribute("aria-selected","true"),e.removeAttribute("aria-selected"),e.setAttribute("tabindex","-1");let l=Array.prototype.indexOf.call(r,t);i[Array.prototype.indexOf.call(r,e)].hidden=!0,i[l].hidden=!1};t.setAttribute("role","tablist"),Array.prototype.forEach.call(r,(e,a)=>{e.setAttribute("role","tab"),e.setAttribute("id","tab"+(a+1)),e.setAttribute("tabindex","-1"),e.parentNode.setAttribute("role","presentation"),e.addEventListener("click",e=>{e.preventDefault();let r=t.querySelector("[aria-selected]");e.currentTarget!==r&&o(r,e.currentTarget),l.forEach(e=>e.classList.remove("hide")),c.forEach(e=>e.classList.remove("active"))}),e.addEventListener("keydown",e=>{let t=Array.prototype.indexOf.call(r,e.currentTarget),l=37===e.which?t-1:39===e.which?t+1:40===e.which?"down":null;null!==l&&(e.preventDefault(),"down"===l?i[a].focus():r[l]&&o(e.currentTarget,r[l]))})}),Array.prototype.forEach.call(i,(e,t)=>{e.setAttribute("role","tabpanel"),e.setAttribute("tabindex","-1"),e.getAttribute("id"),e.setAttribute("aria-labelledby",r[t].id),e.hidden=!0}),r[0].removeAttribute("tabindex"),r[0].setAttribute("aria-selected","true"),i[0].hidden=!1,a.forEach(e=>e.addEventListener("click",e=>{if(e.target.id.length>0){let t=e.target.id+"Spider";d.some(e=>e.id===t)&&(l.forEach(e=>e.classList.add("hide")),c.forEach(e=>e.classList.remove("active")),document.querySelector("#"+t).classList.add("active"))}}))}();

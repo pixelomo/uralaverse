@@ -33,6 +33,5 @@
     "terser-webpack-plugin": "^5.3.9",
     "three-mesh-ui": "^6.5.2",
     "webpack-bundle-analyzer": "^4.10.2"
-  },
-  "sideEffects": false
+  }
 }
