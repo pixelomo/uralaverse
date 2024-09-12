@@ -186,8 +186,8 @@ export default class Raycaster {
                         /////////////////////////// LOCATIONS ///////////////////////////////
                         if(this.currentIntersect.object.name === 'locations'){
                             gsap.to(this.camera.position, {
-                                x: 5,
-                                y: 5,
+                                x: 5.4,
+                                y: 5.1,
                                 z: 12,
                                 duration: 1,
                                 ease: "back.in(1)",
@@ -207,9 +207,12 @@ export default class Raycaster {
                                 // this.experience.scene.children.destroy()
                                 // locationScene = true
                                 gsap.to(this.camera.position, {
-                                    x: 3.8,
-                                    y: 2,
-                                    z: 8,
+                                    // x: 3.8,
+                                    // y: 2,
+                                    // z: 8,
+                                    x: 5.4,
+                                    y: 5.1,
+                                    z: 5.2,
                                     duration: 1.2,
                                     ease: "back.in(1)",
                                 })
