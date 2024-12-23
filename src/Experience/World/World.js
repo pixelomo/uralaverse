@@ -80,7 +80,7 @@ export default class World {
             .to(this, {
                 onComplete: () => {
                     this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: -0.3, y: 8.2, z: 0}, 0.0037);
-                    this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3.2, y: 9, z: 0}, 0.011);
+                    // this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -3.2, y: 9, z: 0}, 0.011);
                 },
                 delay: 0.2
             });
@@ -110,7 +110,7 @@ export default class World {
             .to(this, {
                 onComplete: () => {
                     this.uralaLogo = new SVG('uralaLogo', 'https://www.sortlist.com/agency/urala-communications', {x: 3, y: 4, z: 0}, 0.005);
-                    this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015);
+                    // this.ctLogo = new SVG('ctLogo', 'https://jp.cointelegraph.com/', {x: -5.8, y: 4, z: 2}, 0.015);
                 },
                 delay: 0.2
             });
@@ -150,7 +150,7 @@ export default class World {
             })
         }
         this.uralaLogo.model.visible = true
-        this.ctLogo.model.visible = true
+        // this.ctLogo.model.visible = true
         this.experience.world.environment.pointLight.position.set(1, 3, 10)
         if(this.globe){
             gsap.to(this.globe.model.position, {
@@ -182,7 +182,7 @@ export default class World {
         this.locationsJP.model.visible = false
         this.workJP.model.visible = false
         this.uralaLogo.model.visible = false
-        this.ctLogo.model.visible = false
+        // this.ctLogo.model.visible = false
     }
 
     showWork() {
