@@ -449,9 +449,9 @@ export default class Raycaster {
                     })
                 }else if(id === 'riyadh') {
                     gsap.to(camera, {
-                        x: 1.5,
-                        y: 0.7,
-                        z: 8.9,
+                        x: -6.0,
+                        y: 3.0,
+                        z: 6.0,
                         duration: 1,
                     })
                 }else if(id === 'seoul') {
