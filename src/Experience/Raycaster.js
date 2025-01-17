@@ -19,7 +19,7 @@ export default class Raycaster {
         this.testHomeObjects = true
         this.testPortfolioObjects = false
         this.testLocationsObjects = false
-        this.locationsNames = ['Tokyo', 'London', 'Jakarta', 'Ho Chi Minh', 'Kuala Lumpur', 'Singapore', 'Manila', 'Melbourne']
+        this.locationsNames = ['Tokyo', 'London', 'Jakarta', 'Ho Chi Minh', 'Kuala Lumpur', 'Riyadh','Singapore', 'Manila', 'Melbourne']
 
         const close = document.querySelectorAll('.close-button')
         close.forEach(btn => btn.addEventListener('click', () => {
@@ -441,6 +441,13 @@ export default class Raycaster {
                         duration: 1,
                     })
                 }else if(id === 'singapore') {
+                    gsap.to(camera, {
+                        x: 1.5,
+                        y: 0.7,
+                        z: 8.9,
+                        duration: 1,
+                    })
+                }else if(id === 'riyadh') {
                     gsap.to(camera, {
                         x: 1.5,
                         y: 0.7,
