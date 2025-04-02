@@ -163,6 +163,7 @@ export default class World {
                 this.globe.model.visible = false
             }, 2000)
         }
+
         this.renderer.setReinhardTone()
     }
 

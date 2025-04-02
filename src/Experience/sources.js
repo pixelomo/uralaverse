@@ -35,7 +35,7 @@ export default [
     {
         name: 'globe',
         type: 'gltfModel',
-        path: 'models/globeRiyadh.glb'
+        path: 'models/NoHochiGlobe.glb'
     },
     // {
     //     name: 'doge',
