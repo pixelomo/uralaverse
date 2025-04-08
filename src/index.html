@@ -273,14 +273,19 @@
                     </div>
                     <form class="py-5" action="https://getform.io/f/7eeddac9-88d6-4f65-8dbb-eadd9f9e0edd" method="POST" id="pitch" autocomplete="off">
                         <div class="row">
-                            <div class="col-lg-6 col-12"><input type="text" name="name" placeholder="Name" id="name"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12"><input type="email" name="email" placeholder="Email" autocomplete="off"><input type="hidden" name="_gotcha" style="display:none !important"></div>
+                            <div class="col-lg-6 col-12"><input type="text" name="name" placeholder="Name" id="name" required></div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <select name="type" id="type" class="form-control">
+                                <input type="email" name="email" placeholder="Email" autocomplete="off" required>
+                                <input type="hidden" name="_gotcha" style="display:none !important">
+                                <input type="text" name="honeypot" style="display:none !important">
+                                <input type="hidden" name="_timestamp" value="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <select name="type" id="type" class="form-control" required>
                                     <option value="">Enquiry Type</option>
                                     <option value="Marketing">Marketing</option>
                                     <option value="Branding">Branding</option>
@@ -294,10 +299,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12"><textarea name="description" placeholder="Enquiry" minlength="10"></textarea></div>
+                            <div class="col-12"><textarea name="description" placeholder="Enquiry" minlength="10" required></textarea></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6 offset-lg-6 col-12"><button class="gif-button" type="submit">SEND</button></div>
+                            <div class="col-lg-6 offset-lg-6 col-12">
+                                <button class="gif-button" type="submit" onclick="this.form._timestamp.value=Date.now()">SEND</button>
+                            </div>
                         </div>
                     </form>
 
