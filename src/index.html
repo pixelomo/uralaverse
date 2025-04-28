@@ -165,6 +165,7 @@
                             <p class="icon tel-icon"><a target="_blank" href="tel:+81368073641">0368073641</a></p>
                             <p class="icon fax-icon"><a target="_blank" href="tel:+81368073642">0368073642</a></p>
                             <a target="_blank" class="map-btn" href="https://goo.gl/maps/4VBqu4tBtjw8iFKP9">Map</a>
+                            <button class="contact-us-from-location-btn map-btn">Contact Us</button>
                         </div>
                     </div>
                 </div>
@@ -180,6 +181,7 @@
                             <p class="icon mail-icon"><a target="_blank" href="mailto:rian@uralaverse.com">rian@uralaverse.com</a></p>
                             <p class="icon tel-icon"><a target="_blank" href="tel:+628170979797">+628170979797</a></p>
                             <a target="_blank" class="map-btn" href="https://maps.app.goo.gl/T8F1uUK4v4vwWz3w8?g_st=iw">Map</a>
+                            <button class="contact-us-from-location-btn map-btn">Contact Us</button>
                         </div>
                     </div>
                 </div>
@@ -195,6 +197,7 @@
                             <p class="icon mail-icon"><a target="_blank" href="mailto:build@uralaverse.com">build@uralaverse.com</a></p>
                             <p class="icon tel-icon hide"><a target="_blank" href="tel:">000</a></p>
                             <a target="_blank" class="map-btn" href="https://maps.app.goo.gl/DaA8Yn7dfsggzaf28">Map</a>
+                            <button class="contact-us-from-location-btn map-btn">Contact Us</button>
                         </div>
                     </div>
                 </div>
@@ -210,6 +213,7 @@
                             <p class="icon mail-icon"><a target="_blank" href="mailto:build@uralaverse.com">build@uralaverse.com</a></p>
                             <p class="icon tel-icon hide"><a target="_blank" href="tel:">000</a></p>
                             <a target="_blank" class="map-btn" href="https://goo.gl/maps/ksrh6dybS3Can3hDA">Map</a>
+                            <button class="contact-us-from-location-btn map-btn">Contact Us</button>
                         </div>
                     </div>
                 </div>
@@ -225,6 +229,7 @@
                             <p class="icon mail-icon"><a target="_blank" href="mailto:build@uralaverse.com">build@uralaverse.com</a></p>
                             <p class="icon tel-icon"><a target="_blank" href="tel:+63275872978">+63275872978</a></p>
                             <a target="_blank" class="map-btn" href="https://goo.gl/maps/pPBu3bQddqq61Tux6">Map</a>
+                            <button class="contact-us-from-location-btn map-btn">Contact Us</button>
                         </div>
                     </div>
                 </div>
@@ -240,6 +245,7 @@
                             <p class="icon mail-icon"><a target="_blank" href="mailto:brian.d@uralaverse.com">brian.d@uralaverse.com</a></p>
                             <p class="icon tel-icon"><a target="_blank" href="tel:tel:+61478898560">+61478898560</a></p>
                             <a target="_blank" class="map-btn" href="https://goo.gl/maps/yy2WBhMRKQtMPviEA">Map</a>
+                            <button class="contact-us-from-location-btn map-btn">Contact Us</button>
                         </div>
                     </div>
                 </div>
@@ -273,7 +279,7 @@
                     </div>
                     <form class="py-5" action="https://getform.io/f/7eeddac9-88d6-4f65-8dbb-eadd9f9e0edd" method="POST" id="pitch" autocomplete="off">
                         <div class="row">
-                            <div class="col-lg-6 col-12"><input type="text" name="name" placeholder="Name" id="name" required></div>
+                            <div class="col-lg-6 col-12"><input type="text" name="name" placeholder="Name" id="name"></div>
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -336,5 +342,70 @@
     </body>
     <script>
         !function(){let e=document.querySelector(".tabbed"),t=e.querySelector(".tabbed ul"),r=t.querySelectorAll(".tabbed a"),i=e.querySelectorAll('[id^="section"]'),l=document.querySelectorAll(".list-block"),a=document.querySelectorAll(".list-item"),c=document.querySelectorAll(".spider"),d=Array.from(c),o=(e,t)=>{t.focus(),t.removeAttribute("tabindex"),t.setAttribute("aria-selected","true"),e.removeAttribute("aria-selected"),e.setAttribute("tabindex","-1");let l=Array.prototype.indexOf.call(r,t);i[Array.prototype.indexOf.call(r,e)].hidden=!0,i[l].hidden=!1};t.setAttribute("role","tablist"),Array.prototype.forEach.call(r,(e,a)=>{e.setAttribute("role","tab"),e.setAttribute("id","tab"+(a+1)),e.setAttribute("tabindex","-1"),e.parentNode.setAttribute("role","presentation"),e.addEventListener("click",e=>{e.preventDefault();let r=t.querySelector("[aria-selected]");e.currentTarget!==r&&o(r,e.currentTarget),l.forEach(e=>e.classList.remove("hide")),c.forEach(e=>e.classList.remove("active"))}),e.addEventListener("keydown",e=>{let t=Array.prototype.indexOf.call(r,e.currentTarget),l=37===e.which?t-1:39===e.which?t+1:40===e.which?"down":null;null!==l&&(e.preventDefault(),"down"===l?i[a].focus():r[l]&&o(e.currentTarget,r[l]))})}),Array.prototype.forEach.call(i,(e,t)=>{e.setAttribute("role","tabpanel"),e.setAttribute("tabindex","-1"),e.getAttribute("id"),e.setAttribute("aria-labelledby",r[t].id),e.hidden=!0}),r[0].removeAttribute("tabindex"),r[0].setAttribute("aria-selected","true"),i[0].hidden=!1,a.forEach(e=>e.addEventListener("click",e=>{if(e.target.id.length>0){let t=e.target.id+"Spider";d.some(e=>e.id===t)&&(l.forEach(e=>e.classList.add("hide")),c.forEach(e=>e.classList.remove("active")),document.querySelector("#"+t).classList.add("active"))}}))}();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactButtons = document.querySelectorAll('.contact-us-from-location-btn');
+            const contactForm = document.getElementById('contact');
+            const locationDetails = document.querySelectorAll('.location-details');
+            const locationsList = document.querySelector('.locations.locations-col');
+            const locationsTitle = document.querySelector('h2.locations.title');
+            const backToLocationsButton = document.getElementById('back-to-locations');
+            const closeLocationsButton = document.getElementById('locations-hidden-button');
+            const maskPanel = document.getElementById('maskPanel');
+
+            contactButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    // Find the parent .location-details section of the clicked button
+                    const parentLocationDetail = event.target.closest('.location-details');
+
+                    // Hide all location details sections
+                    locationDetails.forEach(detail => detail.classList.remove('show'));
+                    // Specifically hide the parent one if found (might be redundant but ensures it's hidden)
+                    if (parentLocationDetail) {
+                        parentLocationDetail.classList.remove('show');
+                        parentLocationDetail.style.display = 'none'; // Force hide
+                    }
+
+                    // Hide locations list and title
+                    if (locationsList) locationsList.classList.remove('show');
+                    if (locationsTitle) locationsTitle.classList.remove('show');
+                    // Hide back button
+                    if (backToLocationsButton) backToLocationsButton.classList.add('hide');
+                    // Hide close button for locations
+                    if (closeLocationsButton) closeLocationsButton.classList.add('hide');
+                    // Hide mask panel
+                    if (maskPanel) maskPanel.style.display = 'none';
+
+                    // Show contact form
+                    if (contactForm) {
+                        contactForm.classList.add('show');
+                         // Ensure the close button for the contact form is visible
+                        const closeContactButton = contactForm.querySelector('.close-contact-button');
+                        if (closeContactButton) {
+                             closeContactButton.style.display = 'block'; // Or appropriate display style
+                        }
+                    }
+
+                    // Access Experience instance to hide 3D objects
+                    if (window.experience && window.experience.world) {
+                        if (window.experience.world.locations && window.experience.world.locations.mesh) {
+                            window.experience.world.locations.mesh.visible = false;
+                        }
+                        if (window.experience.world.locationsJP && window.experience.world.locationsJP.model) {
+                            window.experience.world.locationsJP.model.visible = false;
+                        }
+                         // If the globe is visible (meaning we were in locations view), hide it
+                        if(window.experience.world.globe && window.experience.world.globe.model.visible) {
+                             window.experience.world.globe.model.visible = false;
+                             // Optionally move the globe away if needed, similar to showHome
+                             // gsap.to(window.experience.world.globe.model.position, { y: -10, duration: 0 });
+                        }
+                        // Maybe reset camera or light position if needed
+                        // window.experience.world.experience.world.environment.pointLight.position.set(1, 3, 10); // Example: Reset light like in showHome
+                    }
+                });
+            });
+        });
     </script>
 </html>

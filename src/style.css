@@ -787,7 +787,7 @@ a#agencyvista-badge {
     background: #9226ff;
 }
 
-.location:after, .map-btn:after{
+.location:after, a.map-btn:after{
     content: '';
     background-image: url('./../static/images/chevron-right-white.svg');
     position: absolute;
@@ -840,16 +840,17 @@ a#agencyvista-badge {
     cursor: pointer;
     text-decoration: none;
 }
-.location-details a.map-btn {
+.location-details a.map-btn, .location-details button.map-btn {
     display: block;
     position: relative;
     text-align: center;
     margin: 20px auto 40px;
     font-size: 1.2rem;
     background: #000;
-    width: 110px;
+    width: 190px;
     color: #fff;
     padding: 0.5rem 1rem;
+    box-sizing: border-box;
 }
 .location-details a.map-btn:after {
     right: 2rem;
